@@ -5,4 +5,10 @@
 !.gitignore
 !.gitkeep
 
+!/.bin
+!/.bin/install.sh
+
 !/.bashrc
+!/.bash/
+!/.bash/rc/
+!/.bash/rc/alias.bash
