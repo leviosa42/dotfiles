@@ -1,3 +1,5 @@
+colorscheme molokai
+
 syntax enable
 
 set showmode
