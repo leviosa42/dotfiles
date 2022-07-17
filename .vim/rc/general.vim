@@ -9,4 +9,7 @@ set ignorecase
 
 set smartcase
 
+" Allow buffer switching without saving
+set hidden
+
 filetype plugin indent on
