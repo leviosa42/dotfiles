@@ -20,3 +20,5 @@ set hidden
 filetype plugin indent on
 
 set backupdir=~/.vim/backups
+
+set directory=~/.vim/swaps
