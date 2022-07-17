@@ -18,3 +18,5 @@ set smartcase
 set hidden
 
 filetype plugin indent on
+
+set backupdir=~/.vim/backups
