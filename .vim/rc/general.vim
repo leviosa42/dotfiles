@@ -1,6 +1,8 @@
 " Use the OS clipboard
 set clipboard=unnamed
 
+set mouse=a
+
 set wildmenu
 
 set backspace=indent,eol,start
