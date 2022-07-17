@@ -14,3 +14,6 @@
 !/.bash/rc/alias.bash
 
 !/.vimrc
+!/.vim/
+!/.vim/rc/
+!/.vim/rc/general.vim
