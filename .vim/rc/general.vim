@@ -9,4 +9,4 @@ set ignorecase
 
 set smartcase
 
-set smartindent
+filetype plugin indent on

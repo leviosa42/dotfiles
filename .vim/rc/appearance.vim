@@ -18,8 +18,5 @@ set laststatus=2
 
 set mouse=a
 
-" Make tabs as wide as four spaces
-set tabstop=4
-
 " Highlight current Line
 set cursorline
