@@ -2,7 +2,6 @@
 set nocompatible
 
 " 
-let s:dirname = fnamemodify(expand('<sfile>'), ':h')
 let s:rcs = [
 	\ '.vim/rc/general.vim',
 	\ '.vim/rc/appearance.vim'
