@@ -30,6 +30,3 @@ set undodir=~/.vim/undo
 
 " How many undos
 set undolevels=1000
-
-" Number of lines to save for undo
-set undofeload=10000
