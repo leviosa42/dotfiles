@@ -1,7 +1,5 @@
 " Use the OS clipboard
-if has('clipboard')
-	set clipboard=unnamed
-endif
+set clipboard=unnamed
 
 set wildmenu
 
