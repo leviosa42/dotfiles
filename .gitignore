@@ -12,3 +12,5 @@
 !/.bash/
 !/.bash/rc/
 !/.bash/rc/alias.bash
+
+!/.vimrc
