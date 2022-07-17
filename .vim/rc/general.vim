@@ -3,6 +3,9 @@ set clipboard=unnamed
 
 set mouse=a
 
+" ref:https://github.com/vim-jp/issues/issues/1242
+set ttymouse=sgr
+
 set wildmenu
 
 set backspace=indent,eol,start
