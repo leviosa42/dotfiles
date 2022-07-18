@@ -1,6 +1,8 @@
 " Be iMproved
 set nocompatible
 
+set runtimepath^=./.vim
+set packpath^=./.vim
 " 
 let s:rcs = [
 	\ '.vim/rc/general.vim',
