@@ -1,6 +1,6 @@
 packadd lightline.vim
 let g:lightline = {
-		\ 'colorscheme': 'wombat',
+		\ 'colorscheme': 'tokyonight',
 		\ }
 
 packadd auto-pairs

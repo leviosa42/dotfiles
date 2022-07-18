@@ -7,3 +7,6 @@
 [submodule ".vim/pack/plugins/opt/auto-pairs"]
 	path = .vim/pack/plugins/opt/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
+[submodule ".vim/pack/colors/start/tokyonight-vim"]
+	path = .vim/pack/colors/start/tokyonight-vim
+	url = https://github.com/ghifarit53/tokyonight-vim.git
