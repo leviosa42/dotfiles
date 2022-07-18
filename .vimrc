@@ -7,7 +7,8 @@ set packpath^=./.vim
 let s:rcs = [
 	\ '.vim/rc/general.vim',
 	\ '.vim/rc/appearance.vim',
-	\ '.vim/rc/plugins.vim'
+	\ '.vim/rc/plugins.vim',
+	\ '.vim/rc/gui.vim'
 	\ ]
 
 for filename in s:rcs
