@@ -1,6 +1,9 @@
-[submodule ".vim/pack/plugins/start/lightline.vim"]
-	path = .vim/pack/plugins/start/lightline.vim
+[submodule ".vim/pack/opt/"]
+	path = .vim/pack/opt/
 	url = https://github.com/itchyny/lightline.vim.git
-[submodule ".vim/pack/plugins/start/auto-pairs"]
-	path = .vim/pack/plugins/start/auto-pairs
+[submodule ".vim/pack/plugins/opt/lightline.vim"]
+	path = .vim/pack/plugins/opt/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
+[submodule ".vim/pack/plugins/opt/auto-pairs"]
+	path = .vim/pack/plugins/opt/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
