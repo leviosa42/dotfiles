@@ -21,6 +21,8 @@ set smartcase
 " Allow buffer switching without saving
 set hidden
 
+set autochdir
+
 filetype plugin indent on
 
 set backupdir=~/.vim/backups
