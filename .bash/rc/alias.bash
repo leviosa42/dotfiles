@@ -17,3 +17,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+# Editings
+alias dotfiles='vim ~/dotfiles/'
+alias .bashrc='vim ~/.bashrc && source ~/.bashrc'
+alias .alias='vim ~/.bash/rc//alias.bash && source ~/.bashrc'
