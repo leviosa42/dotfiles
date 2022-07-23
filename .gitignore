@@ -15,11 +15,17 @@
 
 !/.vimrc
 !/.vim/
+!/.vim/autoload/
+!/.vim/autoload/plug.vim
 !/.vim/colors/
 !/.vim/colors/molokai.vim
 !/.vim/colors/tokyonight.vim
 !/.vim/indent/
 !/.vim/indent/c.vim
+!/.vim/plugged/
+!/.vim/plugged/auto-pairs/
+!/.vim/plugged/lightline.vim/
+!/.vim/plugged/tokyonight-vim/
 !/.vim/rc/
 !/.vim/rc/general.vim
 !/.vim/rc/appearance.vim
