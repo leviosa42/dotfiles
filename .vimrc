@@ -7,8 +7,8 @@ let g:custom_guifont = 'HackGen\ Console:h13'
 " ===================================
 "   GENERAL
 " ===================================
-set runtimepath^=./.vim
-set packpath^=./.vim
+set runtimepath^=~/.vim
+set packpath^=~/.vim
 set encoding=utf-8
 set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set clipboard=unnamed

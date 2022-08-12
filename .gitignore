@@ -23,6 +23,7 @@
 !/.vim/pack/
 !/.vim/pack/start/
 !/.vim/pack/opt/
+!/.vim/pack/opt/*
 !/.vim/rc/
 !/.vim/rc/general.vim
 !/.vim/rc/appearance.vim
