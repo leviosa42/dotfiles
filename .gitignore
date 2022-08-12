@@ -20,6 +20,9 @@
 !/.vim/colors/tokyonight.vim
 !/.vim/indent/
 !/.vim/indent/c.vim
+!/.vim/pack/
+!/.vim/pack/start/
+!/.vim/pack/opt/
 !/.vim/rc/
 !/.vim/rc/general.vim
 !/.vim/rc/appearance.vim
