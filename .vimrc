@@ -60,3 +60,5 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 call minpac#add('tomasr/molokai')
+
+let g:netrw_dirhistmax = 0
