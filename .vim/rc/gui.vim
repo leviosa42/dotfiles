@@ -1,1 +1,0 @@
-set guifont=Ricty_Diminished_for_Powerline:h14
