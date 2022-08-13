@@ -10,7 +10,7 @@ let g:custom_guifont = 'HackGen\ Console:h13'
 set runtimepath^=~/.vim
 set packpath^=~/.vim
 set encoding=utf-8
-set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
+set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 set clipboard=unnamed
 set mouse=a
 set wildmenu
@@ -40,7 +40,7 @@ set showmode
 set laststatus=2
 set ruler
 set list
-set listchars=tab:▸\ ,trail:·,nbsp:␣,extends:❯,precedes:❮
+set listchars=tab:▶\ ,trail:-,nbsp:␣,extends:»,precedes:«
 set showcmd
 set cmdheight=2
 set tabstop=4
