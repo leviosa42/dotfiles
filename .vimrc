@@ -55,9 +55,6 @@ execute 'set guifont=' . g:custom_guifont
 " ===================================
 "   PLUGINS
 " ===================================
-packadd lightline.vim
-let g:lightline = {
-    \ 'colorscheme': 'molokai'
-    \ }
-
-packadd auto-pairs
+packadd minpac
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})

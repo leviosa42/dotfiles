@@ -15,16 +15,4 @@
 
 !/.vimrc
 !/.vim/
-!/.vim/colors/
-!/.vim/colors/molokai.vim
-!/.vim/colors/tokyonight.vim
-!/.vim/indent/
-!/.vim/indent/c.vim
-!/.vim/pack/
-!/.vim/pack/start/
-!/.vim/pack/opt/
-!/.vim/pack/opt/*
-!/.vim/rc/
-!/.vim/rc/general.vim
-!/.vim/rc/appearance.vim
-!/.vim/rc/gui.vim
+!/.vim/**
