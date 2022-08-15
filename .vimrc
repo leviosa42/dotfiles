@@ -4,6 +4,7 @@
 let g:custom_background = 'dark'
 let g:custom_colorscheme = 'molokai'
 let g:custom_guifont = 'HackGen\ Console:h13'
+
 " ===================================
 "   GENERAL
 " ===================================
