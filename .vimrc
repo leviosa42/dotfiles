@@ -52,6 +52,9 @@ set smartindent
 "   GUI
 " ===================================
 execute 'set guifont=' . g:custom_guifont
+if has('iVim')
+  source ~/.vim/ekbd.vim
+endif
 
 " ===================================
 "   PLUGINS
