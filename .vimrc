@@ -63,8 +63,9 @@ let g:netrw_dirhistmax = 0
 let g:lightline = {
   \ 'colorscheme': 'molokai'
   \ }
-if has('iVim')   
+if has('iVim')
   let g:lightline.component = {
     \ 'mode': '%{g:lightline#mode()[0]}'
     \ }
+  colorscheme molokai 
 endif  
