@@ -1,0 +1,18 @@
+{
+  "en-JP" : {
+    "mappings" : {
+
+    },
+    "symbols" : "`-=~!@#$%^&*()_+[]\\{}|;':\",.\/<>?",
+    "letters" : "abcdefghijklmnopqrstuvwxyz",
+    "version" : "0.0.1"
+  },
+  "ja-JP" : {
+    "mappings" : {
+
+    },
+    "symbols" : "`-=~!@#$%^&*()_+[]\\{}|;':\",.\/<>?",
+    "letters" : "abcdefghijklmnopqrstuvwxyz",
+    "version" : "0.0.1"
+  }
+}
