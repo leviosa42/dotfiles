@@ -4,6 +4,13 @@
 let g:custom_background = 'dark'
 let g:custom_colorscheme = 'default'
 let g:custom_guifont = 'HackGen\ Console:h13'
+if executable('git')
+  let g:jetpack_download_method = 'git'
+elseif execuable('curl')
+  let g:jetpack_download_method = 'curl'
+elseif execuable('wget')
+  let g:jetpack_download_method = 'wget'
+endif
 
 " ===================================
 "   GENERAL
