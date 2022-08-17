@@ -4,6 +4,13 @@
 let g:custom_background = 'dark'
 let g:custom_colorscheme = 'default'
 let g:custom_guifont = 'HackGen\ Console:h13'
+if executable('git')
+  let g:jetpack_download_method = 'git'
+elseif execuable('curl')
+  let g:jetpack_download_method = 'curl'
+elseif execuable('wget')
+  let g:jetpack_download_method = 'wget'
+endif
 
 " ===================================
 "   GENERAL
@@ -59,6 +66,17 @@ endif
 " ===================================
 "   PLUGINS
 " ===================================
+if has('iVim')
+"  iplug import ~/.vim/iplug.json
+else
+  runtime */jetpack.vim
+  call jetpack#begin()
+  Jetpack 'tani/vim-jetpack', {'opt': 1 }
+  Jetpack 'tomasr/molokai'
+  Jetpack 'itchyny/lightline.vim'
+  call jetpack#end()
+endif
+
 let g:netrw_dirhistmax = 0
 let g:lightline = {
   \ 'colorscheme': 'molokai'
@@ -67,5 +85,6 @@ if has('iVim')
   let g:lightline.component = {
     \ 'mode': '%{g:lightline#mode()[0]}'
     \ }
-  colorscheme molokai 
 endif  
+
+colorscheme molokai
