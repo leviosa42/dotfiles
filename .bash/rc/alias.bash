@@ -20,6 +20,6 @@ alias egrep='egrep --color=auto'
 # Editings
 alias dotfiles='vim ~/dotfiles/'
 alias .bashrc='vim ~/.bashrc && source ~/.bashrc'
-alias .alias='vim ~/.bash/rc//alias.bash && source ~/.bashrc'
+alias .alias='vim ~/.bash/rc/alias.bash && source ~/.bashrc'
 
 alias vi='vim -u NONE'
