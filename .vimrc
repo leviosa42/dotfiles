@@ -66,10 +66,10 @@ endif
 " ===================================
 "   PLUGINS
 " ===================================
-let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
-if !filereadable(s:jetpackfile)
-  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/jetpack.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/jetpack.vim --create-dirs  https://raw.githubusercontent.com/tani/vim-jetpack/master/autoload/jetpack.vim'
+  autocmd VimEnter * JetpackSync | source $MYVIMRC
 endif
 packadd vim-jetpack
 call jetpack#begin()
