@@ -85,5 +85,6 @@ if has('iVim')
   let g:lightline.component = {
     \ 'mode': '%{g:lightline#mode()[0]}'
     \ }
-  colorscheme molokai 
 endif  
+
+colorscheme molokai
