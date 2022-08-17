@@ -66,6 +66,11 @@ endif
 " ===================================
 "   PLUGINS
 " ===================================
+packadd vim-jetpack
+call jetpack#begin()
+Jetpack 'tomasr/molokai'
+call jetpack#end()
+
 let g:netrw_dirhistmax = 0
 let g:lightline = {
   \ 'colorscheme': 'molokai'
