@@ -66,11 +66,16 @@ endif
 " ===================================
 "   PLUGINS
 " ===================================
-runtime */jetpack.vim
-call jetpack#begin()
-Jetpack 'tani/vim-jetpack', {'opt': 1 }
-Jetpack 'tomasr/molokai'
-call jetpack#end()
+if has('iVim')
+"  iplug import ~/.vim/iplug.json
+else
+  runtime */jetpack.vim
+  call jetpack#begin()
+  Jetpack 'tani/vim-jetpack', {'opt': 1 }
+  Jetpack 'tomasr/molokai'
+  Jetpack 'itchyny/lightline.vim'
+  call jetpack#end()
+endif
 
 let g:netrw_dirhistmax = 0
 let g:lightline = {
