@@ -21,3 +21,4 @@
 /.vim/pack/ivim/**
 !/.vim/pack/ivim/.gitkeep
 /.vim/pack/jetpack/**
+!/.vim/pack/jetpack/.gitkeep

@@ -66,12 +66,7 @@ endif
 " ===================================
 "   PLUGINS
 " ===================================
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/jetpack.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/jetpack.vim --create-dirs  https://raw.githubusercontent.com/tani/vim-jetpack/master/autoload/jetpack.vim'
-  autocmd VimEnter * JetpackSync | source $MYVIMRC
-endif
-packadd vim-jetpack
+runtime */jetpack.vim
 call jetpack#begin()
 Jetpack 'tani/vim-jetpack', {'opt': 1 }
 Jetpack 'tomasr/molokai'
