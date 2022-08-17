@@ -1,0 +1,25 @@
+[
+  {
+    "oid" : "b02ef0d9f253dfc1cbb3f340b74998d7a4db0bf6",
+    "origin" : "https:\/\/github.com\/itchyny\/lightline.vim",
+    "name" : "lightline.vim",
+    "docDir" : "doc",
+    "rev" : "b:master",
+    "type" : "start"
+  },
+  {
+    "oid" : "c67bdfcdb31415aa0ade7f8c003261700a885476",
+    "name" : "molokai",
+    "type" : "opt",
+    "origin" : "https:\/\/github.com\/tomasr\/molokai",
+    "rev" : "b:master"
+  },
+  {
+    "rev" : "b:master",
+    "name" : "auto-pairs",
+    "oid" : "39f06b873a8449af8ff6a3eee716d3da14d63a76",
+    "type" : "start",
+    "origin" : "https:\/\/github.com\/jiangmiao\/auto-pairs",
+    "docDir" : "doc"
+  }
+]

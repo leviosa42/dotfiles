@@ -17,10 +17,6 @@
 !/.vim/
 !/.vim/*
 !/.vim/**
-/.vim/pack/minpac/start/
-/.vim/pack/minpac/start/*
-/.vim/pack/minpac/start/**
-/.vim/pack/minpac/opt/
-/.vim/pack/minpac/opt/*
-/.vim/pack/minpac/opt/**
-!/.vim/pack/minpac/opt/minpac/
+!/.vim/pack/.gitkeep
+/.vim/pack/ivim/**
+!/.vim/pack/ivim/.gitkeep
