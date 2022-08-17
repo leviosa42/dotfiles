@@ -41,7 +41,7 @@ set showmode
 set laststatus=2
 set ruler
 set list
-set listchars=tab:▶\ ,trail:-,nbsp:␣,extends:»,precedes:«
+set listchars=tab:▶\ ,trail:-,nbsp:␣,extends:»,precedes:«,space:·
 set showcmd
 set cmdheight=2
 set tabstop=4
