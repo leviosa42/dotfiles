@@ -90,6 +90,7 @@ else
   Jetpack 'tani/vim-jetpack', {'opt': 1 }
   Jetpack 'tomasr/molokai'
   Jetpack 'itchyny/lightline.vim'
+  Jetpack 'vim-jp/vimdoc-ja'
   call jetpack#end()
 endif
 
