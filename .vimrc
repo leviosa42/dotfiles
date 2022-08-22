@@ -1,4 +1,6 @@
 set nocompatible
+filetype plugin indent off
+
 " ===================================
 "   VARIABLES
 " ===================================
@@ -102,3 +104,5 @@ if has('iVim')
 endif  
 
 colorscheme molokai
+
+filetype plugin indent on
