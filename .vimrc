@@ -26,6 +26,7 @@ set mouse=a
 set wildmenu
 set wildmode=list:longest
 set backspace=indent,eol,start
+set whichwrap=b,s,h,l,<,>,[,]
 set ignorecase
 set smartcase
 set hidden
