@@ -43,11 +43,11 @@ set autoindent
 set smartindent
 " ref: https://qiita.com/ysn/items/f4fc8f245ba50d5fb8b0
 augroup filetype_indent_settings
-    au FileType vim    setl et   ts=2 sts=-1 sw=0
-    au FileType c      setl noet ts=4 sts=-1 sw=0 cindent
-    au FileType js     setl noet ts=4 sts=-1 sw=0
-    au FileType python setl et   ts=4 sts=-1 sw=0
-    au FileType sh     setl et   ts=2 sts=-1 sw=0
+    au FileType vim          setl et   ts=2 sts=-1 sw=0
+    au FileType c            setl noet ts=4 sts=-1 sw=0 cindent
+    au FileType javascript   setl noet ts=4 sts=-1 sw=0
+    au FileType python       setl et   ts=4 sts=-1 sw=0
+    au FileType sh           setl et   ts=2 sts=-1 sw=0
 augroup END
 
 " ===================================
