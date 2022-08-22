@@ -1,3 +1,4 @@
+set nocompatible
 " ===================================
 "   VARIABLES
 " ===================================
@@ -17,6 +18,7 @@ endif
 " ===================================
 set runtimepath^=~/.vim
 set packpath^=~/.vim
+set fileformat=unix
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 set clipboard=unnamed
