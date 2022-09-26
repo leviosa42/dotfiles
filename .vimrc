@@ -100,8 +100,18 @@ let g:lightline = {
   \ 'colorscheme': 'molokai'
   \ }
 if has('iVim')
-  let g:lightline.component = {
-    \ 'mode': '%{g:lightline#mode()[0]}'
+  let g:lightline.mode_map = {
+    \ 'n' : 'N',
+    \ 'i' : 'I',
+    \ 'R' : 'R',
+	\ 'v' : 'B',
+	\ 'V' : 'VL',
+	\ "\<C-v>": 'VB',
+	\ 'c' : 'C',
+	\ 's' : 'S',
+    \ 'S' : 'SL',
+	\ "\<C-s>": 'SB',
+    \ 't': 'T'
     \ }
 endif  
 
