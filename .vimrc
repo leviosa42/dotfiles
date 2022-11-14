@@ -12,8 +12,8 @@ set nocompatible
 " ===================================
 let mapleader = "\<Space>"
 
-let g:custom_colorscheme = 'elflord'
-"let g:custom_colorscheme = 'molokai'
+"let g:custom_colorscheme = 'elflord'
+let g:custom_colorscheme = 'molokai'
 let g:custom_background = 'dark'
 let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
