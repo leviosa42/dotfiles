@@ -10,6 +10,7 @@ link_to_homedir() {
         echo $f
         [[ ${bf} == ".git" ]] && continue
         [[ ${bf} == ".gitignore" ]] && continue
+        [[ ${bf} == ".gitattributes" ]] && continue 
         if [[ -L "${HOME}/${bf}" ]]; then # is symlink
             command rm -f "${HOME}/${bf}"
         fi
