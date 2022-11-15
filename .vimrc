@@ -18,7 +18,8 @@ let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
 
-let g:custom_enable_pluginmanager = 0
+let g:custom_enable_pluginmanager = 1
+let g:jetpack_download_method = 'curl'
 
 let g:session_directory = split(&runtimepath, ',')[0] . '/sessions'
 
@@ -133,7 +134,7 @@ if g:custom_enable_pluginmanager
   endif
   " plugins
   runtime */jetack.vim
-  call jetpack#begin()
+  call jetpack#begin(split(&rtp, ',')[0])
   Jetpack 'tani/vim-jetpack', {'opt': 1}
   Jetpack 'vim-jp/vimdoc-ja'
   call jetpack#end()
