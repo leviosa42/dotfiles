@@ -157,6 +157,7 @@ nnoremap <Leader>e :e .<CR>
 nnoremap <Leader>sh :split<CR>
 nnoremap <Leader>sv :vsplit<CR>
 
+nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
 " ref: https://qiita.com/r12tkmt/items/b89df403f587216802f1
 " === [window] ===
 nmap <Leader>w [window]
