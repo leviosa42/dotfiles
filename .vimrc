@@ -22,7 +22,7 @@ let mapleader = "\<Space>"
 
 let g:custom_enable_pluginmanager = 0
 
-let g:session_directory = split(&runtimepath, ',')[0]
+let g:session_directory = split(&runtimepath, ',')[0] . '/sessions'
 
 let g:netrw_home = split(&runtimepath, ',')[0]
 
