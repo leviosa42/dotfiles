@@ -18,6 +18,9 @@
 !/.vim/*
 !/.vim/**
 /.vim/.netrwhist
+!/.vim/sessions/
+/.vim/sessions/**
+!/.vim/sessions/.gitkeep
 !/.vim/pack/.gitkeep
 /.vim/pack/ivim/**
 !/.vim/pack/ivim/.gitkeep
