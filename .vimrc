@@ -22,6 +22,8 @@ let mapleader = "\<Space>"
 
 let g:custom_enable_pluginmanager = 0
 
+let g:netrw_home = $HOME . '/.vim'
+
 " ===================================
 "   GENERAL
 " ===================================
