@@ -18,7 +18,7 @@ let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
 
-let g:custom_enable_pluginmanager = 1
+let g:custom_enable_pluginmanager = has('ivim') ? 0 : 1
 let g:jetpack_download_method = 'curl'
 
 let g:session_directory = split(&runtimepath, ',')[0] . '/sessions'
