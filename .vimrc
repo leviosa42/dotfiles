@@ -10,8 +10,6 @@ set nocompatible
 " ===================================
 "   VARIABLES
 " ===================================
-let mapleader = "\<Space>"
-
 "let g:custom_colorscheme = 'elflord'
 let g:custom_colorscheme = 'molokai'
 let g:custom_background = 'dark'
