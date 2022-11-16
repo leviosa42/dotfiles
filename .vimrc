@@ -10,6 +10,16 @@ set nocompatible
 " ===================================
 "   VARIABLES
 " ===================================
+function s:_gethome() abort
+  let l:term_program = expand('$TERM_PROGRAM')
+  "let l:original_home = expand('$HOME')
+  if term_program == 'a-Shell'
+    return expand('~/Documents')
+  else
+    return expand('~/hoge')
+  endif
+endfunction
+let g:custom_home = s:_gethome()
 "let g:custom_colorscheme = 'elflord'
 let g:custom_colorscheme = 'molokai'
 let g:custom_background = 'dark'
@@ -21,15 +31,15 @@ let mapleader = "\<Space>"
 let g:custom_enable_pluginmanager = has('ivim') ? 0 : 1
 let g:jetpack_download_method = 'curl'
 
-let g:session_directory = split(&runtimepath, ',')[0] . '/sessions'
+let g:session_directory = g:custom_home.'/.vim/sessions'
 
-let g:netrw_home = split(&runtimepath, ',')[0]
+let g:netrw_home = g:custom_home.'/.vim'
 
 " ===================================
 "   GENERAL
 " ===================================
-"set runtimepath^=~/.vim
-"set runtimepath+=~/.vim/after
+"execute 'set packpath^=' . g:custom_home . '/.vim'
+"execute 'set runtimepath^=' . g:custom_home . '/.vim'
 
 set helplang=ja,en
 " Encodings
@@ -115,29 +125,32 @@ set listchars+=precedes:«
 "  STATUSLINE
 " ===================================
 set laststatus=2
-set statusline=   " init
-set statusline+=%f
-set statusline+=%m
-set statusline+=%r
-set statusline+=%=
-"set statusline+=[%{&fileformat}]
-set statusline+=l:%l/%L
-
+if 1
+  set statusline=   " init
+  set statusline+=%f
+  set statusline+=%m
+  set statusline+=%r
+  set statusline+=%=
+  "set statusline+=[%{&fileformat}]
+  set statusline+=l:%l/%L
+endif
 " ===================================
 "   PLUGINS
 " ===================================
 if g:custom_enable_pluginmanager
   " bootstrap
-  let s:jetpackfile = expand('<sfile>:p:h') .. '/.vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+  let s:jetpackfile = g:custom_home . '/.vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
   let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
   if !filereadable(s:jetpackfile)
     call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
   endif
-  " plugins
-  runtime */jetack.vim
-  call jetpack#begin(expand('<sfile>:p:h').'/.vim')
+  "plugins
+  "runtime */jetack.vim
+  packadd vim-jetpack
+  call jetpack#begin(g:custom_home . '/.vim')
   Jetpack 'tani/vim-jetpack', {'opt': 1}
   Jetpack 'vim-jp/vimdoc-ja'
+  Jetpack 'itchyny/lightline.vim', {'start': 1}
   call jetpack#end()
 endif
 
