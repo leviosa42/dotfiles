@@ -128,14 +128,14 @@ set statusline+=l:%l/%L
 " ===================================
 if g:custom_enable_pluginmanager
   " bootstrap
-  let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+  let s:jetpackfile = expand('<sfile>:p:h') .. '/.vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
   let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
   if !filereadable(s:jetpackfile)
     call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
   endif
   " plugins
   runtime */jetack.vim
-  call jetpack#begin(split(&rtp, ',')[0])
+  call jetpack#begin(expand('<sfile>:p:h').'/.vim')
   Jetpack 'tani/vim-jetpack', {'opt': 1}
   Jetpack 'vim-jp/vimdoc-ja'
   call jetpack#end()
