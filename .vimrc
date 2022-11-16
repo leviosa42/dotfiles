@@ -31,6 +31,7 @@ let g:netrw_home = split(&runtimepath, ',')[0]
 "set runtimepath^=~/.vim
 "set runtimepath+=~/.vim/after
 
+set helplang=ja,en
 " Encodings
 set fileformat=unix
 set encoding=utf-8
