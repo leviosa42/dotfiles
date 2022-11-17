@@ -125,7 +125,26 @@ set listchars+=precedes:«
 "  STATUSLINE
 " ===================================
 set laststatus=2
+function StatuslineMode() abort
+  let l:use_longname = winwidth(0) > 55
+  let l:mode_map = {
+    \ 'n': [ 'N', 'NORMAL' ],
+    \ 'i': [ 'I', 'INSERT' ],
+    \ 'R': [ 'R', 'REPLACE' ],
+    \ 'v': [ 'V', 'VISUAL' ],
+    \ 'V': [ 'VL', 'V-LINE' ],
+    \ "\<C-v>": [ 'VB', 'V-BLOCK' ],
+    \ 'c': [ 'C', 'COMMAND' ],
+    \ 's': [ 'S', 'SELECT' ],
+    \ 'S': [ 'SL', 'S-LINE' ],
+    \ "\<C-s>": [ 'SB', 'S-BLOCK' ],
+    \ 't': [ 'T', 'TERMINAL' ]
+    \ }
+  let l:modename = get(l:mode_map, mode(), ['!', '?'])[l:use_longname]
+  return '[' . l:modename . ']'
+endfunction
 set statusline=   " init
+set statusline+=%{StatuslineMode()}
 set statusline+=%f
 set statusline+=%m
 set statusline+=%h
@@ -133,9 +152,11 @@ set statusline+=%w
 set statusline+=%<
 set statusline+=%r
 set statusline+=%=
-set statusline+=[%{&fileencoding!=''?&fileencoding:&encoding}]
-set statusline+=[%{&fileformat}]
-set statusline+=%c:%l/%L
+set statusline+=%{&fileencoding!=''?&fileencoding:&encoding}
+set statusline+=\|
+set statusline+=%{&fileformat}
+set statusline+=\|
+set statusline+=%c:%l
 
 " ===================================
 "   PLUGINS
