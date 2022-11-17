@@ -10,7 +10,7 @@ set nocompatible
 " ===================================
 "   VARIABLES
 " ===================================
-function s:_gethome() abort
+function! s:gethome() abort
   let l:term_program = expand('$TERM_PROGRAM')
   "let l:original_home = expand('$HOME')
   if term_program == 'a-Shell'
@@ -19,7 +19,7 @@ function s:_gethome() abort
     return expand('~')
   endif
 endfunction
-let g:custom_home = s:_gethome()
+let g:custom_home = s:gethome()
 "let g:custom_colorscheme = 'elflord'
 let g:custom_colorscheme = 'molokai'
 let g:custom_background = 'dark'
