@@ -134,6 +134,18 @@ if 1
   "set statusline+=[%{&fileformat}]
   set statusline+=l:%l/%L
 endif
+set statusline=   " init
+set statusline+=%f
+set statusline+=%m
+set statusline+=%h
+set statusline+=%w
+set statusline+=%<
+set statusline+=%r
+set statusline+=%=
+set statusline+=[%{&fileencoding!=''?&fileencoding:&encoding}]
+set statusline+=[%{&fileformat}]
+set statusline+=%c:%l/%L
+
 " ===================================
 "   PLUGINS
 " ===================================
