@@ -16,7 +16,7 @@ function s:_gethome() abort
   if term_program == 'a-Shell'
     return expand('~/Documents')
   else
-    return expand('~/hoge')
+    return expand('~')
   endif
 endfunction
 let g:custom_home = s:_gethome()
