@@ -125,15 +125,6 @@ set listchars+=precedes:«
 "  STATUSLINE
 " ===================================
 set laststatus=2
-if 1
-  set statusline=   " init
-  set statusline+=%f
-  set statusline+=%m
-  set statusline+=%r
-  set statusline+=%=
-  "set statusline+=[%{&fileformat}]
-  set statusline+=l:%l/%L
-endif
 set statusline=   " init
 set statusline+=%f
 set statusline+=%m
