@@ -148,9 +148,9 @@ if g:custom_enable_pluginmanager
   "runtime */jetack.vim
   packadd vim-jetpack
   call jetpack#begin(g:custom_home . '/.vim')
-  Jetpack 'tani/vim-jetpack', {'opt': 1}
-  Jetpack 'vim-jp/vimdoc-ja'
-  Jetpack 'itchyny/lightline.vim', {'start': 1}
+  jetpack#add('tani/vim-jetpack', {'opt': 1})
+  jetpack#add('vim-jp/vimdoc-ja')
+  jetpack#add('itchyny/lightline.vim', {'start': 1})
   call jetpack#end()
 endif
 
