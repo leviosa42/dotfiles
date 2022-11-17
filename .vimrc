@@ -75,7 +75,7 @@ augroup END
 set incsearch
 set ignorecase
 set smartcase
-set hlsearch
+"set hlsearch
 set wildmenu
 set wildmode=longest:list,full
 set autochdir
@@ -120,6 +120,9 @@ set listchars+=nbsp:%
 set listchars+=extends:»
 set listchars+=precedes:«
 "set listchars+=space:·
+
+let &t_SI .= "\e[5 q"
+let &t_EI .= "\e[1 q"
 
 " ===================================
 "  STATUSLINE
