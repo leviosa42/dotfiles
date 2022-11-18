@@ -196,8 +196,9 @@ nnoremap <Down> gj
 "inoremap " ""<Left>
 
 nnoremap <Leader>e :e .<CR>
-nnoremap <Leader>sh :split<CR>
-nnoremap <Leader>sv :vsplit<CR>
+nnoremap <Leader>s :s %<CR>
+nnoremap <Leader>ev :e $MYVIMRC<CR>
+nnoremap <Leader>sv :so $MYVIMRC<CR>
 nnoremap <Leader>h :set hlsearch!<CR>
 
 nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
