@@ -54,6 +54,10 @@ set mouse=a
 
 set whichwrap=b,s,h,l,<,>,[,]
 
+if has('termguicolors')
+  set termguicolors
+endif
+set t_Co=256
 syntax on
 
 filetype plugin indent off
