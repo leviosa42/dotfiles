@@ -144,10 +144,12 @@ function StatuslineMode() abort
     \ 't': [ 'T', 'TERMINAL' ]
     \ }
   let l:modename = get(l:mode_map, mode(), ['!', '?'])[l:use_longname]
-  return '[' . l:modename . ']'
+  return '  ' . l:modename . ' '
 endfunction
 set statusline=   " init
+set statusline+=%#Search#
 set statusline+=%{StatuslineMode()}
+set statusline+=%#StatusLine#
 set statusline+=%f
 set statusline+=%m
 set statusline+=%h
