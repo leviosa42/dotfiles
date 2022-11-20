@@ -116,7 +116,7 @@ set cursorline
 set showcmd
 set showmatch
 set showcmd
-set showmode
+set noshowmode
 set list
 set listchars=   " init
 set listchars+=tab:>\ 
@@ -149,8 +149,8 @@ let g:custom_stl_config = {
       \ 'gui': 'gui=bold guifg=white guibg=brown'
       \ },
     \ 'insert': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkblue',
-      \ 'gui': 'gui=bold guifg=white guibg=darkblue'
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=blue',
+      \ 'gui': 'gui=bold guifg=white guibg=blue'
       \ },
     \ 'replace': {
       \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkred',
@@ -210,9 +210,9 @@ function g:customline.CreateStatusLine(is_active) abort
     let stl .= '%<'
     let stl .= '%r'
     let stl .= '%='
-    let stl .= ''
+    let stl .= ' ' . &fenc ? &fenc : &enc
+    let stl .= ' ' . &ff
     let stl .= ' '
-    let stl .= ''
     let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
     let stl .= ' %c:%l '
   else
@@ -227,9 +227,10 @@ function g:customline.CreateStatusLine(is_active) abort
     let stl .= '%<'
     let stl .= '%r'
     let stl .= '%='
-    let stl .= ''
+    let stl .= ' ' . &fenc ? &fenc : &enc
+    let stl .= ' ' . &ff
     let stl .= ' '
-    let stl .= ''
+    let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
     let stl .= '%#CustomLine_inactive#'
     let stl .= ' %c:%l '
   endif
