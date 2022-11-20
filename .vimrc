@@ -28,18 +28,15 @@ let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
 
-let g:custom_enable_pluginmanager = 0 " has('ivim') ? 0 : 1
-let g:jetpack_download_method = 'curl'
+let g:session_directory = g:custom_home.'/.vimlocal/sessions'
 
-let g:session_directory = g:custom_home.'/.vim/sessions'
-
-let g:netrw_home = g:custom_home.'/.vim'
+let g:netrw_home = g:custom_home.'/.vimlocal'
 
 " ===================================
 "   GENERAL
 " ===================================
-"execute 'set packpath^=' . g:custom_home . '/.vim'
-"execute 'set runtimepath^=' . g:custom_home . '/.vim'
+execute 'set packpath^=' . g:custom_home . '/.vimlocal'
+execute 'set runtimepath^=' . g:custom_home . '/.vimlocal'
 
 set helplang=ja,en
 " Encodings
@@ -301,7 +298,7 @@ set statusline=%!g:customline.CreateStatusLine(1)
 " ===================================
 if g:custom_enable_pluginmanager
   " bootstrap
-  let s:jetpackfile = g:custom_home . '/.vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+  let s:jetpackfile = g:custom_home . '/.vimlocal/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
   let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
   if !filereadable(s:jetpackfile)
     call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
@@ -309,10 +306,10 @@ if g:custom_enable_pluginmanager
   "plugins
   "runtime */jetack.vim
   packadd vim-jetpack
-  call jetpack#begin(g:custom_home . '/.vim')
-  jetpack#add('tani/vim-jetpack', {'opt': 1})
-  jetpack#add('vim-jp/vimdoc-ja')
-  jetpack#add('itchyny/lightline.vim', {'start': 1})
+  call jetpack#begin(g:custom_home . '/.vimlocal')
+  call jetpack#add('tani/vim-jetpack', {'opt': 1})
+  call jetpack#add('vim-jp/vimdoc-ja')
+  call jetpack#add('itchyny/lightline.vim', {'start': 1})
   call jetpack#end()
 endif
 
