@@ -75,10 +75,14 @@ augroup filetype_settings
   au BufNewFile,BufRead *.ash   set filetype=sh
 augroup END
 
+augroup folding_setting
+  au FileType vim setl foldmethod=marker
+augroup END
 
 " ===================================
 "   EDITING
 " ===================================
+
 set incsearch
 set ignorecase
 set smartcase
@@ -211,8 +215,12 @@ function g:customline.CreateStatusLine(is_active) abort
     let stl .= '%<'
     let stl .= '%r'
     let stl .= '%='
-    let stl .= ' ' . &fenc ? &fenc : &enc
-    let stl .= ' ' . &ff
+    if winwidth(0) > 70
+      let stl .= '%#CursorLine#'
+      let stl .= ' %{&fenc?&fenc:&enc}'
+      let stl .= ' %{&ff}'
+      let stl .= ' %{&ft}'
+    endif
     let stl .= ' '
     let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
     let stl .= ' %c:%l '
@@ -228,8 +236,11 @@ function g:customline.CreateStatusLine(is_active) abort
     let stl .= '%<'
     let stl .= '%r'
     let stl .= '%='
-    let stl .= ' ' . &fenc ? &fenc : &enc
-    let stl .= ' ' . &ff
+    if winwidth(0) > 70
+      let stl .= ' %{&fenc?&fenc:&enc}'
+      let stl .= ' %{&ff}'
+      let stl .= ' %{&ft}'
+    endif
     let stl .= ' '
     let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
     let stl .= '%#CustomLine_inactive#'
