@@ -53,7 +53,9 @@ set clipboard+=unnamedplus
 set mouse=a
 
 set whichwrap=b,s,h,l,<,>,[,]
-
+set timeout
+set timeoutlen=2000
+set ttimeoutlen=10
 if has('termguicolors')
   set termguicolors
 endif
@@ -323,3 +325,4 @@ execute 'set guifont=' . g:custom_guifont
 execute 'set background=' . g:custom_background
 execute 'colorscheme ' . g:custom_colorscheme
 
+call HighlightSTLColors()
