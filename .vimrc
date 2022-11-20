@@ -324,5 +324,3 @@ filetype indent on
 execute 'set guifont=' . g:custom_guifont
 execute 'set background=' . g:custom_background
 execute 'colorscheme ' . g:custom_colorscheme
-
-call HighlightSTLColors()
