@@ -75,6 +75,7 @@ augroup filetype_settings
   au BufNewFile,BufRead *.ash   set filetype=sh
 augroup END
 
+
 " ===================================
 "   EDITING
 " ===================================
