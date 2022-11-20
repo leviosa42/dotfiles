@@ -134,40 +134,154 @@ let &t_EI .= "\e[1 q"
 "  STATUSLINE
 " ===================================
 set laststatus=2
-function StatuslineMode() abort
-  let l:use_longname = winwidth(0) > 55
-  let l:mode_map = {
-    \ 'n': [ 'N', 'NORMAL' ],
-    \ 'i': [ 'I', 'INSERT' ],
-    \ 'R': [ 'R', 'REPLACE' ],
-    \ 'v': [ 'V', 'VISUAL' ],
-    \ 'V': [ 'VL', 'V-LINE' ],
-    \ "\<C-v>": [ 'VB', 'V-BLOCK' ],
-    \ 'c': [ 'C', 'COMMAND' ],
-    \ 's': [ 'S', 'SELECT' ],
-    \ 'S': [ 'SL', 'S-LINE' ],
-    \ "\<C-s>": [ 'SB', 'S-BLOCK' ],
-    \ 't': [ 'T', 'TERMINAL' ]
+let g:custom_stl_config = {
+  \ 'highlight': {
+    \ 'normal': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
+      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
+      \ },
+    \ 'visual': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkmagenta',
+      \ 'gui': 'gui=bold guifg=white guibg=darkmagenta'
+      \ },
+    \ 'select': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=brown',
+      \ 'gui': 'gui=bold guifg=white guibg=brown'
+      \ },
+    \ 'insert': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkblue',
+      \ 'gui': 'gui=bold guifg=white guibg=darkblue'
+      \ },
+    \ 'replace': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkred',
+      \ 'gui': 'gui=bold guifg=white guibg=darkred'
+      \ },
+    \ 'command': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
+      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
+      \ },
+    \ 'prompt': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
+      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
+      \ },
+    \ 'execute': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
+      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
+      \ },
+    \ 'terminal': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkcyan',
+      \ 'gui': 'gui=bold guifg=white guibg=darkcyan'
+      \ },
+    \ 'inactive': {
+      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgray',
+      \ 'gui': 'gui=bold guifg=white guibg=darkgray'
+      \ },
+    \ },
+  \ 'mode_name': {
+    \ 'n': ['N', 'NORMAL'],
+    \ 'v': ['V', 'VISUAL'],
+    \ 'V': ['VL', 'V-LINE'],
+    \ "\<C-v>": ['VB', 'V-BLOCK'],
+    \ 's': ['S', 'SELECT'],
+    \ 'S': ['SL', 'S-LINE'],
+    \ "\<C-s>": ['SB', 'S-BLOCK'],
+    \ 'i': ['I', 'INSERT'],
+    \ 'R': ['R', 'REPLACE'],
+    \ 'c': ['C', 'COMMAND'],
+    \ 'r': ['P', 'PROMPT'],
+    \ '!': ['E', 'EXECUTE'],
+    \ 't': ['T', 'TERMINAL']
     \ }
-  let l:modename = get(l:mode_map, mode(), ['!', '?'])[l:use_longname]
-  return '  ' . l:modename . ' '
+  \ }
+
+let g:customline = {}
+
+function g:customline.CreateStatusLine(is_active) abort
+  let stl = ''
+  if a:is_active
+    let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
+    let stl .= ' %{g:customline.GetModeName()} '
+    let stl .= '%#StatusLine#'
+    let stl .= '%f'
+    let stl .= '%m'
+    let stl .= '%h'
+    let stl .= '%w'
+    let stl .= '%w'
+    let stl .= '%<'
+    let stl .= '%r'
+    let stl .= '%='
+    let stl .= ''
+    let stl .= ' '
+    let stl .= ''
+    let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
+    let stl .= ' %c:%l '
+  else
+    let stl .= '%#CustomLine_inactive#'
+    let stl .= ' %{g:customline.GetModeName()} '
+    let stl .= '%#StatusLineNC#'
+    let stl .= '%f'
+    let stl .= '%m'
+    let stl .= '%h'
+    let stl .= '%w'
+    let stl .= '%w'
+    let stl .= '%<'
+    let stl .= '%r'
+    let stl .= '%='
+    let stl .= ''
+    let stl .= ' '
+    let stl .= ''
+    let stl .= '%#CustomLine_inactive#'
+    let stl .= ' %c:%l '
+  endif
+  return stl
 endfunction
-set statusline=   " init
-set statusline+=%#Search#
-set statusline+=%{StatuslineMode()}
-set statusline+=%#StatusLine#
-set statusline+=%f
-set statusline+=%m
-set statusline+=%h
-set statusline+=%w
-set statusline+=%<
-set statusline+=%r
-set statusline+=%=
-set statusline+=%{&fileencoding!=''?&fileencoding:&encoding}
-set statusline+=\|
-set statusline+=%{&fileformat}
-set statusline+=\|
-set statusline+=%c:%l
+
+function g:customline.Init() abort
+  " highlight
+  let hi_dict = g:custom_stl_config['highlight']
+  for mt in keys(hi_dict)
+    exec printf('hi CustomLine_%s %s', mt, hi_dict[mt]['cterm'])
+    exec printf('hi CustomLine_%s %s', mt, hi_dict[mt]['gui'])
+  endfor
+endfunction
+
+function g:customline.GetModeType() abort
+  let dict = {
+    \ 'n': 'normal',
+    \ 'v': 'visual',
+    \ 'V': 'visual',
+    \ "\<C-v>": 'visual',
+    \ 's': 'select',
+    \ 'S': 'select',
+    \ "\<C-s>": 'select',
+    \ 'i': 'insert',
+    \ 'R': 'replace',
+    \ 'c': 'command',
+    \ 'r': 'prompt',
+    \ '!': 'execute',
+    \ 't': 'terminal'
+    \ }
+  return get(dict, mode(0))
+endfunction
+
+function g:customline.GetModeHighlightName() abort
+  let mode_type = g:customline.GetModeType()
+  return 'CustomLine_' . mode_type
+endfunction
+
+function g:customline.GetModeName() abort
+  let name_dict = g:custom_stl_config['mode_name']
+  let use_longname = winwidth(0) > 70
+  return get(name_dict, mode(0), ['NF', 'NOTFOUND'])[use_longname]
+endfunction
+
+augroup customline
+  autocmd!
+  autocmd ColorScheme * call g:customline.Init()
+  autocmd WinEnter,BufEnter * setl stl=%!g:customline.CreateStatusLine(1)
+  autocmd WinLeave,BufLeave * setl stl=%!g:customline.CreateStatusLine(0)
+augroup END
+set statusline=%!g:customline.CreateStatusLine(1)
 
 " ===================================
 "   PLUGINS
