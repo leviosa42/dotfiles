@@ -21,12 +21,14 @@ function! s:gethome() abort
 endfunction
 let g:custom_home = s:gethome()
 "let g:custom_colorscheme = 'elflord'
-let g:custom_colorscheme = 'molokai'
+"let g:custom_colorscheme = 'molokai'
+let g:custom_colorscheme = 'gruvbox'
 let g:custom_background = 'dark'
 let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
+let g:jetpack_download_method = 'curl'
 
 let g:session_directory = g:custom_home.'/.vimlocal/sessions'
 
@@ -37,6 +39,24 @@ let g:netrw_home = g:custom_home.'/.vimlocal'
 " ===================================
 execute 'set packpath^=' . g:custom_home . '/.vimlocal'
 execute 'set runtimepath^=' . g:custom_home . '/.vimlocal'
+
+set history=1000
+
+" Backup files
+set backup
+exec 'set backupdir^=' . g:custom_home . '/.vimlocal/backup'
+set backupext=.vimbup
+
+" Swap files
+set swapfile
+exec 'set directory^=' . g:custom_home . '/.vimlocal/swap'
+
+" Undo files
+set undofile
+exec 'set undodir^=' . g:custom_home .'/.vimlocal/undo'
+set undolevels=100
+set undoreload=10000
+set updatetime=4000
 
 set helplang=ja,en
 " Encodings
@@ -309,7 +329,7 @@ if g:custom_enable_pluginmanager
   call jetpack#begin(g:custom_home . '/.vimlocal')
   call jetpack#add('tani/vim-jetpack', {'opt': 1})
   call jetpack#add('vim-jp/vimdoc-ja')
-  call jetpack#add('itchyny/lightline.vim', {'start': 1})
+  "call jetpack#add('itchyny/lightline.vim', {'start': 1})
   call jetpack#end()
 endif
 
