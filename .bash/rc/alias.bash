@@ -8,7 +8,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 # ls
-alias ls='ls --sort=extension --color=auto'
+alias ls='ls -1 --sort=extension --color=auto'
 alias ll='ls -lh'
 alias la='ls -a'
 
