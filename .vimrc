@@ -38,8 +38,10 @@ let g:netrw_home = g:custom_home.'/.vimlocal'
 " ===================================
 "   GENERAL
 " ===================================
-execute 'set packpath^=' . g:custom_home . '/.vimlocal'
-execute 'set runtimepath^=' . g:custom_home . '/.vimlocal'
+exec 'set packpath^=' . g:custom_home . '/.vim'
+exec 'set packpath^=' . g:custom_home . '/.vimlocal'
+exec 'set runtimepath^=' . g:custom_home . '/.vim'
+exec 'set runtimepath^=' . g:custom_home . '/.vimlocal'
 
 set history=1000
 
