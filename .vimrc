@@ -80,6 +80,9 @@ if has('termguicolors')
   set termguicolors
 endif
 set t_Co=256
+
+set guioptions-=m
+set guioptions-=T
 syntax on
 
 filetype plugin indent off
@@ -350,10 +353,6 @@ nnoremap <Down> gj
 "inoremap ' ''<Left>
 "inoremap " ""<Left>
 
-nnoremap <Leader>e :e .<CR>
-nnoremap <Leader>s :s %<CR>
-nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>sv :so $MYVIMRC<CR>
 nnoremap <Leader>h :set hlsearch!<CR>
 
 nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
@@ -395,6 +394,12 @@ nmap <Leader>t [tab]
   nnoremap [tab]n :tabnext<CR>
   nnoremap [tab]<Right> :tabnext<CR>
   nnoremap [tab]c :tabclose<CR>
+
+nmap <Leader>v [vimrc]
+  nnoremap [vimrc]e :e $MYVIMRC<CR>
+  nnoremap [vimrc]<S-e> :e! $MYVIMRC<CR>
+  nnoremap [vimrc]t :tabnew $MYVIMRC<CR>
+  nnoremap [vimrc]s :so $MYVIMRC<CR>
 
 " ===================================
 "   IVIM - ISETEKBD
