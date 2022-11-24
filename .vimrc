@@ -28,6 +28,7 @@ let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
+let g:custom_enable_pluginmanager = 0
 let g:jetpack_download_method = 'curl'
 
 let g:session_directory = g:custom_home.'/.vimlocal/sessions'
@@ -37,8 +38,10 @@ let g:netrw_home = g:custom_home.'/.vimlocal'
 " ===================================
 "   GENERAL
 " ===================================
-execute 'set packpath^=' . g:custom_home . '/.vimlocal'
-execute 'set runtimepath^=' . g:custom_home . '/.vimlocal'
+exec 'set packpath^=' . g:custom_home . '/.vim'
+exec 'set packpath^=' . g:custom_home . '/.vimlocal'
+exec 'set runtimepath^=' . g:custom_home . '/.vim'
+exec 'set runtimepath^=' . g:custom_home . '/.vimlocal'
 
 set history=1000
 
@@ -77,6 +80,9 @@ if has('termguicolors')
   set termguicolors
 endif
 set t_Co=256
+
+set guioptions-=m
+set guioptions-=T
 syntax on
 
 filetype plugin indent off
@@ -347,10 +353,6 @@ nnoremap <Down> gj
 "inoremap ' ''<Left>
 "inoremap " ""<Left>
 
-nnoremap <Leader>e :e .<CR>
-nnoremap <Leader>s :s %<CR>
-nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>sv :so $MYVIMRC<CR>
 nnoremap <Leader>h :set hlsearch!<CR>
 
 nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
@@ -392,6 +394,12 @@ nmap <Leader>t [tab]
   nnoremap [tab]n :tabnext<CR>
   nnoremap [tab]<Right> :tabnext<CR>
   nnoremap [tab]c :tabclose<CR>
+
+nmap <Leader>v [vimrc]
+  nnoremap [vimrc]e :e $MYVIMRC<CR>
+  nnoremap [vimrc]<S-e> :e! $MYVIMRC<CR>
+  nnoremap [vimrc]t :tabnew $MYVIMRC<CR>
+  nnoremap [vimrc]s :so $MYVIMRC<CR>
 
 " ===================================
 "   IVIM - ISETEKBD
