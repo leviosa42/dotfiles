@@ -83,6 +83,9 @@ set t_Co=256
 
 set guioptions-=m
 set guioptions-=T
+set guioptions-=Ll
+set guioptions-=Rr
+set guioptions-=e
 syntax on
 
 filetype plugin indent off
