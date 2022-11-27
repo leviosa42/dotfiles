@@ -21,14 +21,14 @@ function! s:gethome() abort
 endfunction
 let g:custom_home = s:gethome()
 "let g:custom_colorscheme = 'elflord'
-"let g:custom_colorscheme = 'molokai'
-let g:custom_colorscheme = 'gruvbox'
+let g:custom_colorscheme = 'molokai'
+"let g:custom_colorscheme = 'gruvbox'
 let g:custom_background = 'dark'
 let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
-let g:custom_enable_pluginmanager = 1
+let g:custom_enable_pluginmanager = 0
 let g:jetpack_download_method = 'curl'
 
 let g:session_directory = g:custom_home.'/.vimlocal/sessions'
@@ -80,6 +80,9 @@ if has('termguicolors')
   set termguicolors
 endif
 set t_Co=256
+
+set guioptions-=m
+set guioptions-=T
 syntax on
 
 filetype plugin indent off
@@ -154,6 +157,46 @@ set listchars+=precedes:«
 
 let &t_SI .= "\e[5 q"
 let &t_EI .= "\e[1 q"
+
+function s:SetTerminalANSIColors() abort
+  if 1
+    let l:black          = '#232526'
+    let l:red            = '#ff0000'
+    let l:green          = '#a6e22e'
+    let l:yellow         = '#e6db74'
+    let l:blue           = '#7070f0'
+    let l:magenta        = '#ae81ff'
+    let l:cyan           = '#66d9ef'
+    let l:white          = '#f8f8f2'
+    let l:bright_black   = '#000000'
+    let l:bright_red     = '#000000'
+    let l:bright_green   = '#000000'
+    let l:bright_yellow  = '#000000'
+    let l:bright_blue    = '#000000'
+    let l:bright_magenta = '#000000'
+    let l:bright_cyan    = '#000000'
+    let l:bright_white   = '#000000'
+  endif
+  let g:terminal_ansi_colors = [
+    \ l:black,
+    \ l:red,
+    \ l:green,
+    \ l:yellow,
+    \ l:blue,
+    \ l:magenta,
+    \ l:cyan,
+    \ l:white,
+    \ l:bright_black,
+    \ l:bright_red,
+    \ l:bright_green,
+    \ l:bright_yellow,
+    \ l:bright_blue,
+    \ l:bright_magenta,
+    \ l:bright_cyan,
+    \ l:bright_white,
+    \ ]
+endfunction
+call s:SetTerminalANSIColors()
 
 " ===================================
 "  STATUSLINE
@@ -350,10 +393,6 @@ nnoremap <Down> gj
 "inoremap ' ''<Left>
 "inoremap " ""<Left>
 
-nnoremap <Leader>e :e .<CR>
-nnoremap <Leader>s :s %<CR>
-nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>sv :so $MYVIMRC<CR>
 nnoremap <Leader>h :set hlsearch!<CR>
 
 nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
@@ -395,6 +434,12 @@ nmap <Leader>t [tab]
   nnoremap [tab]n :tabnext<CR>
   nnoremap [tab]<Right> :tabnext<CR>
   nnoremap [tab]c :tabclose<CR>
+
+nmap <Leader>v [vimrc]
+  nnoremap [vimrc]e :e $MYVIMRC<CR>
+  nnoremap [vimrc]<S-e> :e! $MYVIMRC<CR>
+  nnoremap [vimrc]t :tabnew $MYVIMRC<CR>
+  nnoremap [vimrc]s :so $MYVIMRC<CR>
 
 " ===================================
 "   IVIM - ISETEKBD
