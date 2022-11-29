@@ -29,7 +29,6 @@ let g:custom_colorscheme = 'tokyonight'
 "let g:custom_colorscheme = 'everforest'
   let g:everforest_background = 'hard'
   let g:everforest_better_performance = 1
-
 let g:custom_background = 'dark'
 let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
