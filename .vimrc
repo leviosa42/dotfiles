@@ -21,8 +21,15 @@ function! s:gethome() abort
 endfunction
 let g:custom_home = s:gethome()
 "let g:custom_colorscheme = 'elflord'
-let g:custom_colorscheme = 'molokai'
+"let g:custom_colorscheme = 'molokai'
 "let g:custom_colorscheme = 'gruvbox'
+let g:custom_colorscheme = 'tokyonight'
+  let g:tokyonight_style = 'night'
+  let g:tokyonight_enable_italic = 0
+"let g:custom_colorscheme = 'everforest'
+  let g:everforest_background = 'hard'
+  let g:everforest_better_performance = 1
+
 let g:custom_background = 'dark'
 let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
