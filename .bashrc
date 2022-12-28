@@ -8,9 +8,9 @@ export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w
 
 if [[ -v MSYSTEM ]]; then
   export VIM=/mingw64/share/vim
-  echo $VIM
+#  echo $VIM
   export VIMRUNTIME=/mingw64/share/vim/runtime
-  echo $VIMRUNTIME
+#  echo $VIMRUNTIME
 fi
 source ".bash/rc/alias.bash"
 
