@@ -4,6 +4,19 @@
 " license : MIT license
 " ===================================
 
+" * g:custom_home
+"   * .vim
+"     * pack
+"       * start
+"         * default
+"     * colors
+"     * autoload
+"   * .vimlocal
+"     * backup
+"     * undo
+"     * swap
+"     * jetpack
+"
 " Vi Improved
 set nocompatible
 
@@ -35,7 +48,7 @@ let g:custom_guifont = 'HackGen\ Console:h13'
 let g:custom_default_use_softtab = 1
 let g:custom_indent_width = 4
 let mapleader = "\<Space>"
-let g:custom_enable_pluginmanager = 0
+let g:custom_enable_pluginmanager = 1
 let g:jetpack_download_method = 'curl'
 
 let g:session_directory = g:custom_home.'/.vimlocal/sessions'
@@ -387,6 +400,7 @@ if g:custom_enable_pluginmanager
   call jetpack#add('vim-jp/vimdoc-ja')
   "call jetpack#add('itchyny/lightline.vim', {'start': 1})
   call jetpack#end()
+  call jetpack#add('shinespark/vim-list2tree')
 endif
 
 " ===================================
