@@ -413,6 +413,7 @@ set statusline=%!g:customline.CreateStatusLine(1)
 "   PLUGINS
 " ===================================
 " {{{
+if g:custom_enable_pluginmanager
   " bootstrap
   let s:jetpackfile = g:custom_home . '/.vimlocal/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
   let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
