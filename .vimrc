@@ -51,9 +51,15 @@ let mapleader = "\<Space>"
 let g:custom_enable_pluginmanager = 1
 let g:jetpack_download_method = 'curl'
 
-let g:session_directory = g:custom_home.'/.vimlocal/sessions'
+let s:dotvimlocal_path = g:custom_home . '/.vimlocal'
 
-let g:netrw_home = g:custom_home.'/.vimlocal'
+if !isdirectory(s:dotvimlocal_path)
+  call mkdir(s:dotvimlocal_path, 'p')
+endif
+
+let g:session_directory = s:dotvimlocal_path . '/sessions'
+
+let g:netrw_home = s:dotvimlocal_path
 
 " ===================================
 "   GENERAL
