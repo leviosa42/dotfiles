@@ -399,8 +399,9 @@ if g:custom_enable_pluginmanager
   call jetpack#add('tani/vim-jetpack', {'opt': 1})
   call jetpack#add('vim-jp/vimdoc-ja')
   "call jetpack#add('itchyny/lightline.vim', {'start': 1})
-  call jetpack#end()
+  call jetpack#add('jiangmiao/auto-pairs')
   call jetpack#add('shinespark/vim-list2tree')
+call jetpack#end()
 endif
 
 " ===================================
