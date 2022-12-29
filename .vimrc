@@ -408,7 +408,11 @@ if g:custom_enable_pluginmanager
   call jetpack#add('jiangmiao/auto-pairs')
   call jetpack#add('markonm/traces.vim')
   call jetpack#add('shinespark/vim-list2tree')
-call jetpack#end()
+
+  call jetpack#add('catppuccin/vim', {'as': 'catppuccin'})
+  call jetpack#add('danilo-augusto/vim-afterglow')
+  call jetpack#add('arcticicestudio/nord-vim')
+  call jetpack#end()
 endif
 
 " ===================================
