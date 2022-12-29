@@ -23,6 +23,7 @@ set nocompatible
 " ===================================
 "   VARIABLES
 " ===================================
+" {{{
 function! s:gethome() abort
   let l:term_program = expand('$TERM_PROGRAM')
   "let l:original_home = expand('$HOME')
@@ -60,10 +61,12 @@ endif
 let g:session_directory = s:dotvimlocal_path . '/sessions'
 
 let g:netrw_home = s:dotvimlocal_path
+" }}}
 
 " ===================================
 "   GENERAL
 " ===================================
+" {{{
 execute 'set packpath^=' . g:custom_home . '/.vim'
 execute 'set packpath^=' . g:custom_home . '/.vimlocal'
 execute 'set runtimepath^=' . g:custom_home . '/.vim'
@@ -73,16 +76,28 @@ set history=1000
 
 " Backup files
 set backup
-exec 'set backupdir^=' . g:custom_home . '/.vimlocal/backup'
+let s:backupdir_path = s:dotvimlocal_path . '/backup'
+if !isdirectory(s:backupdir_path)
+  call mkdir(s:backupdir_path, 'p')
+endif
+exec 'set backupdir^=' . s:backupdir_path
 set backupext=.vimbup
 
 " Swap files
 set swapfile
-exec 'set directory^=' . g:custom_home . '/.vimlocal/swap'
+let s:swapdir_path = s:dotvimlocal_path . '/swap'
+if !isdirectory(s:swapdir_path)
+  call mkdir(s:swapdir_path, 'p')
+endif
+exec 'set directory^=' . s:swapdir_path
 
 " Undo files
 set undofile
-exec 'set undodir^=' . g:custom_home .'/.vimlocal/undo'
+let s:undodir_path = s:dotvimlocal_path . '/undo'
+if !isdirectory(s:undodir_path)
+  call mkdir(s:undodir_path, 'p')
+endif
+exec 'set undodir^=' . s:undodir_path
 set undolevels=100
 set undoreload=10000
 set updatetime=4000
@@ -130,11 +145,12 @@ augroup END
 augroup folding_setting
   au FileType vim setl foldmethod=marker
 augroup END
+" }}}
 
 " ===================================
 "   EDITING
 " ===================================
-
+" {{{
 set incsearch
 set ignorecase
 set smartcase
@@ -163,10 +179,12 @@ augroup filetype_indent_settings
   au FileType python setl et   ts=4 sts=-1 sw=0
   au FileType sh     setl et   ts=2 sts=-1 sw=0
 augroup END
+" }}}
 
 " ===================================
 "   APPEARANCE
 " ===================================
+" {{{
 set number
 set ruler
 set cursorline
@@ -226,10 +244,12 @@ function s:SetTerminalANSIColors() abort
     \ ]
 endfunction
 call s:SetTerminalANSIColors()
+" }}}
 
 " ===================================
 "  STATUSLINE
 " ===================================
+" {{{
 set laststatus=2
 let g:custom_stl_config = {
   \ 'highlight': {
@@ -387,11 +407,12 @@ augroup customline
   autocmd WinLeave,BufLeave * setl stl=%!g:customline.CreateStatusLine(0)
 augroup END
 set statusline=%!g:customline.CreateStatusLine(1)
+" }}}
 
 " ===================================
 "   PLUGINS
 " ===================================
-if g:custom_enable_pluginmanager
+" {{{
   " bootstrap
   let s:jetpackfile = g:custom_home . '/.vimlocal/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
   let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
@@ -414,10 +435,12 @@ if g:custom_enable_pluginmanager
   call jetpack#add('arcticicestudio/nord-vim')
   call jetpack#end()
 endif
+" }}}
 
 " ===================================
 "   KEYBINDINGS
 " ===================================
+" {{{
 nnoremap j gj
 nnoremap k gk
 nnoremap <Up> gk
@@ -476,10 +499,12 @@ nmap <Leader>v [vimrc]
   nnoremap [vimrc]<S-e> :e! $MYVIMRC<CR>
   nnoremap [vimrc]t :tabnew $MYVIMRC<CR>
   nnoremap [vimrc]s :so $MYVIMRC<CR>
+" }}}
 
 " ===================================
 "   IVIM - ISETEKBD
 " ===================================
+" {{{
 if has('ivim')
   isetekbd clear
   
@@ -544,6 +569,7 @@ if has('ivim')
     \ ]
   \ }
 endif
+" }}}
 
 filetype on
 filetype plugin on
