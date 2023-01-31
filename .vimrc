@@ -105,6 +105,7 @@ set updatetime=4000
 set helplang=ja,en
 " Encodings
 set fileformat=unix
+set fileformats=unix,dos
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 
@@ -145,6 +146,9 @@ augroup END
 augroup folding_setting
   au FileType vim setl foldmethod=marker
 augroup END
+
+"set t_vb=
+
 " }}}
 
 " ===================================
@@ -192,6 +196,7 @@ set showcmd
 set showmatch
 set showcmd
 set noshowmode
+"set visualbell
 set list
 set listchars=   " init
 set listchars+=tab:>\ 
@@ -202,8 +207,17 @@ set listchars+=extends:»
 set listchars+=precedes:«
 "set listchars+=space:·
 
-let &t_SI .= "\e[5 q"
-let &t_EI .= "\e[1 q"
+if 0
+  " https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+  " https://zenn.dev/link/comments/4e0f4c8d70de63
+  let &t_SI .= "\<Esc>[5 \x7"
+  let &t_SR .= "\<Esc>[4 \x7"
+  let &t_EI .= "\<Esc>[1 \x7"
+  let &t_ti .= "\<Esc>[1 \x7"
+  let &t_te .= "\<Esc>[0 \x7"
+
+endif
+" set virtualedit=onemore
 
 function s:SetTerminalANSIColors() abort
   if 1
@@ -424,9 +438,14 @@ if g:custom_enable_pluginmanager
   "runtime */jetack.vim
   packadd vim-jetpack
   call jetpack#begin(g:custom_home . '/.vimlocal')
-  call jetpack#add('tani/vim-jetpack', {'opt': 1})
+  call jetpack#add('tani/vim-jetpack', {'opt': 1 })
+
   call jetpack#add('vim-jp/vimdoc-ja')
+
   "call jetpack#add('itchyny/lightline.vim', {'start': 1})
+
+  call jetpack#add('prabirshrestha/vim-lsp')
+  call jetpack#add('mattn/vim-lsp-settings')
   call jetpack#add('jiangmiao/auto-pairs')
   call jetpack#add('markonm/traces.vim')
   call jetpack#add('shinespark/vim-list2tree')
@@ -483,8 +502,8 @@ nmap <Leader>w [window]
   " <C-w>p
   nnoremap [window]p <C-w>p
 
-nnoremap <Tab> :tabnext<CR>
-nnoremap <S-Tab> :tabprevious<CR>
+" nnoremap <Tab> :tabnext<CR>
+" nnoremap <S-Tab> :tabprevious<CR>
 
 nmap <Leader>t [tab]
   " ref: https://spirits.appirits.com/doruby/9017/
