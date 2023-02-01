@@ -13,9 +13,9 @@ link_to_homedir() {
         [[ ${bf} == ".gitattributes" ]] && continue 
         [[ ${bf} == ".gitmodules" ]] && continue
         if [[ -L "${HOME}/${bf}" ]]; then # is symlink
-            command rm -f "${HOME}/${bf}"
+            command rm -f "${HOME}/.config/${bf}"
         fi
-        command ln -sfnv "${f}" "${HOME}"
+        command ln -sfnv "${f}" "${HOME}/.config"
     done
 }
 
