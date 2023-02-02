@@ -5,24 +5,18 @@
 !.gitignore
 !.gitkeep
 
-!/.bin
-!/.bin/install.sh
+!/.config
+!/.config/bash
+!/.config/bash/*
 
-!/.bashrc
-!/.bash/
-!/.bash/rc/
-!/.bash/rc/alias.bash
+!/.config/nvim
+!/.config/nvim/*
 
-!/.vimrc
-!/.vim/
-!/.vim/*
-!/.vim/**
-/.vim/.netrwhist
-!/.vim/sessions/
-/.vim/sessions/**
-!/.vim/sessions/.gitkeep
-!/.vim/pack/.gitkeep
-/.vim/pack/ivim/**
-!/.vim/pack/ivim/.gitkeep
-/.vim/pack/jetpack/**
-!/.vim/pack/jetpack/.gitkeep
+!/.config/nyagos
+!/.config/nyagos/*
+
+!/.config/sh
+!/.config/sh/*
+
+!/.config/vim
+!/.config/vim/*

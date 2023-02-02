@@ -1,0 +1,25 @@
+nyagos.envadd("PATH",
+    -- "%USERPROFILE%\\scoop\\apps\\vim\\current",
+    "%ProgramFIles%\\Vim\\vim90",
+    "%USERPROFILE%\\scoop\\apps\\bat\\current",
+    "%USERPROFILE%\\scoop\\apps\\gcc\\current\\bin",
+    "%USERPROFILE%\\scoop\\apps\\git\\current\\bin",
+    "%USERPROFILE%\\scoop\\shims",
+    "~\\bin")
+
+nyagos.env.MSYS = "winsymlinks:native"
+nyagos.env.MSYSTEM = "MINGW64"
+nyagos.env.MSYS2_PATH_TYPE = "inherit"
+nyagos.env.CHERE_INVOKING = "1"
+
+nyagos.e.v.XDG_CONFIG_HOME = nyagos.pathjoin("%HOME%", "\\.config")
+nyagos.env.XDG_DATA_HOME = nyagos.pathjoin("%HOME%", "\\.local\\share")
+
+-- nyagos.env.VIMRUNTIME = nyagos.pathjoin("%USERPROFILE%", "\\scoop\\apps\\vim\\current\\")
+-- nyagos.env.VIMRUNTIME = nyagos.pathjoin("%ProgramFiles%", "\\Vim\\vim90")
+
+nyagos.alias[":q"] = __exit__
+
+nyagos.env.prompt = 'NYAGOS:$p:$$$s'
+
+-- vim: ft=lua
