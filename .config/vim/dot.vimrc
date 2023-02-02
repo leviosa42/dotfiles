@@ -4,21 +4,9 @@
 " license : MIT license
 " ===================================
 
-" * g:custom_home
-"   * .vim
-"     * pack
-"       * start
-"         * default
-"     * colors
-"     * autoload
-"   * .vimlocal
-"     * backup
-"     * undo
-"     * swap
-"     * jetpack
-"
 " Vi Improved
 set nocompatible
+
 
 " ===================================
 "   VARIABLES
@@ -71,20 +59,24 @@ let g:netrw_home = $XDG_CACHE_HOME/
 "execute 'set packpath^=' . g:custom_home . '/.vimlocal'
 "execute 'set runtimepath^=' . g:custom_home . '/.vim'
 "execute 'set runtimepath^=' . g:custom_home . '/.vimlocal'
-let &packpath = &runtimepath
 
 set history=1000
 " XDG Base Directory
 " ref: https://tlvince.com/vim-respect-xdg
-set directory=expand('$XDG_CACHE_HOME/vim/swap')
+set directory=$XDG_CACHE_HOME/vim/swap
 set backupdir=$XDG_CACHE_HOME/vim/backup
+set undodir=$XDG_CACHE_HOME/vim/undo
 set viminfo=$XDG_CACHE_HOME/vim/viminfo
+call mkdir(&directory, 'p')
+call mkdir(&backupdir, 'p')
+call mkdir(&undodir, 'p')
+call mkdir(&viminfo, 'p')
 set runtimepath^=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let &packpath = &runtimepath
 
 set backupext=.vimbup
 
 set undofile
-set undodir=.
 set undolevels=100
 set undoreload=10000
 set updatetime=4000
@@ -244,7 +236,7 @@ function s:SetTerminalANSIColors() abort
     \ l:bright_white,
     \ ]
 endfunction
-call s:SetTerminalANSIColors()
+"call s:SetTerminalANSIColors()
 " }}}
 
 " ===================================
