@@ -84,6 +84,7 @@ set runtimepath^=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIM
 set backupext=.vimbup
 
 set undofile
+set undodir=.
 set undolevels=100
 set undoreload=10000
 set updatetime=4000

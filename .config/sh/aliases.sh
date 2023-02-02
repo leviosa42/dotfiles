@@ -19,6 +19,7 @@ alias dotfiles='vim ~/dotfiles/'
 alias .bashrc='vim ~/.bashrc && source ~/.bashrc'
 alias .aliases='vim $XDG_CONFIG_HOME/sh/aliases.sh && source ~/.bashrc'
 
+alias e="$EDITOR"
 alias vi='vim -u NONE'
 
 alias :q='exit'
