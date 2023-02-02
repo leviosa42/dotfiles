@@ -1,116 +1,147 @@
-" ===================================
-" filename: .vimrc
-" author  : leviosa42
-" license : MIT license
-" ===================================
-
-" Vi Improved
+"
+" __   _(_)_ __ ___  _ __ ___
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__
+" (_)_/ |_|_| |_| |_|_|  \___|
+"
+"" Vi Improved
 set nocompatible
-
-
-" ===================================
-"   VARIABLES
-" ===================================
-" {{{
-function! s:gethome() abort
-  let l:term_program = expand('$TERM_PROGRAM')
-  "let l:original_home = expand('$HOME')
-  if term_program == 'a-Shell'
-    return expand('~/Documents')
-  else
-    return expand('~')
+" Before --- {{{
+syntax off
+filetype plugin indent off
+" }}}
+" XDG Base Directory --- {{{
+" - Set enviroment variables --- {{{
+if empty($XDG_CONFIG_HOME)
+  let $XDG_CONFIG_HOME = $HOME . '/.config'
+endif
+if empty($XDG_CACHE_HOME)
+  let $XDG_CACHE_HOME = $HOME . '/.cache'
+endif
+if empty($XDG_DATA_HOME)
+  let $XDG_DATA_HOME = $HOME . '/.local/share'
+endif
+if empty($XDG_STATE_HOME)
+  let $XDG_STATE_HOME = $HOME . '/.local/state'
+endif
+" - }}}
+" - Path Variable --- {{{
+let s:runtime_path = $XDG_DATA_HOME . '/vim'
+let s:swap_path = $XDG_CACHE_HOME . '/vim/swap'
+let s:undo_path = $XDG_CACHE_HOME . '/vim/undo'
+let s:viminfo_path = $XDG_STATE_HOME . '/vim/viminfo'
+" - }}}
+" - Util Function --- {{{
+function s:__mkdirp(path) abort
+  if !isdirectory(a:path)
+    call mkdir(a:path, 'p')
   endif
 endfunction
-let g:custom_home = s:gethome()
-"let g:custom_colorscheme = 'elflord'
-let g:custom_colorscheme = 'molokai'
+" }}}
+" - Make directories --- {{{
+if !has('nvim')
+  call s:__mkdirp(s:runtime_path)
+  call s:__mkdirp(s:swap_path)
+  call s:__mkdirp(s:undo_path)
+  call s:__mkdirp(s:viminfo_path)
+endif
+" - }}}
+" - Set options --- {{{
+if !has('nvim')
+  " backup
+  set backupdir=$XDG_CACHE_HOME/vim/backup
+  " swap
+  set directory=$XDG_CACHE_HOME/vim/swap
+  " undo
+  set undofile
+  set undodir=$XDG_CACHE_HOME/vim/undo
+  " viminfo
+  set viminfo+=n$STATE_HOME/vim/viminfo
+  " runtimepath
+  set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim,$VIM,$VIMRUNTIME
+else
+  " backup
+  set backupdir=$XDG_CACHE_HOME/nvim/backup
+  " swap
+  set directory=$XDG_CACHE_HOME/nvim/swap
+  " undo
+  set undofile
+  set undodir=$XDG_CACHE_HOME/nvim/undo
+  " shada(viminfo)
+  set shadafile=$XDG_STATE_HOME/nvim/shada
+  " runtimepath
+  set runtimepath=$XDG_CONFIG_HOME/nvim,$XDG_DATA_HOME/nvim,$VIM,$VIMRUNTIME
+" packpath
+endif
+let &packpath = &runtimepath
+" - }}}
+" }}}
+" Global Variables --- {{{
+" - ColorScheme --- {{{
+let g:conf_background = 'dark'
+let g:conf_colorscheme_default = 'pablo'
+let g:conf_colorscheme = 'tokyonight'
+" - - gruvbox ---  {{{
 "let g:custom_colorscheme = 'gruvbox'
+" - - }}}
+" - - tokyonight --- {{{
 "let g:custom_colorscheme = 'tokyonight'
   let g:tokyonight_style = 'night'
   let g:tokyonight_enable_italic = 0
   let g:tokyonight_disable_italic_comment = 1
+" - - }}}
+" - - everforest --- {{{
 "let g:custom_colorscheme = 'everforest'
   let g:everforest_background = 'hard'
   let g:everforest_better_performance = 1
-let g:custom_background = 'dark'
-let g:custom_guifont = 'HackGen\ Console:h13'
-let g:custom_default_use_softtab = 1
-let g:custom_indent_width = 4
-let mapleader = "\<Space>"
-let g:custom_enable_pluginmanager = 1
-let g:jetpack_download_method = 'curl'
-
-"let s:dotvimlocal_path = g:custom_home . '/.vimlocal'
-
-"if !isdirectory(s:dotvimlocal_path)
-"  call mkdir(s:dotvimlocal_path, 'p')
-"endif
-
-"let g:session_directory = s:dotvimlocal_path . '/sessions'
-
-let g:netrw_home = $XDG_CACHE_HOME/
+" - - }}}
+" - - solarized --- {{{
+let g:solarized_termcolors = 16
+"let g:solarized_termtrans = 1
+let g:solarized_visibility = 'high'
+let g:solarized_contrast = 'high'
+" - - }}}
+" - }}}
+" - Font --- {{{
+let g:conf_guifont = 'HackGenNerd\ Console:h13'
+" - }}}
+" - Plugin Manager --- {{{
+let g:conf_enable_pluginmanager = 1
+if executable('git')
+  let g:jetpack_download_method = 'git'
+elseif executable('curl')
+  let g:jetpack_download_method = 'curl'
+elseif executable('wget')
+  let g:jetpack_download_method = 'wget'
+endif
+"  }}}
+let g:conf_use_customline = 0
+let g:conf_use_expandtab_default = 1
+let g:mapleader = "\<Space>"
 " }}}
-
-" ===================================
-"   GENERAL
-" ===================================
-" {{{
-"execute 'set packpath^=' . g:custom_home . '/.vim'
-"execute 'set packpath^=' . g:custom_home . '/.vimlocal'
-"execute 'set runtimepath^=' . g:custom_home . '/.vim'
-"execute 'set runtimepath^=' . g:custom_home . '/.vimlocal'
-
-set history=1000
-" XDG Base Directory
-" ref: https://tlvince.com/vim-respect-xdg
-set directory=$XDG_CACHE_HOME/vim/swap
-set backupdir=$XDG_CACHE_HOME/vim/backup
-set undodir=$XDG_CACHE_HOME/vim/undo
-set viminfo=$XDG_CACHE_HOME/vim/viminfo
-call mkdir(&directory, 'p')
-call mkdir(&backupdir, 'p')
-call mkdir(&undodir, 'p')
-call mkdir(&viminfo, 'p')
-set runtimepath^=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-let &packpath = &runtimepath
-
-set backupext=.vimbup
-
-set undofile
-set undolevels=100
-set undoreload=10000
-set updatetime=4000
-
-set helplang=ja,en
-" Encodings
+" General --- {{{
+" - Encoding --- {{{
 set fileformat=unix
 set fileformats=unix,dos
 set encoding=utf-8
-set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
-
+set fileencodings=utf-8,iso-2022-jp,sjis,cp932,euc-jp
+" - }}}
+" - Clipboard --- {{{
 set clipboard+=unnamed
 set clipboard+=unnamedplus
-
+" - }}}
+" - Control --- {{{
 set mouse=a
-
-set whichwrap=b,s,h,l,<,>,[,]
+set whichwrap=b,s,<,>,[,]
 set timeout
 set timeoutlen=2000
 set ttimeoutlen=10
-if has('termguicolors')
-  set termguicolors
-endif
-set t_Co=256
-
-set guioptions-=m
-set guioptions-=T
-set guioptions-=Ll
-set guioptions-=Rr
-set guioptions-=e
-syntax on
-
-filetype plugin indent off
-
+" - }}}
+" - Help --- {{{
+set helpheight&vim
+set helplang=ja
+" - }}}
+" - FileType --- {{{
 augroup filetype_settings
   au BufNewFile,BufRead *.vim   set filetype=vim
   au BufNewFile,BufRead *.vimrc set filetype=vim
@@ -121,39 +152,32 @@ augroup filetype_settings
   au BufNewFile,BufRead *.bash  set filetype=sh
   au BufNewFile,BufRead *.ash   set filetype=sh
 augroup END
-
-augroup folding_setting
-  au FileType vim setl foldmethod=marker
-augroup END
-
-"set t_vb=
-
+" - }}}
 " }}}
-
-" ===================================
-"   EDITING
-" ===================================
-" {{{
+" Editing --- {{{
+" - Searching --- {{{
 set incsearch
 set ignorecase
 set smartcase
 "set hlsearch
+"- }}}
+" - Command-Line --- {{{
 set wildmenu
 set wildmode=longest:list,full
-set autochdir
+" - }}}
+" - Modifying --- {{{
 set backspace=indent,eol,start
-
-" indent
-if g:custom_default_use_softtab
+" - }}}
+" - Indent --- {{{
+if g:conf_use_expandtab_default
   set expandtab
 else
   set noexpandtab
 endif
-execute 'set tabstop=' . g:custom_indent_width
-set softtabstop=-1
-set shiftwidth=0
+set sts=-1 sw=0
 set autoindent
 set smartindent
+" - FileType Indent --- {{{
 " ref: https://qiita.com/ysn/items/f4fc8f245ba50d5fb8b0
 augroup filetype_indent_settings
   au FileType vim    setl et   ts=2 sts=-1 sw=0
@@ -162,12 +186,10 @@ augroup filetype_indent_settings
   au FileType python setl et   ts=4 sts=-1 sw=0
   au FileType sh     setl et   ts=2 sts=-1 sw=0
 augroup END
+" - }}}
 " }}}
-
-" ===================================
-"   APPEARANCE
-" ===================================
-" {{{
+" }}}
+" Appearance --- {{{
 set number
 set ruler
 set cursorline
@@ -175,7 +197,10 @@ set showcmd
 set showmatch
 set showcmd
 set noshowmode
-"set visualbell
+if has('termguicolors')
+  set termguicolors
+endif
+" - Listchars --- {{{
 set list
 set listchars=   " init
 set listchars+=tab:>\ 
@@ -185,64 +210,8 @@ set listchars+=nbsp:%
 set listchars+=extends:»
 set listchars+=precedes:«
 "set listchars+=space:·
-
-if 0
-  " https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
-  " https://zenn.dev/link/comments/4e0f4c8d70de63
-  let &t_SI .= "\<Esc>[5 \x7"
-  let &t_SR .= "\<Esc>[4 \x7"
-  let &t_EI .= "\<Esc>[1 \x7"
-  let &t_ti .= "\<Esc>[1 \x7"
-  let &t_te .= "\<Esc>[0 \x7"
-
-endif
-" set virtualedit=onemore
-
-function s:SetTerminalANSIColors() abort
-  if 1
-    let l:black          = '#232526'
-    let l:red            = '#ff0000'
-    let l:green          = '#a6e22e'
-    let l:yellow         = '#e6db74'
-    let l:blue           = '#7070f0'
-    let l:magenta        = '#ae81ff'
-    let l:cyan           = '#66d9ef'
-    let l:white          = '#f8f8f2'
-    let l:bright_black   = '#000000'
-    let l:bright_red     = '#000000'
-    let l:bright_green   = '#000000'
-    let l:bright_yellow  = '#000000'
-    let l:bright_blue    = '#000000'
-    let l:bright_magenta = '#000000'
-    let l:bright_cyan    = '#000000'
-    let l:bright_white   = '#000000'
-  endif
-  let g:terminal_ansi_colors = [
-    \ l:black,
-    \ l:red,
-    \ l:green,
-    \ l:yellow,
-    \ l:blue,
-    \ l:magenta,
-    \ l:cyan,
-    \ l:white,
-    \ l:bright_black,
-    \ l:bright_red,
-    \ l:bright_green,
-    \ l:bright_yellow,
-    \ l:bright_blue,
-    \ l:bright_magenta,
-    \ l:bright_cyan,
-    \ l:bright_white,
-    \ ]
-endfunction
-"call s:SetTerminalANSIColors()
-" }}}
-
-" ===================================
-"  STATUSLINE
-" ===================================
-" {{{
+" - }}}
+" - StatusLine --- {{{
 set laststatus=2
 let g:custom_stl_config = {
   \ 'highlight': {
@@ -393,69 +362,57 @@ function g:customline.GetModeName() abort
   return get(name_dict, mode(0), ['NF', 'NOTFOUND'])[use_longname]
 endfunction
 
-augroup customline
-  autocmd!
-  autocmd ColorScheme * call g:customline.Init()
-  autocmd WinEnter,BufEnter * setl stl=%!g:customline.CreateStatusLine(1)
-  autocmd WinLeave,BufLeave * setl stl=%!g:customline.CreateStatusLine(0)
-augroup END
-set statusline=%!g:customline.CreateStatusLine(1)
-" }}}
-
-" ===================================
-"   PLUGINS
-" ===================================
-" {{{
-if g:custom_enable_pluginmanager
-  " bootstrap
-  let s:jetpackfile = g:custom_home . '/.vimlocal/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-  let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
-  if !filereadable(s:jetpackfile)
-    call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
-  endif
-  "plugins
-  "runtime */jetack.vim
-  packadd vim-jetpack
-  call jetpack#begin(g:custom_home . '/.vimlocal')
-  call jetpack#add('tani/vim-jetpack', {'opt': 1 })
-
-  call jetpack#add('vim-jp/vimdoc-ja')
-
-  "call jetpack#add('itchyny/lightline.vim', {'start': 1})
-
-  call jetpack#add('prabirshrestha/vim-lsp')
-  call jetpack#add('mattn/vim-lsp-settings')
-  call jetpack#add('jiangmiao/auto-pairs')
-  call jetpack#add('markonm/traces.vim')
-  call jetpack#add('shinespark/vim-list2tree')
-
-  call jetpack#add('catppuccin/vim', {'as': 'catppuccin'})
-  call jetpack#add('danilo-augusto/vim-afterglow')
-  call jetpack#add('arcticicestudio/nord-vim')
-  call jetpack#end()
+if g:conf_use_customline
+  augroup customline
+    autocmd!
+    autocmd ColorScheme * call g:customline.Init()
+    autocmd WinEnter,BufEnter * setl stl=%!g:customline.CreateStatusLine(1)
+    autocmd WinLeave,BufLeave * setl stl=%!g:customline.CreateStatusLine(0)
+  augroup END
+  set statusline=%!g:customline.CreateStatusLine(1)
 endif
-" }}}
+" - }}}
+" - FoldText --- {{{
+function! MyFoldText() abort
+    let line = getline(v:foldstart)
 
-" ===================================
-"   KEYBINDINGS
-" ===================================
-" {{{
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 5
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . '..' . foldedlinecount  . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+" - }}}
+" GUI --- {{{
+" - GUI Options --- {{{
+set guioptions-=m
+set guioptions-=T
+set guioptions-=Ll
+set guioptions-=Rr
+set guioptions-=e
+" - }}}
+" }}}
+" Key Mappings --- {{{
 nnoremap j gj
 nnoremap k gk
 nnoremap <Up> gk
 nnoremap <Down> gj
-
+nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
+nnoremap <Leader>h :set hlsearch!<CR>
 "inoremap { {}<Left>
 "inoremap [ []<Left>
 "inoremap ( ()<Left>
 "inoremap ' ''<Left>
 "inoremap " ""<Left>
-
-nnoremap <Leader>h :set hlsearch!<CR>
-
-nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
+" nnoremap <Tab> :tabnext<CR>
+" nnoremap <S-Tab> :tabprevious<CR>
+" - [window] --- {{{
 " ref: https://qiita.com/r12tkmt/items/b89df403f587216802f1
-" === [window] ===
 nmap <Leader>w [window]
   " ref: https://lesguillemets.github.io/blog/2014/10/16/vim-window-controls.html
   " Openeing a window
@@ -480,10 +437,8 @@ nmap <Leader>w [window]
   nnoremap [window]r <C-w>r
   " <C-w>p
   nnoremap [window]p <C-w>p
-
-" nnoremap <Tab> :tabnext<CR>
-" nnoremap <S-Tab> :tabprevious<CR>
-
+" - }}}
+" - [tab] --- {{{
 nmap <Leader>t [tab]
   " ref: https://spirits.appirits.com/doruby/9017/
   " Moving current tab
@@ -492,88 +447,85 @@ nmap <Leader>t [tab]
   nnoremap [tab]n :tabnext<CR>
   nnoremap [tab]<Right> :tabnext<CR>
   nnoremap [tab]c :tabclose<CR>
-
+" - }}}
+" - [vimrc] --- {{{
 nmap <Leader>v [vimrc]
   nnoremap [vimrc]e :e $MYVIMRC<CR>
   nnoremap [vimrc]<S-e> :e! $MYVIMRC<CR>
   nnoremap [vimrc]t :tabnew $MYVIMRC<CR>
   nnoremap [vimrc]s :so $MYVIMRC<CR>
+" - }}}
 " }}}
-
-" ===================================
-"   IVIM - ISETEKBD
-" ===================================
-" {{{
-if has('ivim')
-  isetekbd clear
-  
-  isetekbd append {
-    \ 'buttons': [
-      \ {
-        \ 'keys': [
-          \ { 'title': '⎋', 'type': 'special', 'contents': 'esc' },
-          \ { 'title': '⌃', 'type': 'modifier', 'contents': 'control' },
-        \ ],
-        \ 'locations': [0, 1]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '⇥', 'type': 'special', 'contents': 'tab' },
-          \ { 'title': '⌥', 'type': 'modifier', 'contents': 'alt' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '⌃', 'type': 'modifier', 'contents': 'control' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '⌥', 'type': 'modifier', 'contents': 'alt' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '←', 'type': 'special', 'contents': 'left' },
-          \ { 'title': 'home', 'type': 'command', 'contents': 'eval feedkeys("\<Home>")' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '↓', 'type': 'special', 'contents': 'down' },
-          \ { 'title': 'PgDn', 'type': 'command', 'contents': 'eval feedkeys("\<PageDown>")' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '↑', 'type': 'special', 'contents': 'up' },
-          \ { 'title': 'PgUp', 'type': 'command', 'contents': 'eval feedkeys("\<PageUp>")' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': '→', 'type': 'special', 'contents': 'right' },
-          \ { 'title': 'end', 'type': 'command', 'contents': 'eval feedkeys("\<End>")' }
-        \ ]
-      \ },
-      \ {
-        \ 'keys': [
-          \ { 'title': 'del', 'type': 'command', 'contents': 'eval feedkeys("\<Del>")' }
-        \ ]
-      \ }
-    \ ]
-  \ }
+" Plugins --- {{{
+" - Processes Function --- {{{
+function s:__jetpack_setup(pmpath) abort
+  " botstrap
+  let s:jetpackfile = a:pmpath . '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+  let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+  if !filereadable(s:jetpackfile)
+    call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+  endif
+  "runtime */jetack.vim
+  packadd vim-jetpack
+endfunction
+" - }}}
+" - Add Plugins Function --- {{{
+function s:__jetpack_add_plugins(pmpath) abort
+  call jetpack#begin(a:pmpath)
+  call jetpack#add('tani/vim-jetpack', {'opt': 1}) " bootstrap
+  " - - General --- {{{
+  call jetpack#add('vim-jp/vimdoc-ja')
+  " - - }}}
+  " - - Editings --- {{{
+  call jetpack#add('jiangmiao/auto-pairs')
+  call jetpack#add('markonm/traces.vim')
+  " - }}}
+  " - - Appearance --- {{{
+  call jetpack#add('itchyny/lightline.vim')
+  " - - }}}
+  " - - ColorSchemes --- {{{
+  call jetpack#add('catppuccin/vim', {'as': 'catppuccin'})
+  call jetpack#add('danilo-augusto/vim-afterglow')
+  call jetpack#add('arcticicestudio/nord-vim')
+  "call jetpack#add('altercation/vim-colors-solarized')
+  " - - }}}
+  call jetpack#end()
+endfunction
+" - }}}
+" - Main Process --- {{{
+if g:conf_enable_pluginmanager
+  let s:pmpath = !has('nvim') ? '/vim' : 'nvim'
+  if !has('nvim') " idk why this script runs correctly on nvim
+    call s:__jetpack_setup(s:pmpath)
+    call s:__jetpack_add_plugins(s:pmpath)
+  endif
 endif
+" - }}}
+" - Plugin Settings --- {{{
+" - - [itchyny/lightline.vim] --- {{{
+" ref: https://qiita.com/hoto17296/items/ccbd6b413e67a653f2d
+let g:lightline = {
+  \ 'colorscheme': 'tokyonight',
+  \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+  \ }
+set noshowmode
+augroup lightline_vim
+  autocmd VimEnter * call lightline#update()
+augroup END
+" - - }}}
+" - }}}
 " }}}
+" After --- {{{
+syntax enable
+execute 'set background=' . g:conf_background
+try
+  execute 'colorscheme ' . g:conf_colorscheme
+catch
+  execute 'colorscheme ' . g:conf_colorscheme_default
+endtry
+execute 'set guifont=' . g:conf_guifont
+filetype plugin indent on
+" }}}
+" vim: set ft=vim ts=2 sts=-1 sw=0 expandtab autoindent smartindent foldmethod=marker:
 
-filetype on
-filetype plugin on
-filetype indent on
-
-execute 'set guifont=' . g:custom_guifont
-execute 'set background=' . g:custom_background
-execute 'colorscheme ' . g:custom_colorscheme
