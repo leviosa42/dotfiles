@@ -135,7 +135,7 @@ set mouse=a
 set whichwrap=b,s,<,>,[,]
 set timeout
 set timeoutlen=2000
-set ttimeoutlen=10
+set ttimeoutlen=-1
 " - }}}
 " - Help --- {{{
 set helpheight&vim
@@ -200,6 +200,7 @@ set noshowmode
 if has('termguicolors')
   set termguicolors
 endif
+set ambiwidth=double " Especially for NF's icons
 " - Listchars --- {{{
 set list
 set listchars=   " init
@@ -392,8 +393,10 @@ set foldtext=MyFoldText()
 " - GUI Options --- {{{
 set guioptions-=m
 set guioptions-=T
-set guioptions-=Ll
-set guioptions-=Rr
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
 set guioptions-=e
 " - }}}
 " }}}
@@ -444,8 +447,10 @@ nmap <Leader>t [tab]
   " Moving current tab
   nnoremap [tab]p :tabprevious<CR>
   nnoremap [tab]<Left> :tabprevious<CR>
+  nnoremap [tab]h :tabprevious<CR>
   nnoremap [tab]n :tabnext<CR>
   nnoremap [tab]<Right> :tabnext<CR>
+  nnoremap [tab]l :tabnext<CR>
   nnoremap [tab]c :tabclose<CR>
 " - }}}
 " - [vimrc] --- {{{
@@ -458,11 +463,11 @@ nmap <Leader>v [vimrc]
 " }}}
 " Plugins --- {{{
 " - Processes Function --- {{{
-function s:__jetpack_setup(pmpath) abort
-  " botstrap
+function g:__jetpack_setup(pmpath) abort
+  " bootstrap
   let s:jetpackfile = a:pmpath . '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
   let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
-  if !filereadable(s:jetpackfile)
+  if !filereadable(s:jetpackfile) && executable('curl')
     call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
   endif
   "runtime */jetack.vim
@@ -470,11 +475,15 @@ function s:__jetpack_setup(pmpath) abort
 endfunction
 " - }}}
 " - Add Plugins Function --- {{{
-function s:__jetpack_add_plugins(pmpath) abort
+function g:__jetpack_add_plugins(pmpath) abort
   call jetpack#begin(a:pmpath)
   call jetpack#add('tani/vim-jetpack', {'opt': 1}) " bootstrap
   " - - General --- {{{
   call jetpack#add('vim-jp/vimdoc-ja')
+  call jetpack#add('lambdalisue/fern.vim')
+  call jetpack#add('lambdalisue/fern-renderer-nerdfont.vim', {'depends': 'lambdalisue/nerdfont.vim'})
+  call jetpack#add('lambdalisue/nerdfont.vim')
+  call jetpack#add('yuki-yano/fern-preview.vim', {'depends': 'lambdalisue/fern.vim'})
   " - - }}}
   " - - Editings --- {{{
   call jetpack#add('jiangmiao/auto-pairs')
@@ -494,14 +503,40 @@ endfunction
 " - }}}
 " - Main Process --- {{{
 if g:conf_enable_pluginmanager
-  let s:pmpath = !has('nvim') ? '/vim' : 'nvim'
+  let g:pmpath = $XDG_DATA_HOME . '/vim'
   if !has('nvim') " idk why this script runs correctly on nvim
-    call s:__jetpack_setup(s:pmpath)
-    call s:__jetpack_add_plugins(s:pmpath)
+    call g:__jetpack_setup(g:pmpath)
+    call g:__jetpack_add_plugins(g:pmpath)
   endif
 endif
 " - }}}
 " - Plugin Settings --- {{{
+" - - [lambdalisue/fern.vim] --- {{{
+let g:fern#renderer = 'nerdfont'
+let g:fern#default_hidden = 1
+function! s:init_fern() abort
+  " Use 'select' instead of 'edit' for default 'open' action
+  nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
+endfunction
+augroup fern-custom
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
+nnoremap <silent> <Leader>E :<C-u>Fern . -reveal=%<CR>
+nnoremap <silent> <Leader>e :<C-u>Fern . -reveal=% -drawer -toggle<CR>
+" preview
+function! s:fern_settings() abort
+  nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
+  nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
+  nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
+  nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
+endfunction
+
+augroup fern-settings
+  autocmd!
+  autocmd FileType fern call s:fern_settings()
+augroup END
+" }}}
 " - - [itchyny/lightline.vim] --- {{{
 " ref: https://qiita.com/hoto17296/items/ccbd6b413e67a653f2d
 let g:lightline = {
