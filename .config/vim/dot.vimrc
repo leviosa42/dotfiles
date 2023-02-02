@@ -60,7 +60,7 @@ let g:jetpack_download_method = 'curl'
 
 "let g:session_directory = s:dotvimlocal_path . '/sessions'
 
-let g:netrw_home = s:dotvimlocal_path
+let g:netrw_home = $XDG_CACHE_HOME/
 " }}}
 
 " ===================================
