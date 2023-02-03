@@ -80,7 +80,7 @@ let &packpath = &runtimepath
 " - ColorScheme --- {{{
 let g:conf_background = 'dark'
 let g:conf_colorscheme_default = 'pablo'
-let g:conf_colorscheme = 'tokyonight'
+let g:conf_colorscheme = 'molokai'
 " - - gruvbox ---  {{{
 "let g:custom_colorscheme = 'gruvbox'
 " - - }}}
@@ -200,7 +200,8 @@ set noshowmode
 if has('termguicolors')
   set termguicolors
 endif
-set ambiwidth=double " Especially for NF's icons
+"set ambiwidth=double " Especially for NF's icons
+set ambiwidth=single " To fix lightline.vim's separator
 " - Listchars --- {{{
 set list
 set listchars=   " init
@@ -486,7 +487,7 @@ function g:__jetpack_add_plugins(pmpath) abort
   call jetpack#add('yuki-yano/fern-preview.vim', {'depends': 'lambdalisue/fern.vim'})
   " - - }}}
   " - - Editings --- {{{
-  call jetpack#add('jiangmiao/auto-pairs')
+  " call jetpack#add('jiangmiao/auto-pairs')
   call jetpack#add('markonm/traces.vim')
   " - }}}
   " - - Appearance --- {{{
@@ -540,13 +541,20 @@ augroup END
 " - - [itchyny/lightline.vim] --- {{{
 " ref: https://qiita.com/hoto17296/items/ccbd6b413e67a653f2d
 let g:lightline = {
-  \ 'colorscheme': 'tokyonight',
+  \ 'colorscheme': 'molokai',
   \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
   \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
   \ }
 set noshowmode
+function s:ChangeLightlineColorScheme(name) abort
+  "let g:lightline.colorscheme = a:name
+  "let g:loaded_lightline = 0
+  "call lightline#init()
+  "let g:loaded_lightline = 1
+endfunction
 augroup lightline_vim
   autocmd VimEnter * call lightline#update()
+  "autocmd ColorScheme * call s:ChangeLightlineColorScheme(expand('<amatch>'))
 augroup END
 " - - }}}
 " - }}}
