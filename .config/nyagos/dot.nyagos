@@ -1,25 +1,68 @@
-nyagos.envadd("PATH",
-    -- "%USERPROFILE%\\scoop\\apps\\vim\\current",
-    "%ProgramFIles%\\Vim\\vim90",
-    "%USERPROFILE%\\scoop\\apps\\bat\\current",
-    "%USERPROFILE%\\scoop\\apps\\gcc\\current\\bin",
-    "%USERPROFILE%\\scoop\\apps\\git\\current\\bin",
-    "%USERPROFILE%\\scoop\\shims",
-    "~\\bin")
+-- ref: DeeR's .nyagos. > https://github.com/DeaR/dotfiles/blob/master/.nyagos
+print("Start loading .nyagos")
+-- Pre Init: {{{
+-- Util Functions: -- {{{
+local function mkdirp(path)
+    nyagos.exec({"mkdir", "/p", path})
+end
 
-nyagos.env.MSYS = "winsymlinks:native"
-nyagos.env.MSYSTEM = "MINGW64"
-nyagos.env.MSYS2_PATH_TYPE = "inherit"
-nyagos.env.CHERE_INVOKING = "1"
+local function ext(fname)
+  local p = nyagos.which(fname)
+  return p and nyagos.stat(p).name or fname
+end
 
-nyagos.e.v.XDG_CONFIG_HOME = nyagos.pathjoin("%HOME%", "\\.config")
-nyagos.env.XDG_DATA_HOME = nyagos.pathjoin("%HOME%", "\\.local\\share")
+-- }}}
+local home = nyagos.getenv("HOME") or nyagos.getenv("USERPROFILE")
+set({
+    HOME = home,
+    XDG_CONFIG_HOME = nyagos.getenv("XDG_CONFIG_HOME") or (home .. "\\.config"),
+    XDG_CACHE_HOME  = nyagos.getenv("XDG_CACHE_HOME")  or (home .. "\\.cache"),
+    XDG_DATA_HOME   = nyagos.getenv("XDG_DATA_HOME")   or (home .. "\\.local\\share"),
+    XDG_STATE_HOME = nyagos.getenv("XDG_STATE_HOME")   or (home .. "\\.local\\state")
+})
+mkdirp(nyagos.env.XDG_CONFIG_HOME)
+mkdirp(nyagos.env.XDG_CACHE_HOME)
+mkdirp(nyagos.env.XDG_DATA_HOME)
+mkdirp(nyagos.env.XDG_STATE_HOME)
+-- }}}
+-- Enviroment Variable: {{{
+set({
+    SHELL = nyagos.exe,
+    EDITOR = ext('vim') or ext('notepad')
+})
+-- }}}
+-- Alias: {{{
+alias({
+    ls = "__ls__ -oF",
+    ls = "ls -l",
+    la = "ls -al",
+    e = nyagos.getenv("EDITOR"),
+    q = "__exit__",
+    clear = "__cls__",
+    clc = "__cls__",
+    sudo = "su",
+    renya = (nyagos.getenv("EDITOR") .. "& lua_f ~\\.nyagos")
+})
+if nyagos.which('vim') then
+    alias({
+        v = ext('vim'),
+        vi = ext('vim')
+    })
+end
+-- }}}
+-- Prompt: {{{
+nyagos.prompt = function(template)
+  --local user = nyagos.getenv('USERNAME')
+  --local host = nyagos.getenv('USERDOMAIN')
+  local home = nyagos.getenv('HOME') or nyagos.getenv('USERPROFILE')
+  --local pat  = '^' .. home:gsub('[().%%+-*?%[%]^$]', '%%%0')
+  --local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
+  local root = nyagos.elevated() and '#' or '$$'
+  return nyagos.default_prompt(
+    '$e[32;1m' .. '[$p]'  .. '$e[33;1m'  .. '$e[m:' .. root .. '$s')
+end
+-- }}}
+print("Finished loading .nyagos")
 
--- nyagos.env.VIMRUNTIME = nyagos.pathjoin("%USERPROFILE%", "\\scoop\\apps\\vim\\current\\")
--- nyagos.env.VIMRUNTIME = nyagos.pathjoin("%ProgramFiles%", "\\Vim\\vim90")
+-- vim: ft=lua expandtab ts=4 sts=-1 sw=0 foldmethod=marker cms=--\ %s:
 
-nyagos.alias[":q"] = __exit__
-
-nyagos.env.prompt = 'NYAGOS:$p:$$$s'
-
--- vim: ft=lua
