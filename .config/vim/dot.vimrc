@@ -80,7 +80,8 @@ let &packpath = &runtimepath
 " - ColorScheme --- {{{
 let g:conf_background = 'dark'
 let g:conf_colorscheme_default = 'pablo'
-let g:conf_colorscheme = 'molokai'
+let g:conf_colorscheme = 'everforest'
+let g:conf_lightline_colorscheme = 'everforest'
 " - - gruvbox ---  {{{
 "let g:custom_colorscheme = 'gruvbox'
 " - - }}}
@@ -94,6 +95,10 @@ let g:conf_colorscheme = 'molokai'
 "let g:custom_colorscheme = 'everforest'
   let g:everforest_background = 'hard'
   let g:everforest_better_performance = 1
+  let g:everforest_enable_italic = 0
+  let g:everforest_disable_italic_comment = 1
+  let g:everforest_transparent_background = 0
+  let g:everforest_ui_contrast = 'low'
 " - - }}}
 " - - solarized --- {{{
 let g:solarized_termcolors = 16
@@ -103,7 +108,7 @@ let g:solarized_contrast = 'high'
 " - - }}}
 " - }}}
 " - Font --- {{{
-let g:conf_guifont = 'HackGenNerd\ Console:h13'
+let g:conf_guifont = 'HackGen\ Console\ NF:h13'
 " - }}}
 " - Plugin Manager --- {{{
 let g:conf_enable_pluginmanager = 1
@@ -540,10 +545,39 @@ augroup END
 " }}}
 " - - [itchyny/lightline.vim] --- {{{
 " ref: https://qiita.com/hoto17296/items/ccbd6b413e67a653f2d
-let g:lightline = {
-  \ 'colorscheme': 'molokai',
-  \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+let g:lightline = {}
+let g:lightline.colorscheme = g:conf_lightline_colorscheme
+let g:lightline.enable = { 'statusline': 1, 'tabline': 1 }
+let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
+let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
+let g:lightline.tabline_separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
+let g:lightline.tabline_subseparator = { 'left': " \ub0b1", 'right': "\ub0b3" }
+let g:lightline.active = {
+  \ 'left' : [
+    \ ['mode', 'paste'],
+    \ ['readonly', 'filename', 'modified']
+    \ ],
+  \ 'right': [
+    \ ['lineinfo'],
+    \ ['percent'], 
+    \ ['fileformat', 'fileencoding', 'filetype']
+    \ ]
+  \ }
+let g:lightline.inactive = {
+  \ 'left': [['filename']],
+  \ 'right': [['lineinfo'], ['percent']]
+  \ }
+let g:lightline.tabline = {
+  \ 'left': [['tabs']],
+  \ 'right': [['close']]
+  \ }
+let g:lightline.tab = {
+  \ 'active': ['tabnum', 'filename', 'modified'],
+  \ 'inactive': ['tabnum', 'filename', 'modified']
+  \ }
+let g:lightline.component = {
+  \ 'vim_logo': "\ue62b",
+  \ 'readonly': '%R'
   \ }
 set noshowmode
 function s:ChangeLightlineColorScheme(name) abort
@@ -570,5 +604,5 @@ endtry
 execute 'set guifont=' . g:conf_guifont
 filetype plugin indent on
 " }}}
-" vim: set ft=vim ts=2 sts=-1 sw=0 expandtab autoindent smartindent foldmethod=marker:
+" vim: setl ft=vim ts=2 sts=-1 sw=0 expandtab autoindent smartindent foldmethod=marker:
 
