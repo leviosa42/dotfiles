@@ -604,5 +604,5 @@ endtry
 execute 'set guifont=' . g:conf_guifont
 filetype plugin indent on
 " }}}
-" vim: setl ft=vim ts=2 sts=-1 sw=0 expandtab autoindent smartindent foldmethod=marker:
+" vim: set ft=vim ts=2 sts=-1 sw=0 expandtab autoindent smartindent foldmethod=marker cms="\ %s:
 
