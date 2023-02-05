@@ -22,7 +22,7 @@ end
 -- * * }}}
 -- * }}}
 -- * Plugin Manager: {{{
--- * * Bootstrap: {{{zo
+-- * * Bootstrap: {{{
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -38,119 +38,8 @@ vim.opt.rtp:prepend(lazypath)
 -- * * }}}
 -- * * Setup Plugins: {{{
 vim.g.mapleader = ' '
-require("lazy").setup({
-    {
-        'vim-jp/vimdoc-ja',
-        lazy = false
-    },
-    -- Filer: {{{
-    {
-        'lambdalisue/fern.vim',
-        cmd = 'Fern',
-        init = function()
-            vim.api.nvim_set_keymap('n', '<Leader>f', '[fern]', {noremap = false, silent = true})
-            vim.api.nvim_set_keymap('n', '[fern]', '<Cmd>:Fern . -reveal=% -drawer -toggle<CR>', {noremap = true, silent = true})
-        end,
-        config = function()
-            vim.api.nvim_exec([[
-                " [lambdalisue/fern.vim]
-                let g:fern#default_hidden = 1
-                function! s:init_fern() abort
-                  " Use 'select' instead of 'edit' for default 'open' action
-                  nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
-                endfunction
-                augroup fern-custom
-                  autocmd! *
-                  autocmd FileType fern call s:init_fern()
-                augroup END
-                " [lambdalisue/fern-renderer-nerdfont.vim]
-                let g:fern#renderer = 'nerdfont'
-                " [yuki-yano/fern-preview.vim]
-                function! s:fern_settings() abort
-                  nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
-                  nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
-                  nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
-                  nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
-                endfunction
-                augroup fern-settings
-                  autocmd!
-                  autocmd FileType fern call s:fern_settings()
-                augroup END
-            ]], false)
-        end,
-        dependencies = {
-            'lambdalisue/fern-renderer-nerdfont.vim',
-            'lambdalisue/nerdfont.vim',
-            'yuki-yano/fern-preview.vim'
-        }
-    },
-    -- }}}
-    -- ColorSchemes: {{{
-    {
-        'folke/tokyonight.nvim',
-        lazy = false,
-        -- priority = 1000,
-        config = function()
-            require('tokyonight').setup({
-                style = 'storm', -- storm/moon/night/day
-                light_style = 'light',
-                transparent = false,
-                terminal_colors = true,
-                styles = {
-                    comments = { italic = false },
-                    keywords = { italic = false },
-                    functions = {},
-                    variables = {},
-                    sidebars = 'dark', -- dark/transparent/normal
-                    floats = 'dark' -- dark/transparent/normal
-                },
-                sidebars = { 'qf', 'help' },
-                day_brightness = 0.3,
-                hide_interactive_statusline = false,
-                dim_inactive = false,
-                lualine_bold = false
-            })
-            -- vim.cmd([[colorscheme tokyonight]])
-            -- vim.o.background = 'dark'
-        end
-    },
-    {
-        'rebelot/kanagawa.nvim',
-        lazy = false,
-        -- priority = 1000,
-        config = function()
-            require('kanagawa').setup({
-                undercurl = true,           -- enable undercurls
-                commentStyle = { italic = false },
-                functionStyle = {},
-                keywordStyle = { italic = false},
-                statementStyle = { bold = true },
-                typeStyle = {},
-                variablebuiltinStyle = { italic = false },
-                specialReturn = true,       -- special highlight for the return keyword
-                specialException = true,    -- special highlight for exception handling keywords
-                transparent = false,        -- do not set background color
-                dimInactive = false,        -- dim inactive window `:h hl-NormalNC`
-                globalStatus = false,       -- adjust window separators highlight for laststatus=3
-                terminalColors = true,      -- define vim.g.terminal_color_{0,17}
-                colors = {},
-                overrides = {},
-                theme = "default"           -- Load "default" theme or the experimental "light" theme
-            })
-        end
-    },
-    {
-        'rose-pine/neovim',
-        name = 'rose-pine',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("rose-pine").setup()
-            vim.cmd('colorscheme rose-pine')
-        end
-    }
-    -- }}}
-})
+local plugins = require('plugins')
+require("lazy").setup(plugins)
 -- * * }}}
 -- * }}}
 -- * Options: {{{
@@ -180,6 +69,7 @@ vim.o.clipboard = 'unnamed,unnamedplus'
 vim.o.backspace = 'indent,eol,start'
 -- }}}
 -- * * Appearance: {{{
+-- * * * Misc: {{{
 -- colorscheme
 -- vim.cmd.colorscheme('habamax')
 -- vim.o.background = 'dark'
@@ -190,6 +80,25 @@ vim.o.showmode = true
 vim.o.showcmd = true
 vim.o.ruler = true
 vim.o.laststatus = 2
+-- * * * }}}
+-- * * * FoldText: {{{
+vim.api.nvim_exec([[
+    function! MyFoldText() abort
+        let line = getline(v:foldstart)
+
+        let nucolwidth = &fdc + &number * &numberwidth
+        let windowwidth = winwidth(0) - nucolwidth - 4
+        let foldedlinecount = v:foldend - v:foldstart
+
+        " expand tabs into spaces
+
+        let line = strpart(line, 0, windowwidth - len(foldedlinecount))
+        let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
+        return line . repeat("･",fillcharcount) . '･･･' . foldedlinecount  . ' '
+    endfunction
+    set foldtext=MyFoldText()
+]], false)
+-- * * * }}}
 -- * * }}}
 -- * }}}
 -- * Mappings: {{{
