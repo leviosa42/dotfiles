@@ -202,7 +202,8 @@ set showcmd
 set showmatch
 set showcmd
 set noshowmode
-if has('termguicolors')
+if has('termguicolors') && !has('gui_running')
+"if 0 " for vim-startuptime ?
   set termguicolors
 endif
 "set ambiwidth=double " Especially for NF's icons
@@ -413,6 +414,7 @@ nnoremap <Up> gk
 nnoremap <Down> gj
 nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
 nnoremap <Leader>h :set hlsearch!<CR>
+inoremap <silent>jj <Esc>
 "inoremap { {}<Left>
 "inoremap [ []<Left>
 "inoremap ( ()<Left>
