@@ -44,7 +44,7 @@ alias({
     clear = "__cls__",
     clc = "__cls__",
     sudo = "su",
-    renya = (nyagos.getenv("EDITOR") .. "& lua_f ~\\.nyagos")
+    renya = ("lua_f ~\\.nyagos")
 })
 if nyagos.which('vim') then
     alias({
