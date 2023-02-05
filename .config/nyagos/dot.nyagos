@@ -30,11 +30,14 @@ set({
     SHELL = nyagos.exe,
     EDITOR = ext('vim') or ext('notepad')
 })
+nyagos.envadd("PATH",
+    "%HOME%\\scoop\\shims"
+    )
 -- }}}
 -- Alias: {{{
 alias({
     ls = "__ls__ -oF",
-    ls = "ls -l",
+    ll = "ls -l",
     la = "ls -al",
     e = nyagos.getenv("EDITOR"),
     q = "__exit__",
@@ -49,17 +52,36 @@ if nyagos.which('vim') then
         vi = ext('vim')
     })
 end
+if nyagos.which('nvim') then
+    alias({
+        nv = ext('nvim'),
+        nvi = ext('nvim')
+    })
+end
 -- }}}
 -- Prompt: {{{
-nyagos.prompt = function(template)
-  --local user = nyagos.getenv('USERNAME')
-  --local host = nyagos.getenv('USERDOMAIN')
-  local home = nyagos.getenv('HOME') or nyagos.getenv('USERPROFILE')
-  --local pat  = '^' .. home:gsub('[().%%+-*?%[%]^$]', '%%%0')
-  --local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
-  local root = nyagos.elevated() and '#' or '$$'
-  return nyagos.default_prompt(
-    '$e[32;1m' .. '[$p]'  .. '$e[33;1m'  .. '$e[m:' .. root .. '$s')
+local function ansicolor(ansiesc, text)
+    return (ansiesc .. text)
+end
+if true then
+    nyagos.prompt = function(template)
+      --local user = nyagos.getenv('USERNAME')
+      --local host = nyagos.getenv('USERDOMAIN')
+      --local home = nyagos.getenv('HOME') or nyagos.getenv('USERPROFILE')
+      --local pat  = '^' .. home:gsub('[().%%+-*?%[%]^$]', '%%%0')
+      --local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
+      local nyan = nyagos.getenv("ERRORLEVEL") == "0" and ansicolor("$e[36;1m", "=^..^=") or ansicolor("$e[31;1m", "=^xx^=")
+        local root = nyagos.elevated() and '#' or '$$'
+        return nyagos.default_prompt(
+            nyan .. '$e[32m' .. '[$p]'  .. '$e[33m'  .. '$e[37m:' .. root .. '$e[0m' .. '$s')
+            --'[$p]:' .. root .. '$s')
+    end
+else
+    nyagos.env.prompt='$L'.. nyagos.getenv('COMPUTERNAME') .. ':$P$G$_$$$s'
+    nyagos.prompt = function(this)
+        local title = "hello" -- "NYAGOS - ".. nyagos.getwd():gsub('\\','/')
+        return nyagos.default_prompt('$e[40;36;0m'..this..'$e[37;0m' .. '$e[m', title)
+    end
 end
 -- }}}
 print("Finished loading .nyagos")
