@@ -99,6 +99,26 @@ vim.api.nvim_exec([[
     set foldtext=MyFoldText()
 ]], false)
 -- * * * }}}
+-- * * * Terminal: {{{
+-- vim.api.nvim_create_autocmd({'TermOpen'}, {
+--     pattern = { '*' },
+--     callback = vim.cmd.startinsert()
+-- })
+vim.api.nvim_create_autocmd({'TermOpen', 'TermEnter'}, {
+    pattern = { '*' },
+    callback = function()
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+    end
+})
+vim.api.nvim_create_autocmd({'TermLeave'}, {
+    pattern = { '*' },
+    callback = function()
+        vim.wo.number = true
+        vim.wo.relativenumber = false
+    end
+})
+-- * * * }}} fh
 -- * * }}}
 -- * }}}
 -- * Mappings: {{{
@@ -112,6 +132,7 @@ vim.api.nvim_set_keymap('n', '<Space><Space>', '<Cmd>:setl relativenumber!<CR>',
 
 vim.api.nvim_set_keymap('n', '<Leader>h', '<Cmd>:setl hlsearch!<CR>', {noremap = true, silent = false})
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap = true, silent = false})
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = false })
 -- }}}
 -- * * [window]: {{{
 vim.api.nvim_set_keymap('n', '<Leader>w', '[window]', {noremap = false, silent = false})
@@ -134,6 +155,12 @@ vim.api.nvim_set_keymap('n', '<Leader>v', '[vimrc]', {noremap = false, silent = 
 vim.api.nvim_set_keymap('n', '[vimrc]e', '<Cmd>:e $MYVIMRC<CR>', {noremap = true, silent = false})
 vim.api.nvim_set_keymap('n', '[vimrc]s', '<Cmd>:so $MYVIMRC<CR>', {noremap = true, silent = false})
 vim.api.nvim_set_keymap('n', '[vimrc]t', '<Cmd>:tabnew $MYVIMRC<CR>', {noremap = true, silent = false})
+-- * * }}}
+-- * * [terminal]: {{{
+-- wip...
+-- https://qiita.com/Lennon_x00x_/items/e8fa47d27aaab9635161
+vim.api.nvim_set_keymap('t', '<C-w>j', '<Cmd>wincmd j<CR>', { noremap = true, silent = false })
+vim.api.nvim_set_keymap('t', '<C-w>k', '<Cmd>wincmd k<CR>', { noremap = true, silent = false })
 -- * * }}}
 -- * }}}
 -- * Plugin: {{{

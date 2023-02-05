@@ -3,6 +3,7 @@
   "fern-preview.vim": { "branch": "main", "commit": "74f2c1c45eb48fe9b7e4aa87032f053808944e17" },
   "fern-renderer-nerdfont.vim": { "branch": "master", "commit": "1e90a78ab5510fbcedc85abeb9a251d978726935" },
   "fern.vim": { "branch": "main", "commit": "4841c8830f0354808952fd4f64869383413c194f" },
+  "github-nvim-theme": { "branch": "main", "commit": "a93fc4cd3c16b91cf29a1387015e6e925c416efb" },
   "kanagawa.nvim": { "branch": "master", "commit": "4c8d48726621a7f3998c7ed35b2c2535abc22def" },
   "lazy.nvim": { "branch": "main", "commit": "3d2dcb2d5ef99106c5ff412da88c6f59a9f8a693" },
   "nerdfont.vim": { "branch": "master", "commit": "3daf10116daad5da257486c9043c658cced4dd31" },
@@ -11,5 +12,6 @@
   "telescope.nvim": { "branch": "master", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
   "tokyonight.nvim": { "branch": "main", "commit": "affb21a81e6d7de073378eb86d02864c594104d9" },
   "traces.vim": { "branch": "master", "commit": "9663fcf84de5776bee71b6c816c25ccb6ea11d1a" },
-  "vimdoc-ja": { "branch": "master", "commit": "6e46f4fa10403716a4e608ea7d578d12f464d4fb" }
+  "vimdoc-ja": { "branch": "master", "commit": "6e46f4fa10403716a4e608ea7d578d12f464d4fb" },
+  "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" }
 }
