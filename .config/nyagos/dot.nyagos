@@ -27,7 +27,7 @@ mkdirp(nyagos.env.XDG_STATE_HOME)
 -- }}}
 -- Enviroment Variable: {{{
 set({
-    SHELL = nyagos.exe,
+    SHELL = (string.gsub(nyagos.exe, '\\', '/')),
     EDITOR = ext('vim') or ext('notepad')
 })
 nyagos.envadd("PATH",
