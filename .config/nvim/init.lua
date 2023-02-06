@@ -41,6 +41,14 @@ vim.g.mapleader = ' '
 local plugins = require('plugins')
 require("lazy").setup(plugins)
 -- * * }}}
+-- * * {{{
+vim.api.nvim_create_autocmd({'VimEnter'}, {
+    pattern = '*',
+    callback = function()
+        vim.cmd.colorscheme('github_dimmed')
+    end
+})
+-- * * }}}
 -- * }}}
 -- * Options: {{{
 -- * * General: {{{
@@ -100,10 +108,12 @@ vim.api.nvim_exec([[
 ]], false)
 -- * * * }}}
 -- * * * Terminal: {{{
--- vim.api.nvim_create_autocmd({'TermOpen'}, {
---     pattern = { '*' },
---     callback = vim.cmd.startinsert()
--- })
+vim.api.nvim_create_autocmd({'TermOpen'}, {
+    pattern = { '*' },
+    callback = function()
+        vim.cmd.startinsert()
+    end
+})
 vim.api.nvim_create_autocmd({'TermOpen', 'TermEnter'}, {
     pattern = { '*' },
     callback = function()
@@ -158,6 +168,12 @@ vim.api.nvim_set_keymap('n', '[vimrc]t', '<Cmd>:tabnew $MYVIMRC<CR>', {noremap =
 -- * * }}}
 -- * * [terminal]: {{{
 -- wip...
+vim.api.nvim_set_keymap('n', '<Leader>t', '[terminal]', { noremap = false, silent = false})
+vim.api.nvim_set_keymap('n', '[terminal]v', '<Cmd>vertical new<CR><Cmd>terminal<CR>', {noremap = true, silent = false})
+vim.api.nvim_set_keymap('n', '[terminal]h', '<Cmd>vertical topleft new<CR><Cmd>terminal<CR>', {noremap = true, silent = false})
+vim.api.nvim_set_keymap('n', '[terminal]j', '<Cmd>belowright new<CR><Cmd>terminal<CR>', {noremap = true, silent = false})
+vim.api.nvim_set_keymap('n', '[terminal]k', '<Cmd>aboveleft new<CR><Cmd>terminal<CR>', {noremap = true, silent = false})
+vim.api.nvim_set_keymap('n', '[terminal]l', '<Cmd>vertical botright new<CR><Cmd>terminal<CR>', {noremap = true, silent = false})
 -- https://qiita.com/Lennon_x00x_/items/e8fa47d27aaab9635161
 vim.api.nvim_set_keymap('t', '<C-w>j', '<Cmd>wincmd j<CR>', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('t', '<C-w>k', '<Cmd>wincmd k<CR>', { noremap = true, silent = false })
