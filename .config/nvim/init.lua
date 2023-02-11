@@ -201,6 +201,25 @@ nvkmap('n', '[terminal]l', '<Cmd>vertical botright new<CR><Cmd>terminal<CR>',
 nvkmap('t', '<C-w>j', '<Cmd>wincmd j<CR>', { noremap = true, silent = false })
 nvkmap('t', '<C-w>k', '<Cmd>wincmd k<CR>', { noremap = true, silent = false })
 -- * * }}}
+-- * * [comment]: {{{
+vim.api.nvim_exec([[
+function! CommentIn() abort
+  " ref: https://vim-jp.org/vim-users-jp/2009/09/20/Hack-75.html
+  " \%(^\s*\|^\t*\)\@<=\S
+  call setline(line('.'), substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', printf(&cms, '\1'), ''))
+  "echo substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', '" \1', '')
+endfunction
+
+function! CommentOut() abort
+  "echo substitute(getline('.'), printf(&cms, ''), '', '')
+  call setline(line('.'), substitute(getline('.'), printf(&cms, ''), '', ''))
+endfunction
+]], false)
+nvkmap('n', '<Leader>c', '[comment]', { noremap = false, silent = false })
+nvkmap('n', '[comment]i', '<Cmd>:call CommentIn()<CR>', { noremap = true, silent = true })
+nvkmap('n', '[comment]o', '<Cmd>:call CommentOut()<CR>', { noremap = true, silent = true })
+-- * * }}}
 -- * }}}
 
+--
 -- vim: set ft=lua ts=4 sts=-1 sw=0 et ai si fdm=marker:
