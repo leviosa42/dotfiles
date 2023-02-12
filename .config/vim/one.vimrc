@@ -4,13 +4,12 @@
 " | (_) | | | |  __/\ V /| | | | | | | | | (__  "
 "  \___/|_| |_|\___(_)_/ |_|_| |_| |_|_|  \___| "
 "                                               "
-" * Pre Init: {{{
+" * Pre Init: {{{1
 set nocompatible
 syntax off
 filetype plugin indent off
 let $MYVIMRC = expand('<sfile>')
-" * }}}
-" * Plugin: {{{
+" * Plugin: {{{1
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 let g:netrw_sizestyle = 'H'
@@ -36,31 +35,26 @@ function! ToggleVExplorer()
     let t:expl_buf_num = bufnr("%")
   endif
 endfunction
-" * }}}
-" * General: {{{
+" * General: {{{1
 set shellslash
 set novisualbell
-" * * Encoding: {{{
+" * * Encoding: {{{2
 set fileformat=unix
 set fileformats=unix,dos
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,sjis,cp932,euc-jp
-" * * }}}
-" * * Clipboard: {{{
+" * * Clipboard: {{{2
 set clipboard+=unnamed
 set clipboard+=unnamedplus
-" * * }}}
 " * * Control: {{{
 set mouse=a
 set whichwrap=b,s,<,>,[,]
 set timeout
 set timeoutlen=2000
 set ttimeoutlen=-1
-" * * }}}
 " * * Help: {{{
 set helpheight&vim
 set helplang=ja
-" * * }}}
 " * * FileType: {{{
 augroup filetype_settings
   au BufNewFile,BufRead *.vim   set filetype=vim
@@ -72,23 +66,18 @@ augroup filetype_settings
   au BufNewFile,BufRead *.bash  set filetype=sh
   au BufNewFile,BufRead *.ash   set filetype=sh
 augroup END
-" * * }}}
-" * }}}
-" * Editing: {{{
+" * Editing: {{{1
 set hidden
-" * * Searching: {{{
+" * * Searching: {{{2
 set incsearch
 set ignorecase
 set smartcase
 "set hlsearch
-" * * }}}
 " * * Command-Line: {{{
 set wildmenu
 set wildmode=longest:list,full
-" * * }}}
 " * * Modifying: {{{
 set backspace=indent,eol,start
-" * * }}}
 " * * Indent: {{{
 set expandtab
 set ts=4
@@ -104,10 +93,7 @@ augroup filetype_indent_settings
   au FileType python setl et   ts=4 sts=-1 sw=0
   au FileType sh     setl et   ts=2 sts=-1 sw=0
 augroup END
-" * * * }}}
-" * * }}}
-" * }}}
-" * Appearance: {{{
+" * Appearance: {{{1
 set number
 set cursorline
 set showcmd
@@ -126,10 +112,8 @@ set listchars+=nbsp:%
 set listchars+=extends:»
 set listchars+=precedes:«
 "set listchars+=space:·
-" * * }}}
 " * * FillChars: {{{
 set fillchars+=vert:┃ " U+2503
-" * * }}}
 " * * StatusLine: {{{j
 set laststatus=2
 set ruler
@@ -211,7 +195,6 @@ function! GetMode()
   endif
 endfunction
 
-" * * }}}
 " * * Foldtext: {{{
 function! MyFoldText() abort
   let line = getline(v:foldstart)
@@ -227,11 +210,9 @@ function! MyFoldText() abort
   return line . '…' . repeat(" ",fillcharcount) . '..' . foldedlinecount  . ' '
 endfunction 
 set foldtext=MyFoldText()
-" * * }}}
-" * }}}
-" * Key Mapping: {{{
+" * Key Mapping: {{{1
 let mapleader = "\<Space>"
-" * * Misc: {{{
+" * * Misc: {{{2
 inoremap <silent>jk <Esc>
 
 nnoremap j gj
@@ -257,21 +238,18 @@ nnoremap <Leader>h :<C-u>set hlsearch!<CR>
 nnoremap x "_x
 
 inoremap <C-Tab> <Tab>
-" * * Misc: }}}
-" * * [explorer](netrw): {{{
+" * * [explorer](netrw): {{{2
 nmap <leader>e [explorer]
 nnoremap [explorer] <Nop>
 nnoremap <silent> [explorer]e :<C-u>call ToggleVExplorer()<CR>
-" * * }}}
-" * * [buffer]: {{{
+" * * [buffer]: {{{2
 nmap <Leader>b [buffer]
 nnoremap [buffer] <Nop>
 nnoremap [buffer]p :<C-u>bprev<CR>
 nnoremap [buffer]k :<C-u>bprev<CR>
 nnoremap [buffer]n :<C-u>bnext<CR>
 nnoremap [buffer]j :<C-u>bnext<CR>
-" * * }}}
-" * * [window]: {{{
+" * * [window]: {{{2
 nmap <Leader>w [window]
 noremap [window] <Nop>
 nnoremap [window]h <C-w>h
@@ -281,15 +259,13 @@ nnoremap [window]l <C-w>l
 nnoremap [window]s :<C-u>split<CR>
 nnoremap [window]v :<C-u>vsplit<CR>
 nnoremap [window]o :<C-u>only<CR>
-" * * }}}
-" * * [tab]: {{{
+" * * [tab]: {{{2
 nmap <Leader>t [tab]
 nnoremap [tab] <Nop>
 nnoremap [tab]h :<C-u>tabprevious<CR>
 nnoremap [tab]l :<C-u>tabnext<CR>
 nnoremap [tab]n :<C-u>tabnew<CR>
-" * * }}}
-" * * [terminal]: {{{
+" * * [terminal]: {{{2
 nmap <Leader>x [terminal]
 nnoremap [terminal] <Nop>
 
@@ -304,15 +280,13 @@ nnoremap [terminal]K :<C-u>topleft terminal<CR>
 nnoremap [terminal]L :<C-u>vertical botright terminal<CR>
 
 nnoremap [terminal]t :<C-u>tab terminal<CR>
-" * * }}} 
-" * * [vimrc]: {{{
+" * * [vimrc]: {{{2
 nmap <Leader>v [vimrc]
 nnoremap [vimrc] <Nop>
 nnoremap [vimrc]s :<C-u>source $MYVIMRC<CR>
 nnoremap [vimrc]e :<C-u>edit $MYVIMRC<CR>
 nnoremap [vimrc]t :<C-u>tabnew $MYVIMRC<CR>
-" * * }}}
-" * * [comment]: {{{
+" * * [comment]: {{{2
 function InsertCommentString()
   let line = getline('.')
   let lineNum = line('.')
@@ -346,14 +320,11 @@ nnoremap [comment] <Nop>
 nnoremap [comment]i :call CommentIn()<CR>
 nnoremap [comment]o :call CommentOut()<CR>
 "nnoremap <expr>[comment] I<C-r>=printf(&cms, '')<CR><Esc>
-" * * }}}
-" * }}}
-" * Post Init: {{{
+" * Post Init: {{{1
 syntax enable
 set background=dark
 " colorscheme desert
 colorscheme slate
 filetype plugin indent on
-" * }}}
 " vim: set ft=vim ts=2 sts=-1 sw=0 et fdm=marker fmr={{{,}}} cms="\ %s:
 
