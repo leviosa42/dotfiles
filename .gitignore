@@ -1,8 +1,6 @@
 
 /*
 /.**
-*.swp
-*.exe
 
 !.gitignore
 !.gitkeep
@@ -22,3 +20,7 @@
 
 !/.config/vim
 !/.config/vim/*
+
+*.swp
+*.exe
+
