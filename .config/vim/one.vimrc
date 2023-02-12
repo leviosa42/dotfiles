@@ -39,6 +39,7 @@ endfunction
 " * }}}
 " * General: {{{
 set shellslash
+set novisualbell
 " * * Encoding: {{{
 set fileformat=unix
 set fileformats=unix,dos
@@ -111,7 +112,7 @@ set number
 set cursorline
 set showcmd
 set showmatch
-if has('termguicolors') && !has('gui_running')
+if has('termguicolors') && !has('gui_running') && 1
   set termguicolors
 endif
 set ambiwidth=single
@@ -253,7 +254,7 @@ nnoremap <silent> <Space><Space> :<C-u>setl relativenumber!<CR>:<C-u>setl relati
 
 nnoremap <Leader>h :<C-u>set hlsearch!<CR>
 
-" nnoremap dd "_dd
+nnoremap x "_x
 
 inoremap <C-Tab> <Tab>
 " * * Misc: }}}
