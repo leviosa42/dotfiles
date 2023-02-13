@@ -99,20 +99,20 @@ vim.o.ambiwidth = 'single'
 -- * * * }}}
 -- * * * FoldText: {{{
 vim.api.nvim_exec([[
-    function! MyFoldText() abort
-    let line = getline(v:foldstart)
+function! MyFoldText() abort
+let line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 4
-    let foldedlinecount = v:foldend - v:foldstart
+let nucolwidth = &fdc + &number * &numberwidth
+let windowwidth = winwidth(0) - nucolwidth - 4
+let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
+" expand tabs into spaces
 
-    let line = strpart(line, 0, windowwidth - len(foldedlinecount))
-    let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
-    return line . repeat("･",fillcharcount) . '･･･' . foldedlinecount  . ' '
-    endfunction
-    set foldtext=MyFoldText()
+let line = strpart(line, 0, windowwidth - len(foldedlinecount))
+let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
+return line . repeat("･",fillcharcount) . '･･･' . foldedlinecount  . ' '
+endfunction
+set foldtext=MyFoldText()
 ]], false)
 -- * * * }}}
 -- * * * Terminal: {{{
@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd({ 'TermLeave' }, {
         vim.wo.relativenumber = false
     end
 })
--- * * * }}} fh
+-- * * * }}}
 -- * * }}}
 -- * }}}
 -- * Mappings: {{{
