@@ -52,6 +52,9 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
 -- * }}}
 -- * Options: {{{
 -- * * General: {{{
+-- vim.opt.shellslash = true
+-- fern.vim/lambdalisue: Disable fern with shellslash option #426
+vim.opt.shellslash = false
 -- * * * Encoding: {{{
 vim.o.encoding = 'utf-8'
 -- vim.o.fileencoding = 'utf-8'
@@ -96,17 +99,17 @@ vim.o.laststatus = 2
 -- * * * FoldText: {{{
 vim.api.nvim_exec([[
     function! MyFoldText() abort
-        let line = getline(v:foldstart)
+    let line = getline(v:foldstart)
 
-        let nucolwidth = &fdc + &number * &numberwidth
-        let windowwidth = winwidth(0) - nucolwidth - 4
-        let foldedlinecount = v:foldend - v:foldstart
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 4
+    let foldedlinecount = v:foldend - v:foldstart
 
-        " expand tabs into spaces
+    " expand tabs into spaces
 
-        let line = strpart(line, 0, windowwidth - len(foldedlinecount))
-        let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
-        return line . repeat("･",fillcharcount) . '･･･' . foldedlinecount  . ' '
+    let line = strpart(line, 0, windowwidth - len(foldedlinecount))
+    let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
+    return line . repeat("･",fillcharcount) . '･･･' . foldedlinecount  . ' '
     endfunction
     set foldtext=MyFoldText()
 ]], false)
@@ -136,90 +139,109 @@ vim.api.nvim_create_autocmd({ 'TermLeave' }, {
 -- * * }}}
 -- * }}}
 -- * Mappings: {{{
+-- * * functions: {{{
+local function merge(t1, t2)
+    for k,v in pairs(t2) do
+        t1[k] = v
+    end
+    return t1
+end
+
+-- local function map(mode, lhs, rhs, opts)
+-- vim.api.nvim_set_keymap(mode, lhs, rhs, opts or {})
+-- end
+
+-- local function noremap(mode, lhs, rhs, opts)
+-- vim.api.nvim_set_keymap(mode, lhs, rhs, merge({ noremap = true }, opts or {}))
+-- end
+local map = vim.keymap.set
+-- * }}}
 -- * * Leader: {{{
 -- vim.g.mapleader = ' '
 -- * * }}}
 -- * * Misc: {{{
-local nvkmap = vim.api.nvim_set_keymap
-nvkmap('n', 'j', 'gj', { noremap = true, silent = true })
-nvkmap('n', 'k', 'gk', { noremap = true, silent = true })
-nvkmap('n', '<Space><Space>', '<Cmd>:setl relativenumber!<CR>', { noremap = true, silent = false })
+map('n', 'j', 'gj', { silent = true })
+map('n', 'k', 'gk', { silent = true })
 
-nvkmap('n', 'H', '^', { noremap = true, silent = false })
-nvkmap('n', 'L', '$', { noremap = true, silent = false })
+map('n', '<Space><Space>', '<Cmd>setl relativenumber!<CR>', { silent = true })
 
--- nvkmap('n', 'J', 'L', { noremap = true, silent = false })
-nvkmap('n', 'J', '3j', { noremap = true, silent = false })
--- nvkmap('n', 'K', 'H', { noremap = true, silent = false })
-nvkmap('n', 'K', '3k', { noremap = true, silent = false })
+map('n', 'H', '^', { silent = true })
+map('n', 'L', '$', { silent = true })
 
-nvkmap('n', 'U', '<C-r>', { noremap = true, silent = true })
-nvkmap('n', '<C-r>', 'U', { noremap = true, silent = true })
+map('n', 'J', '3j')
+map('n', 'K', '3k')
 
-nvkmap('n', '<Leader>h', '<Cmd>:setl hlsearch!<CR>', { noremap = true, silent = false })
-nvkmap('i', 'jk', '<Esc>', { noremap = true, silent = false })
-nvkmap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = false })
+map('n', 'U', '<C-r>', { silent = true })
+map('n', '<C-r>', 'U', { silent = true })
 
-nvkmap('i', '<C-h>', '<Left>', { noremap = true, silent = true })
-nvkmap('i', '<C-j>', '<Down>', { noremap = true, silent = true })
-nvkmap('i', '<C-k>', '<Up>', { noremap = true, silent = true })
-nvkmap('i', '<C-l>', '<Right>', { noremap = true, silent = true })
+map('n', '<Leader>h', '<Cmd>setl hlsearch!<CR>', { silent = false })
+map('i', 'jk', '<Esc>', { silent = false })
+map('t', '<Esc>', '<C-\\><C-n>', { silent = false })
+
+map('i', '<C-h>', '<Left>', { silent = true })
+map('i', '<C-j>', '<Down>', { silent = true })
+map('i', '<C-k>', '<Up>', { silent = true })
+map('i', '<C-l>', '<Right>', { silent = true })
+
+-- https://qiita.com/Lennon_x00x_/items/e8fa47d27aaab9635161
+map('t', '<C-w>j', '<Cmd>wincmd j<CR>')
+map('t', '<C-w>k', '<Cmd>wincmd k<CR>')
+-- * * }}}
 -- }}}
+-- * * [buffer]: {{{
+map('n', '<Leader>b', '[buffer]', { remap = true })
+map('n', '[buffer]k', '<cmd>bprev<CR>')
+-- * * }}}
 -- * * [window]: {{{
-nvkmap('n', '<Leader>w', '[window]', { noremap = false, silent = false })
-nvkmap('n', '[window]v', '<Cmd>:vsplit<CR>', { noremap = true, silent = false })
-nvkmap('n', '[window]s', '<Cmd>:split<CR>', { noremap = true, silent = false })
-nvkmap('n', '[window]h', '<C-w>h', { noremap = true, silent = false })
-nvkmap('n', '[window]j', '<C-w>j', { noremap = true, silent = false })
-nvkmap('n', '[window]k', '<C-w>k', { noremap = true, silent = false })
-nvkmap('n', '[window]l', '<C-w>l', { noremap = true, silent = false })
+map('n', '<Leader>w', '[window]', { remap = true })
+map('n', '[window]v', '<Cmd>vsplit<CR>')
+map('n', '[window]s', '<Cmd>split<CR>')
+map('n', '[window]h', '<C-w>h')
+map('n', '[window]j', '<C-w>j')
+map('n', '[window]k', '<C-w>k')
+map('n', '[window]l', '<C-w>l')
 -- * * }}}
 -- * * [tab]: {{{
-nvkmap('n', '<Leader>t', '[tab]', { noremap = false, silent = false })
-nvkmap('n', '[tab]h', '<Cmd>:tabprevious<CR>', { noremap = true, silent = false })
-nvkmap('n', '[tab]l', '<Cmd>:tabnext<CR>', { noremap = true, silent = false })
-nvkmap('n', '[tab]n', '<Cmd>:tabnew<CR>', { noremap = true, silent = false })
-nvkmap('n', '[tab]c', '<Cmd>:tabclose<CR>', { noremap = true, silent = false })
+map('n', '<Leader>t', '[tab]', { remap = true })
+map('n', '[tab]h', '<Cmd>tabprevious<CR>')
+map('n', '[tab]l', '<Cmd>tabnext<CR>')
+map('n', '[tab]n', '<Cmd>tabnew<CR>')
+map('n', '[tab]c', '<Cmd>tabclose<CR>')
 -- * * }}}
 -- * * [vimrc]: {{{
-nvkmap('n', '<Leader>v', '[vimrc]', { noremap = false, silent = false })
-nvkmap('n', '[vimrc]e', '<Cmd>:e $MYVIMRC<CR>', { noremap = true, silent = false })
-nvkmap('n', '[vimrc]s', '<Cmd>:so $MYVIMRC<CR>', { noremap = true, silent = false })
-nvkmap('n', '[vimrc]t', '<Cmd>:tabnew $MYVIMRC<CR>', { noremap = true, silent = false })
+map('n', '<Leader>v', '[vimrc]', { remap = true })
+map('n', '[vimrc]e', '<Cmd>e $MYVIMRC<CR>')
+map('n', '[vimrc]s', '<Cmd>so $MYVIMRC<CR>')
+map('n', '[vimrc]t', '<Cmd>tabnew $MYVIMRC<CR>')
 -- * * }}}
 -- * * [terminal]: {{{
 -- wip...
-nvkmap('n', '<Leader>x', '[terminal]', { noremap = false, silent = false })
-nvkmap('n', '[terminal]v', '<Cmd>vertical new<CR><Cmd>terminal<CR>', { noremap = true, silent = false })
-nvkmap('n', '[terminal]h', '<Cmd>vertical topleft new<CR><Cmd>terminal<CR>',
-    { noremap = true, silent = false })
-nvkmap('n', '[terminal]j', '<Cmd>belowright new<CR><Cmd>terminal<CR>', { noremap = true, silent = false })
-nvkmap('n', '[terminal]k', '<Cmd>aboveleft new<CR><Cmd>terminal<CR>', { noremap = true, silent = false })
-nvkmap('n', '[terminal]l', '<Cmd>vertical botright new<CR><Cmd>terminal<CR>',
-    { noremap = true, silent = false })
--- https://qiita.com/Lennon_x00x_/items/e8fa47d27aaab9635161
-nvkmap('t', '<C-w>j', '<Cmd>wincmd j<CR>', { noremap = true, silent = false })
-nvkmap('t', '<C-w>k', '<Cmd>wincmd k<CR>', { noremap = true, silent = false })
--- * * }}}
+-- map('n', '<Leader>x', '<Plug>(terminal)')
+map('n', '<Leader>x', '[terminal]', { remap = true })
+-- noremap('n', 'v', '<Cmd>vertical new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]v', '<Cmd>vertical new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]h', '<Cmd>vertical topleft new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]j', '<Cmd>belowright new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]k', '<Cmd>aboveleft new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]l', '<Cmd>vertical botright new<CR><Cmd>terminal<CR>')
 -- * * [comment]: {{{
 vim.api.nvim_exec([[
 function! CommentIn() abort
-  " ref: https://vim-jp.org/vim-users-jp/2009/09/20/Hack-75.html
-  " \%(^\s*\|^\t*\)\@<=\S
-  call setline(line('.'), substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', printf(&cms, '\1'), ''))
-  "echo substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', '" \1', '')
+" ref: https://vim-jp.org/vim-users-jp/2009/09/20/Hack-75.html
+" \%(^\s*\|^\t*\)\@<=\S
+call setline(line('.'), substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', printf(&cms, '\1'), ''))
+"echo substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', '" \1', '')
 endfunction
 
 function! CommentOut() abort
-  "echo substitute(getline('.'), printf(&cms, ''), '', '')
-  call setline(line('.'), substitute(getline('.'), printf(&cms, ''), '', ''))
+"echo substitute(getline('.'), printf(&cms, ''), '', '')
+call setline(line('.'), substitute(getline('.'), printf(&cms, ''), '', ''))
 endfunction
 ]], false)
-nvkmap('n', '<Leader>c', '[comment]', { noremap = false, silent = false })
-nvkmap('n', '[comment]i', '<Cmd>:call CommentIn()<CR>', { noremap = true, silent = true })
-nvkmap('n', '[comment]o', '<Cmd>:call CommentOut()<CR>', { noremap = true, silent = true })
+map('n', '<Leader>c', '[comment]', { remap =  true })
+map('n', '[comment]i', '<Cmd>call CommentIn()<CR>')
+map('n', '[comment]o', '<Cmd>call CommentOut()<CR>')
 -- * * }}}
 -- * }}}
 
---
 -- vim: set ft=lua ts=4 sts=-1 sw=0 et ai si fdm=marker:
