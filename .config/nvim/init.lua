@@ -82,7 +82,7 @@ vim.o.backspace = 'indent,eol,start'
 -- }}}
 -- * * Appearance: {{{
 -- * * * guifont: {{{
-vim.o.guifont = 'PlemolJP Console NF'
+vim.o.guifont = 'PlemolJP Console NF:h13'
 -- * * * }}}
 -- * * * Misc: {{{
 -- colorscheme
@@ -95,6 +95,7 @@ vim.o.showmode = true
 vim.o.showcmd = true
 vim.o.ruler = true
 vim.o.laststatus = 2
+vim.o.ambiwidth = 'single'
 -- * * * }}}
 -- * * * FoldText: {{{
 vim.api.nvim_exec([[
@@ -186,11 +187,15 @@ map('i', '<C-l>', '<Right>', { silent = true })
 -- https://qiita.com/Lennon_x00x_/items/e8fa47d27aaab9635161
 map('t', '<C-w>j', '<Cmd>wincmd j<CR>')
 map('t', '<C-w>k', '<Cmd>wincmd k<CR>')
+
+map('n', 'x', '"_x')
 -- * * }}}
--- }}}
 -- * * [buffer]: {{{
 map('n', '<Leader>b', '[buffer]', { remap = true })
 map('n', '[buffer]k', '<cmd>bprev<CR>')
+map('n', '[buffer]j', '<cmd>bnext<CR>')
+map('n', '[buffer]l', '<cmd>ls<CR>')
+map('n', '[buffer]L', '<cmd>ls!<CR>')
 -- * * }}}
 -- * * [window]: {{{
 map('n', '<Leader>w', '[window]', { remap = true })
@@ -200,6 +205,7 @@ map('n', '[window]h', '<C-w>h')
 map('n', '[window]j', '<C-w>j')
 map('n', '[window]k', '<C-w>k')
 map('n', '[window]l', '<C-w>l')
+map('n', '[window]o', '<cmd>only<CR>')
 -- * * }}}
 -- * * [tab]: {{{
 map('n', '<Leader>t', '[tab]', { remap = true })
@@ -219,11 +225,15 @@ map('n', '[vimrc]t', '<Cmd>tabnew $MYVIMRC<CR>')
 -- map('n', '<Leader>x', '<Plug>(terminal)')
 map('n', '<Leader>x', '[terminal]', { remap = true })
 -- noremap('n', 'v', '<Cmd>vertical new<CR><Cmd>terminal<CR>')
-map('n', '[terminal]v', '<Cmd>vertical new<CR><Cmd>terminal<CR>')
-map('n', '[terminal]h', '<Cmd>vertical topleft new<CR><Cmd>terminal<CR>')
-map('n', '[terminal]j', '<Cmd>belowright new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]h', '<Cmd>vertical aboveleft new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]j', '<Cmd>rightbelow new<CR><Cmd>terminal<CR>')
 map('n', '[terminal]k', '<Cmd>aboveleft new<CR><Cmd>terminal<CR>')
-map('n', '[terminal]l', '<Cmd>vertical botright new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]l', '<Cmd>vertical rightbelow new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]H', '<Cmd>vertical topleft new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]J', '<Cmd>botright new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]K', '<Cmd>topleft new<CR><Cmd>terminal<CR>')
+map('n', '[terminal]L', '<Cmd>vertical botright new<CR><Cmd>terminal<CR>')
+-- * * [comment]: {{{
 -- * * [comment]: {{{
 vim.api.nvim_exec([[
 function! CommentIn() abort
@@ -243,5 +253,5 @@ map('n', '[comment]i', '<Cmd>call CommentIn()<CR>')
 map('n', '[comment]o', '<Cmd>call CommentOut()<CR>')
 -- * * }}}
 -- * }}}
-
+-- * }}}
 -- vim: set ft=lua ts=4 sts=-1 sw=0 et ai si fdm=marker:
