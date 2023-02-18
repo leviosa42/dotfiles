@@ -55,6 +55,10 @@ vim.api.nvim_create_autocmd({ 'VimEnter' }, {
 -- vim.opt.shellslash = true
 -- fern.vim/lambdalisue: Disable fern with shellslash option #426
 vim.opt.shellslash = false
+-- for aoj
+vim.o.endofline = false
+vim.o.fixendofline = false
+vim.o.autochdir = true
 -- * * * Encoding: {{{
 vim.o.encoding = 'utf-8'
 -- vim.o.fileencoding = 'utf-8'
@@ -252,6 +256,7 @@ map('n', '<Leader>c', '[comment]', { remap =  true })
 map('n', '[comment]i', '<Cmd>call CommentIn()<CR>')
 map('n', '[comment]o', '<Cmd>call CommentOut()<CR>')
 -- * * }}}
+-- * }}}
 -- * }}}
 -- * }}}
 -- vim: set ft=lua ts=4 sts=-1 sw=0 et ai si fdm=marker:
