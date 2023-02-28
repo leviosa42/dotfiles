@@ -5,7 +5,10 @@
 "  \___/|_| |_|\___(_)_/ |_|_| |_| |_|_|  \___| "
 "                                               "
 " * Pre Init: {{{
-set nocompatible
+if &compatible
+  set nocompatible
+endif
+
 syntax off
 filetype plugin indent off
 let $MYVIMRC = expand('<sfile>')
