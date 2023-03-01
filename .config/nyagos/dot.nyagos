@@ -50,7 +50,8 @@ if nyagos.which('vim') then
     alias({
         v = ext('vim'),
         vi = ext('vim'),
-        vimo = (ext('vim') .. ' -u ~/.config/vim/one.vimrc')
+        vimo = (ext('vim') .. ' -u ~/.config/vim/one.vimrc'),
+        gvimo = (ext('gvim') .. ' -u ~/.config/vim/one.vimrc')
     })
 end
 if nyagos.which('nvim') then
