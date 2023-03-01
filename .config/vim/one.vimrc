@@ -5,6 +5,10 @@
 "  \___/|_| |_|\___(_)_/ |_|_| |_| |_|_|  \___| "
 "                                               "
 " * Pre Init: {{{
+" [:h encoding(enc)] Sets the character encoding used inside Vim.
+set encoding=utf-8
+" [:h scriptencoding(scripte)] Specify the character encoding used in the script.
+scriptencoding utf-8
 if &compatible
   set nocompatible
 endif
@@ -45,11 +49,9 @@ endfunction
 " * General: {{{
 set shellslash
 set novisualbell
-" * * Encoding: {{{
+" * * Formats: {{{
 set fileformat=unix
 set fileformats=unix,dos
-set encoding=utf-8
-set fileencodings=utf-8,iso-2022-jp,sjis,cp932,euc-jp
 " * * }}}
 " * * Clipboard: {{{
 set clipboard+=unnamed
@@ -513,18 +515,22 @@ endfunction
 " * * }}}
 " * }}}
 " * Key Mapping: {{{
-let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+
 " * * Misc: {{{
 inoremap <silent>jk <Esc>
 
-nnoremap j gj
-nnoremap k gk
+" ref: https://github.com/nvim-zh/minimal_vim
+" Move the cursor based on physical lines, not the actual lines.
+nnoremap <silent><expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <silent><expr> k (v:count == 0 ? 'gk' : 'k')
 
 nnoremap H ^
 nnoremap L $
-nnoremap J 3j
-nnoremap K 3k
+nnoremap <silent><expr> J (v:count == 0 ? '3gj' : '3j')
+nnoremap <silent><expr> K (v:count == 0 ? '3gk' : '3k')
 
+" u <-> U = Undo <-> Redo
 nnoremap U <C-r>
 nnoremap <C-r> U
 
@@ -535,7 +541,7 @@ inoremap <C-l> <Right>
 
 nnoremap <silent> <Space><Space> :<C-u>setl relativenumber!<CR>:<C-u>setl relativenumber?<CR>
 
-nnoremap <Leader>h :<C-u>set hlsearch!<CR>
+nnoremap <Leader>h :<C-u>set hlsearch!<CR>:set hlsearch?<CR>
 
 nnoremap x "_x
 
