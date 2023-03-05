@@ -172,22 +172,27 @@ let g:statusline_config.mode_title = {
   \ 't':      ['T', 'TERMINAL']
   \ }
 let g:statusline_config.mode_highlight = {
-  \ 'normal':   [15, 12-8],
-  \ 'insert':   [15, 10-8],
-  \ 'visual':   [15, 13-8],
-  \ 'select':   [15, 9-8],
-  \ 'replace':  [15, 11-8],
-  \ 'terminal': [15, 14-8],
-  \ 'inactive': [0, 8],
-  \ 'ignore':   [15, 0]
+  \ 'normal':   [[15, 12-8], 'Constant'],
+  \ 'insert':   [[15, 10-8], 'Identifier'],
+  \ 'visual':   [[15, 13-8], 'Statement'],
+  \ 'select':   [[15, 9-8], 'PreProc'],
+  \ 'replace':  [[15, 11-8], 'Type'],
+  \ 'terminal': [[15, 14-8], 'Special'],
+  \ 'inactive': [[0, 8], 'Comment'],
+  \ 'ignore':   [[15, 0], 'Ignore']
   \ }
+let g:statusline_config.UseMinimalChecker = { -> winwidth(0) < 70 }
 
-function! g:DefineModeHighlight() abort " {{{
+function! g:DefineModeHighlight(use_termansicolor) abort " {{{
   let mhl = g:statusline_config.mode_highlight
   for [k, v] in items(mhl)
-    execute 'highlight StatusLine_' .. k
-      \ 'guifg=' .. g:terminal_ansi_colors[v[0]]
-      \ 'guibg=' .. g:terminal_ansi_colors[v[1]]
+    if a:use_termansicolor
+      execute 'highlight StatusLine_' .. k
+        \ 'guifg=' .. g:terminal_ansi_colors[v[0][0]]
+        \ 'guibg=' .. g:terminal_ansi_colors[v[0][1]]
+    else
+      execute 'highlight link' 'Statusline_' .. k v[1]
+    endif
   endfor
 endfunction " }}}
 
@@ -216,14 +221,17 @@ function! g:GetModeHighlightName(mode) abort " {{{
 endfunction " }}}
 
 function! g:CreateActiveStatusLine() abort " {{{
+  let use_minimal = g:statusline_config.UseMinimalChecker()
   let s = ''
   let s .= '%#' .. g:GetModeHighlightName(mode()) .. '#'
-  let s .= ' %{g:statusline_config.mode_title[mode(0)][winwidth(0) > 70]} '
-  let s .= '%#CursorLineNr#'
+  let s .= ' ' .. g:statusline_config.mode_title[mode(0)][!use_minimal] .. ' '
+  let s .= &modified ? '%#DiffAdd#' : '%#CursorLineNr#'
   let s .= mode(0) ==# 't' ? ' <terminal>' : ' %f'
-  let s .= ' %m'
+  let s .= ' '
+  let s .= '%y'              " Show filetype
+  let s .= '%m'
   let s .= '%='
-  if winwidth(0) > 70
+  if !use_minimal
     let s .= '%#DiffText#'
     " let s .= '▏'
     let s .= ' '
@@ -234,20 +242,51 @@ function! g:CreateActiveStatusLine() abort " {{{
   let s .= '%#Search#'
   let s .= ' '
   let s .= '%l:%c'              " Show line number and column
-  let s .=' %p%% '               " Show percentage
+  let s .= ' '
+  if !use_minimal
+    let s .= '%p%% '               " Show percentage
+  endif
+  return s
+endfunction " }}}
+
+function! g:CreateInactiveStatusLine() abort " {{{
+  let use_minimal = g:statusline_config.UseMinimalChecker()
+  let s = ''
+  let s .= '%#StasusLineNC#'
+  let s .= ' ' .. g:statusline_config.mode_title[mode(0)][!use_minimal] .. ' '
+  let s .= mode(0) ==# 't' ? '▏<terminal>' : '▏%f'
+  let s .= ' '
+  let s .= '%y'              " Show filetype
+  let s .= '%m'
+  let s .= '%='
+  if !use_minimal
+    let s .= '▏'
+    " let s .= ' '
+    let s .= '%{&fileencoding?&fileencoding:&encoding}'
+    let s .= ' %{&fileformat} '
+  endif
+  let s .= '▏'
+  " let s .= ' '
+  let s .= '%l:%c'              " Show line number and column
+  let s .= ' '
+  if !use_minimal
+    let s .= '%p%% '               " Show percentage
+  endif
+  let s .= '%#VertSplit#'
   return s
 endfunction " }}}
 
 function! g:Init() abort " {{{
-  call g:DefineModeHighlight()
+  call g:DefineModeHighlight(exists('g:terminal_ansi_colors') && 1)
   set statusline=%!g:CreateActiveStatusLine()
   augroup status
     autocmd!
     autocmd WinEnter * setlocal statusline=%!g:CreateActiveStatusLine()
-    autocmd WinLeave * setlocal statusline=%!CreateInactiveStatusline()
+    autocmd WinLeave * setlocal statusline=%!g:CreateInactiveStatusLine()
   augroup END
 endfunction " }}}
 
+" (old) streamline based statusline {{{
 function! CreateStatusline() abort
   let statusline=''
   let statusline.='%#Search#'
@@ -309,6 +348,7 @@ function! GetMode()
     return 'NORMAL'
   endif
 endfunction
+" }}}
 " * * }}}
 " * * Foldtext: {{{
 function! MyFoldText() abort
