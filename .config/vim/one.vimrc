@@ -153,18 +153,100 @@ set ruler
 set showmode
 " baased on https://github.com/KaraMCC/vim-streamline/tree/master/plugin
 " license: https://github.com/KaraMCC/vim-streamline/blob/master/LICENSE
-set laststatus=2
-set statusline=%!CreateStatusline()
-augroup status
-  autocmd!
-  autocmd WinEnter * setlocal statusline=%!CreateStatusline()
-  autocmd WinLeave * setlocal statusline=%!CreateInactiveStatusline()
-augroup END
-
 " function! GetBufSize() abort
 " let l:bufbytes = wordcount().bytes
 " echo l:bufbytes
 " endfunction
+
+let g:statusline_config = {}
+let g:statusline_config.mode_title = {
+  \ 'n':      ['N', 'NORMAL'],
+  \ 'v':      ['V', 'VISUAL'],
+  \ 'V':      ['VL', 'V-LINE'],
+  \ "\<C-v>": ['VB', 'V-BLOCK'],
+  \ 's':      ['S', 'SELECT'],
+  \ 'S':      ['SL', 'S-LINE'],
+  \ "\<C-s>": ['SB', 'S-BLOCK'],
+  \ 'i':      ['I', 'INSERT'],
+  \ 'R':      ['R', 'REPLACE'],
+  \ 't':      ['T', 'TERMINAL']
+  \ }
+let g:statusline_config.mode_highlight = {
+  \ 'normal':   [15, 12-8],
+  \ 'insert':   [15, 10-8],
+  \ 'visual':   [15, 13-8],
+  \ 'select':   [15, 9-8],
+  \ 'replace':  [15, 11-8],
+  \ 'terminal': [15, 14-8],
+  \ 'inactive': [0, 8],
+  \ 'ignore':   [15, 0]
+  \ }
+
+function! g:DefineModeHighlight() abort " {{{
+  let mhl = g:statusline_config.mode_highlight
+  for [k, v] in items(mhl)
+    execute 'highlight StatusLine_' .. k
+      \ 'guifg=' .. g:terminal_ansi_colors[v[0]]
+      \ 'guibg=' .. g:terminal_ansi_colors[v[1]]
+  endfor
+endfunction " }}}
+
+function! g:GetModeType(mode) abort " {{{
+  let m = a:mode[0]
+  if m ==# 'n'
+    return 'normal'
+  elseif m ==# 'v' || m ==# 'V' || m ==# "\<C-v>"
+    return 'visual'
+  elseif m ==# 's' || m ==# 'S' || m ==# "\<C-s>"
+    return 'select'
+  elseif m ==# 'i'
+    return 'insert'
+  elseif m ==# 'R'
+    return 'replace'
+  elseif m ==# 't'
+    return 'replace'
+  else
+    return 'ignore'
+  endif
+endfunction " }}}
+
+function! g:GetModeHighlightName(mode) abort " {{{
+  let type = g:GetModeType(a:mode)
+  return 'StatusLine_' .. type
+endfunction " }}}
+
+function! g:CreateActiveStatusLine() abort " {{{
+  let s = ''
+  let s .= '%#' .. g:GetModeHighlightName(mode()) .. '#'
+  let s .= ' %{g:statusline_config.mode_title[mode(0)][winwidth(0) > 70]} '
+  let s .= '%#CursorLineNr#'
+  let s .= mode(0) ==# 't' ? ' <terminal>' : ' %f'
+  let s .= ' %m'
+  let s .= '%='
+  if winwidth(0) > 70
+    let s .= '%#DiffText#'
+    " let s .= '▏'
+    let s .= ' '
+    let s .= '%{&fileencoding?&fileencoding:&encoding}'
+    let s .= ' %{&fileformat} '
+  endif
+  " let s .= '▏'
+  let s .= '%#Search#'
+  let s .= ' '
+  let s .= '%l:%c'              " Show line number and column
+  let s .=' %p%% '               " Show percentage
+  return s
+endfunction " }}}
+
+function! g:Init() abort " {{{
+  call g:DefineModeHighlight()
+  set statusline=%!g:CreateActiveStatusLine()
+  augroup status
+    autocmd!
+    autocmd WinEnter * setlocal statusline=%!g:CreateActiveStatusLine()
+    autocmd WinLeave * setlocal statusline=%!CreateInactiveStatusline()
+  augroup END
+endfunction " }}}
 
 function! CreateStatusline() abort
   let statusline=''
@@ -707,6 +789,8 @@ try
 catch
   colorscheme desert
 endtry
+
+call g:Init()
 " colorscheme kanagawa-mini
 filetype plugin indent on
 " * }}}
