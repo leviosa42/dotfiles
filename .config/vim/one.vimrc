@@ -549,15 +549,13 @@ function! s:kanagawa_mini.hlgroups(colors, config) abort " {{{
   "call self.h('Italic', { 'gui': 'italic' })
 endfunction " }}}
 
-" main {{{
-function! g:SetMyColorScheme() abort
+function! g:SetMyColorScheme() abort " {{{
   set bg=dark
   hi clear
 
   if exists("syntax_on")
     syntax reset
   endif
-  let g:colors_name = expand('<sfile>:t:r')
   let s:kanagawa_mini.config = s:kanagawa_mini.get_config(get(g:, 'kanagawa_mini', {}))
   if !exists('g:kanagawa_mini')
     let g:kanagawa_mini = s:kanagawa_mini.config
@@ -568,10 +566,8 @@ function! g:SetMyColorScheme() abort
     call s:kanagawa_mini.set_terminal_ansi_colors(s:kanagawa_mini.palette)
   endif
   call s:kanagawa_mini.hlgroups(s:kanagawa_mini.colors, s:kanagawa_mini.config)
-endfunction
+endfunction " }}}
 
-" }}}
-" vim: fenc=utf-8 ff=unix ft=vim ts=4 sw=4 sts=4 si et fdm=marker fmr={{{,}}}:
 " * * }}}
 " * }}}
 " * Key Mapping: {{{
