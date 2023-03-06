@@ -834,6 +834,10 @@ if has('ivim')
   else
     call system(printf('curl -kOL https://curl.haxx.se/ca/cacert.pem -o %s', $SSL_CERT_FILE))
   endif
+  silent !alias ls='ls -F'
+  silent !alias ll='ls -l'
+  silent !alias la='ls -a'
+  silent !alias al='ls -al'
   silent !alias q=exit
   silent !alias ':q'=exit
 endif
