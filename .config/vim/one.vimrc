@@ -1,4 +1,3 @@
-"                         _                     "
 "   ___  _ __   _____   _(_)_ __ ___  _ __ ___  "
 "  / _ \| '_ \ / _ \ \ / / | '_ ` _ \| '__/ __| "
 " | (_) | | | |  __/\ V /| | | | | | | | | (__  "
@@ -169,6 +168,7 @@ let g:statusline_config.mode_title = {
   \ "\<C-s>": ['SB', 'S-BLOCK'],
   \ 'i':      ['I', 'INSERT'],
   \ 'R':      ['R', 'REPLACE'],
+  \ 'c':      ['C', 'COMMAND'],
   \ 't':      ['T', 'TERMINAL']
   \ }
 let g:statusline_config.mode_highlight = {
@@ -177,6 +177,7 @@ let g:statusline_config.mode_highlight = {
   \ 'visual':   [[15, 13-8], 'Statement'],
   \ 'select':   [[15, 9-8], 'PreProc'],
   \ 'replace':  [[15, 11-8], 'Type'],
+  \ 'command':  [[15, 12-8], 'Constant'],
   \ 'terminal': [[15, 14-8], 'Special'],
   \ 'inactive': [[0, 8], 'Comment'],
   \ 'ignore':   [[15, 0], 'Ignore']
@@ -208,8 +209,10 @@ function! g:GetModeType(mode) abort " {{{
     return 'insert'
   elseif m ==# 'R'
     return 'replace'
+  elseif m ==# 'c'
+    return 'command'
   elseif m ==# 't'
-    return 'replace'
+    return 'terminal'
   else
     return 'ignore'
   endif
