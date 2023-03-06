@@ -1,3 +1,4 @@
+"                         _                     "
 "   ___  _ __   _____   _(_)_ __ ___  _ __ ___  "
 "  / _ \| '_ \ / _ \ \ / / | '_ ` _ \| '__/ __| "
 " | (_) | | | |  __/\ V /| | | | | | | | | (__  "
@@ -227,7 +228,7 @@ function! g:CreateActiveStatusLine() abort " {{{
   let use_minimal = g:statusline_config.UseMinimalChecker()
   let s = ''
   let s .= '%#' .. g:GetModeHighlightName(mode()) .. '#'
-  let s .= ' ' .. g:statusline_config.mode_title[mode(0)][!use_minimal] .. ' '
+  let s .= ' %{g:statusline_config.mode_title[mode(0)][' .. !use_minimal .. ']} '
   let s .= &modified ? '%#DiffAdd#' : '%#CursorLineNr#'
   let s .= mode(0) ==# 't' ? ' <terminal>' : ' %f'
   let s .= ' '
@@ -255,8 +256,8 @@ endfunction " }}}
 function! g:CreateInactiveStatusLine() abort " {{{
   let use_minimal = g:statusline_config.UseMinimalChecker()
   let s = ''
-  let s .= '%#StasusLineNC#'
-  let s .= ' ' .. g:statusline_config.mode_title[mode(0)][!use_minimal] .. ' '
+  let s .= '%#StatusLineNC#'
+  let s .= ' %{g:statusline_config.mode_title[mode(0)][' .. !use_minimal .. ']} '
   let s .= mode(0) ==# 't' ? '▏<terminal>' : '▏%f'
   let s .= ' '
   let s .= '%y'              " Show filetype
@@ -282,10 +283,10 @@ endfunction " }}}
 function! g:Init() abort " {{{
   call g:DefineModeHighlight(exists('g:terminal_ansi_colors') && 1)
   set statusline=%!g:CreateActiveStatusLine()
-  augroup status
+  augroup statusline
     autocmd!
-    autocmd WinEnter * setlocal statusline=%!g:CreateActiveStatusLine()
-    autocmd WinLeave * setlocal statusline=%!g:CreateInactiveStatusLine()
+    autocmd BufEnter,WinEnter * setlocal statusline=%!g:CreateActiveStatusLine()
+    autocmd Bufleave,WinLeave * setlocal statusline=%!g:CreateInactiveStatusLine()
   augroup END
 endfunction " }}}
 
@@ -822,6 +823,21 @@ nnoremap [comment]i :call CommentIn()<CR>
 nnoremap [comment]o :call CommentOut()<CR>
 "nnoremap <expr>[comment] I<C-r>=printf(&cms, '')<CR><Esc>
 " * * }}}
+" * }}}
+" * iVim: {{{
+if has('ivim')
+  let &guifont = 'PlemolJP Console NF:h25'
+  " https://github.com/terrychou/iVim/wiki/External-Command:-curl
+  let $SSL_CERT_FILE = expand('~/cacert.pem')
+  if filereadable($SSL_CERT_FILE)
+    call system(printf('cd ~ && curl --remote-name --time-cond %s https://curl.haxx.se/ca/cacert.pem', $SSL_CERT_FILE))
+  else
+    call system(printf('curl -kOL https://curl.haxx.se/ca/cacert.pem -o %s', $SSL_CERT_FILE))
+  endif
+  silent !alias q=exit
+  silent !alias ':q'=exit
+endif
+
 " * }}}
 " * Post Init: {{{
 syntax enable
