@@ -173,13 +173,13 @@ let g:statusline_config.mode_title = {
   \ 't':      ['T', 'TERMINAL']
   \ }
 let g:statusline_config.mode_highlight = {
-  \ 'normal':   [[15, 12-8], 'Constant'],
-  \ 'insert':   [[15, 10-8], 'Identifier'],
-  \ 'visual':   [[15, 13-8], 'Statement'],
-  \ 'select':   [[15, 9-8], 'PreProc'],
-  \ 'replace':  [[15, 11-8], 'Type'],
-  \ 'command':  [[15, 12-8], 'Constant'],
-  \ 'terminal': [[15, 14-8], 'Special'],
+  \ 'normal':   [[0, 12-8], 'Constant'],
+  \ 'insert':   [[0, 10-8], 'Identifier'],
+  \ 'visual':   [[0, 13-8], 'Statement'],
+  \ 'select':   [[0, 9-8], 'PreProc'],
+  \ 'replace':  [[0, 11-8], 'Type'],
+  \ 'command':  [[0, 12-8], 'Constant'],
+  \ 'terminal': [[0, 14-8], 'Special'],
   \ 'inactive': [[0, 8], 'Comment'],
   \ 'ignore':   [[15, 0], 'Ignore']
   \ }
