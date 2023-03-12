@@ -9,15 +9,34 @@
 set encoding=utf-8
 " [:h scriptencoding(scripte)] Specify the character encoding used in the script.
 scriptencoding utf-8
+
 if &compatible
   set nocompatible
 endif
 
 syntax off
 filetype plugin indent off
+
 let $MYVIMRC = expand('<sfile>')
 
-set rtp+=~/vim-dev/vim-xvi,~/vim-dev/kanagawa-mini.vim
+let g:vimrc ={}
+let s:vimrc = {}
+
+function! s:vimrc.GetHome() " {{{
+  if $TERM_PRORAM ==# 'a-Shell' " a-Shell
+    return expand('~/Documents')
+  elseif exists('$HOME') || has('ivim') " iVim
+    return $HOME
+  elseif exists('$USERPROFILE') " windows
+    return $USERPROFILE
+  else
+    return expand('<sfile>:p:h')
+  endif
+endfunction " }}}
+
+let g:vimrc.home = s:vimrc.GetHome()
+" set rtp+=~/vim-dev/vim-xvi,~/vim-dev/kanagawa-mini.vim
+set rtp+=~/vim-dev/stoneline.vim
 " * }}}
 " * Plugin: {{{
 let g:netrw_liststyle = 3
@@ -290,69 +309,6 @@ function! g:Init() abort " {{{
   augroup END
 endfunction " }}}
 
-" (old) streamline based statusline {{{
-function! CreateStatusline() abort
-  let statusline=''
-  let statusline.='%#Search#'
-  let statusline.=' %{GetMode()} '
-  let statusline.='%#diffadd#'
-  let statusline.='%#CursorlineNr#'
-  let statusline.=' %y'              " Show filetype
-  let statusline.=' %f'                  " Show filename
-  let statusline.=' %m'                  " Show modified tag
-  let statusline.='%='                   " Switch elements to the right
-  if !get(g:, 'streamline_minimal_ui', 0)
-    let statusline.='%{&fileencoding?&fileencoding:&encoding}'
-    let statusline.=' %{&fileformat} '
-    let statusline.='%#TermCursor#'
-    let statusline.='▏'
-  endif
-  let statusline.='c%{wordcount().chars} '
-  let statusline.='%l:%c'              " Show line number and column
-  let statusline.=' %p%% '               " Show percentage
-  return statusline
-endfunction
-
-function! CreateInactiveStatusline()
-  let statusline=''
-  let statusline.='%#Whitespace#'
-  let statusline.=' %{GetMode()} '
-  let statusline.='▏'
-  let statusline.=' %y'
-  let statusline.=' %f'
-  let statusline.=' %m'
-  let statusline.='%='
-  if !get(g:, 'streamline_minimal_ui', 0)
-    let statusline.='%{&fileencoding?&fileencoding:&encoding}'
-    let statusline.=' %{&fileformat} '
-    let statusline.='▏'
-  endif
-  let statusline.='%l:%c'
-  let statusline.=' %p%% '
-  return statusline
-endfunction
-
-function! GetMode()
-  let l:mode=mode(1)
-  if l:mode ==# 'i'
-    return 'INSERT'
-  elseif l:mode ==# 'c'
-    return 'COMMAND'
-  elseif l:mode ==# 'v'
-    return 'VISUAL'
-  elseif l:mode ==# 'V'
-    return 'V-LINE'
-  elseif l:mode ==# "\<C-V>"
-    return 'V-BLOCK'
-  elseif l:mode ==? 'R' || l:mode ==? 'Rv'
-    return 'REPLACE'
-  elseif l:mode ==? 't'
-    return 'TERMINAL'
-  else
-    return 'NORMAL'
-  endif
-endfunction
-" }}}
 " * * }}}
 " * * Foldtext: {{{
 function! MyFoldText() abort
@@ -853,7 +809,7 @@ catch
   colorscheme desert
 endtry
 
-call g:Init()
+" call g:Init()
 " colorscheme kanagawa-mini
 filetype plugin indent on
 " * }}}

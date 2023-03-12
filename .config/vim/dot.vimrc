@@ -1,152 +1,177 @@
-"
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-" (_)_/ |_|_| |_| |_|_|  \___|
-"
-"" Vi Improved
-set nocompatible
-" Before --- {{{
+"       _               "
+"  __ _(_)_ __  _ _ __  "
+"  \ V / | '  \| '_/ _| "
+" (_)_/|_|_|_|_|_| \__| "
+"                       "
+" * Pre Init: {{{
+" [:h encoding(enc)] Sets the character encoding used inside Vim.
+set encoding=utf-8
+" [:h scriptencoding(scripte)] Specify the character encoding used in the script.
+scriptencoding utf-8
+
+if &compatible
+  set nocompatible
+endif
+
 syntax off
 filetype plugin indent off
-" }}}
-" XDG Base Directory --- {{{
-" - Set enviroment variables --- {{{
-if empty($XDG_CONFIG_HOME)
-  let $XDG_CONFIG_HOME = $HOME . '/.config'
+
+let $MYVIMRC = expand('<sfile>')
+
+if $SHELL =~? 'nyagos'
+  set shellcmdflag=-c
 endif
-if empty($XDG_CACHE_HOME)
-  let $XDG_CACHE_HOME = $HOME . '/.cache'
+
+let s:vimrc = {}
+
+function! s:vimrc.GetHome() " {{{
+  if $TERM_PRORAM ==# 'a-Shell' " a-Shell
+    return expand('~/Documents')
+  elseif exists('$HOME') || has('ivim') " iVim
+    return $HOME
+  elseif exists('$USERPROFILE') " windows
+    return $USERPROFILE
+  else
+    return expand('<sfile>:p:h')
+  endif
+endfunction " }}}
+
+let g:home = s:vimrc.GetHome()
+" set rtp+=~/vim-dev/vim-xvi,~/vim-dev/kanagawa-mini.vim
+" set rtp+=~/vim-dev/stoneline.vim
+" * }}}
+" * XDG Based Directory: {{{
+" $XDG_CONFIG_HOME/ <- $HOME/.config
+" +- vim/
+"    +- dot.vimrc
+"
+" $XDG_CACHE_HOME/ <- $HOME/.cache
+" +- vim/
+"    +- swap/
+"
+" $XDG_DATA_HOME/ <- $HOME/.loca/share
+" +- vim/
+"    +- backup/
+"    +- pack/
+"       +- jetpack/
+"
+" $XDG_STATE_HOME/ <- $HOME/.local/state
+" +- vim/
+"    +- undo/
+"    +- viminfo.txt
+if !exists('$XDG_CONFIG_HOME')
+  let $XDG_CONFIG_HOME = g:home .. '/.config'
 endif
-if empty($XDG_DATA_HOME)
-  let $XDG_DATA_HOME = $HOME . '/.local/share'
+if !exists('$XDG_CACHE_HOME')
+  let $XDG_CACHE_HOME = g:home .. '/.cache'
 endif
-if empty($XDG_STATE_HOME)
-  let $XDG_STATE_HOME = $HOME . '/.local/state'
+if !exists('$XDG_DATA_HOME')
+  let $XDG_DATA_HOME = g:home .. '/.local/share'
 endif
-" - }}}
-" - Path Variable --- {{{
-let s:runtime_path = $XDG_DATA_HOME . '/vim'
-let s:swap_path = $XDG_CACHE_HOME . '/vim/swap'
-let s:undo_path = $XDG_CACHE_HOME . '/vim/undo'
-let s:viminfo_path = $XDG_STATE_HOME . '/vim/viminfo'
-" - }}}
-" - Util Function --- {{{
-function s:__mkdirp(path) abort
-  if !isdirectory(a:path)
-    call mkdir(a:path, 'p')
+if !exists('$XDG_STATE_HOME')
+  let $XDG_STATE_HOME = g:home .. '/.local/state'
+endif
+call mkdir($XDG_CONFIG_HOME, 'p')
+call mkdir($XDG_CACHE_HOME, 'p')
+call mkdir($XDG_DATA_HOME, 'p')
+call mkdir($XDG_STATE_HOME, 'p')
+
+set directory=$XDG_CACHE_HOME/vim/swap
+set swapfile
+set backupdir=$XDG_DATA_HOME/vim/backup
+set undodir=$XDG_STATE_HOME/vim/undo
+set undofile
+set undolevels=1000
+set viminfo+=n$XDG_STATE_HOME/vim/viminfo
+
+call mkdir(&directory, 'p')
+call mkdir(&backupdir, 'p')
+call mkdir(&undodir, 'p')
+
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim,$VIM,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+let &packpath = &runtimepath
+
+let $MYVIMRC = expand('<sfile>')
+" * }}}
+" * Plugin: {{{
+" * * Default Plugin: {{{
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_sizestyle = 'H'
+let g:netrw_timefmt = '%Y-%m-%dT%H:%M:%S'
+let g:netrw_winsize = 25
+" https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
+" Toggle Vexplore with Ctrl-E
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+    let expl_win_num = bufwinnr(t:expl_buf_num)
+    if expl_win_num != -1
+      let cur_win_nr = winnr()
+      exec expl_win_num . 'wincmd w'
+      close
+      exec cur_win_nr . 'wincmd w'
+      unlet t:expl_buf_num
+    else
+      unlet t:expl_buf_num
+    endif
+  else
+    exec '1wincmd w'
+    Vexplore
+    let t:expl_buf_num = bufnr("%")
   endif
 endfunction
-" }}}
-" - Make directories --- {{{
-if !has('nvim')
-  call s:__mkdirp(s:runtime_path)
-  call s:__mkdirp(s:swap_path)
-  call s:__mkdirp(s:undo_path)
-  call s:__mkdirp(s:viminfo_path)
+" * * }}}
+" * * Custom Plugin: {{{
+" * * * Automatic installation on startup: {{{
+let s:jetpackfile = expand('$XDG_DATA_HOME/vim') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if !filereadable(s:jetpackfile)
+  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
 endif
-" - }}}
-" - Set options --- {{{
-if !has('nvim')
-  " backup
-  set backupdir=$XDG_CACHE_HOME/vim/backup
-  " swap
-  set directory=$XDG_CACHE_HOME/vim/swap
-  " undo
-  set undofile
-  set undodir=$XDG_CACHE_HOME/vim/undo
-  " viminfo
-  set viminfo+=n$STATE_HOME/vim/viminfo
-  " runtimepath
-  set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim,$VIM,$VIMRUNTIME
-else
-  " backup
-  set backupdir=$XDG_CACHE_HOME/nvim/backup
-  " swap
-  set directory=$XDG_CACHE_HOME/nvim/swap
-  " undo
-  set undofile
-  set undodir=$XDG_CACHE_HOME/nvim/undo
-  " shada(viminfo)
-  set shadafile=$XDG_STATE_HOME/nvim/shada
-  " runtimepath
-  set runtimepath=$XDG_CONFIG_HOME/nvim,$XDG_DATA_HOME/nvim,$VIM,$VIMRUNTIME
-" packpath
+" * * * }}}
+if executable('git') && 1
+" * * * Add plugins: {{{
+packadd vim-jetpack
+call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
+  call jetpack#add('tani/vim-jetpack', {'opt': 1}) "bootstrap
+  call jetpack#add('vim-jp/vimdoc-ja') " help@ja
+  call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
+  call jetpack#add('tpope/vim-commentary')
+call jetpack#end()
+
+augroup vim-jetpack-mypatch
+  autocmd VimEnter * setl nomodified
+augroup END
+" * * * }}}
 endif
-let &packpath = &runtimepath
-" - }}}
-" }}}
-" Global Variables --- {{{
-" - ColorScheme --- {{{
-let g:conf_background = 'dark'
-let g:conf_colorscheme_default = 'pablo'
-let g:conf_colorscheme = 'everforest'
-let g:conf_lightline_colorscheme = 'everforest'
-" - - gruvbox ---  {{{
-"let g:custom_colorscheme = 'gruvbox'
-" - - }}}
-" - - tokyonight --- {{{
-"let g:custom_colorscheme = 'tokyonight'
-  let g:tokyonight_style = 'night'
-  let g:tokyonight_enable_italic = 0
-  let g:tokyonight_disable_italic_comment = 1
-" - - }}}
-" - - everforest --- {{{
-"let g:custom_colorscheme = 'everforest'
-  let g:everforest_background = 'hard'
-  let g:everforest_better_performance = 1
-  let g:everforest_enable_italic = 0
-  let g:everforest_disable_italic_comment = 1
-  let g:everforest_transparent_background = 0
-  let g:everforest_ui_contrast = 'low'
-" - - }}}
-" - - solarized --- {{{
-let g:solarized_termcolors = 16
-"let g:solarized_termtrans = 1
-let g:solarized_visibility = 'high'
-let g:solarized_contrast = 'high'
-" - - }}}
-" - }}}
-" - Font --- {{{
-let g:conf_guifont = 'HackGen\ Console\ NF:h13'
-" - }}}
-" - Plugin Manager --- {{{
-let g:conf_enable_pluginmanager = 1
-if executable('git')
-  let g:jetpack_download_method = 'git'
-elseif executable('curl')
-  let g:jetpack_download_method = 'curl'
-elseif executable('wget')
-  let g:jetpack_download_method = 'wget'
-endif
-"  }}}
-let g:conf_use_customline = 0
-let g:conf_use_expandtab_default = 1
-let g:mapleader = "\<Space>"
-" }}}
-" General --- {{{
-" - Encoding --- {{{
+" * * }}}
+" * * Local Plugin: {{{
+set rtp+=~/vim-dev/stoneline.vim
+" * * }}}
+" * }}}
+" * General: {{{
+set noshellslash
+set novisualbell
+" * * Formats: {{{
 set fileformat=unix
 set fileformats=unix,dos
-set encoding=utf-8
-set fileencodings=utf-8,iso-2022-jp,sjis,cp932,euc-jp
-" - }}}
-" - Clipboard --- {{{
+" * * }}}
+" * * Clipboard: {{{
 set clipboard+=unnamed
 set clipboard+=unnamedplus
-" - }}}
-" - Control --- {{{
+" * * }}}
+" * * Control: {{{
 set mouse=a
 set whichwrap=b,s,<,>,[,]
 set timeout
 set timeoutlen=2000
 set ttimeoutlen=-1
-" - }}}
-" - Help --- {{{
+" * * }}}
+" * * Help: {{{
 set helpheight&vim
 set helplang=ja
-" - }}}
-" - FileType --- {{{
+" * * }}}
+" * * FileType: {{{
 augroup filetype_settings
   au BufNewFile,BufRead *.vim   set filetype=vim
   au BufNewFile,BufRead *.vimrc set filetype=vim
@@ -157,32 +182,30 @@ augroup filetype_settings
   au BufNewFile,BufRead *.bash  set filetype=sh
   au BufNewFile,BufRead *.ash   set filetype=sh
 augroup END
-" - }}}
-" }}}
-" Editing --- {{{
-" - Searching --- {{{
+" * * }}}
+" * }}}
+" * Editing: {{{
+set hidden
+" * * Searching: {{{
 set incsearch
 set ignorecase
 set smartcase
 "set hlsearch
-"- }}}
-" - Command-Line --- {{{
+" * * }}}
+" * * Command-Line: {{{
 set wildmenu
 set wildmode=longest:list,full
-" - }}}
-" - Modifying --- {{{
+" * * }}}
+" * * Modifying: {{{
 set backspace=indent,eol,start
-" - }}}
-" - Indent --- {{{
-if g:conf_use_expandtab_default
-  set expandtab
-else
-  set noexpandtab
-endif
+" * * }}}
+" * * Indent: {{{
+set expandtab
+set ts=4
 set sts=-1 sw=0
 set autoindent
 set smartindent
-" - FileType Indent --- {{{
+" * * * FileType Indent: {{{
 " ref: https://qiita.com/ysn/items/f4fc8f245ba50d5fb8b0
 augroup filetype_indent_settings
   au FileType vim    setl et   ts=2 sts=-1 sw=0
@@ -191,213 +214,20 @@ augroup filetype_indent_settings
   au FileType python setl et   ts=4 sts=-1 sw=0
   au FileType sh     setl et   ts=2 sts=-1 sw=0
 augroup END
-" - }}}
-" }}}
-" }}}
-" Appearance --- {{{
+" * * * }}}
+" * * }}}
+" * }}}
+" * Appearance: {{{
 set number
-set ruler
 set cursorline
 set showcmd
 set showmatch
-set showcmd
-set noshowmode
-if has('termguicolors') && !has('gui_running')
-"if 0 " for vim-startuptime ?
+if has('termguicolors') && !has('gui_running') && 1
   set termguicolors
 endif
-"set ambiwidth=double " Especially for NF's icons
-set ambiwidth=single " To fix lightline.vim's separator
-" - Listchars --- {{{
-set list
-set listchars=   " init
-set listchars+=tab:>\ 
-set listchars+=trail:~
-set listchars+=nbsp:%
-"set listchars+=eol:$
-set listchars+=extends:»
-set listchars+=precedes:«
-"set listchars+=space:·
-" - }}}
-" - StatusLine --- {{{
-set laststatus=2
-let g:custom_stl_config = {
-  \ 'highlight': {
-    \ 'normal': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
-      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
-      \ },
-    \ 'visual': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkmagenta',
-      \ 'gui': 'gui=bold guifg=white guibg=darkmagenta'
-      \ },
-    \ 'select': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=brown',
-      \ 'gui': 'gui=bold guifg=white guibg=brown'
-      \ },
-    \ 'insert': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=blue',
-      \ 'gui': 'gui=bold guifg=white guibg=blue'
-      \ },
-    \ 'replace': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkred',
-      \ 'gui': 'gui=bold guifg=white guibg=darkred'
-      \ },
-    \ 'command': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
-      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
-      \ },
-    \ 'prompt': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
-      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
-      \ },
-    \ 'execute': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgreen',
-      \ 'gui': 'gui=bold guifg=white guibg=darkgreen'
-      \ },
-    \ 'terminal': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkcyan',
-      \ 'gui': 'gui=bold guifg=white guibg=darkcyan'
-      \ },
-    \ 'inactive': {
-      \ 'cterm': 'cterm=bold ctermfg=white ctermbg=darkgray',
-      \ 'gui': 'gui=bold guifg=white guibg=darkgray'
-      \ },
-    \ },
-  \ 'mode_name': {
-    \ 'n': ['N', 'NORMAL'],
-    \ 'v': ['V', 'VISUAL'],
-    \ 'V': ['VL', 'V-LINE'],
-    \ "\<C-v>": ['VB', 'V-BLOCK'],
-    \ 's': ['S', 'SELECT'],
-    \ 'S': ['SL', 'S-LINE'],
-    \ "\<C-s>": ['SB', 'S-BLOCK'],
-    \ 'i': ['I', 'INSERT'],
-    \ 'R': ['R', 'REPLACE'],
-    \ 'c': ['C', 'COMMAND'],
-    \ 'r': ['P', 'PROMPT'],
-    \ '!': ['E', 'EXECUTE'],
-    \ 't': ['T', 'TERMINAL']
-    \ }
-  \ }
-
-let g:customline = {}
-
-function g:customline.CreateStatusLine(is_active) abort
-  let stl = ''
-  if a:is_active
-    let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
-    let stl .= ' %{g:customline.GetModeName()} '
-    let stl .= '%#StatusLine#'
-    let stl .= '%f'
-    let stl .= '%m'
-    let stl .= '%h'
-    let stl .= '%w'
-    let stl .= '%w'
-    let stl .= '%<'
-    let stl .= '%r'
-    let stl .= '%='
-    if winwidth(0) > 70
-      let stl .= '%#CursorLine#'
-      let stl .= ' %{&fenc?&fenc:&enc}'
-      let stl .= ' %{&ff}'
-      let stl .= ' %{&ft}'
-    endif
-    let stl .= ' '
-    let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
-    let stl .= ' %c:%l '
-  else
-    let stl .= '%#CustomLine_inactive#'
-    let stl .= ' %{g:customline.GetModeName()} '
-    let stl .= '%#StatusLineNC#'
-    let stl .= '%f'
-    let stl .= '%m'
-    let stl .= '%h'
-    let stl .= '%w'
-    let stl .= '%w'
-    let stl .= '%<'
-    let stl .= '%r'
-    let stl .= '%='
-    if winwidth(0) > 70
-      let stl .= ' %{&fenc?&fenc:&enc}'
-      let stl .= ' %{&ff}'
-      let stl .= ' %{&ft}'
-    endif
-    let stl .= ' '
-    let stl .= '%#' . g:customline.GetModeHighlightName() .'#'
-    let stl .= '%#CustomLine_inactive#'
-    let stl .= ' %c:%l '
-  endif
-  return stl
-endfunction
-
-function g:customline.Init() abort
-  " highlight
-  let hi_dict = g:custom_stl_config['highlight']
-  for mt in keys(hi_dict)
-    exec printf('hi CustomLine_%s %s', mt, hi_dict[mt]['cterm'])
-    exec printf('hi CustomLine_%s %s', mt, hi_dict[mt]['gui'])
-  endfor
-endfunction
-
-function g:customline.GetModeType() abort
-  let dict = {
-    \ 'n': 'normal',
-    \ 'v': 'visual',
-    \ 'V': 'visual',
-    \ "\<C-v>": 'visual',
-    \ 's': 'select',
-    \ 'S': 'select',
-    \ "\<C-s>": 'select',
-    \ 'i': 'insert',
-    \ 'R': 'replace',
-    \ 'c': 'command',
-    \ 'r': 'prompt',
-    \ '!': 'execute',
-    \ 't': 'terminal'
-    \ }
-  return get(dict, mode(0))
-endfunction
-
-function g:customline.GetModeHighlightName() abort
-  let mode_type = g:customline.GetModeType()
-  return 'CustomLine_' . mode_type
-endfunction
-
-function g:customline.GetModeName() abort
-  let name_dict = g:custom_stl_config['mode_name']
-  let use_longname = winwidth(0) > 70
-  return get(name_dict, mode(0), ['NF', 'NOTFOUND'])[use_longname]
-endfunction
-
-if g:conf_use_customline
-  augroup customline
-    autocmd!
-    autocmd ColorScheme * call g:customline.Init()
-    autocmd WinEnter,BufEnter * setl stl=%!g:customline.CreateStatusLine(1)
-    autocmd WinLeave,BufLeave * setl stl=%!g:customline.CreateStatusLine(0)
-  augroup END
-  set statusline=%!g:customline.CreateStatusLine(1)
-endif
-" - }}}
-" - FoldText --- {{{
-function! MyFoldText() abort
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 5
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . '..' . foldedlinecount  . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-" - }}}
-" GUI --- {{{
-" - GUI Options --- {{{
+set ambiwidth=single
+" * * GUI Options --- {{{
+let &guifont = 'PlemolJP Console NF:h13'
 set guioptions-=m
 set guioptions-=T
 set guioptions-=l
@@ -405,206 +235,343 @@ set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 set guioptions-=e
-" - }}}
-" }}}
-" Key Mappings --- {{{
-nnoremap j gj
-nnoremap k gk
-nnoremap <Up> gk
-nnoremap <Down> gj
-nnoremap <silent><Space><Space> :setlocal relativenumber!<CR>
-nnoremap <Leader>h :set hlsearch!<CR>
-inoremap <silent>jj <Esc>
-"inoremap { {}<Left>
-"inoremap [ []<Left>
-"inoremap ( ()<Left>
-"inoremap ' ''<Left>
-"inoremap " ""<Left>
-" nnoremap <Tab> :tabnext<CR>
-" nnoremap <S-Tab> :tabprevious<CR>
-" - [window] --- {{{
-" ref: https://qiita.com/r12tkmt/items/b89df403f587216802f1
+" * * }}}
+" * * ListChars: {{{
+set list
+set listchars=
+set listchars+=tab:>\ 
+set listchars+=trail:~
+set listchars+=nbsp:%
+"set listchars+=eol:$
+set listchars+=extends:»
+set listchars+=precedes:«
+"set listchars+=space:·
+" * * }}}
+" * * FillChars: {{{
+set fillchars+=vert:┃ " U+2503
+" * * }}}
+" * * StatusLine: {{{
+set laststatus=2
+set ruler
+set showmode
+" baased on https://github.com/KaraMCC/vim-streamline/tree/master/plugin
+" license: https://github.com/KaraMCC/vim-streamline/blob/master/LICENSE
+" function! GetBufSize() abort
+" let l:bufbytes = wordcount().bytes
+" echo l:bufbytes
+" endfunction
+
+let g:statusline_config = {}
+let g:statusline_config.mode_title = {
+  \ 'n':      ['N', 'NORMAL'],
+  \ 'v':      ['V', 'VISUAL'],
+  \ 'V':      ['VL', 'V-LINE'],
+  \ "\<C-v>": ['VB', 'V-BLOCK'],
+  \ 's':      ['S', 'SELECT'],
+  \ 'S':      ['SL', 'S-LINE'],
+  \ "\<C-s>": ['SB', 'S-BLOCK'],
+  \ 'i':      ['I', 'INSERT'],
+  \ 'R':      ['R', 'REPLACE'],
+  \ 'c':      ['C', 'COMMAND'],
+  \ 't':      ['T', 'TERMINAL']
+  \ }
+let g:statusline_config.mode_highlight = {
+  \ 'normal':   [[0, 12-8], 'Constant'],
+  \ 'insert':   [[0, 10-8], 'Identifier'],
+  \ 'visual':   [[0, 13-8], 'Statement'],
+  \ 'select':   [[0, 9-8], 'PreProc'],
+  \ 'replace':  [[0, 11-8], 'Type'],
+  \ 'command':  [[0, 12-8], 'Constant'],
+  \ 'terminal': [[0, 14-8], 'Special'],
+  \ 'inactive': [[0, 8], 'Comment'],
+  \ 'ignore':   [[15, 0], 'Ignore']
+  \ }
+let g:statusline_config.UseMinimalChecker = { -> winwidth(0) < 70 }
+
+function! g:DefineModeHighlight(use_termansicolor) abort " {{{
+  let mhl = g:statusline_config.mode_highlight
+  for [k, v] in items(mhl)
+    if a:use_termansicolor
+      execute 'highlight StatusLine_' .. k
+        \ 'guifg=' .. g:terminal_ansi_colors[v[0][0]]
+        \ 'guibg=' .. g:terminal_ansi_colors[v[0][1]]
+    else
+      execute 'highlight link' 'Statusline_' .. k v[1]
+    endif
+  endfor
+endfunction " }}}
+
+function! g:GetModeType(mode) abort " {{{
+  let m = a:mode[0]
+  if m ==# 'n'
+    return 'normal'
+  elseif m ==# 'v' || m ==# 'V' || m ==# "\<C-v>"
+    return 'visual'
+  elseif m ==# 's' || m ==# 'S' || m ==# "\<C-s>"
+    return 'select'
+  elseif m ==# 'i'
+    return 'insert'
+  elseif m ==# 'R'
+    return 'replace'
+  elseif m ==# 'c'
+    return 'command'
+  elseif m ==# 't'
+    return 'terminal'
+  else
+    return 'ignore'
+  endif
+endfunction " }}}
+
+function! g:GetModeHighlightName(mode) abort " {{{
+  let type = g:GetModeType(a:mode)
+  return 'StatusLine_' .. type
+endfunction " }}}
+
+function! g:CreateActiveStatusLine() abort " {{{
+  let use_minimal = g:statusline_config.UseMinimalChecker()
+  let s = ''
+  let s .= '%#' .. g:GetModeHighlightName(mode()) .. '#'
+  let s .= ' %{g:statusline_config.mode_title[mode(0)][' .. !use_minimal .. ']} '
+  let s .= &modified ? '%#DiffAdd#' : '%#CursorLineNr#'
+  let s .= mode(0) ==# 't' ? ' <terminal>' : ' %f'
+  let s .= ' '
+  let s .= '%y'              " Show filetype
+  let s .= '%m'
+  let s .= '%='
+  if !use_minimal
+    let s .= '%#DiffText#'
+    " let s .= '▏'
+    let s .= ' '
+    let s .= '%{&fileencoding?&fileencoding:&encoding}'
+    let s .= ' %{&fileformat} '
+  endif
+  " let s .= '▏'
+  let s .= '%#Search#'
+  let s .= ' '
+  let s .= '%l:%c'              " Show line number and column
+  let s .= ' '
+  if !use_minimal
+    let s .= '%p%% '               " Show percentage
+  endif
+  return s
+endfunction " }}}
+
+function! g:CreateInactiveStatusLine() abort " {{{
+  let use_minimal = g:statusline_config.UseMinimalChecker()
+  let s = ''
+  let s .= '%#StatusLineNC#'
+  let s .= ' %{g:statusline_config.mode_title[mode(0)][' .. !use_minimal .. ']} '
+  let s .= mode(0) ==# 't' ? '▏<terminal>' : '▏%f'
+  let s .= ' '
+  let s .= '%y'              " Show filetype
+  let s .= '%m'
+  let s .= '%='
+  if !use_minimal
+    let s .= '▏'
+    " let s .= ' '
+    let s .= '%{&fileencoding?&fileencoding:&encoding}'
+    let s .= ' %{&fileformat} '
+  endif
+  let s .= '▏'
+  " let s .= ' '
+  let s .= '%l:%c'              " Show line number and column
+  let s .= ' '
+  if !use_minimal
+    let s .= '%p%% '               " Show percentage
+  endif
+  let s .= '%#VertSplit#'
+  return s
+endfunction " }}}
+
+function! g:Init() abort " {{{
+  call g:DefineModeHighlight(exists('g:terminal_ansi_colors') && 1)
+  set statusline=%!g:CreateActiveStatusLine()
+  augroup statusline
+    autocmd!
+    autocmd BufEnter,WinEnter * setlocal statusline=%!g:CreateActiveStatusLine()
+    autocmd Bufleave,WinLeave * setlocal statusline=%!g:CreateInactiveStatusLine()
+  augroup END
+endfunction " }}}
+
+" * * }}}
+" * * Foldtext: {{{
+function! MyFoldText() abort
+  let line = getline(v:foldstart)
+
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 5
+  let foldedlinecount = v:foldend - v:foldstart
+
+  " expand tabs into spaces
+
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
+  return line . '…' . repeat(" ",fillcharcount) . '..' . foldedlinecount  . ' '
+endfunction 
+set foldtext=MyFoldText()
+" * * }}}
+" * }}}
+" * Key Mapping: {{{
+let g:mapleader = "\<Space>"
+
+" * * Misc: {{{
+inoremap <silent>jk <Esc>
+
+" ref: https://github.com/nvim-zh/minimal_vim
+" Move the cursor based on physical lines, not the actual lines.
+nnoremap <silent><expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <silent><expr> k (v:count == 0 ? 'gk' : 'k')
+
+nnoremap H ^
+nnoremap L $
+nnoremap <silent><expr> J (v:count == 0 ? '3gj' : '3j')
+nnoremap <silent><expr> K (v:count == 0 ? '3gk' : '3k')
+
+" u <-> U = Undo <-> Redo
+nnoremap U <C-r>
+nnoremap <C-r> U
+
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
+nnoremap <silent> <Space><Space> :<C-u>setl relativenumber!<CR>:<C-u>setl relativenumber?<CR>
+
+nnoremap <Leader>h :<C-u>set hlsearch!<CR>:set hlsearch?<CR>
+
+nnoremap x "_x
+
+inoremap <C-Tab> <Tab>
+
+nnoremap <silent> <S-Up> "zdd<Up>"zP
+nnoremap <silent> <S-Down> "zdd"zp
+vnoremap <S-Up> "zx<Up>"zP`[V`]
+vnoremap <S-Down> "zx"zp`[V`]
+" * * }}}
+" * * [explorer](netrw): {{{
+nmap <leader>e [explorer]
+nnoremap [explorer] <Nop>
+nnoremap <silent> [explorer]e :<C-u>call ToggleVExplorer()<CR>
+" * * }}}
+" * * [buffer]: {{{
+nmap <Leader>b [buffer]
+nnoremap [buffer] <Nop>
+nnoremap [buffer]k :<C-u>bprev<CR>
+nnoremap [buffer]j :<C-u>bnext<CR>
+nnoremap [buffer]l :<C-u>ls<CR>
+nnoremap [buffer]L :<C-u>ls!<CR>
+" * * }}}
+" * * [window]: {{{
 nmap <Leader>w [window]
-  " ref: https://lesguillemets.github.io/blog/2014/10/16/vim-window-controls.html
-  " Openeing a window
-  " <C-w>s == :split
-  nnoremap [window]s <C-w>s
-  " <C-w>v == :vsplit
-  nnoremap [window]v <C-w>v
-  " <C-w>n == :new
-  nnoremap [window]n <C-w>n
-  " Closing a window
-  " <C-w>q == :quit
-  nnoremap [window]q <C-w>q
-  " <C-w>o == :only
-  nnoremap [window]o <C-w>o
-  " <C-w>r .. rotate window
-  " Moving cursor to other windows
-  nnoremap [window]h <C-w>h
-  nnoremap [window]j <C-w>j
-  nnoremap [window]k <C-w>k
-  nnoremap [window]l <C-w>l
-  " Moving windows around
-  nnoremap [window]r <C-w>r
-  " <C-w>p
-  nnoremap [window]p <C-w>p
-" - }}}
-" - [tab] --- {{{
+noremap [window] <Nop>
+nnoremap [window]h <C-w>h
+nnoremap [window]j <C-w>j
+nnoremap [window]k <C-w>k
+nnoremap [window]l <C-w>l
+nnoremap [window]s :<C-u>split<CR>
+nnoremap [window]v :<C-u>vsplit<CR>
+nnoremap [window]o :<C-u>only<CR>
+" * * }}}
+" * * [tab]: {{{
 nmap <Leader>t [tab]
-  " ref: https://spirits.appirits.com/doruby/9017/
-  " Moving current tab
-  nnoremap [tab]p :tabprevious<CR>
-  nnoremap [tab]<Left> :tabprevious<CR>
-  nnoremap [tab]h :tabprevious<CR>
-  nnoremap [tab]n :tabnext<CR>
-  nnoremap [tab]<Right> :tabnext<CR>
-  nnoremap [tab]l :tabnext<CR>
-  nnoremap [tab]c :tabclose<CR>
-" - }}}
-" - [vimrc] --- {{{
+nnoremap [tab] <Nop>
+nnoremap [tab]h :<C-u>tabprevious<CR>
+nnoremap [tab]l :<C-u>tabnext<CR>
+nnoremap [tab]n :<C-u>tabnew<CR>
+" * * }}}
+" * * [terminal]: {{{
+nmap <Leader>x [terminal]
+nnoremap [terminal] <Nop>
+
+nnoremap [terminal]x :<C-u>terminal ++curwin<CR>
+
+nnoremap [terminal]h :<C-u>vertical aboveleft terminal<CR>
+nnoremap [terminal]j :<C-u>rightbelow terminal<CR>
+nnoremap [terminal]k :<C-u>aboveleft terminal<CR>
+nnoremap [terminal]l :<C-u>vertical rightbelow terminal<CR>
+
+nnoremap [terminal]H :<C-u>vertical topleft terminal<CR>
+nnoremap [terminal]J :<C-u>botright terminal<CR>
+nnoremap [terminal]K :<C-u>topleft terminal<CR>
+nnoremap [terminal]L :<C-u>vertical botright terminal<CR>
+
+nnoremap [terminal]t :<C-u>tab terminal<CR>
+" * * }}}
+" * * [vimrc]: {{{
 nmap <Leader>v [vimrc]
-  nnoremap [vimrc]e :e $MYVIMRC<CR>
-  nnoremap [vimrc]<S-e> :e! $MYVIMRC<CR>
-  nnoremap [vimrc]t :tabnew $MYVIMRC<CR>
-  nnoremap [vimrc]s :so $MYVIMRC<CR>
-" - }}}
-" }}}
-" Plugins --- {{{
-" - Processes Function --- {{{
-function g:__jetpack_setup(pmpath) abort
-  " bootstrap
-  let s:jetpackfile = a:pmpath . '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-  let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
-  if !filereadable(s:jetpackfile) && executable('curl')
-    call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
-  endif
-  "runtime */jetack.vim
-  packadd vim-jetpack
-endfunction
-" - }}}
-" - Add Plugins Function --- {{{
-function g:__jetpack_add_plugins(pmpath) abort
-  call jetpack#begin(a:pmpath)
-  call jetpack#add('tani/vim-jetpack', {'opt': 1}) " bootstrap
-  " - - General --- {{{
-  call jetpack#add('vim-jp/vimdoc-ja')
-  call jetpack#add('lambdalisue/fern.vim')
-  call jetpack#add('lambdalisue/fern-renderer-nerdfont.vim', {'depends': 'lambdalisue/nerdfont.vim'})
-  call jetpack#add('lambdalisue/nerdfont.vim')
-  call jetpack#add('yuki-yano/fern-preview.vim', {'depends': 'lambdalisue/fern.vim'})
-  " - - }}}
-  " - - Editings --- {{{
-  " call jetpack#add('jiangmiao/auto-pairs')
-  call jetpack#add('markonm/traces.vim')
-  " - }}}
-  " - - Appearance --- {{{
-  call jetpack#add('itchyny/lightline.vim')
-  " - - }}}
-  " - - ColorSchemes --- {{{
-  call jetpack#add('catppuccin/vim', {'as': 'catppuccin'})
-  call jetpack#add('danilo-augusto/vim-afterglow')
-  call jetpack#add('arcticicestudio/nord-vim')
-  "call jetpack#add('altercation/vim-colors-solarized')
-  " - - }}}
-  call jetpack#end()
-endfunction
-" - }}}
-" - Main Process --- {{{
-if g:conf_enable_pluginmanager
-  let g:pmpath = $XDG_DATA_HOME . '/vim'
-  if !has('nvim') " idk why this script runs correctly on nvim
-    call g:__jetpack_setup(g:pmpath)
-    call g:__jetpack_add_plugins(g:pmpath)
-  endif
-endif
-" - }}}
-" - Plugin Settings --- {{{
-" - - [lambdalisue/fern.vim] --- {{{
-let g:fern#renderer = 'nerdfont'
-let g:fern#default_hidden = 1
-function! s:init_fern() abort
-  " Use 'select' instead of 'edit' for default 'open' action
-  nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
-endfunction
-augroup fern-custom
-  autocmd! *
-  autocmd FileType fern call s:init_fern()
-augroup END
-nnoremap <silent> <Leader>E :<C-u>Fern . -reveal=%<CR>
-nnoremap <silent> <Leader>e :<C-u>Fern . -reveal=% -drawer -toggle<CR>
-" preview
-function! s:fern_settings() abort
-  nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
-  nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
-  nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
-  nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
+nnoremap [vimrc] <Nop>
+nnoremap [vimrc]s :<C-u>source $MYVIMRC<CR>
+nnoremap [vimrc]e :<C-u>edit $MYVIMRC<CR>
+nnoremap [vimrc]t :<C-u>tabnew $MYVIMRC<CR>
+" * * }}}
+" * * [comment]: {{{
+function InsertCommentString()
+  let line = getline('.')
+  let lineNum = line('.')
+  call setline(lineNum, printf(&cms, line))
 endfunction
 
-augroup fern-settings
-  autocmd!
-  autocmd FileType fern call s:fern_settings()
-augroup END
-" }}}
-" - - [itchyny/lightline.vim] --- {{{
-" ref: https://qiita.com/hoto17296/items/ccbd6b413e67a653f2d
-let g:lightline = {}
-let g:lightline.colorscheme = g:conf_lightline_colorscheme
-let g:lightline.enable = { 'statusline': 1, 'tabline': 1 }
-let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
-let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
-let g:lightline.tabline_separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
-let g:lightline.tabline_subseparator = { 'left': " \ub0b1", 'right': "\ub0b3" }
-let g:lightline.active = {
-  \ 'left' : [
-    \ ['mode', 'paste'],
-    \ ['readonly', 'filename', 'modified']
-    \ ],
-  \ 'right': [
-    \ ['lineinfo'],
-    \ ['percent'], 
-    \ ['fileformat', 'fileencoding', 'filetype']
-    \ ]
-  \ }
-let g:lightline.inactive = {
-  \ 'left': [['filename']],
-  \ 'right': [['lineinfo'], ['percent']]
-  \ }
-let g:lightline.tabline = {
-  \ 'left': [['tabs']],
-  \ 'right': [['close']]
-  \ }
-let g:lightline.tab = {
-  \ 'active': ['tabnum', 'filename', 'modified'],
-  \ 'inactive': ['tabnum', 'filename', 'modified']
-  \ }
-let g:lightline.component = {
-  \ 'vim_logo': "\ue62b",
-  \ 'readonly': '%R'
-  \ }
-set noshowmode
-function s:ChangeLightlineColorScheme(name) abort
-  "let g:lightline.colorscheme = a:name
-  "let g:loaded_lightline = 0
-  "call lightline#init()
-  "let g:loaded_lightline = 1
+function! CommentIn() abort
+  " ref: https://vim-jp.org/vim-users-jp/2009/09/20/Hack-75.html
+  " \%(^\s*\|^\t*\)\@<=\S
+  let l = getline('.')
+  if l == ''
+    call setline(line('.'), printf(&cms, ''))
+  else
+    call setline(line('.'), substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', printf(&cms, '\1'), ''))
+    "echo substitute(getline('.'), '\%(^\s*\|^\t*\)\@<=\(\S.*\)', '" \1', '')
+  endif
 endfunction
-augroup lightline_vim
-  autocmd VimEnter * call lightline#update()
-  "autocmd ColorScheme * call s:ChangeLightlineColorScheme(expand('<amatch>'))
-augroup END
-" - - }}}
-" - }}}
-" }}}
-" After --- {{{
+
+function CommentOut() abort
+  let l = getline('.')
+  if l == printf(&cms, '')
+    call setline(line('.'), '')
+  else
+    "echo substitute(getline('.'), printf(&cms, ''), '', '')
+    call setline(line('.'), substitute(getline('.'), printf(&cms, ''), '', ''))
+  endif
+endfunction
+
+nmap <Leader>c [comment]
+nnoremap [comment] <Nop>
+nnoremap [comment]i :call CommentIn()<CR>
+nnoremap [comment]o :call CommentOut()<CR>
+"nnoremap <expr>[comment] I<C-r>=printf(&cms, '')<CR><Esc>
+" * * }}}
+" * }}}
+" * iVim: {{{
+if has('ivim')
+  let &guifont = 'PlemolJP Console NF:h25'
+  " https://github.com/terrychou/iVim/wiki/External-Command:-curl
+  let $SSL_CERT_FILE = expand('~/cacert.pem')
+  if filereadable($SSL_CERT_FILE)
+    call system(printf('cd ~ && curl --remote-name --time-cond %s https://curl.haxx.se/ca/cacert.pem', $SSL_CERT_FILE))
+  else
+    call system(printf('curl -kOL https://curl.haxx.se/ca/cacert.pem -o %s', $SSL_CERT_FILE))
+  endif
+  silent !alias ls='ls -F'
+  silent !alias ll='ls -l'
+  silent !alias la='ls -a'
+  silent !alias al='ls -al'
+  silent !alias q=exit
+  silent !alias ':q'=exit
+endif
+
+" * }}}
+" * Post Init: {{{
 syntax enable
-execute 'set background=' . g:conf_background
+set background=dark
 try
-  execute 'colorscheme ' . g:conf_colorscheme
+  " call g:SetMyColorScheme()
+  colorscheme kanagawa-mini
 catch
-  execute 'colorscheme ' . g:conf_colorscheme_default
+  colorscheme desert
 endtry
-execute 'set guifont=' . g:conf_guifont
+
+" call g:Init()
 filetype plugin indent on
-" }}}
-" vim: set ft=vim ts=2 sts=-1 sw=0 expandtab autoindent smartindent foldmethod=marker cms="\ %s:
+" * }}}
+" vim: set ft=vim ts=2 sts=-1 sw=0 et fdm=marker fmr={{{,}}} cms="\ %s:
 
