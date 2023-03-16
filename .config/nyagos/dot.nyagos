@@ -72,10 +72,10 @@ if true then
       --local home = nyagos.getenv('HOME') or nyagos.getenv('USERPROFILE')
       --local pat  = '^' .. home:gsub('[().%%+-*?%[%]^$]', '%%%0')
       --local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
-      local nyan = nyagos.getenv("ERRORLEVEL") == "0" and ansicolor("$e[36;1m", "=^..^=") or ansicolor("$e[31;1m", "=^xx^=")
+      local nyan = nyagos.getenv("ERRORLEVEL") == "0" and '$e[36m=^..^=' or '$e[31m=^xx^='
         local root = nyagos.elevated() and '#' or '$$'
         return nyagos.default_prompt(
-            nyan .. '$e[32m' .. '[$p]'  .. '$e[33m'  .. '$e[37m:' .. root .. '$e[0m' .. '$s')
+            '$e[39;0m' .. nyan .. '$e[32m' .. '[$p]' .. '$e[39;0m:' .. root .. ' ')
             --'[$p]:' .. root .. '$s')
     end
 else
@@ -85,7 +85,7 @@ else
         return nyagos.default_prompt('$e[40;36;0m'..this..'$e[37;0m' .. '$e[m', title)
     end
 end
--- }}}
+-- }
 print("Finished loading .nyagos")
 
 -- vim: ft=lua expandtab ts=4 sts=-1 sw=0 foldmethod=marker cms=--\ %s:
