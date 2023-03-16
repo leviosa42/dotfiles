@@ -100,26 +100,7 @@ let g:netrw_banner = 0
 let g:netrw_sizestyle = 'H'
 let g:netrw_timefmt = '%Y-%m-%dT%H:%M:%S'
 let g:netrw_winsize = 25
-" https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
-" Toggle Vexplore with Ctrl-E
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-    let expl_win_num = bufwinnr(t:expl_buf_num)
-    if expl_win_num != -1
-      let cur_win_nr = winnr()
-      exec expl_win_num . 'wincmd w'
-      close
-      exec cur_win_nr . 'wincmd w'
-      unlet t:expl_buf_num
-    else
-      unlet t:expl_buf_num
-    endif
-  else
-    exec '1wincmd w'
-    Vexplore
-    let t:expl_buf_num = bufnr("%")
-  endif
-endfunction
+let g:vimrc_explorer = 'netrw' " as default
 " * * }}}
 " * * Custom Plugin: {{{
 " * * * Automatic installation on startup: {{{
@@ -135,7 +116,41 @@ packadd vim-jetpack
 call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('tani/vim-jetpack', {'opt': 1}) "bootstrap
   call jetpack#add('vim-jp/vimdoc-ja') " help@ja
+  call jetpack#add('sheerun/vim-polyglot') " lang packs
+  call jetpack#add('lambdalisue/fern.vim') " file explorer
+    " lambdalisue/fern.vim {{{
+    let g:vimrc_explorer = 'fern'
+    let g:fern#default_hidden = 1
+    " fern-preview.vim 's mapping
+    function! s:fern_settings() abort
+      nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
+      nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
+      nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
+      nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
+      " smart_perview function
+      nmap <silent> <buffer> <expr> <Plug>(fern-quit-or-close-preview) fern_preview#smart_preview("\<Plug>(fern-action-preview:close)", ":q\<CR>")
+      nmap <silent> <buffer> q <Plug>(fern-quit-or-close-preview)
+      " my custom mapping
+      nmap <silent> <buffer> H <Plug>(fern-action-leave)
+      nmap <silent> <buffer> L <Plug>(fern-action-open-or-expand)
+    endfunction
+
+    augroup fern-settings
+      autocmd!
+      autocmd FileType fern call s:fern_settings() | setlocal nonumber
+    augroup END
+    " }}}
+    call jetpack#add('lambdalisue/fern-renderer-nerdfont.vim')
+      " lambdalisue/fern-renderer-nerdfont.vim {{{
+      let g:fern#renderer = "nerdfont"
+      " }}}
+      call jetpack#add('lambdalisue/nerdfont.vim')
+    call jetpack#add('yuki-yano/fern-preview.vim')
+  call jetpack#add('machakann/vim-sandwich')
+  call jetpack#add('markonm/traces.vim')
+  call jetpack#add('machakann/vim-highlightedyank')
   call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
+  call jetpack#add('cormacrelf/vim-colors-github') " colorscheme
   call jetpack#add('tpope/vim-commentary')
 call jetpack#end()
 
@@ -147,6 +162,8 @@ endif
 " * * }}}
 " * * Local Plugin: {{{
 set rtp+=~/vim-dev/stoneline.vim
+set rtp+=~/vim-dev/github-theme-mini.vim
+" let g:stoneline.feat_mode_hl_termansicolors = 1
 " * * }}}
 " * }}}
 " * General: {{{
@@ -208,7 +225,7 @@ set smartindent
 " * * * FileType Indent: {{{
 " ref: https://qiita.com/ysn/items/f4fc8f245ba50d5fb8b0
 augroup filetype_indent_settings
-  au FileType vim    setl et   ts=2 sts=-1 sw=0
+  au FileType vim    setl et   ts=2 sts=-1 sw=0 | let g:vim_indent_cont = &sw
   au FileType c      setl noet ts=4 sts=-1 sw=0 cindent
   au FileType js     setl noet ts=4 sts=-1 sw=0
   au FileType python setl et   ts=4 sts=-1 sw=0
@@ -220,6 +237,7 @@ augroup END
 " * Appearance: {{{
 set number
 set cursorline
+set foldcolumn=1
 set showcmd
 set showmatch
 if has('termguicolors') && !has('gui_running') && 1
@@ -249,6 +267,10 @@ set listchars+=precedes:«
 " * * }}}
 " * * FillChars: {{{
 set fillchars+=vert:┃ " U+2503
+set fillchars+=vert:│ " U+2502
+set fillchars+=foldclose:>
+set fillchars+=foldopen:┌ " U+250C
+set fillchars+=foldsep:│ " U+2502
 " * * }}}
 " * * StatusLine: {{{
 set laststatus=2
@@ -411,6 +433,27 @@ endfunction
 set foldtext=MyFoldText()
 " * * }}}
 " * }}}
+" * Commnad: {{{
+" * * :HighlightInfo {{{
+" show highlight infomation under the cursor.
+" ref: https://qiita.com/pasela/items/903bb9f5ac1b9b17af2c
+function! <SID>get_syn_id(transparent)
+    let synid = synID(line('.'), col('.'), 1)
+    return a:transparent ? synIDtrans(synid) : synid
+endfunction
+function! <SID>get_syn_name(synid)
+    return synIDattr(a:synid, 'name')
+endfunction
+function! <SID>get_highlight_info()
+    execute "highlight " . <SID>get_syn_name(<SID>get_syn_id(0))
+    execute "highlight " . <SID>get_syn_name(<SID>get_syn_id(1))
+endfunction
+command! HighlightInfo call <SID>get_highlight_info()
+" * * }}}
+" * * :DiffOrig: {{{
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+" * * }}}
+" * }}}
 " * Key Mapping: {{{
 let g:mapleader = "\<Space>"
 
@@ -449,14 +492,45 @@ nnoremap <silent> <S-Down> "zdd"zp
 vnoremap <S-Up> "zx<Up>"zP`[V`]
 vnoremap <S-Down> "zx"zp`[V`]
 " * * }}}
-" * * [explorer](netrw): {{{
+" * * [explorer]: {{{
 nmap <leader>e [explorer]
 nnoremap [explorer] <Nop>
+if g:vimrc_explorer ==# 'netrw'
+" * * * (netrw): {{{
+" Toggle Vexplore with Ctrl-E
+" https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree
+function! ToggleVExplorer() " {{{
+  if exists("t:expl_buf_num")
+    let expl_win_num = bufwinnr(t:expl_buf_num)
+    if expl_win_num != -1
+      let cur_win_nr = winnr()
+      exec expl_win_num . 'wincmd w'
+      close
+      exec cur_win_nr . 'wincmd w'
+      unlet t:expl_buf_num
+    else
+      unlet t:expl_buf_num
+    endif
+  else
+    exec '1wincmd w'
+    Vexplore
+    let t:expl_buf_num = bufnr("%")
+  endif
+endfunction " }}}
+
 nnoremap <silent> [explorer]e :<C-u>call ToggleVExplorer()<CR>
+" * * * }}}
+elseif g:vimrc_explorer ==# 'fern'
+" * * * (fern): {{{
+nnoremap <silent> [explorer]e :<C-u>Fern . -drawer -toggle -keep<CR>
+nnoremap <silent> [explorer]d :<C-u>Fern %:h -drawer -toggle -keep<CR>
+" * * * }}}
+endif
 " * * }}}
 " * * [buffer]: {{{
 nmap <Leader>b [buffer]
 nnoremap [buffer] <Nop>
+nnoremap [buffer]n :<C-u>new<CR>
 nnoremap [buffer]k :<C-u>bprev<CR>
 nnoremap [buffer]j :<C-u>bnext<CR>
 nnoremap [buffer]l :<C-u>ls<CR>
@@ -565,7 +639,8 @@ syntax enable
 set background=dark
 try
   " call g:SetMyColorScheme()
-  colorscheme kanagawa-mini
+  " colorscheme kanagawa-mini
+  colorscheme github-mini
 catch
   colorscheme desert
 endtry
@@ -573,5 +648,5 @@ endtry
 " call g:Init()
 filetype plugin indent on
 " * }}}
-" vim: set ft=vim ts=2 sts=-1 sw=0 et fdm=marker fmr={{{,}}} cms="\ %s:
+" vim: set ft=vim ts=2 sts=-1 sw=0 et fdm=marker fmr={{{,}}} fdc=5 fdls=0 cms="\ %s:
 
