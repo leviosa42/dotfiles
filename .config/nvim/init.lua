@@ -86,7 +86,7 @@ vim.o.backspace = 'indent,eol,start'
 -- }}}
 -- * * Appearance: {{{
 -- * * * guifont: {{{
-vim.o.guifont = 'PlemolJP Console NF:h10'
+vim.o.guifont = 'PlemolJP Console NF:h14'
 -- * * * }}}
 -- * * * Misc: {{{
 -- colorscheme
