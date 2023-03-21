@@ -10,8 +10,7 @@
 !/.config/bash/*
 
 !/.config/gh
-!/.config/gh/*
-/.config/gh/host.yml
+/.config/gh/.gitkeep
 
 !/.config/nvim
 !/.config/nvim/*
@@ -27,4 +26,5 @@
 
 *.swp
 *.exe
+*.netrwhist
 
