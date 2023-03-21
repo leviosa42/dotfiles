@@ -9,6 +9,10 @@
 !/.config/bash
 !/.config/bash/*
 
+!/.config/gh
+!/.config/gh/*
+/.config/gh/host.yml
+
 !/.config/nvim
 !/.config/nvim/*
 
