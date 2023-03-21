@@ -57,7 +57,9 @@ end
 if nyagos.which('nvim') then
     alias({
         nv = ext('nvim'),
-        nvi = ext('nvim')
+        nvi = ext('nvim'),
+        gnvim = ext('goneovim'),
+        gnv = ext('goneovim')
     })
 end
 -- }}}
