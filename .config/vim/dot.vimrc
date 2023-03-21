@@ -465,8 +465,8 @@ inoremap <silent>jk <Esc>
 nnoremap <silent><expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap <silent><expr> k (v:count == 0 ? 'gk' : 'k')
 
-nnoremap H ^
-nnoremap L $
+" nnoremap H ^
+" nnoremap L $
 nnoremap <silent><expr> J (v:count == 0 ? '3gj' : '3j')
 nnoremap <silent><expr> K (v:count == 0 ? '3gk' : '3k')
 
@@ -481,7 +481,8 @@ inoremap <C-l> <Right>
 
 nnoremap <silent> <Space><Space> :<C-u>setl relativenumber!<CR>:<C-u>setl relativenumber?<CR>
 
-nnoremap <Leader>h :<C-u>set hlsearch!<CR>:set hlsearch?<CR>
+" nnoremap <Leader>h :<C-u>nohlsearch<CR>:echo v:hlsearch ? 'hlsearch' : 'nohlsearch'<CR>
+nnoremap <Leader>h :<C-u>setl hlsearch!<CR>:setl hlsearch?<CR>
 
 nnoremap x "_x
 
@@ -489,8 +490,13 @@ inoremap <C-Tab> <Tab>
 
 nnoremap <silent> <S-Up> "zdd<Up>"zP
 nnoremap <silent> <S-Down> "zdd"zp
-vnoremap <S-Up> "zx<Up>"zP`[V`]
-vnoremap <S-Down> "zx"zp`[V`]
+vnoremap <silent> <S-Up> "zx<Up>"zP`[V`]
+vnoremap <silent> <S-Down> "zx"zp`[V`]
+
+nmap >> >>>
+nmap << <<<
+        vmap >> >>gv>
+vmap << <<gv
 " * * }}}
 " * * [explorer]: {{{
 nmap <leader>e [explorer]
@@ -613,6 +619,15 @@ nnoremap [comment] <Nop>
 nnoremap [comment]i :call CommentIn()<CR>
 nnoremap [comment]o :call CommentOut()<CR>
 "nnoremap <expr>[comment] I<C-r>=printf(&cms, '')<CR><Esc>
+" * * }}}
+" * * command-line: {{{
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
 " * * }}}
 " * }}}
 " * iVim: {{{
