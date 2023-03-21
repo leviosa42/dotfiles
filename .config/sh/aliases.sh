@@ -34,6 +34,7 @@ alias e="$EDITOR"
 alias vi='vim -u NONE'
 
 alias :q='exit'
+alias q='exit'
 
 alias cls=clear
 alias clc=clear
