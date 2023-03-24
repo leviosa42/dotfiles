@@ -155,6 +155,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
   " call jetpack#add('cormacrelf/vim-colors-github') " colorscheme
   call jetpack#add('tpope/vim-commentary')
+  " call jetpack#add('itchyny/lightline.vim')
 call jetpack#end()
 
 augroup vim-jetpack-mypatch
@@ -164,7 +165,7 @@ augroup END
 endif
 " * * }}}
 " * * Local Plugin: {{{
-set rtp+=~/vim-dev/stoneline.vim
+" set rtp+=~/vim-dev/stoneline.vim
 set rtp+=~/vim-dev/github-theme-mini.vim
 set rtp+=~/vim-dev/vim-github-theme
 " let g:stoneline.feat_mode_hl_termansicolors = 1
@@ -287,7 +288,50 @@ set showmode
 " let l:bufbytes = wordcount().bytes
 " echo l:bufbytes
 " endfunction
+function! g:PureStatusLine() abort " {{{
+  " * constants {{{
+  let MODE_TITLES = {
+    \ 'n':      ['N', 'NORMAL'],
+    \ 'v':      ['V', 'VISUAL'],
+    \ 'V':      ['VL', 'V-LINE'],
+    \ "\<C-v>": ['VB', 'V-BLOCK'],
+    \ 's':      ['S', 'SELECT'],
+    \ 'S':      ['SL', 'S-LINE'],
+    \ "\<C-s>": ['SB', 'S-BLOCK'],
+    \ 'i':      ['I', 'INSERT'],
+    \ 'R':      ['R', 'REPLACE'],
+    \ 'c':      ['C', 'COMMAND'],
+    \ 't':      ['T', 'TERMINAL']
+    \ }
+  " * }}}
+  " * main {{{
+  let m = mode(0)
+  let is_wide = winwidth(0) > 70
+  let sep = ' ▏'
 
+  let s = ''
+  let s .= ' ' .. MODE_TITLES[m][is_wide]
+  let s .= sep
+  let s .= (m ==# 't') ? '<terminal>' : '%f'
+  let s .= ' '
+  let s .= '%y'
+  let s .= '%m'
+  let s .= '%r'
+  let s .= '%w'
+  let s .= '%='
+  let s .= is_wide ? (&fenc?&fenc:&enc) : ''
+  let s .= is_wide ? ' ' : ''
+  let s .= is_wide ? &ff : ''
+  let s .= sep
+  let s .= '%l:%c '
+  let s .= is_wide ? '%p%% ' : ''
+
+  return s
+  " * }}}
+endfunction " }}}
+set stl=%{%g:PureStatusLine()%}
+
+" rich statusline {{{
 let g:statusline_config = {}
 let g:statusline_config.mode_title = {
   \ 'n':      ['N', 'NORMAL'],
@@ -419,7 +463,7 @@ function! g:Init() abort " {{{
     autocmd Bufleave,WinLeave * setlocal statusline=%!g:CreateInactiveStatusLine()
   augroup END
 endfunction " }}}
-
+" * * * }}}
 " * * }}}
 " * * Foldtext: {{{
 function! MyFoldText() abort
@@ -591,6 +635,11 @@ vnoremap <silent> <S-Down> "zx"zp`[V`]
 " nmap << <<<
         vmap >> >>gv>
 vmap << <<gv
+
+if has('gui_running')
+  let g:vimrc_guisize = 1
+  nnoremap <silent> <expr> <F11> g:vimrc_winsize ? ":simalt ~x\<CR>" : ":simalt ~r\<CR>"
+endif
 " * * }}}
 " * * [explorer]: {{{
 nmap <leader>e [explorer]
