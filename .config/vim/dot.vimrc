@@ -121,8 +121,11 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
     " lambdalisue/fern.vim {{{
     let g:vimrc_explorer = 'fern'
     let g:fern#default_hidden = 1
-    " fern-preview.vim 's mapping
     function! s:fern_settings() abort
+      " https://github.com/lambdalisue/fern.vim/issues/270#issuecomment-740257133
+      setlocal nornu nonu nolbr signcolumn=no foldcolumn=0
+
+      " fern-preview.vim 's mapping
       nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
       nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
       nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
@@ -137,7 +140,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
 
     augroup fern-settings
       autocmd!
-      autocmd FileType fern call s:fern_settings() | setlocal nonumber
+      autocmd FileType fern call s:fern_settings()
     augroup END
     " }}}
     call jetpack#add('lambdalisue/fern-renderer-nerdfont.vim')
@@ -150,7 +153,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('markonm/traces.vim')
   call jetpack#add('machakann/vim-highlightedyank')
   call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
-  call jetpack#add('cormacrelf/vim-colors-github') " colorscheme
+  " call jetpack#add('cormacrelf/vim-colors-github') " colorscheme
   call jetpack#add('tpope/vim-commentary')
 call jetpack#end()
 
@@ -163,6 +166,7 @@ endif
 " * * Local Plugin: {{{
 set rtp+=~/vim-dev/stoneline.vim
 set rtp+=~/vim-dev/github-theme-mini.vim
+set rtp+=~/vim-dev/vim-github-theme
 " let g:stoneline.feat_mode_hl_termansicolors = 1
 " * * }}}
 " * }}}
@@ -271,6 +275,7 @@ set fillchars+=vert:│ " U+2502
 set fillchars+=foldclose:>
 set fillchars+=foldopen:┌ " U+250C
 set fillchars+=foldsep:│ " U+2502
+set fillchars+=eob:\ 
 " * * }}}
 " * * StatusLine: {{{
 set laststatus=2
@@ -432,6 +437,95 @@ function! MyFoldText() abort
 endfunction 
 set foldtext=MyFoldText()
 " * * }}}
+" * * MyColorScheme: {{{
+function! s:github_dark() abort " {{{
+  hi Function guifg=#d2a8ff guibg=NONE guisp=NONE gui=NONE
+  hi Keyword guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  " QuickFixLine
+  hi vimSynType guifg=#79c0ff guibg=NONE guisp=NONE gui=NONE
+  hi Exception guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi! link lCursor Cursor
+  " SpellLocal
+  " SpellCap
+  hi StatusLineNC guifg=#8b949e guibg=#21262d guisp=NONE gui=NONE
+  hi Comment guifg=#8b949e guibg=NONE guisp=NONE gui=NONE
+  hi Question guifg=#d29922 guibg=NONE guisp=NONE gui=NONE
+  hi vimOption guifg=#79c0ff guibg=NONE guisp=NONE gui=NONE
+  " ModeMsg
+  hi vimEnvvar guifg=#79c0ff guibg=NONE guisp=NONE gui=NONE
+  " SpellBad
+  hi vimGroupName guifg=#79c0ff guibg=NONE guisp=NONE gui=NONE
+  " VisualNOS
+  hi! link vimUserFunc Function
+  hi WarningMsg guifg=#d29922 guibg=NONE guisp=NONE gui=NONE
+  " PmenuSbar
+  hi FoldColumn guifg=#bc8cff guibg=#231f39 guisp=NONE gui=NONE
+  hi Cursor guifg=NONE guibg=#484f58 guisp=NONE gui=NONE
+  hi DiffDelete guifg=NONE guibg=#301a1f guisp=NONE gui=NONE
+  hi Visual guifg=NONE guibg=#2f2a1e guisp=NONE gui=NONE
+  hi WildMenu guifg=NONE guibg=#1f6feb guisp=NONE gui=NONE
+  hi CursorLine guifg=NONE guibg=#21262d guisp=NONE gui=NONE
+  hi CursorLineNr guifg=#f0f6fc guibg=#21262d guisp=NONE gui=NONE
+  hi Special guifg=#d2a8ff guibg=NONE guisp=NONE gui=NONE
+  hi TabLineFill guifg=NONE guibg=#161b22 guisp=NONE gui=NONE
+  hi Terminal guifg=#c9d1d9 guibg=#0d1117 guisp=NONE gui=NONE
+  hi PmenuSel guifg=#58a6ff guibg=#21262d guisp=NONE gui=NONE
+  " MoreMsg
+  hi LineNr guifg=#8b949e guibg=#161b22 guisp=NONE gui=NONE
+  hi Label guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi! link CursorLineSign SignColumn
+  " ScrollBar
+  hi Statement guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi! link CursorIM Cursor
+  hi CursorLineFold guifg=#d2a8ff guibg=#493771 guisp=NONE gui=NONE
+  " SpecialKey
+  " Directory
+  hi DiffAdd guifg=NONE guibg=#12261e guisp=NONE gui=NONE
+  hi Identifier guifg=#f0f6fc guibg=NONE guisp=NONE gui=NONE
+  hi DiffChange guifg=NONE guibg=#272115 guisp=NONE gui=NONE
+  hi! link CurSearch Search
+  hi ErrorMsg guifg=#f85149 guibg=NONE guisp=NONE gui=NONE
+  hi TabLine guifg=#8b949e guibg=#161b22 guisp=NONE gui=NONE
+  hi vimHiAttrib guifg=NONE guibg=NONE guisp=NONE gui=NONE
+  hi EndOfBuffer guifg=#161b22 guibg=#161b22 guisp=NONE gui=NONE
+  " PmenuThumb
+  hi Type guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi TabLineSel guifg=#f0f6fc guibg=#484f58 guisp=NONE gui=NONE
+  hi Delimiter guifg=#f0f6fc guibg=NONE guisp=NONE gui=NONE
+  " Menu
+  hi Repeat guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi DiffText guifg=NONE guibg=#13233a guisp=NONE gui=NONE
+  hi String guifg=#a5d6ff guibg=NONE guisp=NONE gui=NONE
+  hi VertSplit guifg=#30363d guibg=#161b22 guisp=NONE gui=NONE
+  hi Error guifg=#f85149 guibg=NONE guisp=NONE gui=NONE
+  hi Preproc guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  " Number
+  hi Pmenu guifg=#8b949e guibg=#161b22 guisp=NONE gui=NONE
+  " Conceal
+  hi! link CursorColumn CursorLine
+  hi Title guifg=#d2a8ff guibg=NONE guisp=NONE gui=NONE
+  hi NonText guifg=#8b949e guibg=#161b22 guisp=NONE gui=NONE
+  hi Constant guifg=#79c0ff guibg=NONE guisp=NONE gui=NONE
+  hi SignColumn guifg=#8b949e guibg=#161b22 guisp=NONE gui=NONE
+  hi StatusLine guifg=#f0f6fc guibg=#484f58 guisp=NONE gui=NONE
+  " SpellRare
+  hi Operator guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi Search guifg=NONE guibg=#533d12 guisp=NONE gui=NONE
+  hi ToDo guifg=#d29922 guibg=NONE guisp=NONE gui=NONE
+  hi MatchParen guifg=NONE guibg=#1f6feb guisp=NONE gui=NONE
+  hi! link StatusLineTerm StatusLine
+  hi Normal guifg=#f0f6fc guibg=#161b22 guisp=NONE gui=NONE
+  hi Conditional guifg=#ff7b72 guibg=NONE guisp=NONE gui=NONE
+  hi! link StatusLineTermNC StatusLineNC
+  " Float
+  hi IncSearch guifg=NONE guibg=NONE guisp=NONE gui=reverse
+  hi Folded guifg=#f0f6fc guibg=#231f39 guisp=NONE gui=NONE
+  " Boolean
+  " Tooltip
+  " ColorColumn
+  " Character
+endfunction " }}}
+" * * }}}
 " * }}}
 " * Commnad: {{{
 " * * :HighlightInfo {{{
@@ -493,8 +587,8 @@ nnoremap <silent> <S-Down> "zdd"zp
 vnoremap <silent> <S-Up> "zx<Up>"zP`[V`]
 vnoremap <silent> <S-Down> "zx"zp`[V`]
 
-nmap >> >>>
-nmap << <<<
+" nmap >> >>>
+" nmap << <<<
         vmap >> >>gv>
 vmap << <<gv
 " * * }}}
@@ -655,7 +749,9 @@ set background=dark
 try
   " call g:SetMyColorScheme()
   " colorscheme kanagawa-mini
-  colorscheme github-mini
+  colorscheme github
+  " colorscheme github-mini
+  " call s:github_dark()
 catch
   colorscheme desert
 endtry
