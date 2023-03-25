@@ -37,8 +37,6 @@ function! s:vimrc.GetHome() " {{{
 endfunction " }}}
 
 let g:home = s:vimrc.GetHome()
-" set rtp+=~/vim-dev/vim-xvi,~/vim-dev/kanagawa-mini.vim
-" set rtp+=~/vim-dev/stoneline.vim
 " * }}}
 " * XDG Based Directory: {{{
 " $XDG_CONFIG_HOME/ <- $HOME/.config
