@@ -5,7 +5,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 # ls
-alias ls='ls -1 --sort=extension --color=auto'
+alias ls='ls -1 -F --sort=extension --color=auto'
 alias ll='ls -lh'
 alias la='ls -la'
 
@@ -13,7 +13,9 @@ alias la='ls -la'
 if [[ $(command -v exa) ]]; then
   alias exa='exa -1 -F --sort=extension'
   alias ex='exa'
-  alias ez='exa -ahl --icons'
+  alias el='exa -hl --icons'
+  alias ea='exa -ahl --icons'
+  alias ea='exa -ahl --icons'
   alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
   alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
   alias lta=eta
