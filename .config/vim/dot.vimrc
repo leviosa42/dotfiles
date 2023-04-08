@@ -321,8 +321,8 @@ function! g:PureStatusLine() abort " {{{
   let s .= is_wide ? ' ' : ''
   let s .= is_wide ? &ff : ''
   let s .= sep
-  let s .= '%l:%c '
-  let s .= is_wide ? '%p%% ' : ''
+  let s .= is_wide ? '%l:%c ' : ''
+  let s .= '%p%% '
 
   return s
   " * }}}
@@ -796,6 +796,10 @@ set background=dark
 try
   " call g:SetMyColorScheme()
   " colorscheme kanagawa-mini
+  let g:github = {
+    \ 'theme': 'dark_colorbind',
+    \ 'enable_termcolors': 1
+    \ }
   colorscheme github
   " colorscheme github-mini
   " call s:github_dark()
