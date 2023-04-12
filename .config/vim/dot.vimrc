@@ -797,7 +797,7 @@ try
   " call g:SetMyColorScheme()
   " colorscheme kanagawa-mini
   let g:github = {
-    \ 'theme': 'dark_colorbind',
+    \ 'theme': 'dark',
     \ 'enable_termcolors': 1
     \ }
   colorscheme github
