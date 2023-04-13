@@ -150,8 +150,10 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('machakann/vim-sandwich')
   call jetpack#add('markonm/traces.vim')
   call jetpack#add('machakann/vim-highlightedyank')
-  call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
-  " call jetpack#add('cormacrelf/vim-colors-github') " colorscheme
+  call jetpack#add('tomasr/molokai') " colorscheme
+  call jetpack#add('AlessandroYorba/Sierra') " colorscheme
+    let g:sierra_Mignight = 1
+  " call jetpack#add('cormacrelfm/vim-colors-github') " colorscheme
   call jetpack#add('tpope/vim-commentary')
   " call jetpack#add('itchyny/lightline.vim')
 call jetpack#end()
