@@ -18,9 +18,9 @@ export PS1='\[\e[1;33m\]\w\[\e[00m\]\$ '
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # for git-bash
-export PATH=`cygpath -u $PATH`
+#export PATH=`cygpath -u $PATH`
 
 source "$XDG_CONFIG_HOME/sh/env.sh"
 source "$XDG_CONFIG_HOME/sh/aliases.sh"
 
-eval "$(starship init bash)"
+#eval "$(starship init bash)"
