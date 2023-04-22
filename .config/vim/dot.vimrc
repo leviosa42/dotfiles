@@ -154,6 +154,9 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('AlessandroYorba/Sierra') " colorscheme
     let g:sierra_Mignight = 1
   " call jetpack#add('cormacrelfm/vim-colors-github') " colorscheme
+  call jetpack#add('leviosa42/vim-github-theme') " colorscheme
+  call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
+  call jetpack#add('sonph/onehalf', {'rtp': 'vim'}) " colorscheme
   call jetpack#add('tpope/vim-commentary')
   " call jetpack#add('itchyny/lightline.vim')
 call jetpack#end()
