@@ -115,6 +115,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('tani/vim-jetpack', {'opt': 1}) "bootstrap
   call jetpack#add('vim-jp/vimdoc-ja') " help@ja
   call jetpack#add('sheerun/vim-polyglot') " lang packs
+  call jetpack#add('pprovost/vim-ps1') " lang for ps1
   call jetpack#add('lambdalisue/fern.vim') " file explorer
     " lambdalisue/fern.vim {{{
     let g:vimrc_explorer = 'fern'
