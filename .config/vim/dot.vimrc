@@ -178,6 +178,7 @@ set rtp+=~/vim-dev/vim-github-theme
 " * General: {{{
 set noshellslash
 set novisualbell
+set modeline
 " * * Formats: {{{
 set fileformat=unix
 set fileformats=unix,dos
@@ -628,7 +629,7 @@ nnoremap <Leader>h :<C-u>setl hlsearch!<CR>:setl hlsearch?<CR>
 
 nnoremap x "_x
 
-inoremap <C-Tab> <Tab>
+inoremap <S-Tab> <Tab>
 
 nnoremap <silent> <S-Up> "zdd<Up>"zP
 nnoremap <silent> <S-Down> "zdd"zp
