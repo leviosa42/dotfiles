@@ -35,6 +35,8 @@ nyagos.envadd("PATH",
     )
 -- }}}
 -- Alias: {{{
+nyagos.alias[".."] = "cd .."
+
 alias({
     ls = "__ls__ -oF",
     ll = "ls -l",
