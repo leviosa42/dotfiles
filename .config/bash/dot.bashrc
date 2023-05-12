@@ -15,12 +15,24 @@ export PS1='\[\e[1;33m\]\w\[\e[00m\]\$ '
 #  echo $VIMRUNTIME
 #fi
 
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/go/bin:$PATH"
+fi
+
+alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
+
 export XDG_CONFIG_HOME="$HOME/.config"
+
+export DOTFILES="$HOME/dotfiles"
 
 # for git-bash
 #export PATH=`cygpath -u $PATH`
 
-source "$XDG_CONFIG_HOME/sh/env.sh"
-source "$XDG_CONFIG_HOME/sh/aliases.sh"
+source "$DOTFILES/.config/sh/env.sh"
+source "$DOTFILES/.config/sh/aliases.sh"
 
 #eval "$(starship init bash)"
