@@ -31,7 +31,8 @@ set({
     EDITOR = ext('vim') or ext('notepad')
 })
 nyagos.envadd("PATH",
-    "%HOME%\\scoop\\shims"
+    "%HOME%\\scoop\\shims",
+    "%USERPROFILE%\\go\\bin"
     )
 -- }}}
 -- Alias: {{{
@@ -46,6 +47,7 @@ alias({
     clear = "__cls__",
     clc = "__cls__",
     sudo = "su",
+    grep = "jvgrep",
     renya = ("lua_f ~\\.nyagos")
 })
 if nyagos.which('vim') then
