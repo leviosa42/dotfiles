@@ -208,6 +208,7 @@ augroup filetype_settings
   au BufNewFile,BufRead *.sh    set filetype=sh
   au BufNewFile,BufRead *.bash  set filetype=sh
   au BufNewFile,BufRead *.ash   set filetype=sh
+  au BufNewFile,BufRead *.plt   set filetype=gnuplot
 augroup END
 " * * }}}
 " * }}}
@@ -240,6 +241,10 @@ augroup filetype_indent_settings
   au FileType js     setl noet ts=4 sts=-1 sw=0
   au FileType python setl et   ts=4 sts=-1 sw=0
   au FileType sh     setl et   ts=2 sts=-1 sw=0
+augroup END
+
+augroup filetype_cms_settings
+  au FileType gnuplot setl cms=#\ %s
 augroup END
 " * * * }}}
 " * * }}}
