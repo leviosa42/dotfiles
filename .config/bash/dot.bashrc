@@ -7,9 +7,26 @@
 #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
 
 set_ps1() {
-    local shell_name=$(basename $0)
+    #   COLOR      FG   |   BG
+    # --------------------------
+    # black .... \e[30m | \e[40m
+    # red ...... \e[31m | \e[41m
+    # green .... \e[32m | \e[42m
+    # yellow ... \e[33m | \e[43m
+    # blue  .... \e[34m | \e[44m
+    # magenta .. \e[35m | \e[45m
+    # cyan ..... \e[36m | \e[46m
+    # white .... \e[37m | \e[47m
 
-    export PS1=($shell_name $SHLVL)'\[\e[1;33m\]\w\[\e[00m\]\$ '
+    # reset .... \e[00m
+
+    local yel="$(echo -e '\[\e[33m\]')"
+    local cya="$(echo -e '\[\e[36m\]')"
+    local res="$(echo -e '\[\e[00m\]')"
+    # \s .. shell name
+
+    # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
+    export PS1="(${cya}\s ${SHLVL}${res})${yel}\w${res}\$ "
 }
 set_ps1
 
@@ -41,3 +58,6 @@ source "$DOTFILES/.config/sh/env.sh"
 source "$DOTFILES/.config/sh/aliases.sh"
 
 #eval "$(starship init bash)"
+
+echo ".bashrc is loaded!"
+
