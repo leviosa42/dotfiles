@@ -6,7 +6,12 @@
 
 #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
 
-export PS1='\[\e[1;33m\]\w\[\e[00m\]\$ '
+set_ps1() {
+    local shell_name=$(basename $0)
+
+    export PS1=($shell_name $SHLVL)'\[\e[1;33m\]\w\[\e[00m\]\$ '
+}
+set_ps1
 
 #if [[ -v MSYSTEM ]]; then
 #  export VIM=/mingw64/share/vim
