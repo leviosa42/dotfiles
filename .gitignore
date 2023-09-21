@@ -5,6 +5,8 @@
 !.gitignore
 !.gitkeep
 
+!install.sh
+
 !/.config
 !/.config/bash
 !/.config/bash/*
