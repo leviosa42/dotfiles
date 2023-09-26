@@ -1,10 +1,6 @@
 -- ref: DeeR's .nyagos. > https://github.com/DeaR/dotfiles/blob/master/.nyagos
 print("Start loading .nyagos")
 
-if nyagos.env.IS_PORTABLE_DEV_ENV == "TRUE" then
-    print("!!On Portable Dev Enviroment!!")
-    print("FINISH LOADING .NYAGOS")
-end
 -- Pre Init: {{{
 -- Util Functions: -- {{{
 local function mkdirp(path)
