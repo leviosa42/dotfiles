@@ -9,15 +9,15 @@ alias ls='ls -1 -F --sort=extension --color=auto'
 alias ll='ls -lh'
 alias la='ls -la'
 
-# exa
-if [[ $(command -v exa) ]]; then
-  alias exa='exa -1 -F --sort=extension'
-  alias ex='exa'
-  alias el='exa -hl --icons'
-  alias ea='exa -ahl --icons'
-  alias ea='exa -ahl --icons'
-  alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
-  alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+# eza
+# https://github.com/eza-community/eza
+if [[ $(command -v eza) ]]; then
+  alias eza='eza -1 -F --sort=extension --time-style=long-iso'
+  alias ex='eza'
+  alias el='eza -hl'
+  alias ea='eza -ahl'
+  alias et='eza -T -L 3 -a -I "node_modules|.git|.cache" '
+  alias eta='eza -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
   alias lta=eta
   alias l='clear && ls'
 fi

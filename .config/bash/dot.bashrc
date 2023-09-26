@@ -6,7 +6,13 @@
 
 #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
 
+echo "=== START  LOADING .bashrc ==="
+
+export PROMPT_COMMAND=set_ps1
+
 set_ps1() {
+    local exst=$? # exit status
+
     #   COLOR      FG   |   BG
     # --------------------------
     # black .... \e[30m | \e[40m
@@ -20,13 +26,27 @@ set_ps1() {
 
     # reset .... \e[00m
 
+    local red="$(echo -e '\[\e[31m\]')"
     local yel="$(echo -e '\[\e[33m\]')"
     local cya="$(echo -e '\[\e[36m\]')"
     local res="$(echo -e '\[\e[00m\]')"
     # \s .. shell name
 
+    # shell_name
+    local shell_name='\s'
+    # exitcolor
+    if [[ $exst == 0 ]]; then
+      local exitcolor=$cya
+    else
+      local exitcolor=$red
+    fi
+
+    if [ -n $WSL_DISTRO_NAME ]; then
+        shell_name="wsl:${shell_name}"
+    fi
+
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
-    export PS1="(${cya}\s ${SHLVL}${res})${yel}\w${res}\$ "
+    export PS1="(${exitcolor}${shell_name} ${SHLVL}${res})${yel}\w${res}:\$ "
 }
 set_ps1
 
@@ -59,5 +79,5 @@ source "$DOTFILES/.config/sh/aliases.sh"
 
 #eval "$(starship init bash)"
 
-echo ".bashrc is loaded!"
+echo "=== FINISH LOADING .bashrc ==="
 
