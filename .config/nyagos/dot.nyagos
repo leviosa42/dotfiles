@@ -7,8 +7,8 @@ local function mkdirp(path)
 end
 
 local function ext(fname)
-  local p = nyagos.which(fname)
-  return p and nyagos.stat(p).name or fname
+    local p = nyagos.which(fname)
+    return p and nyagos.stat(p).name or fname
 end
 
 -- }}}
@@ -16,9 +16,9 @@ local home = nyagos.getenv("HOME") or nyagos.getenv("USERPROFILE")
 set({
     HOME = home,
     XDG_CONFIG_HOME = nyagos.getenv("XDG_CONFIG_HOME") or (home .. "\\.config"),
-    XDG_CACHE_HOME  = nyagos.getenv("XDG_CACHE_HOME")  or (home .. "\\.cache"),
-    XDG_DATA_HOME   = nyagos.getenv("XDG_DATA_HOME")   or (home .. "\\.local\\share"),
-    XDG_STATE_HOME = nyagos.getenv("XDG_STATE_HOME")   or (home .. "\\.local\\state")
+    XDG_CACHE_HOME = nyagos.getenv("XDG_CACHE_HOME") or (home .. "\\.cache"),
+    XDG_DATA_HOME = nyagos.getenv("XDG_DATA_HOME") or (home .. "\\.local\\share"),
+    XDG_STATE_HOME = nyagos.getenv("XDG_STATE_HOME") or (home .. "\\.local\\state")
 })
 mkdirp(nyagos.env.XDG_CONFIG_HOME)
 mkdirp(nyagos.env.XDG_CACHE_HOME)
@@ -30,10 +30,8 @@ set({
     SHELL = (string.gsub(nyagos.exe, '\\', '/')),
     EDITOR = ext('vim') or ext('notepad')
 })
-nyagos.envadd("PATH",
-    "%HOME%\\scoop\\shims",
-    "%USERPROFILE%\\go\\bin"
-    )
+nyagos.envadd("PATH", -- "%HOME%\\scoop\\shims",
+"%USERPROFILE%\\go\\bin", "%USERPROFILE%\\AppData\\Local\\Microsoft\\WinGet\\Links")
 -- }}}
 -- Alias: {{{
 nyagos.alias[".."] = "cd .."
@@ -72,26 +70,25 @@ local function ansicolor(ansiesc, text)
     return (ansiesc .. text)
 end
 if true then
+    prompter = nyagos.prompt
     nyagos.prompt = function(template)
-      --local user = nyagos.getenv('USERNAME')
-      --local host = nyagos.getenv('USERDOMAIN')
-      --local home = nyagos.getenv('HOME') or nyagos.getenv('USERPROFILE')
-      --local pat  = '^' .. home:gsub('[().%%+-*?%[%]^$]', '%%%0')
-      --local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
-      local nyan = nyagos.getenv("ERRORLEVEL") == "0" and '$e[36m=^..^=' or '$e[31m=^xx^='
+        -- local user = nyagos.getenv('USERNAME')
+        -- local host = nyagos.getenv('USERDOMAIN')
+        -- local home = nyagos.getenv('HOME') or nyagos.getenv('USERPROFILE')
+        -- local pat  = '^' .. home:gsub('[().%%+-*?%[%]^$]', '%%%0')
+        -- local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
+        local nyan = nyagos.getenv("ERRORLEVEL") == "0" and '$e[36m=^..^=' or '$e[31m=^xx^='
         local root = nyagos.elevated() and '#' or '$$'
-        return nyagos.default_prompt(
-            '$e[39;0m' .. nyan .. '$e[32m' .. '[$p]' .. '$e[39;0m:' .. root .. ' ')
-            --'[$p]:' .. root .. '$s')
+        return nyagos.default_prompt('$e[39;0m' .. nyan .. '$e[32m' .. '[$p]' .. '$e[39;0m:' .. root .. ' ')
     end
 else
-    nyagos.env.prompt='$L'.. nyagos.getenv('COMPUTERNAME') .. ':$P$G$_$$$s'
+    nyagos.env.prompt = '$L' .. nyagos.getenv('COMPUTERNAME') .. ':$P$G$_$$$s'
     nyagos.prompt = function(this)
         local title = "hello" -- "NYAGOS - ".. nyagos.getwd():gsub('\\','/')
-        return nyagos.default_prompt('$e[40;36;0m'..this..'$e[37;0m' .. '$e[m', title)
+        return nyagos.default_prompt('$e[40;36;0m' .. this .. '$e[0m', title)
     end
 end
--- }
+-- }}}
 print("Finished loading .nyagos")
 
 -- vim: ft=lua expandtab ts=4 sts=-1 sw=0 foldmethod=marker cms=--\ %s:
