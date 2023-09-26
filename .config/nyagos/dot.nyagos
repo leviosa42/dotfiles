@@ -38,6 +38,8 @@ nyagos.envadd("PATH",
 )
 
 if nyagos.env.IS_PORTABLE_DEV_ENV ~= "TRUE" then
+    print("!!! Not Portable Dev Env !!!")
+    print("Exclude values including D: and E: from PATH")
     nyagos.envdel("PATH", "D:", "E:")
 end
 
@@ -88,7 +90,7 @@ if true then
         -- local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
         local nyan = nyagos.getenv("ERRORLEVEL") == "0" and '$e[36m=^..^=' or '$e[31m=^xx^='
         local root = nyagos.elevated() and '#' or '$$'
-        return nyagos.default_prompt('$e[39;0m' .. nyan .. '$e[32m' .. '[$p]' .. '$e[39;0m:' .. root .. ' ')
+        return nyagos.default_prompt('$e[39;0m' .. nyan .. '$e[33m' .. '$s$p' .. '$e[39;0m:' .. root .. ' ')
     end
 else
     nyagos.env.prompt = '$L' .. nyagos.getenv('COMPUTERNAME') .. ':$P$G$_$$$s'
