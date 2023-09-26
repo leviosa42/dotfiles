@@ -1,5 +1,10 @@
 -- ref: DeeR's .nyagos. > https://github.com/DeaR/dotfiles/blob/master/.nyagos
 print("Start loading .nyagos")
+
+if nyagos.env.IS_PORTABLE_DEV_ENV == "TRUE" then
+    print("!!On Portable Dev Enviroment!!")
+    print("FINISH LOADING .NYAGOS")
+end
 -- Pre Init: {{{
 -- Util Functions: -- {{{
 local function mkdirp(path)
@@ -30,8 +35,16 @@ set({
     SHELL = (string.gsub(nyagos.exe, '\\', '/')),
     EDITOR = ext('vim') or ext('notepad')
 })
-nyagos.envadd("PATH", -- "%HOME%\\scoop\\shims",
-"%USERPROFILE%\\go\\bin", "%USERPROFILE%\\AppData\\Local\\Microsoft\\WinGet\\Links")
+nyagos.envadd("PATH",
+    -- "%HOME%\\scoop\\shims",
+    "%USERPROFILE%\\go\\bin",
+    "%USERPROFILE%\\AppData\\Local\\Microsoft\\WinGet\\Links"
+)
+
+if nyagos.env.IS_PORTABLE_DEV_ENV ~= "TRUE" then
+    nyagos.envdel("PATH", "D:", "E:")
+end
+
 -- }}}
 -- Alias: {{{
 nyagos.alias[".."] = "cd .."
