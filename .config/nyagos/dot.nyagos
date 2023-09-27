@@ -1,5 +1,5 @@
 -- ref: DeeR's .nyagos. > https://github.com/DeaR/dotfiles/blob/master/.nyagos
-print("Start loading .nyagos")
+print("[.NYAGOS] START  LOADING")
 
 -- Pre Init: {{{
 -- Util Functions: -- {{{
@@ -39,6 +39,8 @@ nyagos.envadd("PATH",
 )
 
 if nyagos.env.IS_PORTABLE_DEV_ENV ~= "TRUE" then
+    print("!!! Not Portable Dev Env !!!")
+    print("Exclude values including D: and E: from PATH")
     nyagos.envdel("PATH", "D:", "E:")
 end
 
@@ -46,10 +48,24 @@ end
 -- Alias: {{{
 nyagos.alias[".."] = "cd .."
 
+if nyagos.which("eza") then
+    alias({
+        __eza__ = ext("eza"),
+        eza = "__eza__ --color=automatic -1F --group-directories-first -h --git --time-style=long-iso",
+        ls = "eza",
+        ll = "ls -l",
+        la = "ls -laa",
+        lt = "eza -a -T -L=3 -I='node_modules|.git|.cache'"
+    })
+else
+    alias({
+        ls = "__ls__ -oF",
+        ll = "ls -l",
+        la = "ls -al"
+    })
+end
+
 alias({
-    ls = "__ls__ -oF",
-    ll = "ls -l",
-    la = "ls -al",
     e = nyagos.getenv("EDITOR"),
     q = "__exit__",
     clear = "__cls__",
@@ -58,6 +74,8 @@ alias({
     grep = "jvgrep",
     renya = ("lua_f ~\\.nyagos")
 })
+nyagos.alias[".nyagos"] = nyagos.env.EDITOR .. " ~/.nyagos && lua_f ~/.nyagos"
+
 if nyagos.which('vim') then
     alias({
         v = ext('vim'),
@@ -89,7 +107,7 @@ if true then
         -- local cwd  = nyagos.netdrivetounc(nyagos.getwd()):gsub(pat, '~')
         local nyan = nyagos.getenv("ERRORLEVEL") == "0" and '$e[36m=^..^=' or '$e[31m=^xx^='
         local root = nyagos.elevated() and '#' or '$$'
-        return nyagos.default_prompt('$e[39;0m' .. nyan .. '$e[32m' .. '[$p]' .. '$e[39;0m:' .. root .. ' ')
+        return nyagos.default_prompt('$e[39;0m' .. nyan .. '$e[33m' .. '$s$p' .. '$e[39;0m:' .. root .. ' ')
     end
 else
     nyagos.env.prompt = '$L' .. nyagos.getenv('COMPUTERNAME') .. ':$P$G$_$$$s'
@@ -99,7 +117,7 @@ else
     end
 end
 -- }}}
-print("Finished loading .nyagos")
+print("[.NYAGOS] FINISH LOADING")
 
 -- vim: ft=lua expandtab ts=4 sts=-1 sw=0 foldmethod=marker cms=--\ %s:
 
