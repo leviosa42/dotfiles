@@ -54,7 +54,7 @@ if nyagos.which("eza") then
         ls = "eza",
         ll = "ls -l",
         la = "ls -laa",
-        lt = "eza -a -T -L=3 -I"
+        lt = "eza -a -T -L=3 -I='node_modules|.git|.cache'"
     })
 else
     alias({
