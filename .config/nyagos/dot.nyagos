@@ -73,6 +73,8 @@ alias({
     grep = "jvgrep",
     renya = ("lua_f ~\\.nyagos")
 })
+nyagos.alias[".nyagos"] = nyagos.env.EDITOR .. " ~/.nyagos && lua_f ~/.nyagos"
+
 if nyagos.which('vim') then
     alias({
         v = ext('vim'),
