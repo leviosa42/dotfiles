@@ -29,7 +29,8 @@ mkdirp(nyagos.env.XDG_STATE_HOME)
 -- Enviroment Variable: {{{
 set({
     SHELL = (string.gsub(nyagos.exe, '\\', '/')),
-    EDITOR = ext('vim') or ext('notepad')
+    EDITOR = ext('vim') or ext('notepad'),
+    -- PROFILE = "Invoke-Expression (&scoop-search --hook)"
 })
 nyagos.envadd("PATH",
     -- "%HOME%\\scoop\\shims",
