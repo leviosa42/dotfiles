@@ -1,26 +1,65 @@
 $dir_home = $env:USERPROFILE
-$dir_dotfiles = Join-Path $dir_home ".dotfiles"
+$dir_dotfiles = Join-Path $dir_home "dotfiles"
+$url_dotfiles = "https://github.com/leviosa42/dotfiles.git"
 
-# ====================New-Symlink
+# ====================
 # Utilities
 # ====================
+function Write-Log([string]$message) {
+    Write-Host "[LOG] $message" -ForegroundColor Gray
+}
+function Write-Info([string]$message) {
+    Write-Host "[INFO] $message" -ForegroundColor Cyan
+}
+
+function Write-Success([string]$message) {
+    Write-Host "[SUCCSS] $message" -ForegroundColor Green
+}
+
+function Write-Warning([string]$message) {
+    Write-Host "[WARN] $message" -ForegroundColor Yellow
+}
+
+function Write-Error([string]$message) {
+    Write-Host "[ERR] $message" -ForegroundColor Red
+}
+
+
 function New-Symlink([string]$target, [string]$link) {
     if (Test-Path $link) {
+        Write-Warning "Remove-Item $link"
         Remove-Item $link
     }
+    Write-Log "New-Symlink: $link -> $target"
     New-Item -ItemType SymbolicLink -Path $link -Value $target > $null
 }
 
+function Set-EnvironmentVariable([string]$name, [string]$value) {
+    Write-Log "Set-EnvironmentVariable: $name  $value"
+    [Environment]::SetEnvironmentVariable($name, $value, "User")
+    # Set-Variable -Name $name -Value $value -Scope Script
+}
+
+function New-Directory([string]$path) {
+    if (!(Test-Path $path)) {
+        Write-Log "New-Directory: $path"
+        New-Item -ItemType Directory -Path $path > $null
+    }
+}
+
 function Install-WinGetPackage([string]$package) {
+    Write-Log "Install-WinGetPackage: $package"
     winget install -e --no-upgrade --accept-source-agreements $package 
 }
 
 function Install-ScoopPackage([string]$package) {
+    Write-Log "Install-ScoopPackage: $package"
     scoop install $package
 }
 
 # check winget is installed
 if (Get-Command winget -ErrorAction SilentlyContinue) {
+    Write-Info "winget is installed"
     # Microsoft.PowerToys
     Install-WinGetPackage("Microsoft.PowerToys")
     # Microsoft.PowerShell
@@ -34,7 +73,7 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     # Git.GitHub
     Install-WinGetPackage("Git.GitHub")
 } else {
-    Write-Host "winget is not installed"
+    Write-Error "winget is not installed"
     exit
 }
 
@@ -43,7 +82,7 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
 # ====================
 # check dotfiles is cloned
 if (!(Test-Path $dir_dotfiles)) {
-    Write-Host "Cloning dotfiles..."
+    Write-Info "git clone $url_dotfiles $dir_dotfiles"
     git clone https://github.com/leviosa42/dotfiles.git $dir_dotfiles
 }
 # dotfiles\.config -> %HOME%\.config
@@ -60,6 +99,22 @@ if (!(Get-Command scoop -ErrorAction SilentlyContinue)) {
     # bootstrap scoop
     iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 }
+
+# ====================
+# Environment Variables
+# ====================
+# XDG_CONFIG_HOME
+Set-EnvironmentVariable("XDG_CONFIG_HOME", "$dir_home\.config")
+# XDG_CACHE_HOME
+Set-EnvironmentVariable("XDG_CACHE_HOME", "$dir_home\.cache")
+# XDG_DATA_HOME
+Set-EnvironmentVariable("XDG_DATA_HOME", "$dir_home\.local\share")
+New-Directory("$dir_home\.local\share")
+# XDG_STATE_HOME
+Set-EnvironmentVariable("XDG_STATE_HOME", "$dir_home\.local\state")
+New-Directory("$dir_home\.local\state")
+# VIMINIT
+Set-EnvironmentVariable("VIMINIT", 'if !has("nvim") | so $XDG_CONFIG_HOME\vim\dot.vimrc | else | so $XDG_CONFIG_HOME\nvim\init.vim | endif')
 
 # 7zip
 Install-ScoopPackage("7zip")
