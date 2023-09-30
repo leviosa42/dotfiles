@@ -2,6 +2,7 @@ $dir_home = $env:USERPROFILE
 $dir_dotfiles = Join-Path $dir_home "dotfiles"
 $url_dotfiles = "https://github.com/leviosa42/dotfiles.git"
 
+
 # ====================
 # Utilities
 # ====================
@@ -82,6 +83,30 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     exit
 }
 
+
+# ====================
+# Environment Variables
+# ====================
+# XDG_Base_Directory
+Set-EnvironmentVariable "XDG_CONFIG_HOME" "$dir_home\.config"
+Set-EnvironmentVariable "XDG_CACHE_HOME" "$dir_home\.cache"
+Set-EnvironmentVariable "XDG_DATA_HOME" "$dir_home\.local\share"
+New-Directory "$dir_home\.local\share"
+Set-EnvironmentVariable "XDG_STATE_HOME" "$dir_home\.local\state"
+New-Directory "$dir_home\.local\state"
+# vim
+Set-EnvironmentVariable "VIMINIT"  "if !has('nvim') | so `$XDG_CONFIG_HOME\vim\dot.vimrc | else | so `$XDG_CONFIG_HOME\nvim\init.vim | endif"
+# ipython/jupiter
+Set-EnvironmentVariable "IPYTHONDIR"  "$env:XDG_CONFIG_HOME\jupyter"
+Set-EnvironmentVariable "JUPYTER_CONFIG_DIR"  "$env:XDG_CONFIG_HOME\jupyter"
+# go
+Set-EnvironmentVariable "GOPATH"  "$env:XDG_DATA_HOME\go"
+# rust#cargo
+Set-EnvironmentVariable "CARGO_HOME"  "$env:XDG_DATA_HOME\cargo"
+# rust#rustup
+Set-EnvironmentVariable "RUSTUP_HOME"  "$env:XDG_DATA_HOME\rustup"
+
+
 # ====================
 # dotfiles
 # ====================
@@ -105,27 +130,7 @@ if (!(Get-Command scoop -ErrorAction SilentlyContinue)) {
     iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 }
 
-# ====================
-# Environment Variables
-# ====================
-# XDG_Base_Directory
-Set-EnvironmentVariable "XDG_CONFIG_HOME" "$dir_home\.config"
-Set-EnvironmentVariable "XDG_CACHE_HOME" "$dir_home\.cache"
-Set-EnvironmentVariable "XDG_DATA_HOME" "$dir_home\.local\share"
-New-Directory "$dir_home\.local\share"
-Set-EnvironmentVariable "XDG_STATE_HOME" "$dir_home\.local\state"
-New-Directory "$dir_home\.local\state"
-# vim
-Set-EnvironmentVariable "VIMINIT"  "if !has('nvim') | so `$XDG_CONFIG_HOME\vim\dot.vimrc | else | so `$XDG_CONFIG_HOME\nvim\init.vim | endif"
-# ipython/jupiter
-Set-EnvironmentVariable "IPYTHONDIR"  "$env:XDG_CONFIG_HOME\jupyter"
-Set-EnvironmentVariable "JUPYTER_CONFIG_DIR"  "$env:XDG_CONFIG_HOME\jupyter"
-# go
-Set-EnvironmentVariable "GOPATH"  "$env:XDG_DATA_HOME\go"
-# rust#cargo
-Set-EnvironmentVariable "CARGO_HOME"  "$env:XDG_DATA_HOME\cargo"
-# rust#rustup
-Set-EnvironmentVariable "RUSTUP_HOME"  "$env:XDG_DATA_HOME\rustup"
+
 # ====================
 # scoop
 # ====================
