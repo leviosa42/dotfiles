@@ -63,6 +63,12 @@ function Install-ScoopPackage([string]$package) {
     scoop install $package
 }
 
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole("Administrators")) {
+    Write-Error "Please run this script as Administrator"
+    Pause
+    exit
+}
+
 # check winget is installed
 if (Get-Command winget -ErrorAction SilentlyContinue) {
     Write-Info "winget is installed"
@@ -71,7 +77,8 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     # Microsoft.PowerShell
     Install-WinGetPackage("Microsoft.PowerShell")
     # Microsoft.Office
-    Install-WinGetPackage("Microsoft.Office")
+    # [NOTE]: maybe it is recommended to install from Microsoft Store...
+    # Install-WinGetPackage("Microsoft.Office")
     # Microsoft.Edge
     Install-WinGetPackage("Microsoft.Edge")
     # Microsoft.WindowsTerminal
