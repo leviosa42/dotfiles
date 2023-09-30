@@ -87,6 +87,8 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
 # ====================
 # Environment Variables
 # ====================
+# HOME
+Set-EnvironmentVariable "HOME" "$dir_home"
 # XDG_Base_Directory
 Set-EnvironmentVariable "XDG_CONFIG_HOME" "$dir_home\.config"
 Set-EnvironmentVariable "XDG_CACHE_HOME" "$dir_home\.cache"
