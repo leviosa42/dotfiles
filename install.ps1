@@ -70,6 +70,10 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     Install-WinGetPackage("Microsoft.PowerToys")
     # Microsoft.PowerShell
     Install-WinGetPackage("Microsoft.PowerShell")
+    # Microsoft.Office
+    Install-WinGetPackage("Microsoft.Office")
+    # Microsoft.Edge
+    Install-WinGetPackage("Microsoft.Edge")
     # Microsoft.WindowsTerminal
     Install-WinGetPackage("Microsoft.WindowsTerminal")
     # Microsoft.VisualStudioCode
@@ -78,6 +82,14 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     Install-WinGetPackage("Git.Git")
     # Git.GitHub
     Install-WinGetPackage("Git.GitHub")
+    # Oracle.VirtualBox
+    Install-WinGetPackage("Oracle.VirtualBox")
+    # Oracle.MySQL
+    Install-WinGetPackage("Oracle.MySQL")
+    # eza-community.eza
+    Install-WinGetPackage("eza-community.eza")
+    # FastCopy.FastCopy
+    Install-WinGetPackage("FastCopy.FastCopy")
 } else {
     Write-Error "winget is not installed"
     exit
