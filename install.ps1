@@ -115,7 +115,7 @@ Set-EnvironmentVariable "RUSTUP_HOME"  "$env:XDG_DATA_HOME\rustup"
 # check dotfiles is cloned
 if (!(Test-Path $dir_dotfiles)) {
     Write-Info "git clone $url_dotfiles $dir_dotfiles"
-    git clone "https://github.com/leviosa42/dotfiles.git" $dir_dotfiles
+    git clone $url_dotfiles $dir_dotfiles
 }
 # dotfiles\.config -> %HOME%\.config
 New-Symlink "$dir_dotfiles\.config" "$dir_home\.config"
