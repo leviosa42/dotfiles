@@ -120,7 +120,8 @@ Set-EnvironmentVariable "VIMINIT"  "if !has('nvim') | so `$XDG_CONFIG_HOME\vim\d
 # ipython/jupiter
 Set-EnvironmentVariable "IPYTHONDIR"  "$env:XDG_CONFIG_HOME\jupyter"
 Set-EnvironmentVariable "JUPYTER_CONFIG_DIR"  "$env:XDG_CONFIG_HOME\jupyter"
-
+# go
+Set-EnvironmentVariable "GOPATH"  "$env:XDG_DATA_HOME\go"
 # ====================
 # scoop
 # ====================
