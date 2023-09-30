@@ -5,7 +5,8 @@
 !.gitignore
 !.gitkeep
 
-!install.sh
+!/install.sh
+!/install.ps1
 
 !/.config
 !/.config/bash
