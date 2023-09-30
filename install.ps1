@@ -122,6 +122,10 @@ Set-EnvironmentVariable "IPYTHONDIR"  "$env:XDG_CONFIG_HOME\jupyter"
 Set-EnvironmentVariable "JUPYTER_CONFIG_DIR"  "$env:XDG_CONFIG_HOME\jupyter"
 # go
 Set-EnvironmentVariable "GOPATH"  "$env:XDG_DATA_HOME\go"
+# cargo
+Set-EnvironmentVariable "CARGO_HOME"  "$env:XDG_DATA_HOME\cargo"
+# rustup
+Set-EnvironmentVariable "RUSTUP_HOME"  "$env:XDG_DATA_HOME\rustup"
 # ====================
 # scoop
 # ====================
