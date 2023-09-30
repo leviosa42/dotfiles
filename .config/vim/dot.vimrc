@@ -223,6 +223,7 @@ set smartcase
 " * * Command-Line: {{{
 set wildmenu
 set wildmode=longest:list,full
+set makeprg=gcc\ %
 " * * }}}
 " * * Modifying: {{{
 set backspace=indent,eol,start
@@ -579,6 +580,12 @@ function! s:github_dark() abort " {{{
   " ColorColumn
   " Character
 endfunction " }}}
+" * * }}}
+" * }}}
+" * AutoCmd: {{{
+" * * Open Qf window automatically: {{{
+autocmd QuickfixCmdPost vimgrep :cw
+
 " * * }}}
 " * }}}
 " * Commnad: {{{
