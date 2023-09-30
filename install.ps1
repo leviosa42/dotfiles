@@ -142,6 +142,8 @@ New-Symlink "$dir_dotfiles\.config" "$dir_home\.config"
 # New-Symlink "$dir_dotfiles\.config\vim\dot.vimrc" "$dir_home\.vimrc"
 # dotfiles\.config\nyagos\dot.nyagos -> %HOME%\.nyagos
 New-Symlink "$dir_dotfiles\.config\nyagos\dot.nyagos" "$dir_home\.nyagos"
+# dotfiles\.config\wt\settings.json -> %HOME%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+New-Symlink "$dir_dotfiles\.config\wt\settings.json" "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 # ====================
 # scoop
 # ====================

@@ -29,6 +29,9 @@
 !/.config/vim
 !/.config/vim/*
 
+!/.config/wt
+!/.config/wt/*
+
 *.swp
 *.exe
 *.netrwhist
