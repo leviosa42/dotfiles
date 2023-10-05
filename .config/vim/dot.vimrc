@@ -14,6 +14,7 @@ if &compatible
 endif
 
 syntax off
+filetype off
 filetype plugin indent off
 
 let $MYVIMRC = expand('<sfile>')
@@ -37,6 +38,7 @@ function! s:vimrc.GetHome() " {{{
 endfunction " }}}
 
 let g:home = s:vimrc.GetHome()
+
 " * }}}
 " * XDG Based Directory: {{{
 " $XDG_CONFIG_HOME/ <- $HOME/.config
@@ -200,15 +202,16 @@ set helplang=ja
 " * * }}}
 " * * FileType: {{{
 augroup filetype_settings
-  au BufNewFile,BufRead *.vim   set filetype=vim
-  au BufNewFile,BufRead *.vimrc set filetype=vim
-  au BufNewFile,BufRead *.c     set filetype=c
-  au BufNewFile,BufRead *.js    set filetype=javascript
-  au BufNewFile,BufRead *.py    set filetype=python
-  au BufNewFile,BufRead *.sh    set filetype=sh
-  au BufNewFile,BufRead *.bash  set filetype=sh
-  au BufNewFile,BufRead *.ash   set filetype=sh
-  au BufNewFile,BufRead *.plt   set filetype=gnuplot
+  au!
+  au BufNewFile,BufRead,BufEnter *.vim   setf vim
+  au BufNewFile,BufRead,BufEnter *.vimrc setf vim
+  au BufNewFile,BufRead,BufEnter *.c     setf c
+  au BufNewFile,BufRead,BufEnter *.js    setf javascript
+  au BufNewFile,BufRead,BufEnter *.py    setf python
+  au BufNewFile,BufRead,BufEnter *.sh    setf sh
+  au BufNewFile,BufRead,BufEnter *.bash  setf sh
+  au BufNewFile,BufRead,BufEnter *.ash   setf sh
+  au BufNewFile,BufRead,BufEnter *.plt   setf gnuplot
 augroup END
 " * * }}}
 " * }}}
@@ -236,17 +239,40 @@ set autoindent
 set smartindent
 " * * * FileType Indent: {{{
 " ref: https://qiita.com/ysn/items/f4fc8f245ba50d5fb8b0
+function! Fold(lnum)
+  let cl = getline(a:lnum)
+  " if empty(cl) " || cl =~ '^\t*$'
+  "   return 's1'
+  " endif
+  " if cl =~ '^\t*#'
+  "   return indent(a:lnum+1)/&tabstop
+  " elseif empty(cl) || cl =~ '^\t*$'
+  "   return (indent(a:lnum-1)/&ts) - 1
+  " else
+  "   return indent(a:lnum)/&tabstop
+  " endif
+
+  if cl =~ '^\t*#'
+    return indent(a:lnum+1)/&ts
+  else
+    if getline(a:lnum+1) =~ '^\t*#' && indent(a:lnum+1) != indent(a:lnum)
+      return '<' .. indent(a:lnum)/&ts
+    else
+      return indent(a:lnum)/&ts
+    endif
+  endif
+endfunction
+
 augroup filetype_indent_settings
+  au!
   au FileType vim    setl et   ts=2 sts=-1 sw=0 | let g:vim_indent_cont = &sw
   au FileType c      setl noet ts=4 sts=-1 sw=0 cindent
   au FileType js     setl noet ts=4 sts=-1 sw=0
   au FileType python setl et   ts=4 sts=-1 sw=0
   au FileType sh     setl et   ts=2 sts=-1 sw=0
+  au FileType gnuplot setl noet ts=4 sts=-1 sw=0 fdc=5 fdm=expr fde=Fold(v:lnum)
 augroup END
 
-augroup filetype_cms_settings
-  au FileType gnuplot setl cms=#\ %s
-augroup END
 " * * * }}}
 " * * }}}
 " * }}}
@@ -489,7 +515,7 @@ function! MyFoldText() abort
   let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
   let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount)
   return line . '…' . repeat(" ",fillcharcount) . '..' . foldedlinecount  . ' '
-endfunction 
+endfunction
 set foldtext=MyFoldText()
 " * * }}}
 " * * MyColorScheme: {{{
@@ -827,6 +853,7 @@ catch
 endtry
 
 " call g:Init()
+filetype on
 filetype plugin indent on
 " * }}}
 " vim: set ft=vim ts=2 sts=-1 sw=0 et fdm=marker fmr={{{,}}} fdc=5 fdls=0 cms="\ %s:
