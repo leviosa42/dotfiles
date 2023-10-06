@@ -5,9 +5,10 @@ echo "=== START install.sh ==="
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-sudo rm -rf ~/.bashrc
-sudo rm -rf ~/.vim
-sudo rm -rf ~/.vimrc
+mkdir ~/.backup
+mv ~/.bashrc ~/.backup
+mv ~/.vim ~/.backup
+mv ~/.vimrc ~/.backup
 
 ln -sfnv ${script_dir}/.config ~/.config
 ln -sfnv ${script_dir}/.config/bash/dot.bashrc ~/.bashrc
