@@ -254,12 +254,10 @@ function! Fold(lnum)
 
   if cl =~ '^\t*#'
     return indent(a:lnum+1)/&ts
+  elseif getline(a:lnum+1) =~ '^\t*#' && indent(a:lnum+1) != indent(a:lnum)
+    return '<' .. indent(a:lnum)/&ts
   else
-    if getline(a:lnum+1) =~ '^\t*#' && indent(a:lnum+1) != indent(a:lnum)
-      return '<' .. indent(a:lnum)/&ts
-    else
-      return indent(a:lnum)/&ts
-    endif
+    return indent(a:lnum)/&ts
   endif
 endfunction
 
