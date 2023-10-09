@@ -119,6 +119,8 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('sheerun/vim-polyglot') " lang packs
   call jetpack#add('pprovost/vim-ps1') " lang for ps1
   call jetpack#add('lambdalisue/fern.vim') " file explorer
+  call jetpack#add('mattn/vim-sonictemplate')
+    let g:sonictemplate_vim_template_dir = $XDG_CONFIG_HOME .. '/vim/template'
     " lambdalisue/fern.vim {{{
     let g:vimrc_explorer = 'fern'
     let g:fern#default_hidden = 1
@@ -152,6 +154,43 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
     call jetpack#add('yuki-yano/fern-preview.vim')
   call jetpack#add('machakann/vim-sandwich')
   call jetpack#add('markonm/traces.vim')
+  call jetpack#add('prabirshrestha/asyncomplete.vim')
+    " prabirshrestha/asyncomplete.vim {{{
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+    " allow modifying the completeopt variable, or it will be overridden all the time
+    let g:asyncomplete_auto_completeopt = 0
+
+    set completeopt=menuone,noinsert,noselect,preview
+    " }}}
+  call jetpack#add('hrsh7th/vim-vsnip') " snippets
+    call jetpack#add('hrsh7th/vim-vsnip-integ')
+    " hrsh7th/vim-vsnip {{{
+    let g:vsnip_snippet_dir = '~/.config/vim/snippets'
+    " NOTE: You can use other key to expand snippet.
+    " Expand
+    imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+    smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+    " Expand or jump
+    imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+    smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+    " Jump forward or backward
+    imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+    smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+    imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+    smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+    " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+    " See https://github.com/hrsh7th/vim-vsnip/pull/50
+    " nmap        s   <Plug>(vsnip-select-text)
+    " xmap        s   <Plug>(vsnip-select-text)
+    " nmap        S   <Plug>(vsnip-cut-text)
+    " xmap        S   <Plug>(vsnip-cut-text)
+    " If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
+    let g:vsnip_filetypes = {}
+    let g:vsnip_filetypes.javascriptreact = ['javascript']
+    let g:vsnip_filetypes.typescriptreact = ['typescript']
+    " }}}
   call jetpack#add('machakann/vim-highlightedyank')
   call jetpack#add('tomasr/molokai') " colorscheme
   call jetpack#add('AlessandroYorba/Sierra') " colorscheme
@@ -653,10 +692,10 @@ nnoremap <silent><expr> K (v:count == 0 ? '3gk' : '3k')
 nnoremap U <C-r>
 nnoremap <C-r> U
 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+" inoremap <C-h> <Left>
+" inoremap <C-j> <Down>
+" inoremap <C-k> <Up>
+" inoremap <C-l> <Right>
 
 nnoremap <silent> <Space><Space> :<C-u>setl relativenumber!<CR>:<C-u>setl relativenumber?<CR>
 
