@@ -29,6 +29,14 @@
 
 !/.config/vim
 !/.config/vim/*
+!/.config/vim/snippets
+!/.config/vim/snippets/*
+!/.config/vim/template
+!/.config/vim/template/*
+!/.config/vim/template/_/*
+!/.config/vim/template/gnuplot
+!/.config/vim/template/gnuplot/*
+
 
 !/.config/wt
 !/.config/wt/*
