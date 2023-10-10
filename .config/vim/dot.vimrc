@@ -167,7 +167,10 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('hrsh7th/vim-vsnip') " snippets
     call jetpack#add('hrsh7th/vim-vsnip-integ')
     " hrsh7th/vim-vsnip {{{
-    let g:vsnip_snippet_dir = '~/.config/vim/snippets'
+    " let g:vsnip_snippet_dir = '~/.config/vim/snippets'
+    let g:vsnip_snippet_dirs = [
+      \ '~/.config/vim/snippets'
+    \ ]
     " NOTE: You can use other key to expand snippet.
     " Expand
     imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
