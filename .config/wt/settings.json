@@ -94,7 +94,7 @@
                 "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
             },
             {
-                "colorScheme": "KanagawaWave",
+                "colorScheme": "Monokai Seti Dark",
                 "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
                 "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
                 "hidden": false,
@@ -222,6 +222,29 @@
             "selectionBackground": "#2D4F67",
             "white": "#C8C093",
             "yellow": "#C0A36E"
+        },
+        {
+            "background": "#151718",
+            "black": "#151718",
+            "blue": "#9D65FF",
+            "brightBlack": "#625E4C",
+            "brightBlue": "#9D65FF",
+            "brightCyan": "#58D1EB",
+            "brightGreen": "#98F424",
+            "brightPurple": "#F4005F",
+            "brightRed": "#F4005F",
+            "brightWhite": "#F6F6EF",
+            "brightYellow": "#FA8419",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#58D1EB",
+            "foreground": "#F8F8F2",
+            "green": "#98F424",
+            "name": "Monokai Seti Dark",
+            "purple": "#F4005F",
+            "red": "#F4005F",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F8F8F2",
+            "yellow": "#FA8419"
         },
         {
             "background": "#282C34",
