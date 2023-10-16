@@ -202,6 +202,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
   call jetpack#add('leviosa42/vim-github-theme') " colorscheme
   call jetpack#add('leviosa42/kanagawa-mini.vim') " colorscheme
   call jetpack#add('sonph/onehalf', {'rtp': 'vim'}) " colorscheme
+  call jetpack#add('rainglow/vim', {'as': 'rainglow'}) " colorscheme
   call jetpack#add('tpope/vim-commentary')
   " call jetpack#add('itchyny/lightline.vim')
 call jetpack#end()
@@ -803,6 +804,10 @@ nnoremap [terminal]K :<C-u>topleft terminal<CR>
 nnoremap [terminal]L :<C-u>vertical botright terminal<CR>
 
 nnoremap [terminal]t :<C-u>tab terminal<CR>
+
+" ref: https://qiita.com/gorilla0513/items/f59e54606f6f4d7e3514
+command! Terminal call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })
+nnoremap [terminal]p :<C-u>Terminal<CR>
 " * * }}}
 " * * [vimrc]: {{{
 nmap <Leader>v [vimrc]
@@ -885,7 +890,7 @@ try
     \ 'theme': 'dark',
     \ 'enable_termcolors': 1
     \ }
-  colorscheme github
+  colorscheme github_dark
   " colorscheme github-mini
   " call s:github_dark()
 catch
