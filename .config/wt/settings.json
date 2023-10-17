@@ -94,7 +94,7 @@
                 "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
             },
             {
-                "colorScheme": "Monokai Seti Dark",
+                "colorScheme": "iceberg-dark",
                 "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
                 "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
                 "hidden": false,
@@ -475,6 +475,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#C0C0C0",
             "yellow": "#808000"
+        },
+        {
+            "background": "#161821",
+            "black": "#1E2132",
+            "blue": "#84A0C6",
+            "brightBlack": "#6B7089",
+            "brightBlue": "#91ACD1",
+            "brightCyan": "#95C4CE",
+            "brightGreen": "#C0CA8E",
+            "brightPurple": "#ADA0D3",
+            "brightRed": "#E98989",
+            "brightWhite": "#D2D4DE",
+            "brightYellow": "#E9B189",
+            "cursorColor": "#C6C8D1",
+            "cyan": "#89B8C2",
+            "foreground": "#C6C8D1",
+            "green": "#B4BE82",
+            "name": "iceberg-dark",
+            "purple": "#A093C7",
+            "red": "#E27878",
+            "selectionBackground": "#C6C8D1",
+            "white": "#C6C8D1",
+            "yellow": "#E2A478"
         }
     ],
     "themes": []
