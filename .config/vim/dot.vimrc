@@ -196,6 +196,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
     " }}}
   call jetpack#add('machakann/vim-highlightedyank')
   call jetpack#add('tomasr/molokai') " colorscheme
+  call jetpack#add('cocopon/iceberg.vim') " colorscheme
   call jetpack#add('AlessandroYorba/Sierra') " colorscheme
     let g:sierra_Mignight = 1
   " call jetpack#add('cormacrelfm/vim-colors-github') " colorscheme
