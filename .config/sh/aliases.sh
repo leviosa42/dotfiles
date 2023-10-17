@@ -12,14 +12,12 @@ alias la='ls -la'
 # eza
 # https://github.com/eza-community/eza
 if [[ $(command -v eza) ]]; then
-  alias eza='eza -1 -F --sort=extension --time-style=long-iso'
-  alias ex='eza'
-  alias el='eza -hl'
-  alias ea='eza -ahl'
-  alias et='eza -T -L 3 -a -I "node_modules|.git|.cache" '
-  alias eta='eza -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
-  alias lta=eta
-  alias l='clear && ls'
+  alias __eza__="$(which eza)"
+  alias eza='__eza__ --color=automatic -1F --group-directories-first -h --git --time-style=long-iso'
+  alias ls='eza'
+  alias ll='ls -l'
+  alias la='ls -laa'
+  alias lt="eza -a -T -L=3 -I='node_modules|.git|.cache'"
 fi
 
 # grep, fgrep, egrep
