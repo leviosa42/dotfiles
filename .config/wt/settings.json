@@ -126,6 +126,14 @@
                 "hidden": false,
                 "name": "Ubuntu 22.04.2 LTS",
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+            },
+            {
+                "colorScheme": "Tango Dark",
+                "commandline": "busybox64u.exe ash -l",
+                "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
+                "hidden": false,
+                "name": "ash",
+                "startingDirectory": "%HOME%"
             }
         ]
     },
