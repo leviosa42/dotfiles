@@ -71,13 +71,13 @@ alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export DOTFILES="$HOME/dotfiles"
+export DOTFILES_DIR="$HOME/.dotfiles"
 
 # for git-bash
 #export PATH=`cygpath -u $PATH`
 
-source "$DOTFILES/.config/sh/env.sh"
-source "$DOTFILES/.config/sh/aliases.sh"
+source "$DOTFILES_DIR/.config/sh/env.sh"
+source "$DOTFILES_DIR/.config/sh/aliases.sh"
 
 #eval "$(starship init bash)"
 
