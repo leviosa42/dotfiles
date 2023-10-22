@@ -6,7 +6,7 @@
 
 #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
 
-echo "=== START  LOADING .bashrc ==="
+# echo "=== START  LOADING .bashrc ==="
 
 export PROMPT_COMMAND=set_ps1
 
@@ -79,5 +79,7 @@ source "$DOTFILES/.config/sh/aliases.sh"
 
 #eval "$(starship init bash)"
 
-echo "=== FINISH LOADING .bashrc ==="
+source "$HOME/.bashrc.local"
+
+# echo "=== FINISH LOADING .bashrc ==="
 
