@@ -1,5 +1,5 @@
 -- ref: DeeR's .nyagos. > https://github.com/DeaR/dotfiles/blob/master/.nyagos
-print("[.NYAGOS] START  LOADING")
+-- print("[.NYAGOS] START  LOADING")
 
 -- Pre Init: {{{
 -- Util Functions: -- {{{
@@ -39,8 +39,8 @@ nyagos.envadd("PATH",
 )
 
 if nyagos.env.IS_PORTABLE_DEV_ENV ~= "TRUE" then
-    print("!!! Not Portable Dev Env !!!")
-    print("Exclude values including D: and E: from PATH")
+    -- print("!!! Not Portable Dev Env !!!")
+    -- print("Exclude values including D: and E: from PATH")
     nyagos.envdel("PATH", "D:", "E:")
 end
 
@@ -117,7 +117,7 @@ else
     end
 end
 -- }}}
-print("[.NYAGOS] FINISH LOADING")
+-- print("[.NYAGOS] FINISH LOADING")
 
 -- vim: ft=lua expandtab ts=4 sts=-1 sw=0 foldmethod=marker cms=--\ %s:
 
