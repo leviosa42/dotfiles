@@ -1,6 +1,8 @@
-# Usage
+# 💻 dotfiles
 
-## Windows
+## Install
+
+### Windows
 
 1. Install [winget].
 2. Open PowerShell as **Admin** and run below script.
@@ -10,7 +12,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 irm https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.ps1 | iex
 ```
 
-## Ubuntu
+### Ubuntu
 
 ```sh
 sudo apt update && sudo apt upgrade -y
