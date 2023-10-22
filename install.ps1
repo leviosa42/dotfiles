@@ -1,5 +1,5 @@
 $dir_home = $env:USERPROFILE
-$dir_dotfiles = Join-Path $dir_home "dotfiles"
+$dir_dotfiles = Join-Path $dir_home ".dotfiles"
 $url_dotfiles = "https://github.com/leviosa42/dotfiles.git"
 
 
@@ -108,6 +108,8 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
 # ====================
 # HOME
 Set-EnvironmentVariable "HOME" "$dir_home"
+# ENV (for busybox's .ashrc)
+Set-EnvironmentVariable "ENV" "$dir_home\.ashrc"
 # XDG_Base_Directory
 Set-EnvironmentVariable "XDG_CONFIG_HOME" "$dir_home\.config"
 Set-EnvironmentVariable "XDG_CACHE_HOME" "$dir_home\.cache"
@@ -150,7 +152,7 @@ New-Symlink "$dir_dotfiles\.config\wt\settings.json" "$env:USERPROFILE\AppData\L
 # check scoop is installed
 if (!(Get-Command scoop -ErrorAction SilentlyContinue)) {
     # bootstrap scoop
-    iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+    Invoke-Expression (new-object net.webclient).downloadstring('https://get.scoop.sh')
 }
 
 
