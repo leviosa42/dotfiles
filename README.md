@@ -20,4 +20,12 @@ sudo apt install git -y
 git clone https://github.com/leviosa42/dotfiles.git ~/.dotfiles
 bash ~/.dotfiles/install.sh
 ```
+
+## Develop
+
+```
+cd ~/.dotfiles
+docker image build --tag dotfiles-vm:dev .
+docker container run --rm  -v .:/root/.dotfiles -it dotfiles-vm:dev
+```
 [winget]: https://apps.microsoft.com/detail/9NBLGGH4NNS1?hl=ja-jp&gl=JP
