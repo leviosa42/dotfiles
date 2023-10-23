@@ -12,7 +12,12 @@
 !/install.sh
 !/install.ps1
 
+
 !/.config
+
+!/.config/ash
+!/.config/ash/*
+
 !/.config/bash
 !/.config/bash/*
 

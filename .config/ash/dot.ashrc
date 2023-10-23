@@ -1,0 +1,13 @@
+#!/bin/ash
+
+[ -z "$PS1" ] && return
+
+export PS1='(\[\e[1;36m\]'$(echo $0 $SHLVL)'\[\e[0;00m\])\[\e[1;33m\]\w\[\e[00m\]\$ '
+# export PS1='(\[\e[1;36m\]'$(echo $0)'\[\e[0;00m\])[\[\e[1;33m\]\w\[\e[00m\]]:\$ '
+
+alias q=exit
+alias cls=clear
+alias ls='ls -1LHpF'
+alias ..='cd ./..'
+
+# vim: cms=#\ %s:
