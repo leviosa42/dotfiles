@@ -97,6 +97,8 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     Install-WinGetPackage("eza-community.eza")
     # FastCopy.FastCopy
     Install-WinGetPackage("FastCopy.FastCopy")
+    # Readdle.Spark
+    Install-WinGetPackage("Readdle.Spark")
 } else {
     Write-Error "winget is not installed"
     exit
