@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+SHELL [ "/bin/bash", "-l", "-c" ]
 RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
 
 RUN apt update \
@@ -10,4 +11,4 @@ RUN apt update \
         vim
 
 WORKDIR /root
-CMD ["/bin/bash"]
+CMD ./.dotfiles/install.sh && /bin/bash -l

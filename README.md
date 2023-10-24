@@ -23,9 +23,9 @@ bash ~/.dotfiles/install.sh
 
 ## Develop
 
-```
+```bash
 cd ~/.dotfiles
-docker image build --tag dotfiles-vm:dev .
-docker container run --rm  -v .:/root/.dotfiles -it dotfiles-vm:dev
+docker compose run --rm dev
 ```
+
 [winget]: https://apps.microsoft.com/detail/9NBLGGH4NNS1?hl=ja-jp&gl=JP

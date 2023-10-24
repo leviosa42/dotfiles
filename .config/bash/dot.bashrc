@@ -43,8 +43,12 @@ set_ps1() {
       local exitcolor=$red
     fi
 
-    if [ -n $WSL_DISTRO_NAME ]; then
+    if [[ -v WSL_DISTRO_NAME ]]; then
         shell_name="wsl:${shell_name}"
+    fi
+
+    if [ -e /.dockerenv ]; then
+      shell_name="docker:${shell_name}"
     fi
 
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
@@ -82,7 +86,7 @@ source "$DOTFILES_DIR/.config/sh/aliases.sh"
 #eval "$(starship init bash)"
 
 if [ ! -e "$HOME/.bashrc.local" ]; then
-    touch ~/.bashrc
+    touch ~/.bashrc.local
 fi
 source "$HOME/.bashrc.local"
 
