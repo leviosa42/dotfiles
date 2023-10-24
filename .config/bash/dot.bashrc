@@ -52,7 +52,7 @@ set_ps1() {
     fi
 
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
-    export PS1="(${exitcolor}${shell_name} ${SHLVL}${res})${yel}\w${res}:\$ "
+    export PS1="(${exitcolor}${shell_name} ${SHLVL}${res})${yel}\w${res}:\\$ "
 }
 set_ps1
 
