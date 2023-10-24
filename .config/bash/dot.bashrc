@@ -81,6 +81,9 @@ source "$DOTFILES_DIR/.config/sh/aliases.sh"
 
 #eval "$(starship init bash)"
 
+if [ ! -e "$HOME/.bashrc.local" ]; then
+    touch ~/.bashrc
+fi
 source "$HOME/.bashrc.local"
 
 # echo "=== FINISH LOADING .bashrc ==="
