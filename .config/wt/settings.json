@@ -502,5 +502,6 @@
             "yellow": "#E2A478"
         }
     ],
+    "startOnUserLogin": true,
     "themes": []
 }
