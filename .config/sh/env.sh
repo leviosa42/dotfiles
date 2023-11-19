@@ -21,3 +21,7 @@ export VISUAL="vim"
 # Git
 export GIT_EDITOR="vim"
 export GIT_PAGER="less -R"
+
+# brew
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
