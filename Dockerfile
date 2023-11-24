@@ -15,7 +15,7 @@ RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pu
     yes | unminimize
 RUN apt-get install -y --no-install-recommends \
         # basic
-        man-db man vi nano git wget curl ca-certificates sudo \
+        man-db man vim nano git wget curl ca-certificates sudo \
         # linuxbrew
         # build-essential procps curl file git ca-certificates sudo \
         && \
