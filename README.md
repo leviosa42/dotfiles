@@ -18,7 +18,14 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 irm https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.ps1 | iex
 ```
 
-### Ubuntu
+### WSL2
+
+### Import from ghcr.io
+
+```cmd
+docker container export $(docker container create ghcr.io/leviosa42/dotfiles:main) -o %USERPROFILE%\wsl-dotfiles.tar
+wsl --import dotfiles %USERPROFILE%\wsl-dotfiles %USERPROFILE%\wsl-dotfiles.tar --version 2
+```
 
 ```sh
 sudo apt update && sudo apt upgrade -y
