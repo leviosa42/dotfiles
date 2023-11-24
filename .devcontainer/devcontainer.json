@@ -1,4 +1,13 @@
 {
     "name": "dotfiles",
-    "image": "ghcr.io/leviosa42/dotfiles"
-}
+    "image": "ghcr.io/leviosa42/dotfiles",
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "leviosa42/dotfiles": {
+            "permissions": "write-all"
+          }
+        }
+      }
+    }
+  }
