@@ -13,6 +13,9 @@
 !/.github/workflows
 !/.github/workflows/*
 
+!/.devcontainer
+!/.devcontainer/*
+
 !/bootstrap.sh
 !/install.sh
 !/install.ps1
