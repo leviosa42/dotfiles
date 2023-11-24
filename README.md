@@ -1,5 +1,11 @@
 # 💻 dotfiles
 
+## Usage
+
+```sh
+docker container run --rm -it ghcr.io/leviosa42/dotfiles:main
+```
+
 ## Install
 
 ### Windows
@@ -19,13 +25,6 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install git -y
 git clone https://github.com/leviosa42/dotfiles.git ~/.dotfiles
 bash ~/.dotfiles/install.sh
-```
-
-## Develop
-
-```bash
-cd ~/.dotfiles
-docker compose run --rm dev
 ```
 
 [winget]: https://apps.microsoft.com/detail/9NBLGGH4NNS1?hl=ja-jp&gl=JP
