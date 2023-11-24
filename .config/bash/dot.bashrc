@@ -91,6 +91,3 @@ fi
 source "$HOME/.bashrc.local"
 
 # echo "=== FINISH LOADING .bashrc ==="
-
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
