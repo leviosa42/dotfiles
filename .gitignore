@@ -8,6 +8,11 @@
 !.gitignore
 !.gitkeep
 
+!/.github
+!/.github/*
+!/.github/workflows
+!/.github/workflows/*
+
 !/bootstrap.sh
 !/install.sh
 !/install.ps1
