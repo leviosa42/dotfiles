@@ -1,14 +1,47 @@
-FROM ubuntu:latest
+# Dockerfile to build a container image for wsl2.
+# package-manager: apt-get, homebrew(linuxbrew)
+FROM docker.io/library/ubuntu:jammy
 
-SHELL [ "/bin/bash", "-l", "-c" ]
-RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+USER root
 
-RUN apt update \
-    && apt upgrade -y \
-    && apt install -y \
-        sudo \
-        git \
-        vim
+ARG TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-WORKDIR /root
-CMD ./.dotfiles/install.sh && /bin/bash -l
+# コンテナで動かすのに特有?の設定が追加されているので消しておく
+RUN rm /etc/apt/apt.conf.d/docker-*
+
+RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list && \
+    apt-get -y update && \
+    yes | unminimize
+RUN apt-get install -y --no-install-recommends \
+        # basic
+        man-db man vi nano git wget curl ca-certificates sudo \
+        # linuxbrew
+        # build-essential procps curl file git ca-certificates sudo \
+        && \
+    apt-get -y autoremove && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+ARG USER_NAME=jammy
+ARG USER_UID=1000
+# ARG PASSWD=passwd
+RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
+    # echo "${USER_NAME}:${PASSWD}" | chpasswd && \
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    { \
+        echo "[user]"; \   
+        echo "    default = ${USER_NAME}"; \
+    } > /etc/wsl.conf
+
+USER ${USER_NAME}
+WORKDIR /home/${USER_NAME}
+
+# Install linuxbrew
+# RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+#     (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.bashrc && \
+#     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+RUN git clone https://github.com/leviosa42/dotfiles.git $HOME/.dotfiles && \
+    cd $HOME/.dotfiles && \
+    ./install.sh

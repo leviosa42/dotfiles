@@ -76,7 +76,7 @@
             },
             {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": true,
+                "hidden": false,
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
             },
@@ -85,13 +85,6 @@
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "colorScheme": "One Half Dark",
-                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
             },
             {
                 "colorScheme": "iceberg-dark",
@@ -110,24 +103,33 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-                "hidden": true,
-                "name": "Ubuntu-22.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{d7b20cea-47a9-518c-95a4-c8bd91e2e1c6}",
-                "hidden": false,
-                "name": "Ubuntu 22.04.2 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
-            },
-            {
                 "colorScheme": "Tango Dark",
                 "commandline": "busybox64u.exe ash -l",
                 "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
                 "hidden": false,
                 "name": "ash",
                 "startingDirectory": "%HOME%"
+            },
+            {
+                "colorScheme": "Monokai Seti Dark",
+                "commandline": "wsl -d Arch",
+                "font": 
+                {
+                    "size": 13.0
+                },
+                "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
+                "hidden": false,
+                "icon": null,
+                "name": "Arch",
+                "startingDirectory": "\\\\wsl.localhost\\Arch\\home\\arch",
+                "tabTitle": "Arch"
+            },
+            {
+                "colorScheme": "One Half Dark",
+                "guid": "{8333c1cb-1e23-53e7-9b59-f5577b021bd8}",
+                "hidden": false,
+                "name": "Ubuntu-brew",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
