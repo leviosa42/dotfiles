@@ -3,7 +3,7 @@
 ## Usage
 
 ```sh
-docker container run --rm -it ghcr.io/leviosa42/dotfiles:main
+docker container run --rm -it ghcr.io/leviosa42/dotfiles
 ```
 
 ## Install
