@@ -1,5 +1,13 @@
 {
     "name": "dotfiles",
-    "dockerFile": "Dockerfile"
-
-}
+    "image": "ghcr.io/leviosa42/dotfiles",
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "leviosa42/dotfiles": {
+            "permissions": "write-all"
+          }
+        }
+      }
+    }
+  }

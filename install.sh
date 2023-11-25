@@ -22,4 +22,4 @@ ln -sfnv ${script_dir}/.config/vim/dot.vimrc ~/.vimrc
 
 source ~/.bashrc
 
-echo "=== END install.sh ==="
+echo "=== FINISH install.sh ==="
