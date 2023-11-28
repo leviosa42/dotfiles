@@ -16,10 +16,14 @@ RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pu
 RUN apt-get install -y --no-install-recommends \
         # basic
         man-db man vim nano git wget curl ca-certificates build-essential sudo \
+        # wslutilities/wslu
+        wslu \
         # linuxbrew
         # build-essential procps curl file git ca-certificates sudo \
         # eza
         gpg \
+        # bat
+        bat \
         && \
     apt-get -y autoremove && \
     apt-get clean && \
@@ -35,6 +39,9 @@ RUN mkdir -p /etc/apt/keyrings && \
     apt-get -y autoremove && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# bat
+RUN ln -s /usr/bin/batcat /usr/bin/bat
 
 ARG USER_NAME=jammy
 ARG USER_UID=1000
