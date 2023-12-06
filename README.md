@@ -32,7 +32,7 @@ irm https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.ps1 | iex
 ### Import from ghcr.io
 
 ```cmd
-docker container export $(docker container create ghcr.io/leviosa42/dotfiles:main) -o %USERPROFILE%\wsl-dotfiles.tar
+docker container export $(docker container create ghcr.io/leviosa42/dotfiles) -o %USERPROFILE%\wsl-dotfiles.tar
 wsl --import dotfiles %USERPROFILE%\wsl-dotfiles %USERPROFILE%\wsl-dotfiles.tar --version 2
 ```
 
