@@ -35,7 +35,8 @@
 /.config/gh/.gitkeep
 
 !/.config/nvim
-!/.config/nvim/*
+!/.config/nvim/**
+
 
 !/.config/nyagos
 !/.config/nyagos/*

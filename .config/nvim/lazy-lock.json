@@ -1,4 +1,5 @@
 {
+  "copilot.vim": { "branch": "release", "commit": "5b19fb001d7f31c4c7c5556d7a97b243bd29f45f" },
   "fern-preview.vim": { "branch": "main", "commit": "74f2c1c45eb48fe9b7e4aa87032f053808944e17" },
   "fern-renderer-nerdfont.vim": { "branch": "master", "commit": "798a8313433a1569fa2485b8f2b1de68de7e60fe" },
   "fern.vim": { "branch": "main", "commit": "56f8e4c79da01eecb0f7f3803c051cd23c803b35" },
