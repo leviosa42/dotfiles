@@ -120,7 +120,7 @@ New-Directory "$dir_home\.local\share"
 Set-EnvironmentVariable "XDG_STATE_HOME" "$dir_home\.local\state"
 New-Directory "$dir_home\.local\state"
 # vim
-Set-EnvironmentVariable "VIMINIT"  "if !has('nvim') | so `$XDG_CONFIG_HOME\vim\dot.vimrc | else | so `$XDG_CONFIG_HOME\nvim\init.vim | endif"
+Set-EnvironmentVariable "VIMINIT"  "if !has('nvim') | so `$XDG_CONFIG_HOME\vim\dot.vimrc | else | so `$XDG_CONFIG_HOME\nvim\init.lua | endif"
 # ipython/jupiter
 Set-EnvironmentVariable "IPYTHONDIR"  "$env:XDG_CONFIG_HOME\jupyter"
 Set-EnvironmentVariable "JUPYTER_CONFIG_DIR"  "$env:XDG_CONFIG_HOME\jupyter"
