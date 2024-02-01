@@ -8,12 +8,10 @@
             {
                 "action": "copy",
                 "singleLine": false
-            },
-            "keys": "ctrl+c"
+            }
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command": "paste"
         },
         {
             "command": 
@@ -33,6 +31,14 @@
             "keys": "win+sc(41)"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+c"
+        },
+        {
             "command": 
             {
                 "action": "quakeMode"
@@ -40,9 +46,12 @@
             "keys": "win+@"
         }
     ],
+    "alwaysShowNotificationIcon": true,
+    "autoHideWindow": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
+    "minimizeToNotificationArea": false,
     "newTabMenu": 
     [
         {
@@ -83,10 +92,14 @@
             {
                 "colorScheme": "iceberg-dark",
                 "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
+                "font": 
+                {
+                    "face": "PlemolJP Console NF"
+                },
                 "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
                 "hidden": false,
                 "icon": "%SCOOP%\\apps\\nyagos\\current\\nyagos32x32.ico",
-                "intenseTextStyle": "bold",
+                "intenseTextStyle": "bright",
                 "name": "NYAGOS",
                 "startingDirectory": "%HOME%"
             },
@@ -119,11 +132,50 @@
                 "tabTitle": "Arch"
             },
             {
-                "colorScheme": "One Half Dark",
-                "guid": "{47da5730-4a56-5012-99d4-d907f8e81500}",
+                "colorScheme": "Ubuntu-ColorScheme",
+                "cursorShape": "vintage",
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
-                "name": "Ubuntu-dotfiles",
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": true,
+                "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{33a42e1a-7388-5165-b670-f262d026c2e6}",
+                "hidden": false,
+                "name": "Ubuntu-dot",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{2529e5c7-33fb-5378-81eb-76c054aff559}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{1980d477-02b2-5b9c-b0cd-cbc892b68a24}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "colorScheme": "iceberg-dark",
+                "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
+                "font": 
+                {
+                    "face": "UDEV Gothic NF"
+                },
+                "guid": "{b2c2af47-b513-474a-a293-5c97ffe7f81d}",
+                "hidden": false,
+                "icon": "%SCOOP%\\apps\\nyagos\\current\\nyagos32x32.ico",
+                "intenseTextStyle": "bright",
+                "name": "NYAGOS (\u30b3\u30d4\u30fc)",
+                "startingDirectory": "%HOME%"
             }
         ]
     },
