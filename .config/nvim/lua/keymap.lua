@@ -33,12 +33,16 @@ vim.keymap.set('n', '[window]o', '<Cmd>only<CR>', { noremap = true})
 -- * * [settings]: {{{
 vim.keymap.set('n', '<Leader>v', '[settings]', { remap = true })
 vim.keymap.set('n', '[settings]', '<Nop>', { noremap = true })
+vim.keymap.set('n', '[settings] ', '<Cmd>Fern $XDG_CONFIG_HOME/nvim/ -drawer -toggle -keep<CR>', { noremap = true })
 vim.keymap.set('n', '[settings]b', '<Cmd>edit $XDG_CONFIG_HOME/nvim/lua/base.lua<CR>', { noremap = true })
 vim.keymap.set('n', '[settings]k', '<Cmd>edit $XDG_CONFIG_HOME/nvim/lua/keymap.lua<CR>', { noremap = true })
 vim.keymap.set('n', '[settings]p', '<Cmd>edit $XDG_CONFIG_HOME/nvim/lua/plugin.lua<CR>', { noremap = true })
+vim.keymap.set('n', '[settings]p', '<Cmd>edit $XDG_CONFIG_HOME/nvim/lua/plugin.lua<CR>', { noremap = true })
+-- TODO: Avoid hardcoding
+vim.keymap.set('n', '[settings]P', '<Cmd>Fern $XDG_CONFIG_HOME/nvim/lua/plugins -drawer -toggle -keep<CR>', { noremap = true })
 vim.keymap.set('n', '[settings]s', '<Cmd>source $MYVIMRC<CR>', { noremap = true })
 vim.keymap.set('n', '[settings]-', function()
-  -- https://stackoverflow.com/questions/72412720/how-to-source-init-lua-without-restarting-neovim
+   -- https://stackoverflow.com/questions/72412720/how-to-source-init-lua-without-restarting-neovim
   for k,_ in pairs(package.loaded) do
     if k:match('^user') and not name:match('nvim-tree') then
       package.loaded[value] = nil
