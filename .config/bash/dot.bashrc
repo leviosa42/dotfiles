@@ -32,6 +32,7 @@ set_ps1() {
     local yel="$(echo -e '\[\e[33m\]')"
     local cya="$(echo -e '\[\e[36m\]')"
     local res="$(echo -e '\[\e[00m\]')"
+    local bg="$(echo -e '\[\e[49m\]')"
     # \s .. shell name
 
     # shell_name
@@ -52,7 +53,7 @@ set_ps1() {
     fi
 
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
-    export PS1="(${exitcolor}${shell_name} ${SHLVL}${res})${yel}\w${res}:\\$ "
+    export PS1="${res}(${exitcolor}${shell_name} ${SHLVL}${res}${bg})${yel}\w${res}:\\$ ${bg}"
 }
 set_ps1
 
