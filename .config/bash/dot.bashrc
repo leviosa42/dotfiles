@@ -43,8 +43,13 @@ _info "Setting up environment variables..."
   # Load .vimrc from .config/dot.vimrc
   export VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
   # PATH
-  [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
-  [ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
+  if [[ ! $PATH =~ "$HOME/.cargo/bin" ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+  fi
+  # [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+  if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+  fi
   # others
   export EDITOR="vim"
 }
