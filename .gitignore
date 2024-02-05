@@ -34,6 +34,9 @@
 !/.config/gh
 /.config/gh/.gitkeep
 
+!/.config/git
+!/.config/git/*
+
 !/.config/nvim
 !/.config/nvim/**
 
