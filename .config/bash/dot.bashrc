@@ -28,6 +28,22 @@
   }
 }
 
+_info "Setting up shell options..."
+: "Shell options" && {
+  # autocd ... cd to directory by just typing the directory name
+  shopt -s autocd
+  # cdspell ... corrects minor spelling errors during cd
+  shopt -s cdspell
+  # direxpand ... expands directory names to the full pathname
+  shopt -s direxpand
+  # dirspell ... corrects minor spelling errors during directory name completion
+  shopt -s dirspell
+  # dotglob ... include hidden files in globbing
+  shopt -s dotglob
+  # extglob ... enable extended pattern matching features
+  shopt -s extglob
+}
+
 _info "Setting up environment variables..."
 : "Set Enviroment Variables" && {
   # DOTFILES_DIR
@@ -40,6 +56,7 @@ _info "Setting up environment variables..."
   export XDG_STATE_HOME="$HOME/.local/state"
   # bash
   export HISTFILE="$XDG_STATE_HOME/bash/history"
+  export HISTSIZE=1000
   # Load .vimrc from .config/dot.vimrc
   export VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
   # PATH
@@ -52,9 +69,11 @@ _info "Setting up environment variables..."
   fi
   export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
   # others
-  export EDITOR="vim"
+  export EDITOR="nvim"
+  export VISUAL="$EDITOR"
 }
 
+_info "Setting up shell prompt..."
 : "Set Prompt" && {
   #export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
   #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
@@ -104,11 +123,13 @@ _info "Setting up environment variables..."
   export PROMPT_COMMAND="_set_ps1"
 }
 
+_info "Setting up shell aliases..."
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
 }
 
+_info "Change terminal color..."
 : "Change terminal color" && {
   # tokyonight.sh
   # see: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
@@ -128,25 +149,25 @@ _info "Setting up environment variables..."
   }
 
   : "Define colors" && {
-    readonly BLACK='#15161e'
-    readonly RED='#f7768e'
-    readonly GREEN='#9ece6a'
-    readonly YELLOW='#e0af68'
-    readonly BLUE='#7aa2f7'
-    readonly PURPLE='#bb9af7'
-    readonly CYAN='#7dcfff'
-    readonly WHITE='#a9b1d6'
-    readonly BRIGHT_BLACK='#414868'
-    readonly BRIGHT_RED='#f7768e'
-    readonly BRIGHT_GREEN='#9ece6a'
-    readonly BRIGHT_YELLOW='#e0af68'
-    readonly BRIGHT_BLUE='#7aa2f7'
-    readonly BRIGHT_PURPLE='#9d7cd8'
-    readonly BRIGHT_CYAN='#7dcfff'
-    readonly BRIGHT_WHITE='#c0caf5'
-    readonly FOREGROUND='#c0caf5'
-    readonly BACKGROUND='#1a1b26'
-    readonly CURSOR="${BLUE}"
+    BLACK='#15161e'
+    RED='#f7768e'
+    GREEN='#9ece6a'
+    YELLOW='#e0af68'
+    BLUE='#7aa2f7'
+    PURPLE='#bb9af7'
+    CYAN='#7dcfff'
+    WHITE='#a9b1d6'
+    BRIGHT_BLACK='#414868'
+    BRIGHT_RED='#f7768e'
+    BRIGHT_GREEN='#9ece6a'
+    BRIGHT_YELLOW='#e0af68'
+    BRIGHT_BLUE='#7aa2f7'
+    BRIGHT_PURPLE='#9d7cd8'
+    BRIGHT_CYAN='#7dcfff'
+    BRIGHT_WHITE='#c0caf5'
+    FOREGROUND='#c0caf5'
+    BACKGROUND='#1a1b26'
+    CURSOR="${BLUE}"
   }
 
   : "Set colors" && {
@@ -172,7 +193,9 @@ _info "Setting up environment variables..."
   }
 }
 
+_info "Setting up useful functions..."
 : "Useful functions" && {
+  _info "> colortest()"
   function colortest() {
     # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
     local T='gYw' # The test text
