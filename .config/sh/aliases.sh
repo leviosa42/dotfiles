@@ -26,8 +26,8 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # Editings
-alias dotfiles='vim ~/dotfiles/'
-alias .bashrc='vim ~/.bashrc && source ~/.bashrc'
+alias dotfiles="$EDITOR $DOTFILES_DIR"
+alias .bashrc="$EDITOR .bashrc && source ~/.bashrc"
 alias .aliases='vim $XDG_CONFIG_HOME/sh/aliases.sh && source ~/.bashrc'
 
 alias e="$EDITOR"
