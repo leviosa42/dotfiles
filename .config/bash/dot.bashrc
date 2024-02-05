@@ -50,6 +50,7 @@ _info "Setting up environment variables..."
   if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
     export PATH="$HOME/.local/bin:$PATH"
   fi
+  export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
   # others
   export EDITOR="vim"
 }
