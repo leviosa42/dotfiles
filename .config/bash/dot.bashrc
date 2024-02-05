@@ -30,16 +30,18 @@
 
 _info "Setting up environment variables..."
 : "Set Enviroment Variables" && {
-source "$DOTFILES_DIR/.config/sh/env.sh"
+  # DOTFILES_DIR
+  export DOTFILES_DIR="$HOME/.dotfiles"
+  # source "$DOTFILES_DIR/.config/sh/env.sh"
   # XDG_*_HOME
   export XDG_CONFIG_HOME="$HOME/.config"
   export XDG_DATA_HOME="$HOME/.local/share"
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_STATE_HOME="$HOME/.local/state"
-  # DOTFILES_DIR
-  export DOTFILES_DIR="$HOME/.dotfiles"
   # PATH
   [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+  # others
+  export EDITOR="vim"
 }
 
 : "Set Prompt" && {
@@ -94,6 +96,89 @@ source "$DOTFILES_DIR/.config/sh/env.sh"
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
+}
+
+: "Change terminal color" && {
+  # tokyonight.sh
+  # see: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
+
+  # set -euo pipefail
+
+  : "Define functions" && {
+    function osc() {
+      # Usage:
+      #   osc <sequence_number> <text1> <text2> ...
+      # Example:
+      #   osc 1 'This is title' # == printf "\033]1;This is title\033\\"
+      local IFS=';'
+      printf "\033]$*\033\\"
+      return 0
+    }
+  }
+
+  : "Define colors" && {
+    readonly BLACK='#15161e'
+    readonly RED='#f7768e'
+    readonly GREEN='#9ece6a'
+    readonly YELLOW='#e0af68'
+    readonly BLUE='#7aa2f7'
+    readonly PURPLE='#bb9af7'
+    readonly CYAN='#7dcfff'
+    readonly WHITE='#a9b1d6'
+    readonly BRIGHT_BLACK='#414868'
+    readonly BRIGHT_RED='#f7768e'
+    readonly BRIGHT_GREEN='#9ece6a'
+    readonly BRIGHT_YELLOW='#e0af68'
+    readonly BRIGHT_BLUE='#7aa2f7'
+    readonly BRIGHT_PURPLE='#9d7cd8'
+    readonly BRIGHT_CYAN='#7dcfff'
+    readonly BRIGHT_WHITE='#c0caf5'
+    readonly FOREGROUND='#c0caf5'
+    readonly BACKGROUND='#1a1b26'
+    readonly CURSOR="${BLUE}"
+  }
+
+  : "Set colors" && {
+    osc 4 0 "${BLACK}"
+    osc 4 1 "${RED}"
+    osc 4 2 "${GREEN}"
+    osc 4 3 "${YELLOW}"
+    osc 4 4 "${BLUE}"
+    osc 4 5 "${PURPLE}"
+    osc 4 6 "${CYAN}"
+    osc 4 7 "${WHITE}"
+    osc 4 8 "${BRIGHT_BLACK}"
+    osc 4 9 "${BRIGHT_RED}"
+    osc 4 10 "${BRIGHT_GREEN}"
+    osc 4 11 "${BRIGHT_YELLOW}"
+    osc 4 12 "${BRIGHT_BLUE}"
+    osc 4 13 "${BRIGHT_PURPLE}"
+    osc 4 14 "${BRIGHT_CYAN}"
+    osc 4 15 "${BRIGHT_WHITE}"
+    osc 10 "${FOREGROUND}"
+    osc 11 "${BACKGROUND}"
+    osc 12 "${CURSOR}"
+  }
+}
+
+: "Useful functions" && {
+  function colortest() {
+    # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
+    local T='gYw' # The test text
+    echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
+
+    for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
+               '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
+               '  36m' '1;36m' '  37m' '1;37m';
+      do FG=${FGs// /}
+      echo -en " $FGs \033[$FG  $T  "
+      for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
+        do echo -en "$EINS \033[$FG\033[$BG  $T  \033[0m";
+      done
+      echo;
+    done
+    echo
+  }
 }
 
 # If .bashrc.local exists, source it
