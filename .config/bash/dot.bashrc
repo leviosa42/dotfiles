@@ -38,6 +38,8 @@ _info "Setting up environment variables..."
   export XDG_DATA_HOME="$HOME/.local/share"
   export XDG_CACHE_HOME="$HOME/.cache"
   export XDG_STATE_HOME="$HOME/.local/state"
+  # Load .vimrc from .config/dot.vimrc
+  export VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
   # PATH
   [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
   # others
