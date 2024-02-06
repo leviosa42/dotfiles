@@ -1,6 +1,8 @@
 local plugins = {
   -- help for ja
   require('plugins/vimdoc-ja'),
+  -- language support
+  require('plugins/vim-polyglot'),
   -- telescope
   require('plugins/telescope'),
   -- colorscheme
