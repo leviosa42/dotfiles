@@ -28,7 +28,7 @@
   }
 }
 
-_info "Setting up shell options..."
+# _info "Setting up shell options..."
 : "Shell options" && {
   # autocd ... cd to directory by just typing the directory name
   shopt -s autocd
@@ -44,7 +44,7 @@ _info "Setting up shell options..."
   shopt -s extglob
 }
 
-_info "Setting up environment variables..."
+# _info "Setting up environment variables..."
 : "Set Enviroment Variables" && {
   # DOTFILES_DIR
   export DOTFILES_DIR="$HOME/.dotfiles"
@@ -73,7 +73,7 @@ _info "Setting up environment variables..."
   export VISUAL="$EDITOR"
 }
 
-_info "Setting up shell prompt..."
+# _info "Setting up shell prompt..."
 : "Set Prompt" && {
   #export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
   #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
@@ -123,13 +123,13 @@ _info "Setting up shell prompt..."
   export PROMPT_COMMAND="_set_ps1"
 }
 
-_info "Setting up shell aliases..."
+# _info "Setting up shell aliases..."
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
 }
 
-_info "Change terminal color..."
+# _info "Change terminal color..."
 : "Change terminal color" && {
   # tokyonight.sh
   # see: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
@@ -193,9 +193,9 @@ _info "Change terminal color..."
   }
 }
 
-_info "Setting up useful functions..."
+# _info "Setting up useful functions..."
 : "Useful functions" && {
-  _info "> colortest()"
+  # _info "> colortest()"
   function colortest() {
     # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
     local T='gYw' # The test text
@@ -217,9 +217,10 @@ _info "Setting up useful functions..."
 
 # If .bashrc.local exists, source it
 if [ -f "$HOME/.bashrc.local" ]; then
-  _info "Sourcing .bashrc.local..."
+  # _info "Sourcing .bashrc.local..."
   source "$HOME/.bashrc.local"
 fi
 
+_info "Loaded .bashrc"
 
 # vim: set ft=sh ts=2 sw=0 sts=-1 et fdm=marker fmr={,}:
