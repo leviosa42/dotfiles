@@ -15,7 +15,7 @@ set -euo pipefail
   XDG_DATA_HOME=$HOME/.local/share
   XDG_CACHE_HOME=$HOME/.cache
   XDG_STATE_HOME=$HOME/.local/state
-  XDG_RUNTIME_DIR=/run/user/$UID
+  # XDG_RUNTIME_DIR=/run/user/$UID
 }
 
 : "Utility functions" && {
@@ -54,6 +54,8 @@ set -euo pipefail
 }
 
 function main() {
+  # Usage
+  # main <options>
   : "package manager" && {
     # __log "package-manager" "Checking for package manager"
     # if [[ __check_command "apt" ]]; then
@@ -69,6 +71,28 @@ function main() {
     sudo apt update
     __log "package-manager" "sudo apt upgrade -y"
     sudo apt upgrade -y
+  }
+  : "XDG Base Directory Specification" && {
+    if [[ ! -d $XDG_CONFIG_HOME ]]; then
+      __log "xdg" "Creating $XDG_CONFIG_HOME"
+      mkdir -p $XDG_CONFIG_HOME
+    fi
+    if [[ ! -d $XDG_DATA_HOME ]]; then
+      __log "xdg" "Creating $XDG_DATA_HOME"
+      mkdir -p $XDG_DATA_HOME
+    fi
+    if [[ ! -d $XDG_CACHE_HOME ]]; then
+      __log "xdg" "Creating $XDG_CACHE_HOME"
+      mkdir -p $XDG_CACHE_HOME
+    fi
+    if [[ ! -d $XDG_STATE_HOME ]]; then
+      __log "xdg" "Creating $XDG_STATE_HOME"
+      mkdir -p $XDG_STATE_HOME
+    fi
+    # if [[ ! -d $XDG_RUNTIME_DIR ]]; then
+    #   __log "xdg" "Creating $XDG_RUNTIME_DIR"
+    #   mkdir -p $XDG_RUNTIME_DIR
+    # fi
   }
   : "dotfiles" && {
     : "dotfiles-install" && {

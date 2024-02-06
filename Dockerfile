@@ -55,13 +55,20 @@ RUN useradd -m -s /bin/bash -u ${USER_UID} ${USER_NAME} && \
     } > /etc/wsl.conf
 
 USER ${USER_NAME}
-WORKDIR /home/${USER_NAME}
 
 # Install linuxbrew
 # RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
 #     (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.bashrc && \
 #     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-RUN git clone https://github.com/leviosa42/dotfiles.git $HOME/.dotfiles && \
-    cd $HOME/.dotfiles && \
-    ./install.sh
+# RUN git clone https://github.com/leviosa42/dotfiles.git $HOME/.dotfiles && \
+#     cd $HOME/.dotfiles && \
+#     ./install.sh
+
+WORKDIR /home/${USER_NAME}/.dotfiles
+COPY / .
+USER root
+RUN chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/.dotfiles
+
+USER ${USER_NAME}
+RUN ./install.sh
