@@ -160,11 +160,17 @@ function main() {
     }
     : "dotfiles-link" && {
       __log "link" "Linking dotfiles"
+      # bash
       __log "link" "ln -s $DOTFILES_DIR/.config/bash/dot.bashrc $HOME/.bashrc"
       ln -snv $DOTFILES_DIR/.config/bash/dot.bashrc $HOME/.bashrc
+      # vim
       ln -snv $DOTFILES_DIR/.config/vim/ $XDG_CONFIG_HOME/vim
+      # nvim
       __log "link" "ln -s $DOTFILES_DIR/.config/nvim/ $XDG_CONFIG_HOME/nvim"
       ln -snv $DOTFILES_DIR/.config/nvim/ $XDG_CONFIG_HOME/nvim
+      # alacritty
+      __log "link" "ln -s $DOTFILES_DIR/.config/alacritty/ $XDG_CONFIG_HOME/alacritty"
+      ln -snv $DOTFILES_DIR/.config/alacritty/ $XDG_CONFIG_HOME/alacritty
     }
   }
 }

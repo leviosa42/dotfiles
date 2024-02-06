@@ -25,6 +25,9 @@
 
 !/.config
 
+!/.config/alacritty
+!/.config/alacritty/*
+
 !/.config/ash
 !/.config/ash/*
 
