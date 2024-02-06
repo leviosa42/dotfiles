@@ -23,6 +23,11 @@ if $SHELL =~? 'nyagos'
   set shellcmdflag=-c
 endif
 
+" https://github.com/alacritty/alacritty/issues/3402
+if &term == "alacritty"
+  let &term = "xterm-256color"
+endif
+
 let s:vimrc = {}
 
 function! s:vimrc.GetHome() " {{{
