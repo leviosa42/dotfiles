@@ -23,6 +23,11 @@ if $SHELL =~? 'nyagos'
   set shellcmdflag=-c
 endif
 
+" https://github.com/alacritty/alacritty/issues/3402
+if &term == "alacritty"
+  let &term = "xterm-256color"
+endif
+
 let s:vimrc = {}
 
 function! s:vimrc.GetHome() " {{{
@@ -225,6 +230,7 @@ set rtp+=~/vim-dev/vim-github-theme
 set noshellslash
 set novisualbell
 set modeline
+set modelines=2
 " * * Formats: {{{
 set fileformat=unix
 set fileformats=unix,dos
@@ -265,7 +271,7 @@ set hidden
 set incsearch
 set ignorecase
 set smartcase
-"set hlsearch
+set hlsearch
 " * * }}}
 " * * Command-Line: {{{
 set wildmenu
@@ -709,7 +715,7 @@ nnoremap <Leader>h :<C-u>setl hlsearch!<CR>:setl hlsearch?<CR>
 
 nnoremap x "_x
 
-inoremap <S-Tab> <Tab>
+inoremap <S-Tab> <C-v><Tab>
 
 nnoremap <silent> <S-Up> "zdd<Up>"zP
 nnoremap <silent> <S-Down> "zdd"zp

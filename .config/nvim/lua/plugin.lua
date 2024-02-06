@@ -3,10 +3,17 @@ local plugins = {
   require('plugins/vimdoc-ja'),
   -- language support
   require('plugins/vim-polyglot'),
+  -- vim-commentary
+  require('plugins/vim-commentary'),
+  -- markonm/traces.vim
+  require('plugins/traces'),
   -- telescope
   require('plugins/telescope'),
   -- colorscheme
   require('plugins/github-nvim-theme'),
+  -- require('plugins/kanagawa'),
+  -- require('plugins/gruvbox'),
+  -- require('plugins/tokyonight'),
   -- filer
   require('plugins/fern'),
   require('plugins/fern-renderer-nerdfont'), -- support nerdfont

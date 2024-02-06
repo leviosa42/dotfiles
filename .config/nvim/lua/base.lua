@@ -4,6 +4,9 @@ vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
+vim.o.undofile = true
+vim.o.backup = true
+vim.o.backupdir = vim.env.XDG_STATE_HOME .. '/backup'
 -- * Appearance: {{{
 vim.opt.number = true
 vim.opt.cursorline = true

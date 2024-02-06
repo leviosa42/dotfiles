@@ -25,6 +25,9 @@
 
 !/.config
 
+!/.config/alacritty
+!/.config/alacritty/*
+
 !/.config/ash
 !/.config/ash/*
 
@@ -33,6 +36,9 @@
 
 !/.config/gh
 /.config/gh/.gitkeep
+
+!/.config/git
+!/.config/git/*
 
 !/.config/nvim
 !/.config/nvim/**
