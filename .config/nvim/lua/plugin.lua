@@ -1,6 +1,8 @@
 local plugins = {
   -- help for ja
   require('plugins/vimdoc-ja'),
+  -- language support
+  require('plugins/vim-polyglot'),
   -- vim-commentary
   require('plugins/vim-commentary'),
   -- markonm/traces.vim
@@ -16,6 +18,8 @@ local plugins = {
   require('plugins/fern'),
   require('plugins/fern-renderer-nerdfont'), -- support nerdfont
   require('plugins/fern-preview'), -- preview files
+  -- fold
+  require('plugins/pretty-fold'),
   -- lsp
   require('plugins/nvim-treesitter'),
   -- require('plugins/mason'),

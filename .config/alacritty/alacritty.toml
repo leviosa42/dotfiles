@@ -1,9 +1,9 @@
 # https://alacritty.org/config-alacritty.html
 [window]
-padding = { x = 10, y = 10 }
+padding = { x = 5, y = 5 }
 dynamic_padding = true
 opacity = 0.96
-resize_increments = true
+resize_increments = false
 
 [scrolling]
 history = 10000

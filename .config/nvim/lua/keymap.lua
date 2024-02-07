@@ -30,6 +30,14 @@ vim.keymap.set('n', '[window]s', '<Cmd>split<CR>', { noremap = true})
 vim.keymap.set('n', '[window]v', '<Cmd>vsplit<CR>', { noremap = true})
 vim.keymap.set('n', '[window]o', '<Cmd>only<CR>', { noremap = true})
 -- * * }}}
+-- * * [terminal]: {{{
+vim.keymap.set('n', '<Leader>x', '[terminal]', { remap = true })
+vim.keymap.set('n', '[terminal]', '<Nop>', { noremap = true })
+-- vim.keymap.set('n', '[terminal]x', '<cmd>new<CR><Cmd>terminal<CR>', { noremap = true })
+vim.keymap.set('n', '[terminal]h', '<Cmd>vertical aboveleft new<CR><Cmd>terminal<CR>', { noremap = true })
+vim.keymap.set('n', '[terminal]j', '<cmd>rightbelow new<CR><Cmd>terminal<CR>', { noremap = true })
+vim.keymap.set('n', '[terminal]k', '<Cmd>aboveleft new<CR><Cmd>terminal<CR>', { noremap = true })
+vim.keymap.set('n', '[terminal]l', '<Cmd>vertical rightbelow new<CR><Cmd>terminal<CR>', { noremap = true })
 -- * * [settings]: {{{
 vim.keymap.set('n', '<Leader>v', '[settings]', { remap = true })
 vim.keymap.set('n', '[settings]', '<Nop>', { noremap = true })
@@ -53,4 +61,6 @@ vim.keymap.set('n', '[settings]-', function()
 end, { noremap = true })
 -- * * }}}
 -- * }}}
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true })
+vim.keymap.set('t', 'jk', '<C-\\><C-n>', { noremap = true })
 -- vim: ft=lua ts=2 sw=0 sts=-1 et fdm=marker fmr={{{,}}}:

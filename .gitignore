@@ -60,6 +60,8 @@
 !/.config/vim/template/gnuplot
 !/.config/vim/template/gnuplot/*
 
+!/.config/wezterm
+!/.config/wezterm/**
 
 !/.config/wt
 !/.config/wt/*
