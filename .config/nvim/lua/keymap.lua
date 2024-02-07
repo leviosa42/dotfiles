@@ -53,4 +53,6 @@ vim.keymap.set('n', '[settings]-', function()
 end, { noremap = true })
 -- * * }}}
 -- * }}}
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true })
+vim.keymap.set('t', 'jk', '<C-\\><C-n>', { noremap = true })
 -- vim: ft=lua ts=2 sw=0 sts=-1 et fdm=marker fmr={{{,}}}:
