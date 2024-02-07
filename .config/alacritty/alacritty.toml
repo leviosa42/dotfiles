@@ -1,9 +1,9 @@
 # https://alacritty.org/config-alacritty.html
 [window]
-padding = { x = 10, y = 10 }
+padding = { x = 5, y = 5 }
 dynamic_padding = true
 opacity = 0.85
-resize_increments = true
+resize_increments = false
 
 [scrolling]
 history = 10000
@@ -13,7 +13,7 @@ multiplier = 3
 normal = { family = "PlemolJP Console NF", style = "Regular" }
 bold = { family = "PlemolJP Console NF", style = "Bold" }
 italic = { family = "PlemolJP Console NF", style = "Italic" }
-size = 22.0
+size = 18.0
 offset = { x = 0, y = 0 }
 
 [colors]
