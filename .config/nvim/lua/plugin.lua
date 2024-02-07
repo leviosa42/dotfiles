@@ -18,6 +18,8 @@ local plugins = {
   require('plugins/fern'),
   require('plugins/fern-renderer-nerdfont'), -- support nerdfont
   require('plugins/fern-preview'), -- preview files
+  -- fold
+  require('plugins/pretty-fold'),
   -- lsp
   require('plugins/nvim-treesitter'),
   -- require('plugins/mason'),
