@@ -42,6 +42,8 @@
   shopt -s dotglob
   # extglob ... enable extended pattern matching features
   shopt -s extglob
+  # histappend ... append to the history file, don't overwrite it
+  shopt -s histappend
 }
 
 # _info "Setting up environment variables..."
@@ -57,6 +59,7 @@
   # bash
   export HISTFILE="$XDG_STATE_HOME/bash/history"
   export HISTSIZE=1000
+  export HISTCONTROL=ignoreboth
   # Load .vimrc from .config/dot.vimrc
   export VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
   # PATH
