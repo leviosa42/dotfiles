@@ -2,7 +2,7 @@
 [window]
 padding = { x = 10, y = 10 }
 dynamic_padding = true
-opacity = 0.85
+opacity = 0.96
 resize_increments = true
 
 [scrolling]
@@ -13,7 +13,7 @@ multiplier = 3
 normal = { family = "PlemolJP Console NF", style = "Regular" }
 bold = { family = "PlemolJP Console NF", style = "Bold" }
 italic = { family = "PlemolJP Console NF", style = "Italic" }
-size = 22.0
+size = 18.0
 offset = { x = 0, y = 0 }
 
 [colors]
@@ -21,7 +21,8 @@ offset = { x = 0, y = 0 }
 
 [bell]
 animation = "Linear"
-duration = 100
+duration = 2
+color = "#808080"
 
 [selection]
 save_to_clipboard = true
