@@ -1,1 +1,6 @@
-return {'vim-jp/vimdoc-ja'}
+return {
+    'vim-jp/vimdoc-ja',
+    config = function()
+        vim.opt.helplang = 'ja'
+    end,
+}
