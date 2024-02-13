@@ -11,9 +11,10 @@ local plugins = {
   require('plugins/telescope'),
   -- colorscheme
   require('plugins/github-nvim-theme'),
-  -- require('plugins/kanagawa'),
-  -- require('plugins/gruvbox'),
-  -- require('plugins/tokyonight'),
+  require('plugins/catppuccin'),
+  require('plugins/kanagawa'),
+  require('plugins/gruvbox'),
+  require('plugins/tokyonight'),
   -- filer
   require('plugins/fern'),
   require('plugins/fern-renderer-nerdfont'), -- support nerdfont

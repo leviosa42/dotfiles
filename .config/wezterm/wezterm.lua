@@ -17,7 +17,11 @@ config.font = wezterm.font_with_fallback({
     { family = "PlemolJP Console NF", weight = "Regular" },
     "Consolas",
   })
-config.font_size = 12.0
+if platform.is_win then
+  config.font_size = 12.0
+elseif platform.is_linux then
+  config.font_size = 16.0
+end
 
 
 -- +-----------------+
@@ -46,21 +50,29 @@ config.window_background_opacity = 0.95
 -- | Launch          |
 -- +-----------------+
 -- launch (https://wezfurlong.org/wezterm/config/launch.html)
-config.launch_menu = {
-  -- windows
-  {
-    label = "Command Prompt",
-    args = { "cmd.exe" },
-  },
-  {
-    label = "NYAGOS",
-    args = { "nyagos.exe" },
-  },
-  {
-    label = "Ubuntu",
-    args = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" },
+if platform.is_win then
+  config.launch_menu = {
+    {
+      label = "Command Prompt",
+      args = { "cmd.exe" },
+    },
+    {
+      label = "NYAGOS",
+      args = { "nyagos.exe" },
+    },
+    {
+      label = "Ubuntu",
+      args = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" },
+    }
   }
-}
+elseif platform.is_linux then
+  config.launch_menu = {
+    {
+      label = "bash",
+      args = { "/bin/bash", "-himBHs" },
+    }
+  }
+end
 
 for k,v in pairs(require('key_bindings')) do
   config[k] = v
