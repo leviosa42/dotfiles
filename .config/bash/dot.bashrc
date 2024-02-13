@@ -133,6 +133,7 @@
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
+  alias "code"="/mnt/c/Users/askm4/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
 }
 
 # _info "Change terminal color..."
