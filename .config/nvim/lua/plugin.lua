@@ -23,6 +23,7 @@ local plugins = {
   -- lsp
   require('plugins/nvim-treesitter'),
   -- require('plugins/mason'),
+  require('plugins/nvim-lspconfig'),
   -- statusline
   require('plugins/lualine'),
   -- copilot
