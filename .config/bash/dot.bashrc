@@ -73,10 +73,18 @@
   if [[ ! $PATH =~ "/usr/local/go/bin" ]]; then
     export PATH="$PATH:/usr/local/go/bin"
   fi
+  if [[ ! $PATH =~ "$HOME/go/bin" ]]; then
+    export PATH="$PATH:$HOME/go/bin"
+  fi
   export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
   # others
   export EDITOR="nvim"
   export VISUAL="$EDITOR"
+
+  # wsl
+  if [[ -v WSL_DISTRO_NAME ]]; then
+    export BROWSER=/mnt/c/windows/explorer.exe
+  fi
 }
 
 # _info "Setting up shell prompt..."
