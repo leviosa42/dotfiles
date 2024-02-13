@@ -50,6 +50,6 @@ return { -- colorscheme
         groups = {},
       })
     -- setup must be called before loading
-    vim.cmd('colorscheme github_dark_default')
+    -- vim.cmd('colorscheme github_dark_default')
   end
 }
