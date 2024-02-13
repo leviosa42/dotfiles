@@ -70,6 +70,9 @@
   if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
     export PATH="$HOME/.local/bin:$PATH"
   fi
+  if [[ ! $PATH =~ "/usr/local/go/bin" ]]; then
+    export PATH="$PATH:/usr/local/go/bin"
+  fi
   export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
   # others
   export EDITOR="nvim"
