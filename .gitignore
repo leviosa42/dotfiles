@@ -45,7 +45,7 @@
 
 
 !/.config/nyagos
-!/.config/nyagos/*
+!/.config/nyagos/**
 
 !/.config/sh
 !/.config/sh/*

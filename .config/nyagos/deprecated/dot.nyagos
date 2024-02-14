@@ -1,0 +1,104 @@
+-- ref: DeeR's .nyagos. > https://github.com/DeaR/dotfiles/blob/master/.nyagos
+print("[.NYAGOS] START  LOADING")
+
+-- Pre Init: {{{
+-- Util Functions: -- {{{
+local function mkdirp(path)
+    nyagos.exec({"mkdir", "/p", path})
+end
+
+local function ext(fname)
+    local p = nyagos.which(fname)
+    return p and nyagos.stat(p).name or fname
+end
+
+-- }}}
+local home = nyagos.getenv("HOME") or nyagos.getenv("USERPROFILE")
+set({
+    HOME = home,
+    XDG_CONFIG_HOME = nyagos.getenv("XDG_CONFIG_HOME") or (home .. "\\.config"),
+    XDG_CACHE_HOME = nyagos.getenv("XDG_CACHE_HOME") or (home .. "\\.cache"),
+    XDG_DATA_HOME = nyagos.getenv("XDG_DATA_HOME") or (home .. "\\.local\\share"),
+    XDG_STATE_HOME = nyagos.getenv("XDG_STATE_HOME") or (home .. "\\.local\\state")
+})
+mkdirp(nyagos.env.XDG_CONFIG_HOME)
+mkdirp(nyagos.env.XDG_CACHE_HOME)
+mkdirp(nyagos.env.XDG_DATA_HOME)
+mkdirp(nyagos.env.XDG_STATE_HOME)
+-- }}}
+-- Enviroment Variable: {{{
+set({
+    SHELL = (string.gsub(nyagos.exe, '\\', '/')),
+    EDITOR = ext('vim') or ext('notepad'),
+    -- PROFILE = "Invoke-Expression (&scoop-search --hook)"
+})
+nyagos.envadd("PATH",
+    -- "%HOME%\\scoop\\shims",
+    "%USERPROFILE%\\go\\bin",
+    "%USERPROFILE%\\AppData\\Local\\Microsoft\\WinGet\\Links",
+    "%HOME%\\.local\\bin"
+)
+
+if nyagos.env.IS_PORTABLE_DEV_ENV ~= "TRUE" then
+    -- print("!!! Not Portable Dev Env !!!")
+    -- print("Exclude values including D: and E: from PATH")
+    nyagos.envdel("PATH", "D:", "E:")
+end
+
+-- }}}
+-- Alias: {{{
+nyagos.alias[".."] = "cd .."
+
+if nyagos.which("eza") then
+    alias({
+        __eza__ = ext("eza"),
+        eza = "__eza__ --color=automatic -1F --group-directories-first -h --git --time-style=long-iso",
+        ls = "eza",
+        ll = "ls -l",
+        la = "ls -laa",
+        lt = "eza -a -T -L=3 -I='node_modules|.git|.cache'"
+    })
+else
+    alias({
+        ls = "__ls__ -oF",
+        ll = "ls -l",
+        la = "ls -al"
+    })
+end
+
+alias({
+    e = nyagos.getenv("EDITOR"),
+    q = "__exit__",
+    clear = "__cls__",
+    clc = "__cls__",
+    sudo = "su",
+    grep = "jvgrep",
+    renya = ("lua_f ~\\.nyagos"),
+    view = ext("explorer.exe")
+})
+nyagos.alias[".nyagos"] = nyagos.env.EDITOR .. " ~/.nyagos && lua_f ~/.nyagos"
+
+if nyagos.which('vim') then
+    alias({
+        v = ext('vim'),
+        vi = ext('vim'),
+        vimo = (ext('vim') .. ' -u ~/.config/vim/one.vimrc'),
+        gvimo = (ext('gvim') .. ' -u ~/.config/vim/one.vimrc')
+    })
+end
+if nyagos.which('nvim') then
+    alias({
+        nv = ext('nvim'),
+        nvi = ext('nvim'),
+        gnvim = ext('goneovim'),
+        gnv = ext('goneovim')
+    })
+end
+-- }}}
+-- Prompt: {{{
+require("prompt")
+-- }}}
+print("[.NYAGOS] FINISH LOADING")
+
+-- vim: ft=lua expandtab ts=4 sts=-1 sw=0 foldmethod=marker cms=--\ %s:
+
