@@ -1,9 +1,9 @@
-print("[.nyagos]")
-
-package.path = ""
+-- bridge to XDG_CONFIG_HOME/nyagos/nyagos.lua
+package.path = package.path
     .. ";" .. nyagos.pathjoin(nyagos.env.XDG_CONFIG_HOME, "nyagos", "?.lua")
     .. ";" .. nyagos.pathjoin(nyagos.env.XDG_CONFIG_HOME, "nyagos", "?" , "init.lua")
 
 -- print(package.path)
 
 require("nyagos")
+-- vim: ft=lua

@@ -4,9 +4,9 @@ alias({
     clear = "__cls__",
     clc = "__cls__",
     view = nyagos.which("explorer.exe"),
-    reload = "lua_f ~/.nyagos",
+    reload = ("lua_f " .. nyagos.getenv("XDG_CONFIG_HOME") .. "/nyagos/nyagos.lua"),
 })
-
+nyagos.alias[":q"] = "__exit__"
 -- cd
 nyagos.alias[".."] = "cd .."
 
