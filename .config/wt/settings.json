@@ -569,7 +569,7 @@
             "yellow": "#E2A478"
         }
     ],
-    "startOnUserLogin": true,
+    "startOnUserLogin": false,
     "themes": [],
     "useAcrylicInTabRow": true
 }
