@@ -21,3 +21,30 @@ mkdirp(nyagos.env.XDG_STATE_HOME)
 -- Enviroment Variable
 nyagos.env.SHELL = (string.gsub(nyagos.exe, '\\', '/'))
 nyagos.env.EDITOR = nyagos.which("nvim")
+
+-- golang
+-- GOPATH
+nyagos.env.GOPATH = nyagos.pathjoin(nyagos.env.XDG_DATA_HOME, "go")
+mkdirp(nyagos.env.GOPATH)
+-- GO111MODULE
+nyagos.env.GO111MODULE = "on"
+-- GOBIN
+nyagos.env.GOBIN = nyagos.pathjoin(nyagos.env.XDG_DATA_HOME, "go", "bin")
+mkdirp(nyagos.env.GOBIN)
+nyagos.envadd("PATH", nyagos.env.GOBIN)
+-- GOCACHE
+nyagos.env.GOCACHE = nyagos.pathjoin(nyagos.env.XDG_CACHE_HOME, "go-build")
+mkdirp(nyagos.env.GOCACHE)
+-- GOMODCACHE
+nyagos.env.GOMODCACHE = nyagos.pathjoin(nyagos.env.XDG_CACHE_HOME, "go", "mod")
+mkdirp(nyagos.env.GOMODCACHE)
+
+-- rust/cargo
+nyagos.env.CARGO_HOME = nyagos.pathjoin(nyagos.env.XDG_DATA_HOME, "cargo")
+mkdirp(nyagos.env.CARGO_HOME)
+nyagos.envadd("PATH", nyagos.pathjoin(nyagos.env.CARGO_HOME, "bin"))
+
+-- scoop (end of PATH)
+nyagos.envdel("PATH", nyagos.pathjoin("scoop", "shims"))
+nyagos.envadd("PATH", nyagos.pathjoin(nyagos.env.HOME, "scoop", "shims"))
+

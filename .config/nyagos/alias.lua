@@ -4,7 +4,15 @@ alias({
     clear = "__cls__",
     clc = "__cls__",
     view = nyagos.which("explorer.exe"),
-    reload = ("lua_f " .. nyagos.getenv("XDG_CONFIG_HOME") .. "/nyagos/nyagos.lua"),
+    reload = function()
+        local file = nyagos.pathjoin(
+            nyagos.getenv("XDG_CONFIG_HOME"),
+            "nyagos",
+            "nyagos.lua"
+        )
+        nyagos.exec("lua_f " .. file)
+        print("Reloaded " .. file)
+    end,
 })
 nyagos.alias[":q"] = "__exit__"
 -- cd
