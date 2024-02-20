@@ -13,7 +13,9 @@ end
 -- | Font            |
 -- +-----------------+
 -- font (https://wezfurlong.org/wezterm/config/fonts.html)
+-- Morelarspace {Argon,Neon,Xenon,Krypton}
 config.font = wezterm.font_with_fallback({
+    { family = "Moralerspace Argon HWNF", weight = "Regular" },
     { family = "PlemolJP Console NF", weight = "Regular" },
     "Consolas",
   })
@@ -34,7 +36,14 @@ config.window_padding = {
   top = 8,
   bottom = 8,
 }
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.90
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+
+if platform.is_linux then
+  config.integrated_title_button_style = "Gnome"
+elseif platform.is_win then
+  config.integrated_title_button_style = "Windows"
+end
 
 -- +-----------------+
 -- | Domains         |

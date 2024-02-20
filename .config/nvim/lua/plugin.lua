@@ -9,6 +9,8 @@ local plugins = {
   require('plugins/traces'),
   -- telescope
   require('plugins/telescope'),
+  -- indentline
+  require('plugins/indent-blankline'),
   -- colorscheme
   require('plugins/github-nvim-theme'),
   require('plugins/catppuccin'),

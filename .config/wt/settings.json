@@ -96,7 +96,7 @@
                 "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
                 "font": 
                 {
-                    "face": "PlemolJP Console NF"
+                    "face": "Moralerspace Argon"
                 },
                 "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
                 "hidden": false,
