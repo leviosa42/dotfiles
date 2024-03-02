@@ -60,7 +60,7 @@
 
   # PATH
   if [ -d $CARGO_HOME ]; then
-    source "${CARGO_HOME}/bin"
+    source "${CARGO_HOME}/env"
   fi
   # [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
   if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
@@ -73,13 +73,6 @@
     export PATH="$PATH:$HOME/go/bin"
   fi
 
-  # node
-  export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-  # npm
-  export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
-  # rust/cargo,rustup
-  export CARGO_HOME="$XDG_DATA_HOME"/cargo
-  export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
   # others
   export EDITOR="nvim"
   export VISUAL="$EDITOR"

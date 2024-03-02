@@ -24,7 +24,7 @@ fi
 tail /etc/bash.bashrc | grep -q 'XDG_CONFIG_HOME' || echo ". \"${XDG_CONFIG_HOME:-$HOME/.config}/bash/dot.bashrc\"" >> /etc/bash.bashrc
 
 # go
-mkdir "$XDG_DATA_HOME/go"
+mkdir -p "$XDG_DATA_HOME/go"
 GOPATH=${GOPATH:-$XDG_DATA_HOME/go}
 
 # rust(cargo,rustup)
