@@ -11,6 +11,7 @@ sources=(
   .config/ash
   .config/bash
   .config/git
+  .config/nvim
   # .config/nyagos
   .config/sh
   .config/vim
