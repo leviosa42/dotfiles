@@ -50,18 +50,14 @@
 : "Set Enviroment Variables" && {
   # DOTFILES_DIR
   export DOTFILES_DIR="$HOME/.dotfiles"
-  # source "$DOTFILES_DIR/.config/sh/env.sh"
-  # XDG_*_HOME
-  export XDG_CONFIG_HOME="$HOME/.config"
-  export XDG_DATA_HOME="$HOME/.local/share"
-  export XDG_CACHE_HOME="$HOME/.cache"
-  export XDG_STATE_HOME="$HOME/.local/state"
-  # bash
-  export HISTFILE="$XDG_STATE_HOME/bash/history"
+
+  # XDG Base Directory Specification
+  set -a && source "$DOTFILES_DIR/.config/bash/env.xdg.sh" && set +a
+
+  # history
   export HISTSIZE=1000
   export HISTCONTROL=ignoreboth
-  # Load .vimrc from .config/dot.vimrc
-  export VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
+
   # PATH
   if [[ ! $PATH =~ "$HOME/.cargo/bin" ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"

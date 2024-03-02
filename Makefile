@@ -3,6 +3,8 @@
 .DEFAULT_GOAL := help
 .PHONY := help init link install
 
+ENV_XDG := .config/bash/env.xdg.sh
+
 ## help: Show this help message
 help:
 	@grep -E "^## [a-zA-Z_-]+: .*$$" $(MAKEFILE_LIST) \
@@ -16,6 +18,7 @@ init: init_bash
 ## link: Link dotfiles
 link:
 	bash scripts/link.sh
+	exec $$SHELL -l
 
 ## install: Install all packages
 install: install_packages install_bat install_eza install_nvim install_nodejs install_rustup
@@ -35,21 +38,18 @@ install_packages:
 
 ## install_bat: Install sharkdp/bat
 install_bat:
-	bash scripts/install_bat.sh
+	. $(ENV_XDG) && bash scripts/install_bat.sh
 
 ## install_eza: Install eza-community/eza
 install_eza:
-	bash scripts/install_eza.sh
+	. $(ENV_XDG) && bash scripts/install_eza.sh
 
 ## install_nvim: Install neovim/neovim
 install_nvim:
-	bash scripts/install_nvim.sh
+	. $(ENV_XDG) && bash scripts/install_nvim.sh
 
 install_nodejs:
-	bash scripts/install_nodejs.sh
+	. $(ENV_XDG) && bash scripts/install_nodejs.sh
 
 install_rustup:
-	# see: https://www.rust-lang.org/ja/tools/install
-	# see: https://github.com/rust-lang-deprecated/rustup.sh/issues/83
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
+	. $(ENV_XDG) && bash scripts/install_rustup.sh

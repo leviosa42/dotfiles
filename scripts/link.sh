@@ -19,7 +19,7 @@ sources=(
   # .config/wt
 )
 
-backup_dir=$XDG_CACHE_HOME/dotfiles/$(date "+%Y%m%d%H%M%S")
+backup_dir=$XDG_CACHE_HOME/dotfiles/$(date "+%Y-%m-%d-%H%M%S")
 mkdir -p $backup_dir
 
 mkdir -p $XDG_CONFIG_HOME
@@ -30,9 +30,9 @@ for s in "${sources[@]}"; do
   if [ -e $target ]; then
     backupto=$backup_dir/$s
     mkdir -p $(dirname $backupto)
-    cp $source $backup_dir/$s
+    cp -r $source $backupto || echo "FAILURE to backup $source"
   fi
-  ln -sfn $source $target
+  ln -sfn $source $target || echo "FAILURE to link $source"
 done
 
 # vim: noet
