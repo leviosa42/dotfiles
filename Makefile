@@ -32,7 +32,7 @@ install_packages:
 	sudo apt-get update
 	sudo apt-get install -y \
 		# basic
-		git wget curl nano vim ca-certificates build-essential gpg sudo
+		git gh wget curl nano vim ca-certificates build-essential gpg sudo
 
 ## install_bat: Install sharkdp/bat
 install_bat:
@@ -45,3 +45,8 @@ install_eza:
 ## install_nvim: Install neovim/neovim
 install_nvim:
 	bash scripts/install_nvim.sh
+
+install_cargo:
+	# see: https://www.rust-lang.org/ja/tools/install
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
