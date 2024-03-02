@@ -30,7 +30,7 @@ for s in "${sources[@]}"; do
   if [ -e $target ]; then
     backupto=$backup_dir/$s
     mkdir -p $(dirname $backupto)
-    mv $source $backup_dir/$s
+    cp $source $backup_dir/$s
   fi
   ln -sfn $source $target
 done
