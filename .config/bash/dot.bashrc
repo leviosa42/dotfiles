@@ -59,8 +59,8 @@
   export HISTCONTROL=ignoreboth
 
   # PATH
-  if [[ ! $PATH =~ "$HOME/.cargo/bin" ]]; then
-    export PATH="$HOME/.cargo/bin:$PATH"
+  if [ -d $CARGO_HOME ]; then
+    source "${CARGO_HOME}/bin"
   fi
   # [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
   if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
