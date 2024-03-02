@@ -5,6 +5,10 @@
 !/LICENSE
 !/README.md
 
+!/Makefile
+!/scripts
+!/scripts/**
+
 !.gitignore
 !.gitkeep
 
