@@ -11,6 +11,7 @@ vim.cmd([[
   augroup indent
     autocmd!
     autocmd FileType go setl noet ts=4 sw=0 sts=-1
+    autocmd FileType make setl noet ts=4 sw=0 sts=-1
   augroup END
 ]])
 
