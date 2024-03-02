@@ -18,7 +18,7 @@ link:
 	bash scripts/link.sh
 
 ## install: Install all packages
-install: install_packages install_bat install_eza install_nvim
+install: install_packages install_bat install_eza install_nvim install_nodejs install_rustup
 
 ## init_bash: Initialize bash. Support for XDG Base Directory
 init_bash:
@@ -45,7 +45,11 @@ install_eza:
 install_nvim:
 	bash scripts/install_nvim.sh
 
-install_cargo:
+install_nodejs:
+	bash scripts/install_nodejs.sh
+
+install_rustup:
 	# see: https://www.rust-lang.org/ja/tools/install
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	# see: https://github.com/rust-lang-deprecated/rustup.sh/issues/83
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
