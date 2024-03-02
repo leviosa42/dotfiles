@@ -18,7 +18,6 @@ init: init_bash
 ## link: Link dotfiles
 link:
 	bash scripts/link.sh
-	exec $$SHELL -l
 
 ## install: Install all packages
 install: install_packages install_bat install_eza install_nvim install_nodejs install_rustup
@@ -34,7 +33,7 @@ init_bash:
 install_packages:
 	sudo apt-get update
 	sudo apt-get install -y \
-		git gh wget curl nano vim ca-certificates build-essential gpg sudo
+		git gh wget curl nano vim ca-certificates build-essential gpg sudo ripgrep
 
 ## install_bat: Install sharkdp/bat
 install_bat:

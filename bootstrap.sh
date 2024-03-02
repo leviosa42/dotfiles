@@ -14,4 +14,4 @@ git clone https://github.com/leviosa42/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
 make all
-
+exec $SHELL -l
