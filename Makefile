@@ -31,7 +31,6 @@ init_bash:
 install_packages:
 	sudo apt-get update
 	sudo apt-get install -y \
-		# basic
 		git gh wget curl nano vim ca-certificates build-essential gpg sudo
 
 ## install_bat: Install sharkdp/bat
