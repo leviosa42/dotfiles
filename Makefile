@@ -15,7 +15,7 @@ init: init_bash
 
 ## link: Link dotfiles
 link:
-	scripts/link.sh
+	bash scripts/link.sh
 
 ## install: Install all packages
 install: install_packages install_bat install_eza install_nvim
@@ -36,12 +36,12 @@ install_packages:
 
 ## install_bat: Install sharkdp/bat
 install_bat:
-	scripts/install_bat.sh
+	bash scripts/install_bat.sh
 
 ## install_eza: Install eza-community/eza
 install_eza:
-	scripts/install_eza.sh
+	bash scripts/install_eza.sh
 
 ## install_nvim: Install neovim/neovim
 install_nvim:
-	scripts/install_nvim.sh
+	bash scripts/install_nvim.sh
