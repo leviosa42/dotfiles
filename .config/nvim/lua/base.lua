@@ -4,7 +4,9 @@ vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
-vim.opt.shellcmdflag = string.find(vim.env.SHELL, 'nyagos') and '-c' or vim.opt.shellcmdflag
+-- NOTE: on docker, vim.env.SHELL was nil
+local shell = vim.env.SHELL or '/bin/bash'
+vim.opt.shellcmdflag = string.find(shell, 'nyagos') and '-c' or vim.opt.shellcmdflag
 vim.o.undofile = true
 vim.o.backup = true
 vim.o.backupdir = vim.env.XDG_STATE_HOME .. '/backup'
