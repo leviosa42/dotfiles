@@ -15,7 +15,7 @@ sources=(
   # .config/nyagos
   .config/sh
   .config/vim
-  .config/wget
+  # .config/wget
   .config/wezterm
   # .config/wt
 )

@@ -47,8 +47,8 @@ NODE_REPL_HISTORY="$XDG_STATE_HOME/node/repl_history"
 VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
 
 # wget
-WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
-[ -f "$WGETRC" ] || mkdir -p $(dirname $WGETRC)
+# WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+# [ -f "$WGETRC" ] || mkdir -p $(dirname $WGETRC)
 
 
 # dotnet
