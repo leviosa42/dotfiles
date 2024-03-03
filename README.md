@@ -1,7 +1,13 @@
 # 💻 dotfiles
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/leviosa42/dotfiles/docker-publish.yml?style=for-the-badge&logo=docker)
 
+## Usage
 
+## Ubuntu
+
+```sh
+bash <(curl -sL https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.sh)
+```
 
 ### Try with Docker
 

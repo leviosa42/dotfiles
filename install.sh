@@ -13,5 +13,6 @@ sudo apt install -y git make
 git clone https://github.com/leviosa42/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
+# make init_mirror_jp
 make all
 exec $SHELL -l

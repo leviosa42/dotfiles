@@ -5,11 +5,11 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
-XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/run/user/$UID}
-XDG_DATA_DIRS=${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
-XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg}
+# XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/run/user/$UID}
+# XDG_DATA_DIRS=${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
+# XDG_CONFIG_DIRS=${XDG_CONFIG_DIRS:-/etc/xdg}
 
-for var in $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_RUNTIME_DIR $XDG_DATA_DIRS $XDG_CONFIG_DIRS; do
+for var in $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_STATE_HOME ; do
   [ ! -d "${var}" ] && mkdir -p "${var}"
 done
 # bash
@@ -21,7 +21,7 @@ HISTFILE="$XDG_STATE_HOME/bash/history"
 if [ ! -f $HISTFILE ]; then
   mkdir -p $(dirname $HISTFILE) && touch $HISTFILE
 fi
-tail /etc/bash.bashrc | grep -q 'XDG_CONFIG_HOME' || echo ". \"${XDG_CONFIG_HOME:-$HOME/.config}/bash/dot.bashrc\"" >> /etc/bash.bashrc
+tail /etc/bash.bashrc | grep -q 'XDG_CONFIG_HOME' || echo ". \"${XDG_CONFIG_HOME:-$HOME/.config}/bash/dot.bashrc\"" | sudo tee /etc/bash.bashrc
 
 # go
 mkdir -p "$XDG_DATA_HOME/go"
