@@ -13,18 +13,19 @@
 !.gitkeep
 
 !/.github
-!/.github/*
+!/.github/**
 !/.github/workflows
 !/.github/workflows/*
 
 !/.devcontainer
 !/.devcontainer/*
 
-!/bootstrap.sh
+# !/bootstrap.sh
 !/install.sh
 !/install.ps1
 
 !/Dockerfile
+!/Dockerfile.dev
 !/docker-compose.yml
 
 !/.config
