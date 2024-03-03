@@ -9,14 +9,6 @@
 bash <(curl -sL https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.sh)
 ```
 
-### Try with Docker
-
-#### Ubuntu
-
-```sh
-docker container run --rm -it ghcr.io/leviosa42/dotfiles
-```
-
 #### Windows
 
 not yet
@@ -33,6 +25,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 irm https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.ps1 | iex
 ```
 
+<!--
 ### WSL2
 
 ### Import from ghcr.io
@@ -41,5 +34,6 @@ irm https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.ps1 | iex
 docker container export $(docker container create ghcr.io/leviosa42/dotfiles) -o %USERPROFILE%\wsl-dotfiles.tar
 wsl --import dotfiles %USERPROFILE%\wsl-dotfiles %USERPROFILE%\wsl-dotfiles.tar --version 2
 ```
+-->
 
 [winget]: https://apps.microsoft.com/detail/9NBLGGH4NNS1?hl=ja-jp&gl=JP
