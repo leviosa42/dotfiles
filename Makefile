@@ -57,12 +57,16 @@ prod_run:
 
 ## all: make init link install
 all: init link install
+	echo -e "\033[32mDone!\033[0m"
+	echo -e "\033[32mTo apply bashrc, please run: "
+	echo -e "\033[32m    exec \$SHELL -l\033[0m"
 
 ## init: Initialize dotfiles
 init: init_bash
 
 ## link: Link dotfiles
 link:
+	@echo -e "\033[33m[make link]\033[0m"
 	bash scripts/link.sh
 
 ## install: Install all packages
@@ -70,7 +74,7 @@ install: install_packages install_bat install_eza install_nvim install_nodejs in
 
 ## init_mirror_jp: configures the mirror for apt
 init_mirror_jp:
-	echo -e "\033[33m[make init_mirror_jp]\033[0m"
+	@echo -e "\033[33m[make init_mirror_jp]\033[0m"
 	# see: https://raw.githubusercontent.com/leviosa42/dotfiles/main/install.sh
 	sudo sed -i.bak -r \
 		's@http://(jp\.)?archive\.ubuntu\.com/ubuntu/?@https://ftp.udx.icscoe.jp/Linux/ubuntu/@g' \
@@ -78,7 +82,7 @@ init_mirror_jp:
 
 ## init_bash: Initialize bash. Support for XDG Base Directory
 init_bash:
-	echo -e "\033[33m[make init_bash]\033[0m"
+	@echo -e "\033[33m[make init_bash]\033[0m"
 	# Support for XDG Base Directory
 	# see: https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 	sudo cp /etc/bash.bashrc /etc/bash.bashrc.bak
@@ -86,34 +90,34 @@ init_bash:
 
 ## install_packages: Install packages
 install_packages:
-	echo -e "\033[33m[make install_packages]\033[0m"
+	@echo -e "\033[33m[make install_packages]\033[0m"
 	sudo apt-get update
 	sudo apt-get install -y \
 		git gh wget curl nano vim ca-certificates build-essential gpg sudo ripgrep
 
 ## install_bat: Install sharkdp/bat
 install_bat:
-	echo -e "\033[33m[make install_bat]\033[0m"
+	@echo -e "\033[33m[make install_bat]\033[0m"
 	$(SOURCE_ENV_XDG) && bash scripts/install_bat.sh
 
 ## install_eza: Install eza-community/eza
 install_eza:
-	echo -e "\033[33m[make install_eza]\033[0m"
+	@echo -e "\033[33m[make install_eza]\033[0m"
 	$(SOURCE_ENV_XDG) && bash scripts/install_eza.sh
 
 ## install_nvim: Install neovim/neovim
 install_nvim:
-	echo -e "\033[33m[make install_nvim]\033[0m"
+	@echo -e "\033[33m[make install_nvim]\033[0m"
 	$(SOURCE_ENV_XDG) && bash scripts/install_nvim.sh
 
 ## install_nodejs: Install Node.js
 install_nodejs:
-	echo -e "\033[33m[make install_nodejs]\033[0m"
+	@echo -e "\033[33m[make install_nodejs]\033[0m"
 	$(SOURCE_ENV_XDG) && bash scripts/install_nodejs.sh
 
 ## install_rustup: Install rustup
 install_rustup:
-	echo -e "\033[33m[make install_rustup]\033[0m"
+	@echo -e "\033[33m[make install_rustup]\033[0m"
 	$(SOURCE_ENV_XDG) && bash scripts/install_rustup.sh
 
 ## install_wslu: Install wslu
