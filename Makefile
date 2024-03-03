@@ -43,7 +43,6 @@ prod: prod_build prod_run
 ## prod_build: Build docker image for prod mode
 prod_build:
 	docker buildx build \
-		--no-cache \
 		--tag dotfiles-prod \
 		--file Dockerfile \
 		.
