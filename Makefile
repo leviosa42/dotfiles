@@ -72,7 +72,7 @@ link:
 	bash scripts/link.sh
 
 ## install: Install all packages
-install: install_packages install_bat install_eza install_nvim install_nodejs install_rustup
+install: install_packages install_bat install_eza install_fd install_nvim install_nodejs install_rustup install_theme-sh
 
 ## init_mirror_jp: configures the mirror for apt
 init_mirror_jp:
