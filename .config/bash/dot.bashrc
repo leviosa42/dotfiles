@@ -136,6 +136,8 @@
 # _info "Setting up shell aliases..."
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
+  # XDG Base Directory Specification
+  alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget/hsts"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
   alias "code"="/mnt/c/Users/askm4/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
 }

@@ -15,6 +15,7 @@ sources=(
   # .config/nyagos
   .config/sh
   .config/vim
+  .config/wget
   .config/wezterm
   # .config/wt
 )
@@ -34,5 +35,12 @@ for s in "${sources[@]}"; do
   fi
   ln -sfn $source $target || echo "FAILURE to link $source"
 done
+
+if [ -e $HOME/.profile ]; then
+	mv $HOME/.profile $backup_dir/.profile
+fi
+if [ -e $HOME/.bashrc ]; then
+	mv $HOME/.bashrc $backup_dir/.bashrc
+fi
 
 # vim: noet

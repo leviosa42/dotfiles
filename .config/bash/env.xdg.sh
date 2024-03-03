@@ -23,6 +23,10 @@ if [ ! -f $HISTFILE ]; then
 fi
 tail /etc/bash.bashrc | grep -q 'XDG_CONFIG_HOME' || echo ". \"${XDG_CONFIG_HOME:-$HOME/.config}/bash/dot.bashrc\"" | sudo tee /etc/bash.bashrc
 
+# docker
+DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+[ -d "$DOCKER_CONFIG" ] || mkdir -p "$DOCKER_CONFIG"
+
 # go
 mkdir -p "$XDG_DATA_HOME/go"
 GOPATH=${GOPATH:-$XDG_DATA_HOME/go}
@@ -41,3 +45,15 @@ NODE_REPL_HISTORY="$XDG_STATE_HOME/node/repl_history"
 # vim
 # NOTE: VIMINIT will also affect Neovim.
 VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/dot.vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"
+
+# wget
+WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+[ -f "$WGETRC" ] || mkdir -p $(dirname $WGETRC)
+
+
+# dotnet
+# NOTE: |
+#   - https://github.com/dotnet/sdk/issues/10390
+#   - https://github.com/b3nj5m1n/xdg-ninja/issues/349
+DOTNET_CLI_HOME=${XDG_DATA_HOME}/dotnet
+[ -d "$DOTNET_CLI_HOME" ] || mkdir -p "$DOTNET_CLI_HOME"
