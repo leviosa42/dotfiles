@@ -1,5 +1,7 @@
 # makefile for Ubuntu dotfiles
 
+SHELL := /bin/bash
+
 .DEFAULT_GOAL := help
 .PHONY := help init link install
 
@@ -57,9 +59,9 @@ prod_run:
 
 ## all: make init link install
 all: init link install
-	echo -e "\033[32mDone!\033[0m"
-	echo -e "\033[32mTo apply bashrc, please run: "
-	echo -e "\033[32m    exec \$SHELL -l\033[0m"
+	@echo -e "\033[32mDone!\033[0m"
+	@echo -e "\033[32mTo apply bashrc, please run: "
+	@echo -e "\033[32m    exec \$SHELL -l\033[0m"
 
 ## init: Initialize dotfiles
 init: init_bash
@@ -93,12 +95,22 @@ install_packages:
 	@echo -e "\033[33m[make install_packages]\033[0m"
 	sudo apt-get update
 	sudo apt-get install -y \
-		git gh wget curl nano vim ca-certificates build-essential gpg sudo ripgrep
+		git gh wget curl nano vim ca-certificates build-essential gpg sudo ripgrep fzf
+
+## install_theme-sh: Install lemmos/theme.sh
+install_theme-sh:
+	# see: https://github.com/lemnos/theme.sh#installation
+	sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
 
 ## install_bat: Install sharkdp/bat
 install_bat:
 	@echo -e "\033[33m[make install_bat]\033[0m"
 	$(SOURCE_ENV_XDG) && bash scripts/install_bat.sh
+
+## install_fd: Install sharkdp/fd
+install_fd:
+	@echo -e "\033[33m[make install_fd]\033[0m"
+	$(SOURCE_ENV_XDG) && bash scripts/install_fd.sh
 
 ## install_eza: Install eza-community/eza
 install_eza:

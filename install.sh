@@ -15,4 +15,3 @@ cd ~/.dotfiles
 
 # make init_mirror_jp
 make all
-exec $SHELL -l
