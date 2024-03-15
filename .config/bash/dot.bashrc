@@ -59,10 +59,13 @@
   export HISTCONTROL=ignoreboth
 
   # PATH
-  if [ -d $CARGO_HOME ]; then
+  if [[ -d $CARGO_HOME && -f ${CARGO_HOME}/env ]]; then
     source "${CARGO_HOME}/env"
   fi
   # [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+  if [[ -f $CARGO_HOME/bin ]]; then
+    $PATH="$CARGO_HOME/bin$PATH"
+  fi
   if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
     export PATH="$HOME/.local/bin:$PATH"
   fi
@@ -208,7 +211,6 @@
 
 # _info "Setting up useful functions..."
 : "Useful functions" && {
-  # _info "> colortest()"
   function colortest() {
     # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
     local T='gYw' # The test text
@@ -225,7 +227,18 @@
       echo;
     done
     echo
-  }
+  };
+  function mkcd() {
+    if [[ $# == 0 ]]; then
+      echo "Usage: mkcd <directory>" >&2
+      return 1
+    elif [[ $# > 1 ]]; then
+      echo "Specify only one directory" >&2
+      return 1
+    fi
+    mkdir -p "$1" && cd "$1";
+    return 0;
+  };
 }
 
 # If .bashrc.local exists, source it
