@@ -129,6 +129,23 @@
       shell_name="docker:${shell_name}"
     fi
 
+    if [ -f /etc/os-release ]; then
+      . /etc/os-release
+      local distro_icon=${NAME}
+      case ${NAME} in
+        "Ubuntu")
+          distro_icon_NF="󰕈 " # U+f0548 nf-md-ubuntu
+          ;;
+        "Arch Linux")
+          distro_icon_NF="󰣇 " # U+f08c7 nf-md-arch 
+          ;;
+        *)
+          distro_icon_NF=""
+          ;;
+      esac
+      shell_name="${distro_icon_NF}${shell_name}"
+    fi
+
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
     export PS1="${res}(${exitcolor}${shell_name} ${SHLVL}${res}${bg})${yel}\w${res}:\\$ ${bg}"
   }
@@ -146,7 +163,7 @@
 }
 
 # _info "Change terminal color..."
-: "Change terminal color" && {
+: "Change terminal color" || {
   # tokyonight.sh
   # see: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
 
