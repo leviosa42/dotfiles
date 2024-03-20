@@ -59,10 +59,13 @@
   export HISTCONTROL=ignoreboth
 
   # PATH
-  if [ -d $CARGO_HOME ]; then
+  if [[ -d $CARGO_HOME && -f ${CARGO_HOME}/env ]]; then
     source "${CARGO_HOME}/env"
   fi
   # [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+  if [[ -f $CARGO_HOME/bin ]]; then
+    $PATH="$CARGO_HOME/bin$PATH"
+  fi
   if [[ ! $PATH =~ "$HOME/.local/bin" ]]; then
     export PATH="$HOME/.local/bin:$PATH"
   fi
@@ -126,6 +129,23 @@
       shell_name="docker:${shell_name}"
     fi
 
+    if [ -f /etc/os-release ]; then
+      . /etc/os-release
+      local distro_icon=${NAME}
+      case ${NAME} in
+        "Ubuntu")
+          distro_icon_NF="󰕈 " # U+f0548 nf-md-ubuntu
+          ;;
+        "Arch Linux")
+          distro_icon_NF="󰣇 " # U+f08c7 nf-md-arch 
+          ;;
+        *)
+          distro_icon_NF=""
+          ;;
+      esac
+      shell_name="${distro_icon_NF}${shell_name}"
+    fi
+
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
     export PS1="${res}(${exitcolor}${shell_name} ${SHLVL}${res}${bg})${yel}\w${res}:\\$ ${bg}"
   }
@@ -143,7 +163,7 @@
 }
 
 # _info "Change terminal color..."
-: "Change terminal color" && {
+: "Change terminal color" || {
   # tokyonight.sh
   # see: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
 
@@ -208,7 +228,6 @@
 
 # _info "Setting up useful functions..."
 : "Useful functions" && {
-  # _info "> colortest()"
   function colortest() {
     # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
     local T='gYw' # The test text
@@ -225,7 +244,18 @@
       echo;
     done
     echo
-  }
+  };
+  function mkcd() {
+    if [[ $# == 0 ]]; then
+      echo "Usage: mkcd <directory>" >&2
+      return 1
+    elif [[ $# > 1 ]]; then
+      echo "Specify only one directory" >&2
+      return 1
+    fi
+    mkdir -p "$1" && cd "$1";
+    return 0;
+  };
 }
 
 # If .bashrc.local exists, source it
