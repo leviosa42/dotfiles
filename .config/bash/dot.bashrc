@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # If not running interactivty don't do anything
 # [ -z "$PS1" ] && return 0
