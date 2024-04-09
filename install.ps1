@@ -87,12 +87,12 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     Install-WinGetPackage("Microsoft.VisualStudioCode")
     # Git.Git
     Install-WinGetPackage("Git.Git")
-    # Git.GitHub
-    Install-WinGetPackage("Git.GitHub")
+    # GitHub.cli
+    Install-WinGetPackage("GitHub.cli")
     # Oracle.VirtualBox
     Install-WinGetPackage("Oracle.VirtualBox")
     # Oracle.MySQL
-    Install-WinGetPackage("Oracle.MySQL")
+    # Install-WinGetPackage("Oracle.MySQL")
     # eza-community.eza
     Install-WinGetPackage("eza-community.eza")
     # FastCopy.FastCopy
@@ -116,9 +116,12 @@ Set-EnvironmentVariable "ENV" "$dir_home\.config\.ashrc"
 Set-EnvironmentVariable "XDG_CONFIG_HOME" "$dir_home\.config"
 Set-EnvironmentVariable "XDG_CACHE_HOME" "$dir_home\.cache"
 Set-EnvironmentVariable "XDG_DATA_HOME" "$dir_home\.local\share"
-New-Directory "$dir_home\.local\share"
 Set-EnvironmentVariable "XDG_STATE_HOME" "$dir_home\.local\state"
-New-Directory "$dir_home\.local\state"
+New-Directory "$env:XDG_CONFIG_HOME"
+New-Directory "$env:XDG_CACHE_HOME"
+New-Directory "$env:XDG_DATA_HOME"
+New-Directory "$env:XDG_STATE_HOME"
+
 # vim
 Set-EnvironmentVariable "VIMINIT"  "if !has('nvim') | so `$XDG_CONFIG_HOME\vim\dot.vimrc | else | so `$XDG_CONFIG_HOME\nvim\init.lua | endif"
 # ipython/jupiter
@@ -131,7 +134,6 @@ Set-EnvironmentVariable "CARGO_HOME"  "$env:XDG_DATA_HOME\cargo"
 # rust#rustup
 Set-EnvironmentVariable "RUSTUP_HOME"  "$env:XDG_DATA_HOME\rustup"
 
-
 # ====================
 # dotfiles
 # ====================
@@ -140,14 +142,24 @@ if (!(Test-Path $dir_dotfiles)) {
     Write-Info "git clone $url_dotfiles $dir_dotfiles"
     git clone $url_dotfiles $dir_dotfiles
 }
-# dotfiles\.config -> %HOME%\.config
-New-Symlink "$dir_dotfiles\.config" "$dir_home\.config"
-# dotfiles\.config\vim\dot.vimrc -> %HOME%\.vimrc
-# New-Symlink "$dir_dotfiles\.config\vim\dot.vimrc" "$dir_home\.vimrc"
+# # New-Symlink "$dir_dotfiles\.config\vim\dot.vimrc" "$dir_home\.vimrc"
 # dotfiles\.config\nyagos\dot.nyagos -> %HOME%\.nyagos
 New-Symlink "$dir_dotfiles\.config\nyagos\dot.nyagos" "$dir_home\.nyagos"
-# dotfiles\.config\wt\settings.json -> %HOME%\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+
+# Symlink each directory from $dir_dotfiles\.config\* to $env:XDG_CONFIG_HOME\*
+# excludes: vscode, wt,
+Get-ChildItem "$dir_dotfiles\.config" -Directory | Where-Object { $_.Name -notin @("vscode", "wt") } | ForEach-Object {
+    New-Symlink $_.FullName "$env:XDG_CONFIG_HOME\$($_.Name)"
+}
+
+# vscode
+New-Symlink "$dir_dotfiles\.config\vscode\settings.json" "$env:APPDATA\Code\User\settings.json"
+# New-Symlink "$dir_dotfiles\.config\vscode\keybindings.json" "$env:APPDATA\Code\User\keybindings.json"
+# New-Symlink "$dir_dotfiles\.config\vscode\snippets" "$env:APPDATA\Code\User\snippets"
+
+# wt(Windows Terminal)
 New-Symlink "$dir_dotfiles\.config\wt\settings.json" "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
 # ====================
 # scoop
 # ====================

@@ -36,8 +36,10 @@ config.window_padding = {
   top = 8,
   bottom = 8,
 }
-config.window_background_opacity = 0.90
+config.window_background_opacity = 1.00
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+
+treat_east_asian_ambigrous_width_as_wiide = false
 
 if platform.is_linux then
   config.integrated_title_button_style = "Gnome"
@@ -59,19 +61,24 @@ end
 -- | Launch          |
 -- +-----------------+
 -- launch (https://wezfurlong.org/wezterm/config/launch.html)
+local nerdfonts = wezterm.nerdfonts
 if platform.is_win then
   config.launch_menu = {
     {
-      label = "Command Prompt",
+      label = (nerdfonts.cod_terminal_cmd .. " ") .. "Command Prompt",
       args = { "cmd.exe" },
     },
     {
-      label = "NYAGOS",
+      label = (nerdfonts.oct_terminal .. " ") .. "NYAGOS",
       args = { "nyagos.exe" },
     },
     {
-      label = "Ubuntu",
+      label = (nerdfonts.linux_archlinux .. " ") .. "Ubuntu",
       args = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" },
+    },
+    {
+      label = (nerdfonts.linux_ubuntu .. " ") .. "ArchLinux",
+      args = { "wsl.exe", "-d", "ArchLinux", "--cd", "~" },
     }
   }
 elseif platform.is_linux then
