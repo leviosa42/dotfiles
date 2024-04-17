@@ -14,11 +14,11 @@ local plugins = {
   -- mini.nvim
   require('plugins/mini'),
   -- colorscheme
-  -- require('plugins/github-nvim-theme'),
-  -- require('plugins/catppuccin'),
-  -- require('plugins/kanagawa'),
-  -- require('plugins/gruvbox'),
-  -- require('plugins/tokyonight'),
+  require('plugins/github-nvim-theme'),
+  require('plugins/catppuccin'),
+  require('plugins/kanagawa'),
+  require('plugins/gruvbox'),
+  require('plugins/tokyonight'),
   -- filer
   require('plugins/fern'),
   require('plugins/fern-renderer-nerdfont'), -- support nerdfont

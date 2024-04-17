@@ -3,4 +3,4 @@ require('keymap')
 require('plugin')
 require('autocmd')
 
--- vim.cmd [[ colorscheme tokyonight ]]
+vim.cmd [[ colorscheme tokyonight ]]
