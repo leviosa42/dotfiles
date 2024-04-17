@@ -7,13 +7,14 @@ vim.opt.fileencoding = 'utf-8'
 -- NOTE: on docker, vim.env.SHELL was nil
 local shell = nil
 if vim.fn.exists('$SHELL') then
-  vim.o.shell = vim.env.SHELL
+  shell = vim.env.SHELL
 elseif vim.fn.has('win64') then
-   vim.o.shell = 'nyagos'
+   shell = 'nyagos'
 else
-  vim.o.shell = vim.env.SHELL or '/bin/bash'
+  shell = vim.env.SHELL or '/bin/bash'
 end
-vim.opt.shellcmdflag = string.find(vim.o.shell, 'nyagos') and '-c' or vim.opt.shellcmdflag
+vim.opt.shell = shell
+vim.opt.shellcmdflag = string.find(shell, 'nyagos') and '-c' or vim.opt.shellcmdflag
 vim.o.undofile = true
 vim.o.backup = true
 -- vim.o.backupdir = vim.env.XDG_STATE_HOME .. '/backup'
