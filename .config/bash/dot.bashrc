@@ -88,7 +88,7 @@
 
 # _info "Setting up shell prompt..."
 : "Set Prompt" && {
-  #export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+  # export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
   #export PS1='\[\e[1;36m\]\u\[\e[1;37m\]@\[\e[1;32m\]\h\[\e[1;37m\]:\[\e[1;33m\]\w\[\e[00m\]\$ '
   function _set_ps1() {
     local exst=$? # exit status
@@ -129,22 +129,22 @@
       shell_name="docker:${shell_name}"
     fi
 
-    if [ -f /etc/os-release ]; then
-      . /etc/os-release
-      local distro_icon=${NAME}
-      case ${NAME} in
-        "Ubuntu")
-          distro_icon_NF="󰕈 " # U+f0548 nf-md-ubuntu
-          ;;
-        "Arch Linux")
-          distro_icon_NF="󰣇 " # U+f08c7 nf-md-arch 
-          ;;
-        *)
-          distro_icon_NF=""
-          ;;
-      esac
-      shell_name="${distro_icon_NF}${shell_name}"
-    fi
+    # if [ -f /etc/os-release ]; then
+    #   . /etc/os-release
+    #   local distro_icon=${NAME}
+    #   case ${NAME} in
+    #     "Ubuntu")
+    #       distro_icon_NF="󰕈 " # U+f0548 nf-md-ubuntu
+    #       ;;
+    #     "Arch Linux")
+    #       distro_icon_NF="󰣇 " # U+f08c7 nf-md-arch 
+    #       ;;
+    #     *)
+    #       distro_icon_NF=""
+    #       ;;
+    #   esac
+    #   shell_name="${distro_icon_NF}${shell_name}"
+    # fi
 
     # export PS1="(\s $SHLVL)\[\e[1;33m\]\w\[\e[00m\]\$ "
     export PS1="${res}(${exitcolor}${shell_name} ${SHLVL}${res}${bg})${yel}\w${res}:\\$ ${bg}"
@@ -156,6 +156,7 @@
 # _info "Setting up shell aliases..."
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
+  alias rebash="exec $0 -l"
   # XDG Base Directory Specification
   alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget/hsts"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
@@ -278,5 +279,7 @@ if [ -f "$HOME/.bashrc.local" ]; then
 fi
 
 _info "Loaded .bashrc"
+
+return 0
 
 # vim: set ft=sh ts=2 sw=0 sts=-1 et fdm=marker fmr={,}:
