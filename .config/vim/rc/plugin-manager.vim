@@ -1,13 +1,22 @@
 " === plugin manager(vim-jetpack) ===
 " --- configuration for vim-jetpack ---
-let g:jetpack_download_method = 'wget'
+if executable('git')
+	let g:jetpack_download_method = 'git'
+elseif executable('curl')
+	let g:jetpack_download_method = 'curl'
+else
+	let g:jetpack_download_method = 'wget'
+endif
 " --- automatic install if needed ---
-let s:jetpackfile = expand('~/.vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim')
+let s:jetpackfile = expand('$XDG_DATA_HOME/vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim')
 let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
 if !filereadable(s:jetpackfile)
-  " call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
-  call mkdir(fnamemodify(s:jetpackfile, ':h'), 'p')
-  call system(printf('wget -qO %s %s', s:jetpackfile, s:jetpackurl))
+	if g:jetpack_download_method != 'wget'
+    call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+  else
+    call mkdir(fnamemodify(s:jetpackfile, ':h'), 'p')
+    call system(printf('wget -qO %s %s', s:jetpackfile, s:jetpackurl))
+  endif
 endif
 
 " --- add plugins ---

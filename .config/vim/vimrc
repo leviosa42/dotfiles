@@ -10,6 +10,14 @@ filetype indent plugin off
 
 let $MYVIMRC = expand('<sfile>')
 
+if exists('$SHELL')
+  set shell=$SHELL
+endif
+
+if fnamemodify(&shell, ':t:r') == 'nyagos'
+  set shellcmdflag=-c
+endif
+
 if empty("$XDG_CACHE_HOME")
     let $XDG_CACHE_HOME="$HOME/.cache"
 endif
@@ -26,7 +34,8 @@ set directory=$XDG_CACHE_HOME/vim/swap,~/,/tmp
 set backupdir=$XDG_CACHE_HOME/vim/backup,~/,/tmp
 set undodir=$XDG_CACHE_HOME/vim/undo,~/,/tmp
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
-set runtimepath+=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let &packpath = &runtimepath
 
 runtime! rc/*.vim
 
