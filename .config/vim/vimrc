@@ -18,6 +18,8 @@ if fnamemodify(&shell, ':t:r') == 'nyagos'
   set shellcmdflag=-c
 endif
 
+set fileencoding=utf-8
+set encoding=utf-8
 if empty("$XDG_CACHE_HOME")
     let $XDG_CACHE_HOME="$HOME/.cache"
 endif
