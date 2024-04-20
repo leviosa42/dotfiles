@@ -1,0 +1,117 @@
+" __   _(_)_ __ ___  _ __ ___  "
+" \ \ / / | '_ ` _ \| '__/ __| "
+"  \ V /| | | | | | | | | (__  "
+" (_)_/ |_|_| |_| |_|_|  \___| "
+"
+" === pre init ===
+scriptencoding utf-8
+syntax off
+filetype indent plugin off
+
+let $MYVIMRC = expand('<sfile>')
+
+if empty("$XDG_CACHE_HOME")
+    let $XDG_CACHE_HOME="$HOME/.cache"
+endif
+
+if empty("$XDG_CONFIG_HOME")
+    let $XDG_CONFIG_HOME="$HOME/.config"
+endif
+
+if empty("$XDG_DATA_HOME")
+    let $XDG_DATA_HOME="$HOME/.local/share"
+endif
+
+set directory=$XDG_CACHE_HOME/vim/swap,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/vim/backup,~/,/tmp
+set undodir=$XDG_CACHE_HOME/vim/undo,~/,/tmp
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath+=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+
+runtime! rc/*.vim
+
+" === configures ===
+" --- backup ---
+set backup
+let s:backup_dirpath = expand('~/.vim/backup')
+call mkdir(s:backup_dirpath, 'p')
+execute 'set backupdir=' .. s:backup_dirpath
+
+" --- swapfile ---
+set swapfile
+let s:swap_dirpath = expand('~/.vim/swap')
+call mkdir(s:swap_dirpath, 'p')
+execute 'set directory=' .. s:swap_dirpath
+
+" --- undo ---
+if has('persistent_undo')
+  set undofile
+  let s:undo_dirpath = expand('~/.vim/undo')
+  call mkdir(s:undo_dirpath, 'p')
+  execute 'set undodir=' .. s:undo_dirpath
+endif
+
+" --- colorscheme ---
+if has('termguicolors')
+  if $TERM != 'Linux'
+    set termguicolors
+  endif
+endif
+set background=dark
+try
+  " colorscheme iceberg
+  " colorscheme molokai
+  colorscheme tokyonight
+catch
+  colorscheme darkblue
+endtry
+
+set helplang=ja,en
+
+set clipboard=
+
+set title
+
+set virtualedit=onemore
+
+set hidden
+set number
+set cursorline
+
+set showmatch
+set showcmd
+
+set whichwrap=b,s,<,>,[,]
+
+set scrolloff=2
+
+set modeline
+set modelines=3
+
+set keywordprg=:help
+
+set mouse=a
+
+" === indentation ===
+set noexpandtab " et == use space
+set smarttab
+set tabstop=4
+set shiftwidth=0 softtabstop=-1 " follow to tabstop
+set autoindent
+set smartindent
+
+" === slash searching ===
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
+" === wildmenu ===
+set wildmenu
+set wildmode=list:longest,full
+
+" === post init ===
+syntax enable
+filetype plugin indent on
+
+" vim: set et ts=2 sw=0 sts=-1 fmr={{{,}}}:
