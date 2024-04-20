@@ -73,8 +73,12 @@ if platform.is_win then
       args = { "nyagos.exe" },
     },
     {
-      label = (nerdfonts.linux_archlinux .. " ") .. "Ubuntu",
+      label = (nerdfonts.linux_ubuntu .. " ") .. "Ubuntu",
       args = { "wsl.exe", "-d", "Ubuntu", "--cd", "~" },
+    },
+    {
+      label = (nerdfonts.linux_ubuntu .. " ") .. "Ubuntu-22.04",
+      args = { "wsl.exe", "-d", "Ubuntu-22.04", "--cd", "~" },
     },
     {
       label = (nerdfonts.linux_ubuntu .. " ") .. "ArchLinux",
