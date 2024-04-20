@@ -30,6 +30,7 @@ if empty("$XDG_DATA_HOME")
     let $XDG_DATA_HOME="$HOME/.local/share"
 endif
 
+set backup
 set directory=$XDG_CACHE_HOME/vim/swap,~/,/tmp
 set backupdir=$XDG_CACHE_HOME/vim/backup,~/,/tmp
 set undodir=$XDG_CACHE_HOME/vim/undo,~/,/tmp
@@ -42,20 +43,20 @@ runtime! rc/*.vim
 " === configures ===
 " --- backup ---
 set backup
-let s:backup_dirpath = expand('~/.vim/backup')
+let s:backup_dirpath = expand('$XDG_CACHE_HOME/vim/backup')
 call mkdir(s:backup_dirpath, 'p')
 execute 'set backupdir=' .. s:backup_dirpath
 
 " --- swapfile ---
 set swapfile
-let s:swap_dirpath = expand('~/.vim/swap')
+let s:swap_dirpath = expand('$XDG_CACHE_HOME/vim/swap')
 call mkdir(s:swap_dirpath, 'p')
 execute 'set directory=' .. s:swap_dirpath
 
 " --- undo ---
 if has('persistent_undo')
   set undofile
-  let s:undo_dirpath = expand('~/.vim/undo')
+  let s:undo_dirpath = expand('$XDG_CACHE_HOME/vim/undo')
   call mkdir(s:undo_dirpath, 'p')
   execute 'set undodir=' .. s:undo_dirpath
 endif
