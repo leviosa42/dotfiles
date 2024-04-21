@@ -1,11 +1,9 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
-    [
+    "actions": [
         {
-            "command": 
-            {
+            "command": {
                 "action": "copy",
                 "singleLine": false
             }
@@ -30,8 +28,7 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -39,8 +36,7 @@
             "keys": "alt+shift+d"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "quakeMode"
             },
             "keys": "win+@"
@@ -52,27 +48,74 @@
     "copyOnSelect": false,
     "defaultProfile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
     "minimizeToNotificationArea": false,
-    "newTabMenu": 
-    [
+    "newTabMenu": [
         {
-            "type": "remainingProfiles"
+            "type": "folder",
+            "name": "Windows",
+            "entries": [
+                {
+                    "type": "profile",
+                    "profile": "cmd.exe"
+                },
+                {
+                    "type": "profile",
+                    "profile": "Windows PowerShell"
+                },
+                {
+                    "type": "matchProfiles",
+                    "source": "Windows.Terminal.PowershellCore"
+                },
+                {
+                    "type": "profile",
+                    "profile": "Developer Command Prompt for VS 2022"
+                },
+                {
+                    "type": "profile",
+                    "profile": "Developer PowerShell for VS 2022"
+                },
+                {
+                    "type": "profile",
+                    "profile": "Azure Cloud Shell"
+                }
+            ]
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "type": "profile",
+            "profile": "busybox"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "type": "profile",
+            "profile": "NYAGOS"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "type": "matchProfiles",
+            "source": "Windows.Terminal.Wsl"
+        },
+        {
+            "type": "profile",
+            "profile": "ArchLinux"
         }
     ],
-    "profiles": 
-    {
-        "defaults": 
-        {
+    "profiles": {
+        "defaults": {
             "cursorShape": "filledBox",
-            "font": 
-            {
+            "font": {
                 "face": "PlemolJP Console NF"
             },
             "opacity": 100,
             "padding": "0",
             "useAcrylic": false
         },
-        "list": 
-        [
+        "list": [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -83,7 +126,7 @@
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
-                "name": "\u30b3\u30de\u30f3\u30c9 \u30d7\u30ed\u30f3\u30d7\u30c8"
+                "name": "cmd.exe"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -94,13 +137,12 @@
             {
                 "colorScheme": "iceberg-dark",
                 "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
-                "font": 
-                {
+                "font": {
                     "face": "Moralerspace Argon"
                 },
                 "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
                 "hidden": false,
-                "icon": "%SCOOP%\\apps\\nyagos\\current\\nyagos32x32.ico",
+                "icon": "%Scoop%\\apps\\nyagos\\current\\Etc\\nyagos32x32.ico",
                 "intenseTextStyle": "bright",
                 "name": "NYAGOS",
                 "opacity": 84,
@@ -115,47 +157,11 @@
             },
             {
                 "colorScheme": "Tango Dark",
-                "commandline": "busybox64u.exe ash -l",
+                "commandline": "busybox64u.exe bash -l",
                 "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
                 "hidden": false,
-                "name": "ash",
+                "name": "busybox",
                 "startingDirectory": "%HOME%"
-            },
-            {
-                "colorScheme": "Monokai Seti Dark",
-                "commandline": "wsl -d Arch",
-                "font": 
-                {
-                    "size": 13.0
-                },
-                "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
-                "hidden": false,
-                "icon": null,
-                "name": "Arch",
-                "startingDirectory": "\\\\wsl.localhost\\Arch\\home\\arch",
-                "tabTitle": "Arch"
-            },
-            {
-                "colorScheme": "Ubuntu-ColorScheme",
-                "cursorShape": "vintage",
-                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "opacity": 89,
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc",
-                "useAcrylic": true
-            },
-            {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": true,
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{33a42e1a-7388-5165-b670-f262d026c2e6}",
-                "hidden": false,
-                "name": "Ubuntu-dot",
-                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{2529e5c7-33fb-5378-81eb-76c054aff559}",
@@ -170,36 +176,28 @@
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "colorScheme": "iceberg-dark",
-                "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
-                "font": 
-                {
-                    "face": "UDEV Gothic NF"
-                },
-                "guid": "{b2c2af47-b513-474a-a293-5c97ffe7f81d}",
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
-                "icon": "%SCOOP%\\apps\\nyagos\\current\\nyagos32x32.ico",
-                "intenseTextStyle": "bright",
-                "name": "NYAGOS (\u30b3\u30d4\u30fc)",
-                "startingDirectory": "%HOME%"
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
             },
             {
-                "experimental.retroTerminalEffect": false,
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-                "hidden": true,
+                "hidden": false,
                 "name": "Ubuntu-22.04",
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "guid": "{e5a83caa-4c73-52b3-ae6b-bc438d721ef9}",
+                "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
                 "hidden": false,
-                "name": "Ubuntu 22.04.3 LTS",
-                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+                "name": "ArchLinux",
+                "icon": null,
+                "commandline": "wsl.exe -d ArchLinux"
+                // "source": "Windows.Terminal.Wsl"
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
