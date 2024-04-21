@@ -145,9 +145,7 @@
                 "icon": "%Scoop%\\apps\\nyagos\\current\\Etc\\nyagos32x32.ico",
                 "intenseTextStyle": "bright",
                 "name": "NYAGOS",
-                "opacity": 84,
-                "startingDirectory": "%HOME%",
-                "useAcrylic": true
+                "startingDirectory": "%HOME%"
             },
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
