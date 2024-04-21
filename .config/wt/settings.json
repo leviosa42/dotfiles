@@ -116,12 +116,7 @@
             "useAcrylic": false
         },
         "list": [
-            {
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": false,
-                "name": "Windows PowerShell"
-            },
+            // --- Windows basic profiles ---
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -129,10 +124,43 @@
                 "name": "cmd.exe"
             },
             {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{2529e5c7-33fb-5378-81eb-76c054aff559}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{1980d477-02b2-5b9c-b0cd-cbc892b68a24}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            // --- User profiles ---
+            {
+                "colorScheme": "Tango Dark",
+                "commandline": "busybox64u.exe bash -l",
+                "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
+                "hidden": false,
+                "name": "busybox",
+                "startingDirectory": "%HOME%"
             },
             {
                 "colorScheme": "iceberg-dark",
@@ -146,32 +174,6 @@
                 "intenseTextStyle": "bright",
                 "name": "NYAGOS",
                 "startingDirectory": "%HOME%"
-            },
-            {
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": false,
-                "name": "PowerShell",
-                "source": "Windows.Terminal.PowershellCore"
-            },
-            {
-                "colorScheme": "Tango Dark",
-                "commandline": "busybox64u.exe bash -l",
-                "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
-                "hidden": false,
-                "name": "busybox",
-                "startingDirectory": "%HOME%"
-            },
-            {
-                "guid": "{2529e5c7-33fb-5378-81eb-76c054aff559}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{1980d477-02b2-5b9c-b0cd-cbc892b68a24}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
             },
             {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
