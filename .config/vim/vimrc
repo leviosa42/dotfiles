@@ -63,20 +63,6 @@ if has('persistent_undo')
   execute 'set undodir=' .. s:undo_dirpath
 endif
 
-" --- colorscheme ---
-if has('termguicolors')
-  if $TERM != 'Linux'
-    set termguicolors
-  endif
-endif
-set background=dark
-try
-  " colorscheme iceberg
-  " colorscheme molokai
-  colorscheme tokyonight
-catch
-  colorscheme darkblue
-endtry
 
 set helplang=ja,en
 
@@ -104,6 +90,7 @@ set keywordprg=:help
 
 set mouse=a
 
+set backspace=indent,eol,start
 " === indentation ===
 set noexpandtab " et == use space
 set smarttab
@@ -126,4 +113,18 @@ set wildmode=list:longest,full
 syntax enable
 filetype plugin indent on
 
+" --- colorscheme ---
+if has('termguicolors')
+  if $TERM != 'Linux'
+    set termguicolors
+  endif
+endif
+set background=dark
+try
+  " colorscheme iceberg
+  " colorscheme molokai
+  colorscheme tokyonight
+catch
+  colorscheme darkblue
+endtry
 " vim: set et ts=2 sw=0 sts=-1 fmr={{{,}}}:
