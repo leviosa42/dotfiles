@@ -16,7 +16,7 @@ end
 vim.opt.shellcmdflag = string.find(vim.o.shell, 'nyagos') and '-c' or vim.opt.shellcmdflag
 vim.o.undofile = true
 vim.o.backup = true
--- vim.o.backupdir = vim.env.XDG_STATE_HOME .. '/backup'
+vim.o.backupdir = vim.fn.stdpath('data') .. ( vim.fn.has('win64') and '\\backup\\\\' or '/backup' )
 
 
 -- * Appearance: {{{
