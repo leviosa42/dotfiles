@@ -16,6 +16,13 @@ vim.cmd([[
   augroup END
 ]])
 
+-- commentstring
+vim.cmd([[
+  augroup indent
+    autocmd!
+    autocmd FileType ggnuplot setl cms=#\ %s
+  augroup END
+]])
 -- highlight yank
 vim.cmd[[
   augroup highlight_yank

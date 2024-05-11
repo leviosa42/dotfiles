@@ -18,18 +18,19 @@ if fnamemodify(&shell, ':t:r') == 'nyagos'
   set shellcmdflag=-c
 endif
 
-set fileencoding=utf-8
 set encoding=utf-8
+set fileencodings=utf-8,sjis
+
 if empty("$XDG_CACHE_HOME")
-    let $XDG_CACHE_HOME="$HOME/.cache"
+  let $XDG_CACHE_HOME="$HOME/.cache"
 endif
 
 if empty("$XDG_CONFIG_HOME")
-    let $XDG_CONFIG_HOME="$HOME/.config"
+  let $XDG_CONFIG_HOME="$HOME/.config"
 endif
 
 if empty("$XDG_DATA_HOME")
-    let $XDG_DATA_HOME="$HOME/.local/share"
+  let $XDG_DATA_HOME="$HOME/.local/share"
 endif
 
 set backup
@@ -39,8 +40,6 @@ set undodir=$XDG_CACHE_HOME/vim/undo,~/,/tmp
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 let &packpath = &runtimepath
-
-runtime! rc/*.vim
 
 " === configures ===
 " --- backup ---
@@ -109,6 +108,9 @@ set hlsearch
 set wildmenu
 set wildmode=list:longest,full
 
+" === load rcs ===
+runtime! rc/*.vim
+
 " === post init ===
 syntax enable
 filetype plugin indent on
@@ -127,4 +129,4 @@ try
 catch
   colorscheme darkblue
 endtry
-" vim: set et ts=2 sw=0 sts=-1 fmr={{{,}}}:
+" _vim: set et ts=2 sw=0 sts=-1 fmr={{{,}}}:

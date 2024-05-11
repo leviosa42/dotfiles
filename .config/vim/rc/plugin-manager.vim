@@ -1,17 +1,17 @@
 " === plugin manager(vim-jetpack) ===
 " --- configuration for vim-jetpack ---
 if executable('git')
-	let g:jetpack_download_method = 'git'
+  let g:jetpack_download_method = 'git'
 elseif executable('curl')
-	let g:jetpack_download_method = 'curl'
+  let g:jetpack_download_method = 'curl'
 else
-	let g:jetpack_download_method = 'wget'
+  let g:jetpack_download_method = 'wget'
 endif
 " --- automatic install if needed ---
 let s:jetpackfile = expand('$XDG_DATA_HOME/vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim')
 let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
 if !filereadable(s:jetpackfile)
-	if g:jetpack_download_method != 'wget'
+  if g:jetpack_download_method != 'wget'
     call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
   else
     call mkdir(fnamemodify(s:jetpackfile, ':h'), 'p')
@@ -29,20 +29,20 @@ call jetpack#add('markonm/traces.vim') " preview the replacement results
 call jetpack#add('machakann/vim-highlightedyank') " flash yanked text
 call jetpack#add('lambdalisue/vim-manpager') " manpager
 call jetpack#add('lambdalisue/fern.vim') " filer
-  nnoremap [edit]e :Fern . -drawer -toggle -keep<CR>
-  nnoremap [edit]d :Fern %:h -drawer -toggle -keep<CR>
-  nnoremap <expr> [vimrc]d ":Fern " .. fnamemodify($MYVIMRC, ':h') .. " -drawer -toggle -keep\<CR>"
-  augroup FernStatusLine
-    autocmd!
-    autocmd FileType fern let &l:stl = '%#Directory# %{&ft} '
-  augroup END
+nnoremap [edit]e :Fern . -drawer -toggle -keep<CR>
+nnoremap [edit]d :Fern %:h -drawer -toggle -keep<CR>
+nnoremap <expr> [vimrc]d ":Fern " .. fnamemodify($MYVIMRC, ':h') .. " -drawer -toggle -keep\<CR>"
+augroup FernStatusLine
+  autocmd!
+  autocmd FileType fern let &l:stl = '%#Directory# %{&ft} '
+augroup END
 call jetpack#add('leviosa42/vim-github-theme') " colorscheme
 call jetpack#add('tomasr/molokai') " colorscheme
 call jetpack#add('morhetz/gruvbox') " colorscheme
 call jetpack#add('altercation/vim-colors-solarized') " colorscheme
 call jetpack#add('nordtheme/vim', {'as': 'nord'}) " colorscheme
 call jetpack#add('ghifarit53/tokyonight-vim') " colorscheme
-  let g:tokyonight_style = 'night'
+let g:tokyonight_style = 'night'
 call jetpack#add('catppuccin/vim', {'as': 'catppuccin'}) " colorscheme
 call jetpack#add('cocopon/iceberg.vim') " colorscheme
 call jetpack#end()
