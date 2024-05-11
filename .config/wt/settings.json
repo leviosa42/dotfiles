@@ -1,9 +1,11 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": [
+    "actions": 
+    [
         {
-            "command": {
+            "command": 
+            {
                 "action": "copy",
                 "singleLine": false
             }
@@ -28,7 +30,8 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command": {
+            "command": 
+            {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -36,7 +39,8 @@
             "keys": "alt+shift+d"
         },
         {
-            "command": {
+            "command": 
+            {
                 "action": "quakeMode"
             },
             "keys": "win+@"
@@ -44,79 +48,95 @@
     ],
     "alwaysShowNotificationIcon": true,
     "autoHideWindow": false,
+    "centerOnLaunch": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
+    "initialCols": 60,
+    "initialPosition": ",",
+    "initialRows": 20,
     "minimizeToNotificationArea": false,
-    "newTabMenu": [
+    "newTabMenu": 
+    [
         {
-            "type": "folder",
-            "name": "Windows",
-            "entries": [
+            "allowEmpty": false,
+            "entries": 
+            [
                 {
-                    "type": "profile",
-                    "profile": "cmd.exe"
+                    "profile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                    "type": "profile"
                 },
                 {
-                    "type": "profile",
-                    "profile": "Windows PowerShell"
+                    "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                    "type": "profile"
                 },
                 {
-                    "type": "matchProfiles",
-                    "source": "Windows.Terminal.PowershellCore"
+                    "commandline": null,
+                    "name": null,
+                    "source": "Windows.Terminal.PowershellCore",
+                    "type": "matchProfiles"
                 },
                 {
-                    "type": "profile",
-                    "profile": "Developer Command Prompt for VS 2022"
+                    "profile": "Developer Command Prompt for VS 2022",
+                    "type": "profile"
                 },
                 {
-                    "type": "profile",
-                    "profile": "Developer PowerShell for VS 2022"
+                    "profile": "Developer PowerShell for VS 2022",
+                    "type": "profile"
                 },
                 {
-                    "type": "profile",
-                    "profile": "Azure Cloud Shell"
+                    "profile": "Azure Cloud Shell",
+                    "type": "profile"
                 }
-            ]
+            ],
+            "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\windows11.png",
+            "inline": "never",
+            "name": "Windows",
+            "type": "folder"
         },
         {
             "type": "separator"
         },
         {
-            "type": "profile",
-            "profile": "busybox"
+            "profile": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
+            "type": "profile"
         },
         {
             "type": "separator"
         },
         {
-            "type": "profile",
-            "profile": "NYAGOS"
+            "profile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
+            "type": "profile"
         },
         {
             "type": "separator"
         },
         {
-            "type": "matchProfiles",
-            "source": "Windows.Terminal.Wsl"
+            "commandline": null,
+            "name": null,
+            "source": "Windows.Terminal.Wsl",
+            "type": "matchProfiles"
         },
         {
-            "type": "profile",
-            "profile": "ArchLinux"
+            "profile": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
+            "type": "profile"
         }
     ],
-    "profiles": {
-        "defaults": {
+    "profiles": 
+    {
+        "defaults": 
+        {
             "cursorShape": "filledBox",
-            "font": {
+            "font": 
+            {
                 "face": "PlemolJP Console NF"
             },
             "opacity": 100,
             "padding": "0",
             "useAcrylic": false
         },
-        "list": [
-            // --- Windows basic profiles ---
+        "list": 
+        [
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -153,20 +173,21 @@
                 "name": "Developer PowerShell for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
-            // --- User profiles ---
             {
                 "colorScheme": "Tango Dark",
                 "commandline": "busybox64u.exe bash -l",
                 "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
                 "hidden": false,
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\busybox.png",
                 "name": "busybox",
                 "startingDirectory": "%HOME%"
             },
             {
                 "colorScheme": "iceberg-dark",
                 "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
-                "font": {
-                    "face": "Moralerspace Argon"
+                "font": 
+                {
+                    "face": "PlemolJP Console NF"
                 },
                 "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
                 "hidden": false,
@@ -178,26 +199,28 @@
             {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\ubuntu.png",
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
                 "hidden": false,
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\ubuntu.png",
                 "name": "Ubuntu-22.04",
                 "source": "Windows.Terminal.Wsl"
             },
             {
+                "commandline": "wsl.exe -d ArchLinux",
                 "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
                 "hidden": false,
-                "name": "ArchLinux",
-                "icon": null,
-                "commandline": "wsl.exe -d ArchLinux"
-                // "source": "Windows.Terminal.Wsl"
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\archlinux.png",
+                "name": "ArchLinux"
             }
         ]
     },
-    "schemes": [
+    "schemes": 
+    [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -567,7 +590,7 @@
             "yellow": "#E2A478"
         }
     ],
-    "startOnUserLogin": false,
+    "startOnUserLogin": true,
     "themes": [],
     "useAcrylicInTabRow": true
 }

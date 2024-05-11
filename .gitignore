@@ -73,7 +73,7 @@
 !/.config/wezterm/**
 
 !/.config/wt
-!/.config/wt/*
+!/.config/wt/**
 
 *.swp
 *.exe

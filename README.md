@@ -36,4 +36,8 @@ wsl --import dotfiles %USERPROFILE%\wsl-dotfiles %USERPROFILE%\wsl-dotfiles.tar 
 ```
 -->
 
+## License
+
+- [devicon/devicon](https://github.com/devicons/devicon/blob/master/LICENSE)
+
 [winget]: https://apps.microsoft.com/detail/9NBLGGH4NNS1?hl=ja-jp&gl=JP
