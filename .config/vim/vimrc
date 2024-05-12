@@ -107,6 +107,10 @@ set hlsearch
 " === wildmenu ===
 set wildmenu
 set wildmode=list:longest,full
+if has('patch-8.2.4325')
+  set wildmode=full
+  set wildoptions=pum
+endif
 
 " === load rcs ===
 runtime! rc/*.vim
@@ -125,7 +129,8 @@ set background=dark
 try
   " colorscheme iceberg
   " colorscheme molokai
-  colorscheme tokyonight
+  " colorscheme tokyonight
+  colorscheme catppuccin_mocha
 catch
   colorscheme darkblue
 endtry

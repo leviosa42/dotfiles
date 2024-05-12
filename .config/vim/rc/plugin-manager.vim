@@ -39,11 +39,13 @@ augroup END
 call jetpack#add('leviosa42/vim-github-theme') " colorscheme
 call jetpack#add('tomasr/molokai') " colorscheme
 call jetpack#add('morhetz/gruvbox') " colorscheme
+call jetpack#add('sainnhe/gruvbox-material') " colorscheme
 call jetpack#add('altercation/vim-colors-solarized') " colorscheme
-call jetpack#add('nordtheme/vim', {'as': 'nord'}) " colorscheme
-call jetpack#add('ghifarit53/tokyonight-vim') " colorscheme
+call jetpack#add('catppuccin/vim', {'name': 'catppuccin'}) " colorscheme
+" call jetpack#add('nordtheme/vim', {'name': 'nord'}) " colorscheme
+ " call jetpack#add('dracula/vim', {'name': 'dracula'}) " colorscheme
+" call jetpack#add('ghifarit53/tokyonight-vim') " colorscheme
 let g:tokyonight_style = 'night'
-call jetpack#add('catppuccin/vim', {'as': 'catppuccin'}) " colorscheme
 call jetpack#add('cocopon/iceberg.vim') " colorscheme
 call jetpack#end()
 
