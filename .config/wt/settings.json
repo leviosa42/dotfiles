@@ -89,7 +89,7 @@
                     "type": "profile"
                 }
             ],
-            "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\windows11.png",
+            "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\windows11_32x32.png",
             "inline": "never",
             "name": "Windows",
             "type": "folder"
@@ -112,8 +112,6 @@
             "type": "separator"
         },
         {
-            "commandline": null,
-            "name": null,
             "source": "Windows.Terminal.Wsl",
             "type": "matchProfiles"
         },
@@ -178,7 +176,7 @@
                 "commandline": "busybox64u.exe bash -l",
                 "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
                 "hidden": false,
-                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\busybox.png",
+                // "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\busybox_32x32.png",
                 "name": "busybox",
                 "startingDirectory": "%HOME%"
             },
@@ -199,22 +197,22 @@
             {
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
-                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\ubuntu.png",
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\ubuntu_32x32.png",
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
                 "hidden": false,
-                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\ubuntu.png",
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\ubuntu_32x32.png",
                 "name": "Ubuntu-22.04",
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "commandline": "wsl.exe -d ArchLinux",
+                "commandline": "wsl.exe -d ArchLinux --cd ~",
                 "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
                 "hidden": false,
-                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\archlinux.png",
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\archlinux_32x32.png",
                 "name": "ArchLinux"
             }
         ]
