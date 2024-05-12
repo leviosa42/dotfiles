@@ -1,3 +1,5 @@
+set timeoutlen=400 " default: 1000 ms
+
 " === key mapping ===
 let g:mapleader = "\<Space>"
 
@@ -17,6 +19,9 @@ vnoremap <S-Up> "zx<Up>"zP`[V`]
 vnoremap <S-Down> "zx"zp`[V`]
 
 nnoremap <Leader>h :nohlsearch<CR>
+
+tnoremap <Esc><Esc> <C-\><C-n>
+" tnoremap jk <C-\><C-n>
 
 " --- [buffer] ---
 nmap <Leader>b [buffer]
