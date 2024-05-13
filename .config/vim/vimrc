@@ -112,6 +112,17 @@ if has('patch-8.2.4325')
   set wildoptions=pum
 endif
 
+" === others ===
+" set completefunc=
+set completeopt=menuone,popup
+" inoremap <expr> <Tab>  pumvisible() ? "<C-n>" : "<C-x><C-o>"
+" inoremap <expr> <S-Tab>  pumvisible() ? "<C-p>" : "<C-v><Tab>"
+inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
+" imap <expr> <Tab> pumvisible() ? "<C-y>" : "<Plug>(complete)"
+" inoremap <Plug>(complete)f <C-x><C-f>
+" inoremap <Plug>(complete)p <C-x><C-p>
+" inoremap <Plug>(complete)o <C-x><C-o>
+
 " === load rcs ===
 runtime! rc/*.vim
 
@@ -134,4 +145,13 @@ try
 catch
   colorscheme darkblue
 endtry
+
+" === after ===
+if exists("$USE_VIMUX") && $USE_VIMUX == 1
+  let $USE_VIMUX = ""
+  set noruler noshowcmd noshowmode laststatus=0
+  terminal
+  only
+  colorscheme gruvbox
+endif
 " _vim: set et ts=2 sw=0 sts=-1 fmr={{{,}}}:

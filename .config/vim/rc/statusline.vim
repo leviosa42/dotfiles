@@ -9,7 +9,7 @@ let s:stl .= ' '
 let s:stl .= '%-F' " filename
 let s:stl .= '%-m' " is modified
 let s:stl .= '%-r' " is readonly
-let s:stl .= '%-h' " is help-page
+" let s:stl .= '%-h' " is help-page
 let s:stl .= '%=' " separation point between left and right
 let s:stl .= '%{%g:actual_curwin==win_getid(winnr())?"%#CursorLine#":"%#StatusLineNC#"%}'
 " let s:stl .= ' '
@@ -27,5 +27,15 @@ let s:stl .= ' '
 let s:stl .= '%p%%'
 let s:stl .= ' '
 let s:stl .= '%<'
+
+set laststatus=0
 let &statusline = s:stl
+
+set showtabline=2
+let &tabline = s:stl
+
+" set title
+" let s:tst = ''
+" let s:tst .= '%{&shell}'
+" let &titlestring = s:tst
 

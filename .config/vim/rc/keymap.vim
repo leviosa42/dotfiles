@@ -4,6 +4,7 @@ set timeoutlen=400 " default: 1000 ms
 let g:mapleader = "\<Space>"
 
 inoremap <silent> jk <Esc>
+" vnoremap <silent> jk <Esc>
 
 nnoremap <silent> j gj
 nnoremap <silent> k gk
@@ -18,10 +19,24 @@ nnoremap <silent> <S-Down> "zdd"zp
 vnoremap <S-Up> "zx<Up>"zP`[V`]
 vnoremap <S-Down> "zx"zp`[V`]
 
+vnoremap < <gv
+vnoremap > >gv
+
 nnoremap <Leader>h :nohlsearch<CR>
 
 tnoremap <Esc><Esc> <C-\><C-n>
 " tnoremap jk <C-\><C-n>
+
+" https://zenn.dev/mattn/articles/83c2d4c7645faa
+nmap <C-w>+ <C-w>+<SID>ws
+nmap <C-w>- <C-w>-<SID>ws
+nmap <C-w>> <C-w>><SID>ws
+nmap <C-w>< <C-w><<SID>ws
+nnoremap <script> <SID>ws+ <C-w>+<SID>ws
+nnoremap <script> <SID>ws- <C-w>-<SID>ws
+nnoremap <script> <SID>ws> <C-w>><SID>ws
+nnoremap <script> <SID>ws< <C-w><<SID>ws
+nmap <SID>ws <Nop>
 
 " --- [buffer] ---
 nmap <Leader>b [buffer]
