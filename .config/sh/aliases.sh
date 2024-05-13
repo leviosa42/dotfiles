@@ -27,7 +27,7 @@ alias egrep='egrep --color=auto'
 
 # Editings
 alias dotfiles="$EDITOR $DOTFILES_DIR"
-alias .bashrc="$EDITOR ~/.bashrc && source ~/.bashrc"
+alias .bashrc="$EDITOR $XDG_CONFIG_HOME/bash/dot.bashrc && source $XDG_CONFIG_HOME/bash/dot.bashrc"
 alias .aliases='vim $XDG_CONFIG_HOME/sh/aliases.sh && source ~/.bashrc'
 
 alias e="$EDITOR"
