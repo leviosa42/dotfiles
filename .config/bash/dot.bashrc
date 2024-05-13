@@ -121,6 +121,10 @@
       local exitcolor=$red
     fi
 
+    if [[ -v VIM_TERMINAL ]]; then
+        shell_name="vim:${shell_name}"
+    fi
+
     if [[ -v WSL_DISTRO_NAME ]]; then
         shell_name="wsl:${shell_name}"
     fi
