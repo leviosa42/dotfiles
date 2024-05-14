@@ -160,7 +160,7 @@
 # _info "Setting up shell aliases..."
 : "Set Aliases" && {
   source "$DOTFILES_DIR/.config/sh/aliases.sh"
-  alias rebash="exec $0 -l"
+  alias rebash="exec $SHELL -l"
   # XDG Base Directory Specification
   alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget/hsts"
   alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
