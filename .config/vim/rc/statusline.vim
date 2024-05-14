@@ -28,11 +28,17 @@ let s:stl .= '%p%%'
 let s:stl .= ' '
 let s:stl .= '%<'
 
-set laststatus=0
+
+set laststatus=2
 let &statusline = s:stl
 
-set showtabline=2
-let &tabline = s:stl
+" TODO
+if exists("$USE_VIMUX") && $USE_VIMUX == 1
+  set showtabline=2
+  let &tabline = s:stl
+  set laststatus=0
+  let &statusline = s:stl
+endif
 
 " set title
 " let s:tst = ''
