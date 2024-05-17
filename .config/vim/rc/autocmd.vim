@@ -7,8 +7,8 @@ augroup vimrc
 
   " --- 'keywordprg' ---
   autocmd FileType vim setl kp=:help
-  autocmd FileType sh  setl kp=man
-        \ | nnoremap K :Man <cword><CR>
+  autocmd FileType sh  setl kp=:Man
+        " \ | nnoremap K :Man <cword><CR>
 
   " --- indentation by filetype ---
   autocmd FileType vim setl ts=2 et
