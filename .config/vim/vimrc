@@ -141,7 +141,8 @@ try
   " colorscheme iceberg
   " colorscheme molokai
   " colorscheme tokyonight
-  colorscheme catppuccin_mocha
+  " colorscheme catppuccin_mocha
+  colorscheme github_dark
 catch
   colorscheme darkblue
 endtry
