@@ -74,6 +74,8 @@
   fi
   if [[ ! $PATH =~ "$HOME/go/bin" ]]; then
     export PATH="$PATH:$HOME/go/bin"
+  elif [[ ! $PATH =~ "$XDG_DATA_HOME/go/bin" ]]; then
+    export PATH="${PATH}:$XDG_DATA_HOME/go/bin"
   fi
 
   # others
