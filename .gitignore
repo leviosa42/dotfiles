@@ -59,6 +59,8 @@
 !/.config/vim/*
 !/.config/vim/__archived
 !/.config/vim/__archived/*
+!/.config/vim/pack
+!/.config/vim/pack/**
 !/.config/vim/rc
 !/.config/vim/rc/*
 !/.config/vim/snippets

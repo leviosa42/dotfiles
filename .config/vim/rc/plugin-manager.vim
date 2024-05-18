@@ -50,6 +50,7 @@ let g:tokyonight_style = 'night'
 call jetpack#add('cocopon/iceberg.vim') " colorscheme
 call jetpack#end()
 
+packadd! asterm.vim
 " :h man.vim
 " ref: https://muru.dev/2015/08/28/vim-for-man.html
 " runtime! ftplugin/man.vim

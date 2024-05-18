@@ -148,11 +148,4 @@ catch
 endtry
 
 " === after ===
-if exists("$USE_VIMUX") && $USE_VIMUX == 1
-  let $USE_VIMUX = ""
-  set noruler noshowcmd noshowmode laststatus=0
-  terminal
-  only
-  colorscheme gruvbox
-endif
 " _vim: set et ts=2 sw=0 sts=-1 fmr={{{,}}}:
