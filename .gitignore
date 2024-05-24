@@ -61,6 +61,8 @@
 !/.config/vim/__archived/*
 !/.config/vim/pack
 !/.config/vim/pack/**
+!/.config/vim/colors
+!/.config/vim/colors/**
 !/.config/vim/rc
 !/.config/vim/rc/*
 !/.config/vim/snippets

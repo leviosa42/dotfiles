@@ -138,13 +138,17 @@ if has('termguicolors')
 endif
 set background=dark
 try
-  " colorscheme iceberg
+  colorscheme iceberg
   " colorscheme molokai
   " colorscheme tokyonight
   " colorscheme catppuccin_mocha
-  colorscheme github_dark
+  " colorscheme github_dark
 catch
-  colorscheme darkblue
+  try
+    colorscheme retrobox
+  catch
+    colorscheme darkblue
+  endtry
 endtry
 
 " === after ===
