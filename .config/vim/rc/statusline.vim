@@ -4,7 +4,7 @@ let s:stl = ''
 " let s:stl .= '%-{%g:actual_curwin==win_getid(winnr())?"%#SignColumn#":"%#StatusLineNC#"%}'
 let s:stl .= '%-{%g:actual_curwin==win_getid(winnr())?"%#Directory#":"%#StatusLineNC#"%}'
 let s:stl .= ' %{mode()[0]} ' " mode
-let s:stl .= '%-{%g:actual_curwin==win_getid(winnr())?&modified?"%#Diff#":"%#StatusLine#":"%#StatusLineNC#"%}'
+let s:stl .= '%-{%g:actual_curwin==win_getid(winnr())?&modified?"%#DiffAdd#":"%#StatusLine#":"%#StatusLineNC#"%}'
 let s:stl .= ' '
 let s:stl .= '%-F' " filename
 let s:stl .= '%-m' " is modified
