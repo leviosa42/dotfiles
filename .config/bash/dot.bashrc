@@ -86,6 +86,9 @@
   if [[ -v WSL_DISTRO_NAME ]]; then
     export BROWSER=/mnt/c/windows/explorer.exe
   fi
+
+  # lambdalisue/vim-manpager
+	export MANPAGER="vim -c ASMANPAGER -"
 }
 
 # _info "Setting up shell prompt..."
