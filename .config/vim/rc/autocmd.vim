@@ -3,7 +3,10 @@ augroup vimrc
   autocmd!
 
   " --- detect filetype ---
-  autocmd BufRead,BufNewFile *.plt setl filetype=gnuplot
+  autocmd BufNewFile,BufRead *.plt setfiletype gnuplot
+
+  " --- 'commentstring'
+  autocmd FileType gnuplot setl cms=#\ %s
 
   " --- 'keywordprg' ---
   autocmd FileType vim setl kp=:help

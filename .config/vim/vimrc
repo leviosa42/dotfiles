@@ -5,8 +5,10 @@
 "
 " === pre init ===
 scriptencoding utf-8
-syntax off
-filetype indent plugin off
+" syntax off
+" filetype indent plugin off
+syntax enable
+filetype plugin indent on
 
 let $MYVIMRC = expand('<sfile>')
 
@@ -127,8 +129,8 @@ inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 runtime! rc/*.vim
 
 " === post init ===
-syntax enable
-filetype plugin indent on
+" syntax enable
+" filetype plugin indent on
 
 " --- colorscheme ---
 if has('termguicolors')
@@ -138,11 +140,11 @@ if has('termguicolors')
 endif
 set background=dark
 try
-  " colorscheme iceberg
+  colorscheme iceberg
   " colorscheme molokai
   " colorscheme tokyonight
   " colorscheme catppuccin_mocha
-  colorscheme github_dark
+  " colorscheme github_dark
 catch
   colorscheme darkblue
 endtry
