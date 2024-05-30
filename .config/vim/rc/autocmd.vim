@@ -29,8 +29,8 @@ augroup vimrc
 
   " --- man ---
   autocmd FileType man
-        \ | setl nolist nonumber nomodifiable readonly noswapfile
-        \ | if !empty($MAN_PN) | file $MAN_PN endif
+        \ | setl nolist nonumber nomodifiable readonly noswapfile fdl=99
+        \ | if !empty($MAN_PN) | file $MAN_PN | endif
 
   if exists("+omnifunc")
     autocmd Filetype *

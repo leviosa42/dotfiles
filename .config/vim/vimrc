@@ -146,7 +146,11 @@ try
   " colorscheme catppuccin_mocha
   " colorscheme github_dark
 catch
-  colorscheme darkblue
+  try
+    colorscheme retrobox
+  catch
+    colorscheme darkblue
+  endtry
 endtry
 
 " === after ===
