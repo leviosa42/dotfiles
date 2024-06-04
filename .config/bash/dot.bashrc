@@ -168,8 +168,12 @@
   alias rebash="exec $SHELL -l"
   # XDG Base Directory Specification
   alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget/hsts"
-  alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
-  alias "code"="/mnt/c/Users/askm4/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
+  if [[ -v WSL_DISTRO_NAME ]]; then
+    alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
+    export BROWSER=/mnt/c/windows/explorer.exe
+    alias "code"="/mnt/c/Users/askm4/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
+    alias view="/mnt/c/WINDOWS/explorer.exe"
+  fi
 }
 
 # _info "Change terminal color..."
