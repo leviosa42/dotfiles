@@ -176,7 +176,6 @@
                 "commandline": "busybox64u.exe bash -l",
                 "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
                 "hidden": false,
-                // "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\busybox_32x32.png",
                 "name": "busybox",
                 "startingDirectory": "%HOME%"
             },
@@ -214,6 +213,12 @@
                 "hidden": false,
                 "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\archlinux_32x32.png",
                 "name": "ArchLinux"
+            },
+            {
+                "guid": "{e1ac1feb-c2bd-5b1c-8cae-5a252cb087e4}",
+                "hidden": false,
+                "name": "Ubuntu-24.04-tl23",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
@@ -512,6 +517,29 @@
             "foreground": "#FFFFFF",
             "green": "#26A269",
             "name": "Ubuntu-22.04-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-24.04-ColorScheme",
             "purple": "#881798",
             "red": "#C21A23",
             "selectionBackground": "#FFFFFF",

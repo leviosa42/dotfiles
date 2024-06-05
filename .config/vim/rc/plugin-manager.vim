@@ -43,7 +43,7 @@ call jetpack#add('chrisbra/Colorizer')
   " 1: enabled, 0: disabled
   let g:colorizer_colornames = 1
   let g:colorizer_x11_names = 0
-  let g:colorizer_auto_filetype = 'css,html,vim'
+  let g:colorizer_auto_filetype = 'css,html'
   let g:colorizer_disable_bufleave = 1
   nnoremap <Leader>cc <Plug>Colorizer
   nnoremap <Leader>ct <Plug>ColorContrast
