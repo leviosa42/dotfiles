@@ -25,6 +25,7 @@ call jetpack#begin(expand('$XDG_DATA_HOME/vim'))
 call jetpack#add('tani/vim-jetpack', {'opt': 1}) " bootstrap
 call jetpack#add('vim-jp/vimdoc-ja') " help for japanese
 call jetpack#add('thinca/vim-quickrun')
+call jetpack#add('machakann/vim-sandwich')
 call jetpack#add('dstein64/vim-startuptime') " help for japanese
 call jetpack#add('tpope/vim-commentary') " comment in/out
 call jetpack#add('markonm/traces.vim') " preview the replacement results

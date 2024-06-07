@@ -9,6 +9,9 @@ inoremap <silent> jk <Esc>
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 
+" :h Y
+map Y y$ 
+
 nnoremap U <C-r>
 nnoremap <C-r> U
 

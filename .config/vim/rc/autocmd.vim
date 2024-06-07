@@ -12,6 +12,8 @@ augroup vimrc
   autocmd FileType vim setl kp=:help
   autocmd FileType sh  setl kp=:Man
         " \ | nnoremap K :Man <cword><CR>
+  command! -buffer -nargs=1 GnuplotHelp :exe ':term gnuplot -e "help <args>"'
+  autocmd FileType gnuplot setl kp=:GnuplotHelp
 
   " --- indentation by filetype ---
   autocmd FileType vim setl ts=2 et
