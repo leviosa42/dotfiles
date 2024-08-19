@@ -18,6 +18,7 @@ sources=(
   # .config/wget
   .config/wezterm
   # .config/wt
+	.config/npm
 )
 
 backup_dir=$XDG_CACHE_HOME/dotfiles/$(date "+%Y-%m-%d-%H%M%S")
