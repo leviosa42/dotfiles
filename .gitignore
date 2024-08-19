@@ -73,6 +73,9 @@
 !/.config/vim/template/gnuplot
 !/.config/vim/template/gnuplot/*
 
+!/.config/vscode
+!/.config/vscode/*
+
 !/.config/wezterm
 !/.config/wezterm/**
 
