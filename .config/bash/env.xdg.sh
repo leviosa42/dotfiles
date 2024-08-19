@@ -42,6 +42,9 @@ mkdir -p $RUSTUP_HOME
 mkdir -p "$XDG_CONFIG_HOME/node"
 NODE_REPL_HISTORY="$XDG_STATE_HOME/node/repl_history"
 
+# npm
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+
 # vim
 # NOTE: VIMINIT will also affect Neovim.
 VIMINIT="if !has('nvim') | so $XDG_CONFIG_HOME/vim/vimrc | else | so $XDG_CONFIG_HOME/nvim/init.lua | endif"

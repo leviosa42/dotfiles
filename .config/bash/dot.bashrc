@@ -77,6 +77,9 @@
   elif [[ ! $PATH =~ "$XDG_DATA_HOME/go/bin" ]]; then
     export PATH="${PATH}:$XDG_DATA_HOME/go/bin"
   fi
+  if [[ ! $PATH =~ "/home/arch/.local/share/npm/bin" ]]; then
+    export PATH="$PATH:/home/arch/.local/share/npm/bin"
+  fi
 
   # others
   export EDITOR="nvim"
