@@ -1,0 +1,217 @@
+{
+    "workbench.colorTheme": "Tokyo Night",
+    "editor.inlineSuggest.enabled": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash",
+            "args": [
+                "--login"
+            ],
+            "overrideName": true,
+            "icon": "terminal-bash"
+        },
+        "NYAGOS": {
+            "path": "${env:USERPROFILE}\\scoop\\apps\\nyagos\\current\\nyagos.exe",
+            "icon": "terminal",
+            "overrideName": true
+        },
+        "Bash (BB64u)": {
+            "path": "${env:USERPROFILE}\\busybox64u.exe",
+            "args": [
+                "bash",
+                "--login"
+            ],
+            "icon": "terminal",
+            "overrideName": true
+        },
+        "Ash (BB64u)": {
+            "env": {
+                "ENV": "${env:USERPROFILE}\\.dotfiles\\.config\\ash\\dot.ashrc",
+            },
+            "path": "${env:USERPROFILE}\\busybox64u.exe",
+            "args": [
+                "ash",
+                "--login"
+            ],
+            "icon": "terminal",
+            "overrideName": true
+        },
+    },
+    "terminal.integrated.defaultProfile.windows": "NYAGOS",
+    "editor.fontSize": 18,
+    "settingsSync.ignoredSettings": [
+        "editor.fontSize",
+        "-dotfiles.installCommand",
+        "-dotfiles.repository",
+        "-dotfiles.targetPath"
+    ],
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "explorer.confirmDelete": false,
+    "editor.fontFamily": "'PlemolJP Console NF', Consolas, 'Courier New', monospace",
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "files.associations": {
+        "*.ashrc": "shellscript",
+        "*.nyagos": "lua"
+    },
+    "C_Cpp.dimInactiveRegions": false,
+    "C_Cpp.clang_format_style": "Google",
+    "editor.foldingImportsByDefault": true,
+    "editor.unfoldOnClickAfterEndOfLine": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": false,
+        "javascript": true
+    },
+    "explorer.confirmDragAndDrop": false,
+    "dotfiles.installCommand": "bash ~/.dotfiles/install.sh",
+    "dotfiles.repository": "leviosa42/dotfiles",
+    "dotfiles.targetPath": "~/.dotfiles",
+    "[dockerfile]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        }
+    },
+    "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.docker.enabled": false,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk-lualatex",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatex",
+            "command": "lualatex",
+            "args": [
+                "--cmdx",
+                "-file-line-error",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-halt-on-error",
+                "%DOC%"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "[1]latexmk(lualatex)",
+            "tools": [
+                "latexmk-lualatex"
+            ]
+        },
+        {
+            "name": "[2]latexmk(lualatex)",
+            "tools": [
+                "latexmk-lualatex",
+                "latexmk-lualatex"
+            ]
+        },
+        {
+            "name": "[3]latexmk(lualatex)",
+            "tools": [
+                "latexmk-lualatex",
+                "latexmk-lualatex",
+                "latexmk-lualatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk",
+        "*.synctex.gz",
+        // for Beamer files
+        "_minted*",
+        "*.nav",
+        "*.snm",
+        "*.vrb",
+    ],
+    "latex-workshop.intellisense.bibtexJSON.replace": {},
+    "latex-workshop.latex.outDir": "out",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "C_Cpp.vcFormat.indent.accessSpecifiers": true,
+    "C_Cpp.vcFormat.indent.braces": true,
+    "C_Cpp.vcFormat.indent.caseLabels": true,
+    "C_Cpp.vcFormat.indent.caseContentsWhenBlock": true,
+    "editor.indentSize": "tabSize",
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+    "powershell.promptToUpdatePowerShell": false,
+    "workbench.editorAssociations": {
+        "*.emf": "default"
+    },
+    "redhat.telemetry.enabled": true,
+    "latex-workshop.latex.clean.subfolder.enabled": true,
+    "svg.preview.mode": "svg",
+    "terminal.integrated.copyOnSelection": true,
+    "[latex]": {
+        "editor.tabSize": 2
+    },
+    "C_Cpp.default.compilerPath": "%USERPROFILE%\\scoop\\apps\\gcc\\current\\bin\\gcc.exe",
+    "git.openRepositoryInParentFolders": "never",
+    "window.menuBarVisibility": "compact",
+    "git.enableSmartCommit": true,
+    "remote.SSH.serverInstallPath": {
+        "LETSNOTE": "~/.local/share/vscode-server"
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "explorer.confirmPasteNative": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "editor.codeActionsOnSave": {},
+    "remote.SSH.remotePlatform": {
+        "rpi": "linux"
+    },
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.enableImages": true,
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "[github-actions-workflow]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "cmake.showOptionsMovedNotification": false,
+    "markdown.marp.themes": [
+        "${documentWorkspaceFolder}/marp-themes/themes/olive.css"
+    ]
+}
