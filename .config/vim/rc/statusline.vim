@@ -6,7 +6,8 @@ let s:stl .= '%-{%g:actual_curwin==win_getid(winnr())?"%#Directory#":"%#StatusLi
 let s:stl .= ' %{mode()[0]} ' " mode
 let s:stl .= '%-{%g:actual_curwin==win_getid(winnr())?&modified?"%#DiffAdd#":"%#StatusLine#":"%#StatusLineNC#"%}'
 let s:stl .= ' '
-let s:stl .= '%-F' " filename
+" let s:stl .= '%-F' " filename
+let s:stl .= '%-{%mode()[0]==#"t"&&(&shell)=~#"nyagos"?"NYAGOS":"%F"%}'
 let s:stl .= '%-m' " is modified
 let s:stl .= '%-r' " is readonly
 " let s:stl .= '%-h' " is help-page
