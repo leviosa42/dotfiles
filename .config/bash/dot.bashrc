@@ -80,6 +80,9 @@
   if [[ ! $PATH =~ "/home/arch/.local/share/npm/bin" ]]; then
     export PATH="$PATH:/home/arch/.local/share/npm/bin"
   fi
+  if [[ ! $PATH =~ "$HOME/.deno/bin" ]]; then
+    export PATH="$PATH:$HOME/.deno/bin"
+  fi
 
   # others
   export EDITOR="nvim"
@@ -175,7 +178,7 @@
     alias "clip.exe"="/mnt/c/WINDOWS/system32/clip.exe"
     export BROWSER=/mnt/c/windows/explorer.exe
     alias "code"="/mnt/c/Users/askm4/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
-    alias view="/mnt/c/WINDOWS/explorer.exe"
+    alias view="/mnt/c/Windows/explorer.exe"
   fi
 }
 
