@@ -1,352 +1,378 @@
 {
-  "$help": "https://aka.ms/terminal-documentation",
-  "$schema": "https://aka.ms/terminal-profiles-schema",
-  "actions": [
-    {
-      "command": "unbound",
-      "keys": "win+sc(41)"
-    },
-    {
-      "command": "unbound",
-      "keys": "ctrl+v"
-    },
-    {
-      "command": "unbound",
-      "keys": "ctrl+c"
-    },
-    {
-      "command": {
-        "action": "copy",
-        "singleLine": false
-      }
-    },
-    {
-      "command": "paste"
-    },
-    {
-      "command": {
-        "action": "splitPane",
-        "split": "auto",
-        "splitMode": "duplicate"
-      },
-      "id": "User.splitPane.A6751878",
-      "keys": "alt+shift+d"
-    },
-    {
-      "command": {
-        "action": "quakeMode"
-      },
-      "id": "User.quakeMode.F1E129A4",
-      "keys": "win+@"
-    },
-    {
-      "command": "find",
-      "id": "User.find",
-      "keys": "ctrl+shift+f"
-    }
-  ],
-  "alwaysShowNotificationIcon": true,
-  "autoHideWindow": false,
-  "centerOnLaunch": false,
-  "copyFormatting": "none",
-  "copyOnSelect": false,
-  "defaultProfile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
-  "firstWindowPreference": "persistedWindowLayout",
-  "initialCols": 60,
-  "initialPosition": ",",
-  "initialRows": 20,
-  "minimizeToNotificationArea": false,
-  "newTabMenu": [
-    {
-      "allowEmpty": false,
-      "entries": [
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
         {
-          "profile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-          "type": "profile"
+            "command": "unbound",
+            "keys": "win+sc(41)"
         },
         {
-          "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-          "type": "profile"
+            "command": "unbound",
+            "keys": "ctrl+v"
         },
         {
-          "commandline": null,
-          "name": null,
-          "source": "Windows.Terminal.PowershellCore",
-          "type": "matchProfiles"
+            "command": "unbound",
+            "keys": "ctrl+c"
         },
         {
-          "profile": "Developer Command Prompt for VS 2022",
-          "type": "profile"
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2"
         },
         {
-          "profile": "Developer PowerShell for VS 2022",
-          "type": "profile"
+            "command": "paste",
+            "id": "User.paste"
         },
         {
-          "profile": "Azure Cloud Shell",
-          "type": "profile"
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
+        },
+        {
+            "command": 
+            {
+                "action": "quakeMode"
+            },
+            "id": "User.quakeMode.F1E129A4",
+            "keys": "win+@"
+        },
+        {
+            "command": "find",
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
         }
-      ],
-      "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\windows11_32x32.png",
-      "inline": "never",
-      "name": "Windows",
-      "type": "folder"
-    },
-    {
-      "type": "separator"
-    },
-    {
-      "profile": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
-      "type": "profile"
-    },
-    {
-      "type": "separator"
-    },
-    {
-      "profile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
-      "type": "profile"
-    },
-    {
-      "type": "separator"
-    },
-    {
-      "commandline": null,
-      "name": null,
-      "source": "Windows.Terminal.Wsl",
-      "type": "matchProfiles"
-    },
-    {
-      "profile": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
-      "type": "profile"
-    }
-  ],
-  "profiles": {
-    "defaults": {
-      "cursorShape": "filledBox",
-      "font": {
-        "face": "PlemolJP Console NF"
-      },
-      "opacity": 100,
-      "padding": "0",
-      "useAcrylic": false
-    },
-    "list": [
-      {
-        "commandline": "%SystemRoot%\\System32\\cmd.exe",
-        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-        "hidden": false,
-        "name": "cmd.exe"
-      },
-      {
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "hidden": false,
-        "name": "Windows PowerShell"
-      },
-      {
-        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-        "hidden": false,
-        "name": "PowerShell",
-        "source": "Windows.Terminal.PowershellCore"
-      },
-      {
-        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": true,
-        "name": "Azure Cloud Shell",
-        "source": "Windows.Terminal.Azure"
-      },
-      {
-        "guid": "{2529e5c7-33fb-5378-81eb-76c054aff559}",
-        "hidden": true,
-        "name": "Developer Command Prompt for VS 2022",
-        "source": "Windows.Terminal.VisualStudio"
-      },
-      {
-        "guid": "{1980d477-02b2-5b9c-b0cd-cbc892b68a24}",
-        "hidden": true,
-        "name": "Developer PowerShell for VS 2022",
-        "source": "Windows.Terminal.VisualStudio"
-      },
-      {
-        "colorScheme": "Tango Dark",
-        "commandline": "busybox64u.exe bash -l",
-        "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
-        "hidden": false,
-        "name": "busybox",
-        "startingDirectory": "%HOME%"
-      },
-      {
-        "colorScheme": "iceberg-dark",
-        "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
-        "font": {
-          "face": "PlemolJP Console NF"
+    ],
+    "alwaysShowNotificationIcon": true,
+    "autoHideWindow": false,
+    "centerOnLaunch": false,
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
+    "firstWindowPreference": "persistedWindowLayout",
+    "initialCols": 60,
+    "initialPosition": ",",
+    "initialRows": 20,
+    "minimizeToNotificationArea": false,
+    "newTabMenu": 
+    [
+        {
+            "allowEmpty": false,
+            "entries": 
+            [
+                {
+                    "profile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                    "type": "profile"
+                },
+                {
+                    "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                    "type": "profile"
+                },
+                {
+                    "commandline": null,
+                    "name": null,
+                    "source": "Windows.Terminal.PowershellCore",
+                    "type": "matchProfiles"
+                },
+                {
+                    "profile": "Developer Command Prompt for VS 2022",
+                    "type": "profile"
+                },
+                {
+                    "profile": "Developer PowerShell for VS 2022",
+                    "type": "profile"
+                },
+                {
+                    "profile": "Azure Cloud Shell",
+                    "type": "profile"
+                }
+            ],
+            "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\windows11_32x32.png",
+            "inline": "never",
+            "name": "Windows",
+            "type": "folder"
         },
-        "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
-        "hidden": false,
-        "icon": "%Scoop%\\apps\\nyagos\\current\\Etc\\nyagos32x32.ico",
-        "intenseTextStyle": "bright",
-        "name": "NYAGOS",
-        "startingDirectory": "%HOME%"
-      },
-      {
-        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-        "hidden": false,
-        "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\ubuntu_32x32.png",
-        "name": "Ubuntu",
-        "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-        "hidden": false,
-        "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\ubuntu_32x32.png",
-        "name": "Ubuntu-22.04",
-        "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "commandline": "wsl.exe -d ArchLinux --cd ~",
-        "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
-        "hidden": false,
-        "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\archlinux_32x32.png",
-        "name": "ArchLinux"
-      },
-      {
-        "guid": "{63adbb83-68e6-5ad1-a84f-109b153a1bad}",
-        "hidden": false,
-        "name": "Ubuntu-24.04-TL24",
-        "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "guid": "{5a72daec-7229-53c8-925d-173bae382cb4}",
-        "hidden": false,
-        "name": "Ubuntu-24.04-TL24-test",
-        "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "guid": "{74b194fa-988f-582d-ba08-27e63cebabf6}",
-        "hidden": false,
-        "name": "Ubuntu-24.04-TL24-test-2",
-        "source": "Windows.Terminal.Wsl"
-      }
-    ]
-  },
-  "schemes": [
+        {
+            "type": "separator"
+        },
+        {
+            "profile": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
+            "type": "profile"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "profile": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
+            "type": "profile"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "commandline": null,
+            "name": null,
+            "source": "Windows.Terminal.Wsl",
+            "type": "matchProfiles"
+        },
+        {
+            "profile": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
+            "type": "profile"
+        }
+    ],
+    "profiles": 
     {
-      "background": "#181616",
-      "black": "#0D0C0C",
-      "blue": "#8BA4B0",
-      "brightBlack": "#A6A69C",
-      "brightBlue": "#7FB4CA",
-      "brightCyan": "#7AA89F",
-      "brightGreen": "#87A987",
-      "brightPurple": "#8992A7",
-      "brightRed": "#E46876",
-      "brightWhite": "#C5C9C5",
-      "brightYellow": "#E6C384",
-      "cursorColor": "#C5C9C5",
-      "cyan": "#8EA4A2",
-      "foreground": "#C8C093",
-      "green": "#8A9A7B",
-      "name": "KanagawaDragon",
-      "purple": "#A292A3",
-      "red": "#C4746E",
-      "selectionBackground": "#223249",
-      "white": "#C8C093",
-      "yellow": "#C4B28A"
+        "defaults": 
+        {
+            "cursorShape": "filledBox",
+            "font": 
+            {
+                "face": "PlemolJP Console NF"
+            },
+            "opacity": 100,
+            "padding": "0",
+            "useAcrylic": false
+        },
+        "list": 
+        [
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "cmd.exe"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": true,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{2529e5c7-33fb-5378-81eb-76c054aff559}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{1980d477-02b2-5b9c-b0cd-cbc892b68a24}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "colorScheme": "Tango Dark",
+                "commandline": "busybox64u.exe bash -l",
+                "guid": "{2ffd29a2-a5c3-4a46-a071-049140091ac7}",
+                "hidden": false,
+                "name": "busybox",
+                "startingDirectory": "%HOME%"
+            },
+            {
+                "colorScheme": "iceberg-dark",
+                "commandline": "%SCOOP%\\apps\\nyagos\\current\\nyagos.exe",
+                "font": 
+                {
+                    "face": "PlemolJP Console NF"
+                },
+                "guid": "{ac67fd0e-f345-4a25-aefc-560ea9a08529}",
+                "hidden": false,
+                "icon": "%Scoop%\\apps\\nyagos\\current\\Etc\\nyagos32x32.ico",
+                "intenseTextStyle": "bright",
+                "name": "NYAGOS",
+                "startingDirectory": "%HOME%"
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\ubuntu_32x32.png",
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "commandline": "wsl.exe -d ArchLinux --cd ~",
+                "guid": "{6146979c-ed99-413e-8c5e-d9ab43688120}",
+                "hidden": false,
+                "icon": "%XDG_CONFIG_HOME%\\wt\\icons\\devicon\\archlinux_32x32.png",
+                "name": "ArchLinux"
+            },
+            {
+                "guid": "{63adbb83-68e6-5ad1-a84f-109b153a1bad}",
+                "hidden": false,
+                "name": "Ubuntu-24.04-TL24",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{5a72daec-7229-53c8-925d-173bae382cb4}",
+                "hidden": false,
+                "name": "Ubuntu-24.04-TL24-test",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{74b194fa-988f-582d-ba08-27e63cebabf6}",
+                "hidden": false,
+                "name": "Ubuntu-24.04-TL24-test-2",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "colorScheme": "iceberg-dark",
+                "guid": "{c397f356-5e7b-55bc-956b-8cb4b9762c26}",
+                "hidden": false,
+                "name": "NixOS",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{ea74e40f-9d3e-5e99-881c-06206a8a5178}",
+                "hidden": false,
+                "name": "Arch-Nix",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{8d7566aa-8e6c-5137-8ac3-da32296d8a70}",
+                "hidden": false,
+                "name": "Ubuntu-24.04-Nix",
+                "source": "Windows.Terminal.Wsl"
+            }
+        ]
     },
-    {
-      "background": "#1F1F28",
-      "black": "#090618",
-      "blue": "#7E9CD8",
-      "brightBlack": "#727169",
-      "brightBlue": "#7FB4CA",
-      "brightCyan": "#7AA89F",
-      "brightGreen": "#98BB6C",
-      "brightPurple": "#938AA9",
-      "brightRed": "#E82424",
-      "brightWhite": "#DCD7BA",
-      "brightYellow": "#E6C384",
-      "cursorColor": "#C8C093",
-      "cyan": "#6A9589",
-      "foreground": "#DCD7BA",
-      "green": "#76946A",
-      "name": "KanagawaWave",
-      "purple": "#957FB8",
-      "red": "#C34043",
-      "selectionBackground": "#2D4F67",
-      "white": "#C8C093",
-      "yellow": "#C0A36E"
-    },
-    {
-      "background": "#151718",
-      "black": "#151718",
-      "blue": "#9D65FF",
-      "brightBlack": "#625E4C",
-      "brightBlue": "#9D65FF",
-      "brightCyan": "#58D1EB",
-      "brightGreen": "#98F424",
-      "brightPurple": "#F4005F",
-      "brightRed": "#F4005F",
-      "brightWhite": "#F6F6EF",
-      "brightYellow": "#FA8419",
-      "cursorColor": "#FFFFFF",
-      "cyan": "#58D1EB",
-      "foreground": "#F8F8F2",
-      "green": "#98F424",
-      "name": "Monokai Seti Dark",
-      "purple": "#F4005F",
-      "red": "#F4005F",
-      "selectionBackground": "#FFFFFF",
-      "white": "#F8F8F2",
-      "yellow": "#FA8419"
-    },
-    {
-      "background": "#16161E",
-      "black": "#363B54",
-      "blue": "#7AA2F7",
-      "brightBlack": "#363B54",
-      "brightBlue": "#7AA2F7",
-      "brightCyan": "#7DCFFF",
-      "brightGreen": "#41A6B5",
-      "brightPurple": "#BB9AF7",
-      "brightRed": "#F7768E",
-      "brightWhite": "#ACB0D0",
-      "brightYellow": "#E0AF68",
-      "cursorColor": "#FFFFFF",
-      "cyan": "#7DCFFF",
-      "foreground": "#787C99",
-      "green": "#41A6B5",
-      "name": "TokyoNight",
-      "purple": "#BB9AF7",
-      "red": "#F7768E",
-      "selectionBackground": "#FFFFFF",
-      "white": "#787C99",
-      "yellow": "#E0AF68"
-    },
-    {
-      "background": "#161821",
-      "black": "#1E2132",
-      "blue": "#84A0C6",
-      "brightBlack": "#6B7089",
-      "brightBlue": "#91ACD1",
-      "brightCyan": "#95C4CE",
-      "brightGreen": "#C0CA8E",
-      "brightPurple": "#ADA0D3",
-      "brightRed": "#E98989",
-      "brightWhite": "#D2D4DE",
-      "brightYellow": "#E9B189",
-      "cursorColor": "#C6C8D1",
-      "cyan": "#89B8C2",
-      "foreground": "#C6C8D1",
-      "green": "#B4BE82",
-      "name": "iceberg-dark",
-      "purple": "#A093C7",
-      "red": "#E27878",
-      "selectionBackground": "#C6C8D1",
-      "white": "#C6C8D1",
-      "yellow": "#E2A478"
-    }
-  ],
-  "startOnUserLogin": false,
-  "themes": [],
-  "useAcrylicInTabRow": true
+    "schemes": 
+    [
+        {
+            "background": "#181616",
+            "black": "#0D0C0C",
+            "blue": "#8BA4B0",
+            "brightBlack": "#A6A69C",
+            "brightBlue": "#7FB4CA",
+            "brightCyan": "#7AA89F",
+            "brightGreen": "#87A987",
+            "brightPurple": "#8992A7",
+            "brightRed": "#E46876",
+            "brightWhite": "#C5C9C5",
+            "brightYellow": "#E6C384",
+            "cursorColor": "#C5C9C5",
+            "cyan": "#8EA4A2",
+            "foreground": "#C8C093",
+            "green": "#8A9A7B",
+            "name": "KanagawaDragon",
+            "purple": "#A292A3",
+            "red": "#C4746E",
+            "selectionBackground": "#223249",
+            "white": "#C8C093",
+            "yellow": "#C4B28A"
+        },
+        {
+            "background": "#1F1F28",
+            "black": "#090618",
+            "blue": "#7E9CD8",
+            "brightBlack": "#727169",
+            "brightBlue": "#7FB4CA",
+            "brightCyan": "#7AA89F",
+            "brightGreen": "#98BB6C",
+            "brightPurple": "#938AA9",
+            "brightRed": "#E82424",
+            "brightWhite": "#DCD7BA",
+            "brightYellow": "#E6C384",
+            "cursorColor": "#C8C093",
+            "cyan": "#6A9589",
+            "foreground": "#DCD7BA",
+            "green": "#76946A",
+            "name": "KanagawaWave",
+            "purple": "#957FB8",
+            "red": "#C34043",
+            "selectionBackground": "#2D4F67",
+            "white": "#C8C093",
+            "yellow": "#C0A36E"
+        },
+        {
+            "background": "#151718",
+            "black": "#151718",
+            "blue": "#9D65FF",
+            "brightBlack": "#625E4C",
+            "brightBlue": "#9D65FF",
+            "brightCyan": "#58D1EB",
+            "brightGreen": "#98F424",
+            "brightPurple": "#F4005F",
+            "brightRed": "#F4005F",
+            "brightWhite": "#F6F6EF",
+            "brightYellow": "#FA8419",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#58D1EB",
+            "foreground": "#F8F8F2",
+            "green": "#98F424",
+            "name": "Monokai Seti Dark",
+            "purple": "#F4005F",
+            "red": "#F4005F",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F8F8F2",
+            "yellow": "#FA8419"
+        },
+        {
+            "background": "#16161E",
+            "black": "#363B54",
+            "blue": "#7AA2F7",
+            "brightBlack": "#363B54",
+            "brightBlue": "#7AA2F7",
+            "brightCyan": "#7DCFFF",
+            "brightGreen": "#41A6B5",
+            "brightPurple": "#BB9AF7",
+            "brightRed": "#F7768E",
+            "brightWhite": "#ACB0D0",
+            "brightYellow": "#E0AF68",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#7DCFFF",
+            "foreground": "#787C99",
+            "green": "#41A6B5",
+            "name": "TokyoNight",
+            "purple": "#BB9AF7",
+            "red": "#F7768E",
+            "selectionBackground": "#FFFFFF",
+            "white": "#787C99",
+            "yellow": "#E0AF68"
+        },
+        {
+            "background": "#161821",
+            "black": "#1E2132",
+            "blue": "#84A0C6",
+            "brightBlack": "#6B7089",
+            "brightBlue": "#91ACD1",
+            "brightCyan": "#95C4CE",
+            "brightGreen": "#C0CA8E",
+            "brightPurple": "#ADA0D3",
+            "brightRed": "#E98989",
+            "brightWhite": "#D2D4DE",
+            "brightYellow": "#E9B189",
+            "cursorColor": "#C6C8D1",
+            "cyan": "#89B8C2",
+            "foreground": "#C6C8D1",
+            "green": "#B4BE82",
+            "name": "iceberg-dark",
+            "purple": "#A093C7",
+            "red": "#E27878",
+            "selectionBackground": "#C6C8D1",
+            "white": "#C6C8D1",
+            "yellow": "#E2A478"
+        }
+    ],
+    "startOnUserLogin": false,
+    "themes": [],
+    "useAcrylicInTabRow": true
 }
