@@ -48,3 +48,5 @@ nyagos.envadd("PATH", nyagos.pathjoin(nyagos.env.CARGO_HOME, "bin"))
 nyagos.envdel("PATH", nyagos.pathjoin("scoop", "shims"))
 nyagos.envadd("PATH", nyagos.pathjoin(nyagos.env.HOME, "scoop", "shims"))
 
+-- deno
+nyagos.envadd("PATH", nyagos.pathjoin(nyagos.env.HOME, ".deno", "bin"))
